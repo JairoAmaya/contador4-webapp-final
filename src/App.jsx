@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import promptsData from "./prompts.json";
+import promptsData from './promptsData.js';
 import "./styles.css";
 
 function App() {

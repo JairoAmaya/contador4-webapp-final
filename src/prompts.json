@@ -5,91 +5,33 @@ const promptsData = [
     id: "analisis-financiero",
     name: "Análisis Financiero Estratégico",
     icon: "📊",
-    subcategories: [
+    prompts: [
       {
-        name: "Interpretación de estados financieros",
-        prompts: [
-          {
-            title: "Análisis integral de estados financieros",
-            text: "Actúa como analista financiero senior y revisa los estados financieros de los últimos 3 años. Identifica tendencias clave, fortalezas y debilidades, y elabora un diagnóstico general de la empresa."
-          },
-          {
-            title: "Evaluación de desempeño histórico",
-            text: "Compara los resultados de los estados financieros año a año, destacando las variaciones más relevantes en ingresos, costos y utilidades."
-          },
-          {
-            title: "Informe ejecutivo de hallazgos",
-            text: "Resume los 5 hallazgos más importantes de los estados financieros, explica su impacto y presenta recomendaciones estratégicas para la alta dirección."
-          }
-        ]
+        title: "Análisis Integral de Estados Financieros",
+        text: `Actúa como un analista financiero senior. Analiza los estados financieros adjuntos de los últimos 3 años. 
+        Identifica las 5 tendencias más significativas, evalúa la salud financiera general de la empresa, 
+        proporciona 3 recomendaciones estratégicas basadas en tu análisis, incluye comparaciones año a año 
+        y explica el impacto de cada hallazgo en la posición competitiva.`
       },
       {
-        name: "Análisis de flujo de efectivo",
-        prompts: [
-          {
-            title: "Proyección de flujo de efectivo",
-            text: "Elabora una proyección de flujo de efectivo para los próximos 12 meses considerando ingresos esperados, gastos fijos y variables."
-          },
-          {
-            title: "Identificación de cuellos de liquidez",
-            text: "Detecta los periodos de mayor riesgo de falta de liquidez en el flujo de efectivo y sugiere estrategias para afrontarlos."
-          },
-          {
-            title: "Optimización de flujo de caja",
-            text: "Propón acciones para mejorar la gestión del flujo de efectivo, incluyendo manejo de cuentas por cobrar, inventarios y cuentas por pagar."
-          }
-        ]
+        title: "Análisis Comparativo Sectorial",
+        text: `Realiza un análisis comparativo entre los indicadores financieros de la empresa y el promedio del sector. 
+        Destaca fortalezas, debilidades y propone estrategias para mejorar la competitividad.`
       },
       {
-        name: "Evaluación de rentabilidad por línea de negocio",
-        prompts: [
-          {
-            title: "Análisis de rentabilidad por segmento",
-            text: "Evalúa la rentabilidad de cada línea de negocio identificando qué segmentos generan mayor margen y cuáles consumen más recursos."
-          },
-          {
-            title: "Comparación de desempeño entre líneas",
-            text: "Compara el desempeño financiero de las distintas líneas de negocio, resaltando las más eficientes y menos rentables."
-          },
-          {
-            title: "Priorización estratégica de líneas",
-            text: "Propón qué líneas de negocio deben potenciarse, mantenerse o reducirse en función de su rentabilidad y potencial de crecimiento."
-          }
-        ]
+        title: "Detección de Anomalías Financieras",
+        text: `Revisa los estados financieros adjuntos y detecta posibles anomalías, inconsistencias o riesgos financieros. 
+        Explica el impacto potencial de cada hallazgo y sugiere medidas correctivas.`
       },
       {
-        name: "Análisis de ratios financieros",
-        prompts: [
-          {
-            title: "Dashboard de ratios clave",
-            text: "Crea un dashboard financiero que incluya liquidez corriente, endeudamiento, margen neto, ROE y rotación de activos, con interpretación para la gerencia."
-          },
-          {
-            title: "Interpretación de ratios",
-            text: "Explica de manera clara los resultados de los ratios financieros principales, destacando fortalezas y riesgos potenciales."
-          },
-          {
-            title: "Comparación sectorial de ratios",
-            text: "Compara los ratios financieros de la empresa con el promedio del sector, destacando brechas y oportunidades de mejora."
-          }
-        ]
+        title: "Dashboard de Ratios Clave",
+        text: `Crea un dashboard financiero que incluya los ratios clave: liquidez corriente, endeudamiento, 
+        margen neto, ROE y rotación de activos. Incluye una interpretación clara de cada indicador.`
       },
       {
-        name: "Detección de riesgos financieros",
-        prompts: [
-          {
-            title: "Identificación de riesgos financieros",
-            text: "Revisa los estados financieros y detecta riesgos potenciales de liquidez, endeudamiento excesivo, morosidad de clientes u otros factores críticos."
-          },
-          {
-            title: "Evaluación de impacto de riesgos",
-            text: "Estima el impacto de los principales riesgos financieros identificados sobre la estabilidad y sostenibilidad de la empresa."
-          },
-          {
-            title: "Plan de mitigación financiera",
-            text: "Diseña un plan de acción con medidas específicas para mitigar los riesgos financieros encontrados, priorizando los de mayor impacto."
-          }
-        ]
+        title: "Análisis de Flujo de Efectivo Predictivo",
+        text: `Realiza un análisis del flujo de efectivo proyectado para los próximos 12 meses, 
+        identificando riesgos de liquidez y oportunidades de inversión.`
       }
     ]
   }

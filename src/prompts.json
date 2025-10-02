@@ -1,0 +1,95 @@
+{
+  "categorias": [
+    {
+      "nombre": "Análisis Financiero Estratégico",
+      "prompts": [
+        {
+          "titulo": "Análisis Integral de Estados Financieros",
+          "contenido": "Actúa como un analista financiero senior. Analiza los estados financieros adjuntos de los últimos 3 años. Identifica tendencias clave, evalúa la salud financiera y proporciona 3 recomendaciones estratégicas."
+        },
+        {
+          "titulo": "Análisis de Flujo de Efectivo Predictivo",
+          "contenido": "Realiza un análisis del flujo de efectivo proyectado para los próximos 12 meses, identificando riesgos de liquidez y oportunidades de inversión."
+        }
+      ]
+    },
+    {
+      "nombre": "Comunicación Empresarial de Alto Impacto",
+      "prompts": [
+        {
+          "titulo": "Carta a Clientes Profesional",
+          "contenido": "Redacta una carta profesional a [cliente] informando sobre los resultados trimestrales y próximos pasos estratégicos."
+        },
+        {
+          "titulo": "Reporte Ejecutivo de Resultados",
+          "contenido": "Genera un reporte ejecutivo que resuma el desempeño financiero de la empresa para presentar a directivos no técnicos."
+        }
+      ]
+    },
+    {
+      "nombre": "Propuestas y Cotizaciones que Cierran Negocios",
+      "prompts": [
+        {
+          "titulo": "Propuesta de Servicios Contables",
+          "contenido": "Elabora una propuesta para [empresa] detallando los servicios contables, honorarios y beneficios estratégicos."
+        },
+        {
+          "titulo": "Cotización por Paquetes",
+          "contenido": "Crea una cotización con tres paquetes de servicios contables (básico, intermedio y premium) incluyendo justificación de valor."
+        }
+      ]
+    },
+    {
+      "nombre": "Reportes y Dashboards Inteligentes",
+      "prompts": [
+        {
+          "titulo": "Dashboard de KPIs Financieros",
+          "contenido": "Crea un dashboard con KPIs clave como liquidez, rentabilidad y endeudamiento, explicando su impacto en la gestión."
+        },
+        {
+          "titulo": "Análisis de Desviaciones Presupuestarias",
+          "contenido": "Genera un informe que compare el presupuesto proyectado con los resultados reales e identifique desviaciones críticas."
+        }
+      ]
+    },
+    {
+      "nombre": "Cumplimiento Fiscal Proactivo",
+      "prompts": [
+        {
+          "titulo": "Calendario de Obligaciones Fiscales",
+          "contenido": "Genera un calendario mensual con todas las obligaciones fiscales para una empresa de tamaño medio en [país]."
+        },
+        {
+          "titulo": "Explicación de Cambios Normativos",
+          "contenido": "Redacta un resumen ejecutivo sobre los cambios más recientes en la normativa fiscal y su impacto en la empresa."
+        }
+      ]
+    },
+    {
+      "nombre": "Auditoría y Control Robusto",
+      "prompts": [
+        {
+          "titulo": "Programa de Auditoría Personalizado",
+          "contenido": "Diseña un programa de auditoría interna para [empresa] que incluya controles clave y áreas de mayor riesgo."
+        },
+        {
+          "titulo": "Detección de Irregularidades",
+          "contenido": "Actúa como auditor y analiza las transacciones adjuntas para detectar posibles irregularidades o fraudes."
+        }
+      ]
+    },
+    {
+      "nombre": "Clientes Internacionales Sin Fronteras",
+      "prompts": [
+        {
+          "titulo": "Consolidación Internacional",
+          "contenido": "Genera un reporte consolidado de estados financieros en USD y EUR para una empresa con filiales en Latinoamérica."
+        },
+        {
+          "titulo": "Reporte Multimoneda",
+          "contenido": "Elabora un informe comparativo de resultados en al menos dos monedas (USD y moneda local) para clientes internacionales."
+        }
+      ]
+    }
+  ]
+}

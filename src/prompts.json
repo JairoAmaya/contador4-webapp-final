@@ -1,95 +1,98 @@
-{
-  "categorias": [
-    {
-      "nombre": "Análisis Financiero Estratégico",
-      "prompts": [
-        {
-          "titulo": "Análisis Integral de Estados Financieros",
-          "contenido": "Actúa como un analista financiero senior. Analiza los estados financieros adjuntos de los últimos 3 años. Identifica tendencias clave, evalúa la salud financiera y proporciona 3 recomendaciones estratégicas."
-        },
-        {
-          "titulo": "Análisis de Flujo de Efectivo Predictivo",
-          "contenido": "Realiza un análisis del flujo de efectivo proyectado para los próximos 12 meses, identificando riesgos de liquidez y oportunidades de inversión."
-        }
-      ]
-    },
-    {
-      "nombre": "Comunicación Empresarial de Alto Impacto",
-      "prompts": [
-        {
-          "titulo": "Carta a Clientes Profesional",
-          "contenido": "Redacta una carta profesional a [cliente] informando sobre los resultados trimestrales y próximos pasos estratégicos."
-        },
-        {
-          "titulo": "Reporte Ejecutivo de Resultados",
-          "contenido": "Genera un reporte ejecutivo que resuma el desempeño financiero de la empresa para presentar a directivos no técnicos."
-        }
-      ]
-    },
-    {
-      "nombre": "Propuestas y Cotizaciones que Cierran Negocios",
-      "prompts": [
-        {
-          "titulo": "Propuesta de Servicios Contables",
-          "contenido": "Elabora una propuesta para [empresa] detallando los servicios contables, honorarios y beneficios estratégicos."
-        },
-        {
-          "titulo": "Cotización por Paquetes",
-          "contenido": "Crea una cotización con tres paquetes de servicios contables (básico, intermedio y premium) incluyendo justificación de valor."
-        }
-      ]
-    },
-    {
-      "nombre": "Reportes y Dashboards Inteligentes",
-      "prompts": [
-        {
-          "titulo": "Dashboard de KPIs Financieros",
-          "contenido": "Crea un dashboard con KPIs clave como liquidez, rentabilidad y endeudamiento, explicando su impacto en la gestión."
-        },
-        {
-          "titulo": "Análisis de Desviaciones Presupuestarias",
-          "contenido": "Genera un informe que compare el presupuesto proyectado con los resultados reales e identifique desviaciones críticas."
-        }
-      ]
-    },
-    {
-      "nombre": "Cumplimiento Fiscal Proactivo",
-      "prompts": [
-        {
-          "titulo": "Calendario de Obligaciones Fiscales",
-          "contenido": "Genera un calendario mensual con todas las obligaciones fiscales para una empresa de tamaño medio en [país]."
-        },
-        {
-          "titulo": "Explicación de Cambios Normativos",
-          "contenido": "Redacta un resumen ejecutivo sobre los cambios más recientes en la normativa fiscal y su impacto en la empresa."
-        }
-      ]
-    },
-    {
-      "nombre": "Auditoría y Control Robusto",
-      "prompts": [
-        {
-          "titulo": "Programa de Auditoría Personalizado",
-          "contenido": "Diseña un programa de auditoría interna para [empresa] que incluya controles clave y áreas de mayor riesgo."
-        },
-        {
-          "titulo": "Detección de Irregularidades",
-          "contenido": "Actúa como auditor y analiza las transacciones adjuntas para detectar posibles irregularidades o fraudes."
-        }
-      ]
-    },
-    {
-      "nombre": "Clientes Internacionales Sin Fronteras",
-      "prompts": [
-        {
-          "titulo": "Consolidación Internacional",
-          "contenido": "Genera un reporte consolidado de estados financieros en USD y EUR para una empresa con filiales en Latinoamérica."
-        },
-        {
-          "titulo": "Reporte Multimoneda",
-          "contenido": "Elabora un informe comparativo de resultados en al menos dos monedas (USD y moneda local) para clientes internacionales."
-        }
-      ]
-    }
-  ]
-}
+// src/promptsData.js
+
+const promptsData = [
+  {
+    id: "analisis-financiero",
+    name: "Análisis Financiero Estratégico",
+    icon: "📊",
+    subcategories: [
+      {
+        name: "Interpretación de estados financieros",
+        prompts: [
+          {
+            title: "Análisis integral de estados financieros",
+            text: "Actúa como analista financiero senior y revisa los estados financieros de los últimos 3 años. Identifica tendencias clave, fortalezas y debilidades, y elabora un diagnóstico general de la empresa."
+          },
+          {
+            title: "Evaluación de desempeño histórico",
+            text: "Compara los resultados de los estados financieros año a año, destacando las variaciones más relevantes en ingresos, costos y utilidades."
+          },
+          {
+            title: "Informe ejecutivo de hallazgos",
+            text: "Resume los 5 hallazgos más importantes de los estados financieros, explica su impacto y presenta recomendaciones estratégicas para la alta dirección."
+          }
+        ]
+      },
+      {
+        name: "Análisis de flujo de efectivo",
+        prompts: [
+          {
+            title: "Proyección de flujo de efectivo",
+            text: "Elabora una proyección de flujo de efectivo para los próximos 12 meses considerando ingresos esperados, gastos fijos y variables."
+          },
+          {
+            title: "Identificación de cuellos de liquidez",
+            text: "Detecta los periodos de mayor riesgo de falta de liquidez en el flujo de efectivo y sugiere estrategias para afrontarlos."
+          },
+          {
+            title: "Optimización de flujo de caja",
+            text: "Propón acciones para mejorar la gestión del flujo de efectivo, incluyendo manejo de cuentas por cobrar, inventarios y cuentas por pagar."
+          }
+        ]
+      },
+      {
+        name: "Evaluación de rentabilidad por línea de negocio",
+        prompts: [
+          {
+            title: "Análisis de rentabilidad por segmento",
+            text: "Evalúa la rentabilidad de cada línea de negocio identificando qué segmentos generan mayor margen y cuáles consumen más recursos."
+          },
+          {
+            title: "Comparación de desempeño entre líneas",
+            text: "Compara el desempeño financiero de las distintas líneas de negocio, resaltando las más eficientes y menos rentables."
+          },
+          {
+            title: "Priorización estratégica de líneas",
+            text: "Propón qué líneas de negocio deben potenciarse, mantenerse o reducirse en función de su rentabilidad y potencial de crecimiento."
+          }
+        ]
+      },
+      {
+        name: "Análisis de ratios financieros",
+        prompts: [
+          {
+            title: "Dashboard de ratios clave",
+            text: "Crea un dashboard financiero que incluya liquidez corriente, endeudamiento, margen neto, ROE y rotación de activos, con interpretación para la gerencia."
+          },
+          {
+            title: "Interpretación de ratios",
+            text: "Explica de manera clara los resultados de los ratios financieros principales, destacando fortalezas y riesgos potenciales."
+          },
+          {
+            title: "Comparación sectorial de ratios",
+            text: "Compara los ratios financieros de la empresa con el promedio del sector, destacando brechas y oportunidades de mejora."
+          }
+        ]
+      },
+      {
+        name: "Detección de riesgos financieros",
+        prompts: [
+          {
+            title: "Identificación de riesgos financieros",
+            text: "Revisa los estados financieros y detecta riesgos potenciales de liquidez, endeudamiento excesivo, morosidad de clientes u otros factores críticos."
+          },
+          {
+            title: "Evaluación de impacto de riesgos",
+            text: "Estima el impacto de los principales riesgos financieros identificados sobre la estabilidad y sostenibilidad de la empresa."
+          },
+          {
+            title: "Plan de mitigación financiera",
+            text: "Diseña un plan de acción con medidas específicas para mitigar los riesgos financieros encontrados, priorizando los de mayor impacto."
+          }
+        ]
+      }
+    ]
+  }
+];
+
+export default promptsData;

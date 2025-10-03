@@ -43,11 +43,13 @@ h1 {
   font-weight: bold;
   cursor: pointer;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .breadcrumb button:hover {
   text-decoration: underline;
-  color: #cc5c29; /* Naranja más oscuro en hover */
 }
 
 /* === Categorías === */
@@ -81,14 +83,14 @@ h1 {
 }
 
 /* === Subcategorías === */
-.subcategory-list {
+.subcategoria-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin-top: 20px;
 }
 
-.subcategory {
+.subcategoria-card {
   padding: 15px 20px;
   margin: 12px 0;
   background: #fff;
@@ -101,8 +103,8 @@ h1 {
   font-size: 16px;
 }
 
-.subcategory:hover {
-  background: #fdf4ee; /* Fondo suave naranja */
+.subcategoria-card:hover {
+  background: #fdf4ee;
   border-color: #E66E33;
   transform: translateY(-2px);
 }
@@ -122,8 +124,8 @@ h1 {
   margin: 15px 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid #eee;
-  transition: transform 0.2s ease;
   text-align: left;
+  transition: transform 0.2s ease;
 }
 
 .prompt-card:hover {
@@ -143,8 +145,8 @@ h1 {
 
 /* === Botón Copiar Prompt === */
 .prompt-card button {
-  background: #E66E33; /* Naranja corporativo */
-  color: #000; /* Texto negro */
+  background: #E66E33;
+  color: black;
   font-weight: bold;
   padding: 10px 18px;
   border: none;
@@ -155,90 +157,6 @@ h1 {
 }
 
 .prompt-card button:hover {
-  background: #cc5c29; /* Más oscuro en hover */
-  color: #fff; /* Texto blanco al pasar */
-}
-/* ======== Fix layout: left-align content area & make subcategory boxes full-width ======== */
-
-/* Anula la centración heredada de .app-container para el contenido que importa */
-.content-area {
-  text-align: left;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Hacer que las listas ocupen todo el ancho posible y que el contenido interno quede alineado a la izquierda */
-.category-list,
-.subcategory-list,
-.prompt-list {
-  width: 100%;
-  max-width: 880px;   /* limita el ancho para mantener lectura cómoda */
-  margin: 0 auto;     /* centra la columna en la página pero con contenido alineado a la izquierda */
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Subcategorías: caja clara, ancho completo dentro del contenedor, icono y texto alineados */
-.subcategory {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 18px;
-  margin: 12px 0;
-  width: 100%;
-  box-sizing: border-box;
-  font-size: 18px;
-  background: #fff;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  cursor: pointer;
-  transition: transform 0.12s ease, background 0.12s ease;
-}
-
-.subcategory:hover {
-  background: #fdf4ee;
-  border-color: #E66E33;
-}
-
-/* Forzar el texto dentro de la subcategory a no centrarse */
-.subcategory strong {
-  display: inline-block;
-  margin: 0;
-  line-height: 1;
-}
-
-/* Si estás usando emojis en línea como iconos, forzamos un tamaño razonable */
-.subcategory img,
-.subcategory .icon,
-.subcategory span.emoji {
-  font-size: 20px;
-  line-height: 1;
-}
-
-/* Encabezados de secciones a la izquierda */
-.subcategory-list h2,
-.prompt-list h3,
-.category-list h2 {
-  text-align: left;
-}
-
-/* Asegurar que los botones de categoría no aparezcan centrados */
-.category-button {
-  justify-content: flex-start;
-  text-align: left;
-}
-
-/* Mantener buena separación entre el breadcrumb y el contenido */
-.breadcrumb {
-  margin-bottom: 18px;
-}
-
-/* Mejora visual móvil: que las cajas se adapten */
-@media (max-width: 640px) {
-  .category-button, .subcategory, .prompt-card {
-    padding-left: 14px;
-    padding-right: 14px;
-    font-size: 16px;
-  }
-  .app-container { padding-left: 12px; padding-right: 12px; }
+  background: #cc5c29;
+  color: white;
 }

@@ -1,6 +1,6 @@
 const promptsData = [
   {
-    id: 1,
+    id: "finanzas",
     name: "Análisis Financiero Estratégico",
     icon: "📊",
     subcategories: [
@@ -9,15 +9,15 @@ const promptsData = [
         prompts: [
           {
             title: "Análisis Integral de Estados Financieros",
-            text: "Actúa como un analista financiero senior. Analiza los estados financieros adjuntos de los últimos 3 años..."
+            text: "Actúa como un analista financiero senior y genera un análisis detallado del balance general, estado de resultados y flujo de efectivo."
           },
           {
             title: "Comparación de Estados Financieros",
-            text: "Realiza una comparación entre balance general, estado de resultados y flujo de efectivo de los últimos 3 años..."
+            text: "Compara los estados financieros de los últimos tres años e identifica tendencias clave."
           },
           {
-            title: "Resumen Ejecutivo de Resultados",
-            text: "Genera un resumen ejecutivo claro para la gerencia sobre los resultados financieros más relevantes..."
+            title: "Informe para Inversores",
+            text: "Resume los estados financieros en un formato amigable para inversionistas."
           }
         ]
       },
@@ -25,16 +25,16 @@ const promptsData = [
         name: "Análisis de Flujo de Efectivo",
         prompts: [
           {
-            title: "Proyección de Flujo de Efectivo",
-            text: "Elabora una proyección de flujo de efectivo a 12 meses considerando ingresos y egresos esperados..."
+            title: "Revisión de Liquidez Operativa",
+            text: "Evalúa la liquidez operativa de la empresa con base en su flujo de efectivo."
           },
           {
-            title: "Identificación de Cuellos de Botella",
-            text: "Detecta períodos con tensiones de liquidez y sugiere medidas de mitigación..."
+            title: "Análisis de Flujo Libre",
+            text: "Calcula el flujo de caja libre e interpreta sus implicaciones estratégicas."
           },
           {
-            title: "Estrategias de Optimización de Liquidez",
-            text: "Recomienda acciones para mejorar la gestión de caja en la empresa..."
+            title: "Escenarios de Caja",
+            text: "Proyecta tres escenarios posibles de flujo de efectivo para los próximos 12 meses."
           }
         ]
       },
@@ -42,16 +42,16 @@ const promptsData = [
         name: "Evaluación de Rentabilidad por Línea de Negocio",
         prompts: [
           {
-            title: "Rentabilidad por Producto",
-            text: "Analiza la rentabilidad de cada producto y su contribución al margen total..."
+            title: "Rentabilidad Segmentada",
+            text: "Analiza la rentabilidad por unidad de negocio o producto."
           },
           {
-            title: "Comparación entre Líneas",
-            text: "Compara el desempeño de las diferentes líneas de negocio y determina cuáles son más estratégicas..."
+            title: "Margen por Cliente",
+            text: "Calcula y explica el margen de rentabilidad promedio por cliente."
           },
           {
-            title: "Segmentación de Clientes Rentables",
-            text: "Identifica los clientes que aportan mayor rentabilidad y recomienda estrategias de fidelización..."
+            title: "Top 5 Líneas Más Rentables",
+            text: "Identifica las cinco líneas de negocio más rentables y explica por qué."
           }
         ]
       },
@@ -59,16 +59,16 @@ const promptsData = [
         name: "Análisis de Ratios Financieros",
         prompts: [
           {
-            title: "Ratios de Liquidez",
-            text: "Calcula y analiza ratios de liquidez como razón corriente y prueba ácida..."
+            title: "Ratios Clave",
+            text: "Calcula los principales ratios financieros de la empresa y explica su significado."
           },
           {
-            title: "Ratios de Rentabilidad",
-            text: "Evalúa ratios como ROE, ROA y margen neto en los últimos 3 años..."
+            title: "Comparación con el Sector",
+            text: "Compara los ratios de la empresa con los promedios del sector."
           },
           {
-            title: "Ratios de Endeudamiento",
-            text: "Analiza el nivel de apalancamiento financiero y su impacto en la sostenibilidad de la empresa..."
+            title: "Alertas en Ratios",
+            text: "Identifica posibles alertas en ratios financieros que deban ser corregidas."
           }
         ]
       },
@@ -76,40 +76,40 @@ const promptsData = [
         name: "Detección de Riesgos Financieros",
         prompts: [
           {
-            title: "Mapa de Riesgos Financieros",
-            text: "Identifica y clasifica los principales riesgos financieros que enfrenta la empresa..."
+            title: "Mapa de Riesgos",
+            text: "Identifica los riesgos financieros más relevantes de la empresa."
           },
           {
-            title: "Escenarios de Crisis",
-            text: "Crea escenarios hipotéticos de crisis y sugiere respuestas financieras adecuadas..."
+            title: "Evaluación de Impacto",
+            text: "Clasifica los riesgos detectados según probabilidad e impacto."
           },
           {
             title: "Recomendaciones de Mitigación",
-            text: "Propón estrategias concretas para reducir la exposición a los riesgos detectados..."
+            text: "Propón estrategias para mitigar los principales riesgos financieros."
           }
         ]
       }
     ]
   },
   {
-    id: 2,
+    id: "comunicacion",
     name: "Comunicación Empresarial de Alto Impacto",
-    icon: "📢",
+    icon: "💬",
     subcategories: [
       {
         name: "Cartas explicativas para clientes",
         prompts: [
           {
-            title: "Carta de Ajuste Contable",
-            text: "Redacta una carta para un cliente explicando un ajuste contable de manera clara y comprensible..."
+            title: "Carta de Aclaración",
+            text: "Redacta una carta clara y profesional explicando a un cliente un ajuste contable inesperado."
           },
           {
-            title: "Notificación de Cambios Normativos",
-            text: "Explica a un cliente los impactos de una nueva regulación contable en su negocio..."
+            title: "Notificación de Cambios",
+            text: "Escribe una carta notificando a los clientes sobre cambios en la normativa fiscal."
           },
           {
-            title: "Explicación de Diferencias en Facturación",
-            text: "Genera una carta diplomática para explicar discrepancias en facturación..."
+            title: "Explicación de Resultados",
+            text: "Redacta un comunicado sencillo explicando los resultados financieros de un trimestre."
           }
         ]
       },
@@ -117,16 +117,16 @@ const promptsData = [
         name: "Reportes ejecutivos personalizados",
         prompts: [
           {
-            title: "Reporte Financiero Trimestral",
-            text: "Crea un reporte ejecutivo con los principales indicadores financieros trimestrales..."
+            title: "Reporte de Desempeño",
+            text: "Crea un reporte ejecutivo de una empresa resaltando sus fortalezas financieras."
           },
           {
-            title: "Resumen Estratégico para CEO",
-            text: "Prepara un resumen ejecutivo en lenguaje simple con hallazgos financieros clave..."
+            title: "Análisis para CEO",
+            text: "Prepara un resumen ejecutivo con los puntos críticos que un CEO debe conocer."
           },
           {
             title: "Reporte Comparativo",
-            text: "Elabora un reporte comparando desempeño real vs. presupuesto y explica desviaciones..."
+            text: "Elabora un informe ejecutivo comparando el desempeño financiero contra el plan anual."
           }
         ]
       },
@@ -134,16 +134,16 @@ const promptsData = [
         name: "Presentaciones de resultados",
         prompts: [
           {
-            title: "Presentación para Junta Directiva",
-            text: "Estructura una presentación de resultados financieros con gráficos y mensajes clave..."
+            title: "Presentación Visual",
+            text: "Genera una presentación en PowerPoint con gráficos claros de resultados financieros."
           },
           {
-            title: "Presentación para Inversionistas",
-            text: "Diseña un discurso para inversionistas resaltando logros financieros y proyecciones..."
+            title: "Resumen Ejecutivo",
+            text: "Crea diapositivas con los KPIs más relevantes del trimestre."
           },
           {
-            title: "Resumen Visual de Resultados",
-            text: "Genera un esquema visual de KPIs y métricas clave para presentaciones ejecutivas..."
+            title: "Pitch para Inversores",
+            text: "Elabora una presentación con métricas clave para presentar a potenciales inversores."
           }
         ]
       },
@@ -151,16 +151,16 @@ const promptsData = [
         name: "Comunicación de hallazgos de auditoría",
         prompts: [
           {
-            title: "Informe de Observaciones",
-            text: "Redacta un informe claro con hallazgos de auditoría y su impacto en la gestión..."
+            title: "Informe de Hallazgos",
+            text: "Redacta un reporte formal comunicando hallazgos de auditoría a la gerencia."
           },
           {
-            title: "Comunicación de Recomendaciones",
-            text: "Explica recomendaciones de auditoría en un lenguaje accesible para la gerencia..."
+            title: "Comunicación Constructiva",
+            text: "Escribe un mensaje profesional resaltando oportunidades de mejora detectadas en auditoría."
           },
           {
-            title: "Síntesis de Hallazgos Críticos",
-            text: "Resume en una página los hallazgos más críticos y las acciones inmediatas sugeridas..."
+            title: "Resumen de Recomendaciones",
+            text: "Elabora un memo con las recomendaciones de auditoría más relevantes."
           }
         ]
       },
@@ -168,19 +168,21 @@ const promptsData = [
         name: "Explicación de impactos fiscales",
         prompts: [
           {
-            title: "Impacto de Nuevos Impuestos",
-            text: "Elabora un documento para explicar a directivos los efectos de un nuevo impuesto..."
+            title: "Impacto de Reforma Fiscal",
+            text: "Resume en lenguaje simple cómo afecta una nueva ley fiscal a la empresa."
           },
           {
-            title: "Explicación de Cambios en Declaraciones",
-            text: "Redacta un texto que detalle cómo afectan los cambios normativos a las declaraciones fiscales..."
+            title: "Explicación para No Financieros",
+            text: "Crea un comunicado dirigido a empleados no financieros explicando un cambio tributario."
           },
           {
-            title: "Síntesis de Beneficios Tributarios",
-            text: "Explica a la gerencia las oportunidades de ahorro fiscal derivadas de nuevas normativas..."
+            title: "Informe de Impacto Económico",
+            text: "Elabora un reporte breve sobre el impacto económico de una modificación fiscal."
           }
         ]
       }
     ]
   }
 ];
+
+export default promptsData;

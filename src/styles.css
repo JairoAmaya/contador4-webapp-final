@@ -177,3 +177,31 @@ h1 {
   background: #cc5c29;
   color: white;
 }
+/* === Tips card === */
+.tips-card {
+  background: #fff8e1;
+  border: 1px solid #ffecb3;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.tips-card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #e66e33;
+}
+
+.tips-card ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.tips-card li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #8a4f0b;
+}

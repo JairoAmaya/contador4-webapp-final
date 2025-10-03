@@ -70,23 +70,36 @@ function App() {
       )}
 
       {/* Vista de prompts dentro de una subcategoría */}
-      {subcategoriaSeleccionada && (
-        <div className="prompt-list">
-          <h3>{subcategoriaSeleccionada.name}</h3>
-          {subcategoriaSeleccionada.prompts.map((prompt, index) => (
-            <div key={index} className="prompt-card">
-              <h4>{prompt.title}</h4>
-              <p>{prompt.text}</p>
-              <button onClick={() => copiarPrompt(prompt.text)}>
-                Copiar Prompt
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
+{selectedSubcategory && (
+  <div>
+    <div className="breadcrumb">
+      <button
+        className="back-button"
+        onClick={() => setSelectedSubcategory(null)}
+      >
+        ⬅ Volver
+      </button>
+      <span>
+        {selectedCategory.name} / {selectedSubcategory.name}
+      </span>
     </div>
-  );
-}
+
+    <h3>{selectedSubcategory.name}</h3>
+
+    <div className="prompt-list">
+      {selectedSubcategory.prompts.map((prompt, index) => (
+        <div key={index} className="prompt-card">
+          <h4>{prompt.title}</h4>
+          <p>{prompt.text}</p>
+          <button onClick={() => copyPrompt(prompt.text)}>
+            Copiar Prompt
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
 
 export default App;
 

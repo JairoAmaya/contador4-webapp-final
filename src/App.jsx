@@ -11,36 +11,41 @@ function App() {
     alert("✅ Prompt copiado al portapapeles");
   };
 
-  const volver = () => {
-    if (subcategoriaSeleccionada) {
-      setSubcategoriaSeleccionada(null);
-    } else if (categoriaSeleccionada) {
-      setCategoriaSeleccionada(null);
-    }
-  };
-
   return (
     <div className="app-container">
-      <header className="header">
-        {(categoriaSeleccionada || subcategoriaSeleccionada) && (
-          <button className="back-btn" onClick={volver}>
+      <h1>📊 Contador 4.0 – Demo</h1>
+      <p className="subtitle">
+        Explora categorías y subcategorías de prompts especializados en
+        contabilidad y negocio.
+      </p>
+
+      {/* Breadcrumb */}
+      {categoriaSeleccionada && (
+        <div className="breadcrumb">
+          <button
+            onClick={() =>
+              subcategoriaSeleccionada
+                ? setSubcategoriaSeleccionada(null)
+                : setCategoriaSeleccionada(null)
+            }
+          >
             ⬅ Volver
           </button>
-        )}
-        <h1>📊 Contador 4.0 – Demo</h1>
-        <p className="subtitle">
-          Explora categorías y subcategorías de prompts especializados en contabilidad y negocio.
-        </p>
-      </header>
+          <span>
+            {categoriaSeleccionada.name}
+            {subcategoriaSeleccionada && ` / ${subcategoriaSeleccionada.name}`}
+          </span>
+        </div>
+      )}
 
-      {/* Pantalla Principal: Lista de Categorías */}
+      {/* Pantalla principal - lista de categorías */}
       {!categoriaSeleccionada && (
-        <div className="categorias-list">
+        <div className="category-list">
           {promptsData.map((cat) => (
             <button
               key={cat.id}
+              className="category-button"
               onClick={() => setCategoriaSeleccionada(cat)}
-              className="categoria-btn"
             >
               {cat.icon} {cat.name}
             </button>
@@ -48,29 +53,33 @@ function App() {
         </div>
       )}
 
-      {/* Pantalla de una Categoría → Subcategorías */}
+      {/* Vista de una categoría con subcategorías */}
       {categoriaSeleccionada && !subcategoriaSeleccionada && (
-        <div>
+        <div className="subcategory-list">
           <h2>{categoriaSeleccionada.name}</h2>
-          {categoriaSeleccionada.subcategories.map((sub, i) => (
-            <div key={i} className="subcategoria-card">
-              <h3 onClick={() => setSubcategoriaSeleccionada(sub)}>
-                📂 {sub.name}
-              </h3>
+          {categoriaSeleccionada.subcategories.map((subcat, index) => (
+            <div
+              key={index}
+              className="subcategory"
+              onClick={() => setSubcategoriaSeleccionada(subcat)}
+            >
+              📑 <strong>{subcat.name}</strong>
             </div>
           ))}
         </div>
       )}
 
-      {/* Pantalla de una Subcategoría → Prompts */}
+      {/* Vista de prompts dentro de una subcategoría */}
       {subcategoriaSeleccionada && (
-        <div>
-          <h2>{subcategoriaSeleccionada.name}</h2>
-          {subcategoriaSeleccionada.prompts.map((p, i) => (
-            <div key={i} className="prompt-card">
-              <h3>{p.title}</h3>
-              <p>{p.text}</p>
-              <button onClick={() => copiarPrompt(p.text)}>Copiar Prompt</button>
+        <div className="prompt-list">
+          <h3>{subcategoriaSeleccionada.name}</h3>
+          {subcategoriaSeleccionada.prompts.map((prompt, index) => (
+            <div key={index} className="prompt-card">
+              <h4>{prompt.title}</h4>
+              <p>{prompt.text}</p>
+              <button onClick={() => copiarPrompt(prompt.text)}>
+                Copiar Prompt
+              </button>
             </div>
           ))}
         </div>
@@ -80,3 +89,4 @@ function App() {
 }
 
 export default App;
+

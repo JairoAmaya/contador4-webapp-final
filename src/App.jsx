@@ -55,51 +55,40 @@ function App() {
 
       {/* Vista de una categoría con subcategorías */}
       {categoriaSeleccionada && !subcategoriaSeleccionada && (
-        <div className="subcategory-list">
+        <div className="subcategoria-list">
           <h2>{categoriaSeleccionada.name}</h2>
           {categoriaSeleccionada.subcategories.map((subcat, index) => (
             <div
               key={index}
-              className="subcategory"
+              className="subcategoria-card"
               onClick={() => setSubcategoriaSeleccionada(subcat)}
             >
-              📑 <strong>{subcat.name}</strong>
+              📑 {subcat.name}
             </div>
           ))}
         </div>
       )}
 
       {/* Vista de prompts dentro de una subcategoría */}
-{selectedSubcategory && (
-  <div>
-    <div className="breadcrumb">
-      <button
-        className="back-button"
-        onClick={() => setSelectedSubcategory(null)}
-      >
-        ⬅ Volver
-      </button>
-      <span>
-        {selectedCategory.name} / {selectedSubcategory.name}
-      </span>
-    </div>
+      {subcategoriaSeleccionada && (
+        <div>
+          <h3>{subcategoriaSeleccionada.name}</h3>
 
-    <h3>{selectedSubcategory.name}</h3>
-
-    <div className="prompt-list">
-      {selectedSubcategory.prompts.map((prompt, index) => (
-        <div key={index} className="prompt-card">
-          <h4>{prompt.title}</h4>
-          <p>{prompt.text}</p>
-          <button onClick={() => copyPrompt(prompt.text)}>
-            Copiar Prompt
-          </button>
+          <div className="prompt-list">
+            {subcategoriaSeleccionada.prompts.map((prompt, index) => (
+              <div key={index} className="prompt-card">
+                <h4>{prompt.title}</h4>
+                <p>{prompt.text}</p>
+                <button onClick={() => copiarPrompt(prompt.text)}>
+                  Copiar Prompt
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
+      )}
     </div>
-  </div>
-)}
-
+  );
+}
 
 export default App;
-

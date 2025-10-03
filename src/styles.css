@@ -86,15 +86,15 @@ h1 {
 .subcategoria-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 20px;
+  gap: 18px; /* más separación entre tarjetas */
+  margin-top: 25px;
 }
 
 .subcategoria-card {
-  padding: 15px 20px;
-  margin: 12px 0;
+  padding: 18px 22px; /* más aire interno */
+  margin: 0; /* quitamos margin redundante */
   background: #fff;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid #ddd;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -145,7 +145,7 @@ h1 {
 
 /* === Botón Copiar Prompt === */
 .prompt-card button {
-  background: #E66E33;
+  background: #E66E33; /* Naranja corporativo */
   color: black;
   font-weight: bold;
   padding: 10px 18px;
@@ -157,6 +157,6 @@ h1 {
 }
 
 .prompt-card button:hover {
-  background: #cc5c29;
+  background: #cc5c29; /* Hover más oscuro */
   color: white;
 }

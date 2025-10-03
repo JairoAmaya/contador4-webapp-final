@@ -1,28 +1,22 @@
-// src/promptsData.js
-
 const promptsData = [
-  // ==========================
-  // CATEGORÍA 1
-  // ==========================
   {
     id: 1,
     name: "📊 Análisis Financiero Estratégico",
-    icon: "📊",
     subcategories: [
       {
         name: "Interpretación de estados financieros",
         prompts: [
           {
-            title: "Análisis integral de estados financieros",
-            text: "Actúa como un analista financiero senior. Analiza los estados financieros adjuntos (balance general, estado de resultados y estado de cambios en el patrimonio) de los últimos 3 años. Identifica las 5 tendencias más significativas, evalúa la salud financiera general de la empresa y proporciona 3 recomendaciones estratégicas. Incluye comparaciones año a año y explica el impacto de cada hallazgo en la posición competitiva de la empresa."
+            title: "Análisis Integral de Estados Financieros",
+            text: "Actúa como un analista financiero senior. Analiza los estados financieros adjuntos (balance general, estado de resultados y estado de cambios en el patrimonio) de los últimos 3 años. Identifica las 5 tendencias más significativas, evalúa la salud financiera general de la empresa, y proporciona 3 recomendaciones estratégicas basadas en tu análisis. Incluye comparaciones año a año y explica el impacto de cada hallazgo en la posición competitiva de la empresa."
           },
           {
-            title: "Comparación interanual de resultados",
-            text: "Genera un análisis comparativo de los estados de resultados de los últimos 2 años. Identifica los cambios en ingresos, costos y gastos, destacando las áreas con mayor impacto en la utilidad neta. Explica qué factores podrían estar impulsando estas variaciones."
+            title: "Identificación de fortalezas y debilidades",
+            text: "Eres un consultor contable. Revisa los estados financieros de la empresa y elabora un informe que identifique al menos 3 fortalezas y 3 debilidades financieras clave, explicando su impacto en la operación actual."
           },
           {
-            title: "Análisis de balance general",
-            text: "Revisa el balance general de la empresa y determina los cambios más relevantes en activos, pasivos y patrimonio. Evalúa la estructura de capital, el nivel de endeudamiento y la liquidez disponible para operaciones."
+            title: "Comparación interanual",
+            text: "Genera un análisis comparativo de los estados financieros de la empresa en los últimos 2 años. Destaca las variaciones más relevantes en ingresos, gastos y patrimonio, y proporciona conclusiones claras para la gerencia."
           }
         ]
       },
@@ -30,16 +24,16 @@ const promptsData = [
         name: "Análisis de flujo de efectivo",
         prompts: [
           {
-            title: "Evaluación del flujo operativo",
-            text: "Analiza el estado de flujo de efectivo y determina si la empresa genera suficiente flujo operativo para cubrir sus gastos recurrentes y de inversión. Identifica los principales impulsores de entrada y salida de efectivo."
+            title: "Evaluación de liquidez operativa",
+            text: "Examina el estado de flujo de efectivo de los últimos 12 meses e identifica si la empresa cuenta con suficiente liquidez para cubrir sus operaciones. Sugiere medidas para optimizar la gestión de efectivo."
           },
           {
-            title: "Impacto de financiamiento",
-            text: "Examina la sección de actividades de financiamiento en el flujo de efectivo. Explica cómo los nuevos préstamos, emisiones de acciones o pagos de deuda impactan la liquidez de la empresa."
+            title: "Proyección de flujo de caja",
+            text: "Elabora una proyección de flujo de efectivo para los próximos 6 meses basada en los patrones históricos de ingresos y egresos. Indica posibles riesgos de liquidez y estrategias para mitigarlos."
           },
           {
-            title: "Proyección de liquidez",
-            text: "Con base en el flujo de efectivo histórico, elabora una proyección de liquidez para los próximos 6 meses. Señala riesgos de déficit y sugiere medidas preventivas."
+            title: "Detección de cuellos de botella financieros",
+            text: "Analiza el flujo de efectivo y señala en qué áreas se generan cuellos de botella (ejemplo: cobros tardíos, pagos concentrados). Propón soluciones prácticas para equilibrar entradas y salidas."
           }
         ]
       },
@@ -47,16 +41,16 @@ const promptsData = [
         name: "Evaluación de rentabilidad por línea de negocio",
         prompts: [
           {
-            title: "Rentabilidad por unidad de negocio",
-            text: "Desarrolla un informe que compare la rentabilidad de cada unidad de negocio o línea de producto. Identifica qué áreas generan mayor margen y cuáles requieren ajustes estratégicos."
+            title: "Análisis de márgenes por unidad",
+            text: "Calcula y compara los márgenes de utilidad de cada línea de negocio de la empresa. Identifica cuál aporta mayor rentabilidad y cuál está generando pérdidas."
           },
           {
-            title: "Análisis de clientes rentables",
-            text: "Clasifica a los principales clientes en función de su rentabilidad neta. Identifica cuáles son los más estratégicos y cuáles podrían estar afectando los márgenes de la empresa."
+            title: "Identificación de líneas estratégicas",
+            text: "Realiza un análisis financiero para recomendar a la gerencia en qué líneas de negocio debería invertir más y cuáles conviene descontinuar, con base en su rentabilidad."
           },
           {
-            title: "Benchmarking interno",
-            text: "Compara las líneas de negocio internas para determinar qué prácticas de las más rentables podrían aplicarse en otras unidades menos eficientes."
+            title: "Reporte de rentabilidad acumulada",
+            text: "Prepara un informe con la rentabilidad acumulada de cada línea de negocio en los últimos 3 años, destacando tendencias y variaciones importantes."
           }
         ]
       },
@@ -64,16 +58,16 @@ const promptsData = [
         name: "Análisis de ratios financieros",
         prompts: [
           {
-            title: "Ratios de liquidez",
-            text: "Calcula los principales indicadores de liquidez (current ratio, quick ratio, cash ratio). Evalúa si la empresa tiene capacidad para cubrir sus obligaciones de corto plazo."
+            title: "Indicadores clave",
+            text: "Calcula los principales ratios financieros (liquidez corriente, endeudamiento, margen neto y ROE) de la empresa. Explica qué revelan sobre su salud financiera."
           },
           {
-            title: "Ratios de rentabilidad",
-            text: "Analiza el ROE, ROA y margen neto de la empresa. Explica qué tan atractiva es la empresa para inversionistas y socios estratégicos."
+            title: "Benchmarking con el sector",
+            text: "Compara los ratios financieros de la empresa con los promedios del sector. Identifica fortalezas competitivas y riesgos en la comparación."
           },
           {
-            title: "Ratios de eficiencia",
-            text: "Evalúa la rotación de inventarios, rotación de cuentas por cobrar y cuentas por pagar. Explica si la empresa gestiona bien su capital de trabajo."
+            title: "Tendencia de ratios",
+            text: "Genera un análisis de la evolución de los principales ratios financieros en los últimos 3 años e interpreta si la empresa va en una dirección positiva o negativa."
           }
         ]
       },
@@ -82,43 +76,38 @@ const promptsData = [
         prompts: [
           {
             title: "Mapa de riesgos financieros",
-            text: "Genera un mapa de riesgos basado en los estados financieros. Señala los 3 riesgos más críticos (liquidez, endeudamiento, exposición cambiaria, etc.) y sugiere planes de mitigación."
+            text: "Actúa como un analista de riesgos. Elabora un mapa de los principales riesgos financieros de la empresa (liquidez, endeudamiento, rentabilidad, cumplimiento). Prioriza los 3 más críticos."
           },
           {
-            title: "Sensibilidad a cambios de mercado",
-            text: "Evalúa cómo impactaría una variación del 10% en tasas de interés o tipo de cambio en la posición financiera de la empresa."
+            title: "Evaluación de riesgo de insolvencia",
+            text: "Evalúa la probabilidad de insolvencia de la empresa en base a sus indicadores financieros actuales y pasados. Propón medidas preventivas."
           },
           {
-            title: "Escenarios adversos",
-            text: "Diseña un escenario de estrés financiero para la empresa considerando caída de ventas y aumento de costos. Determina su capacidad de resistencia."
+            title: "Informe de riesgos por área",
+            text: "Prepara un informe que identifique los riesgos financieros asociados a las diferentes áreas de la empresa (operaciones, ventas, compras). Explica cómo afectan a la estabilidad financiera."
           }
         ]
       }
     ]
   },
-
-  // ==========================
-  // CATEGORÍA 2
-  // ==========================
   {
     id: 2,
     name: "💬 Comunicación Empresarial de Alto Impacto",
-    icon: "💬",
     subcategories: [
       {
         name: "Cartas explicativas para clientes",
         prompts: [
           {
-            title: "Carta para aclarar cambios normativos",
-            text: "Redacta una carta clara y profesional dirigida a clientes, explicando cómo un reciente cambio normativo afecta sus obligaciones fiscales. Usa un tono cercano pero técnico."
+            title: "Carta de resultados financieros",
+            text: "Actúa como un contador especializado en comunicación clara con clientes. Redacta una carta explicativa que resuma los principales resultados financieros de este trimestre para un cliente pyme. Incluye puntos positivos, áreas de atención y recomendaciones, en un lenguaje sencillo y no técnico."
           },
           {
             title: "Explicación de ajustes contables",
-            text: "Escribe una carta a un cliente detallando por qué se realizó un ajuste en su contabilidad, indicando la normativa que respalda el cambio."
+            text: "Imagina que eres un contador que debe justificar un ajuste contable a un cliente. Redacta un mensaje breve, profesional y fácil de entender, donde expliques la razón del ajuste, su impacto y por qué es necesario mantener la transparencia en los registros."
           },
           {
-            title: "Notificación preventiva",
-            text: "Redacta un mensaje preventivo para clientes sobre posibles riesgos financieros derivados de retrasos en pagos de impuestos."
+            title: "Carta de felicitación por desempeño",
+            text: "Actúa como un asesor financiero. Redacta una carta de felicitación a un cliente corporativo destacando el buen desempeño financiero en el último año, resaltando los logros clave y motivando a mantener las buenas prácticas."
           }
         ]
       },
@@ -126,16 +115,16 @@ const promptsData = [
         name: "Reportes ejecutivos personalizados",
         prompts: [
           {
-            title: "Reporte mensual para la gerencia",
-            text: "Genera un reporte ejecutivo con resumen financiero mensual, destacando ingresos, gastos, utilidades y riesgos relevantes."
+            title: "Resumen ejecutivo para directorio",
+            text: "Eres un contador senior y debes elaborar un reporte ejecutivo de una página para el directorio. Resume el desempeño financiero de la empresa en los últimos 6 meses, destacando crecimiento, riesgos y tres recomendaciones estratégicas clave."
           },
           {
-            title: "Reporte para inversionistas",
-            text: "Prepara un reporte conciso para inversionistas con los 5 indicadores clave del trimestre, incluyendo EBITDA y flujo de caja."
+            title: "Reporte de rentabilidad por unidad",
+            text: "Crea un reporte ejecutivo para la gerencia donde se detalle la rentabilidad por cada unidad de negocio, resaltando cuál contribuye más al margen operativo y cuál genera pérdidas. Propón acciones inmediatas para optimizar resultados."
           },
           {
-            title: "Informe para junta directiva",
-            text: "Redacta un informe ejecutivo para la junta, resaltando decisiones críticas que deben tomarse con base en los resultados."
+            title: "Informe de flujo de efectivo",
+            text: "Redacta un informe ejecutivo en formato claro y visual que explique el estado del flujo de efectivo, principales entradas y salidas, y cómo se proyecta la liquidez en los próximos tres meses."
           }
         ]
       },
@@ -143,16 +132,16 @@ const promptsData = [
         name: "Presentaciones de resultados",
         prompts: [
           {
-            title: "Presentación de cierre trimestral",
-            text: "Diseña una presentación de PowerPoint con gráficos que expliquen los resultados financieros del trimestre. Resalta KPIs clave."
+            title: "Presentación trimestral para junta",
+            text: "Genera una presentación en formato de diapositivas que muestre los resultados trimestrales. Incluye gráficos de ingresos, gastos, utilidades y comparaciones con el presupuesto."
           },
           {
-            title: "Presentación para clientes",
-            text: "Prepara una presentación simple y clara para un cliente, mostrando cómo se justifica el valor de tus servicios."
+            title: "Informe anual a inversionistas",
+            text: "Crea un guion para una presentación dirigida a inversionistas donde se explique el desempeño anual de la empresa, su situación financiera y los planes de crecimiento a futuro."
           },
           {
-            title: "Storytelling financiero",
-            text: "Convierte los resultados financieros en una narrativa fácil de entender para no financieros."
+            title: "Presentación de KPIs financieros",
+            text: "Prepara una presentación enfocada en los principales KPIs financieros (liquidez, endeudamiento, rentabilidad). Incluye recomendaciones para mejorar dos de ellos en el próximo semestre."
           }
         ]
       },
@@ -160,16 +149,16 @@ const promptsData = [
         name: "Comunicación de hallazgos de auditoría",
         prompts: [
           {
-            title: "Informe de hallazgos",
-            text: "Redacta un documento que explique hallazgos de auditoría a un cliente, indicando el riesgo y la acción correctiva recomendada."
+            title: "Informe de hallazgos menores",
+            text: "Actúa como un auditor que debe comunicar hallazgos menores a la gerencia. Redacta un informe breve que explique los hallazgos, su impacto y las acciones correctivas sugeridas."
           },
           {
-            title: "Correo sobre irregularidades",
-            text: "Prepara un correo a la gerencia detallando hallazgos críticos que requieren acción inmediata."
+            title: "Explicación de irregularidad detectada",
+            text: "Imagina que debes informar a la alta dirección sobre una irregularidad detectada en los procesos de control interno. Explica el hallazgo, su posible riesgo y los pasos inmediatos recomendados."
           },
           {
-            title: "Resumen ejecutivo de auditoría",
-            text: "Crea un resumen ejecutivo en lenguaje sencillo para explicar hallazgos a no expertos."
+            title: "Comunicación de buenas prácticas",
+            text: "Redacta un mensaje a la gerencia donde destaques las buenas prácticas encontradas en la auditoría, reforzando la confianza y felicitando al equipo."
           }
         ]
       },
@@ -177,112 +166,16 @@ const promptsData = [
         name: "Explicación de impactos fiscales",
         prompts: [
           {
-            title: "Explicación de reforma fiscal",
-            text: "Redacta una explicación sencilla sobre cómo una reforma fiscal impactará a un cliente en particular."
+            title: "Explicación de reforma tributaria",
+            text: "Redacta una comunicación para un cliente corporativo explicando en lenguaje claro los principales cambios de la última reforma tributaria y cómo afectan a la empresa."
           },
           {
-            title: "Impacto de deducciones",
-            text: "Explica a un cliente cómo aprovechar deducciones específicas para optimizar su carga tributaria."
+            title: "Impacto de deducciones fiscales",
+            text: "Explica a un cliente cómo puede beneficiarse de nuevas deducciones fiscales aplicables a su industria, resaltando los beneficios y precauciones a tener en cuenta."
           },
           {
-            title: "Aviso de cambios en retenciones",
-            text: "Prepara un comunicado para clientes sobre cambios en retenciones y sus implicaciones."
-          }
-        ]
-      }
-    ]
-  },
-
-  // ==========================
-  // CATEGORÍA 3
-  // ==========================
-  {
-    id: 3,
-    name: "💼 Propuestas y Cotizaciones que Cierran Negocios",
-    icon: "💼",
-    subcategories: [
-      {
-        name: "Propuestas de servicios contables",
-        prompts: [
-          {
-            title: "Propuesta detallada de servicios",
-            text: "Redacta una propuesta completa de servicios contables para una pyme, detallando alcance, beneficios, tiempos de entrega y tarifas."
-          },
-          {
-            title: "Propuesta orientada a valor",
-            text: "Elabora una propuesta de servicios contables enfocada en el valor agregado para el cliente, resaltando ahorros y beneficios."
-          },
-          {
-            title: "Propuesta personalizada",
-            text: "Crea una propuesta de servicios ajustada a un cliente del sector salud, destacando tu experiencia en ese rubro."
-          }
-        ]
-      },
-      {
-        name: "Cotizaciones por paquetes de servicios",
-        prompts: [
-          {
-            title: "Cotización básica, intermedia y premium",
-            text: "Genera una tabla comparativa con 3 paquetes de servicios contables, diferenciando precios, beneficios y nivel de soporte."
-          },
-          {
-            title: "Cotización flexible",
-            text: "Diseña una cotización que permita al cliente escoger servicios individuales y formar su propio paquete."
-          },
-          {
-            title: "Cotización estandarizada",
-            text: "Elabora una cotización estándar para startups, con precios competitivos y entregables claros."
-          }
-        ]
-      },
-      {
-        name: "Presentación de servicios de valor agregado",
-        prompts: [
-          {
-            title: "Servicios de consultoría extra",
-            text: "Prepara un documento que muestre servicios adicionales de consultoría financiera como parte del paquete."
-          },
-          {
-            title: "Propuesta con diferenciadores",
-            text: "Redacta una propuesta que resalte qué te diferencia de la competencia (tecnología, rapidez, experiencia)."
-          },
-          {
-            title: "Beneficios intangibles",
-            text: "Elabora una propuesta que destaque beneficios intangibles como confianza, soporte personalizado y asesoría continua."
-          }
-        ]
-      },
-      {
-        name: "Justificación de honorarios",
-        prompts: [
-          {
-            title: "Explicación de tarifas",
-            text: "Redacta una justificación clara de tus honorarios mostrando el valor recibido por el cliente."
-          },
-          {
-            title: "Comparación de honorarios",
-            text: "Crea un cuadro que compare tus honorarios con el valor de mercado, resaltando beneficios adicionales."
-          },
-          {
-            title: "Justificación orientada a resultados",
-            text: "Explica cómo tus honorarios se compensan con los ahorros fiscales y eficiencia logrados."
-          }
-        ]
-      },
-      {
-        name: "Contratos de servicios profesionales",
-        prompts: [
-          {
-            title: "Contrato estándar",
-            text: "Redacta un contrato de prestación de servicios contables, incluyendo alcance, confidencialidad y cláusulas de pago."
-          },
-          {
-            title: "Contrato flexible",
-            text: "Diseña un contrato que permita ajustar servicios en función del crecimiento del cliente."
-          },
-          {
-            title: "Contrato para servicios recurrentes",
-            text: "Crea un contrato enfocado en servicios mensuales recurrentes con cláusulas claras de renovación."
+            title: "Aviso de vencimiento de obligaciones",
+            text: "Redacta un aviso proactivo para un cliente recordándole las próximas fechas de vencimiento de impuestos y las consecuencias de no cumplir con las obligaciones a tiempo."
           }
         ]
       }

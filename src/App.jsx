@@ -19,74 +19,76 @@ function App() {
         contabilidad y negocio.
       </p>
 
-      {/* Breadcrumb */}
-      {categoriaSeleccionada && (
-        <div className="breadcrumb">
-          <button
-            onClick={() =>
-              subcategoriaSeleccionada
-                ? setSubcategoriaSeleccionada(null)
-                : setCategoriaSeleccionada(null)
-            }
-          >
-            ⬅ Volver
-          </button>
-          <span>
-            {categoriaSeleccionada.name}
-            {subcategoriaSeleccionada && ` / ${subcategoriaSeleccionada.name}`}
-          </span>
-        </div>
-      )}
-
-      {/* Pantalla principal - lista de categorías */}
-      {!categoriaSeleccionada && (
-        <div className="category-list">
-          {promptsData.map((cat) => (
+      <div className="content-area">
+        {/* Breadcrumb */}
+        {categoriaSeleccionada && (
+          <div className="breadcrumb">
             <button
-              key={cat.id}
-              className="category-button"
-              onClick={() => setCategoriaSeleccionada(cat)}
+              onClick={() =>
+                subcategoriaSeleccionada
+                  ? setSubcategoriaSeleccionada(null)
+                  : setCategoriaSeleccionada(null)
+              }
             >
-              {cat.icon} {cat.name}
+              ⬅ Volver
             </button>
-          ))}
-        </div>
-      )}
+            <span>
+              {categoriaSeleccionada.name}
+              {subcategoriaSeleccionada && ` / ${subcategoriaSeleccionada.name}`}
+            </span>
+          </div>
+        )}
 
-      {/* Vista de una categoría con subcategorías */}
-      {categoriaSeleccionada && !subcategoriaSeleccionada && (
-        <div className="subcategoria-list">
-          <h2>{categoriaSeleccionada.name}</h2>
-          {categoriaSeleccionada.subcategories.map((subcat, index) => (
-            <div
-              key={index}
-              className="subcategoria-card"
-              onClick={() => setSubcategoriaSeleccionada(subcat)}
-            >
-              📑 {subcat.name}
-            </div>
-          ))}
-        </div>
-      )}
+        {/* Pantalla principal - lista de categorías */}
+        {!categoriaSeleccionada && (
+          <div className="category-list">
+            {promptsData.map((cat) => (
+              <button
+                key={cat.id}
+                className="category-button"
+                onClick={() => setCategoriaSeleccionada(cat)}
+              >
+                {cat.icon} {cat.name}
+              </button>
+            ))}
+          </div>
+        )}
 
-      {/* Vista de prompts dentro de una subcategoría */}
-      {subcategoriaSeleccionada && (
-        <div>
-          <h3>{subcategoriaSeleccionada.name}</h3>
-
-          <div className="prompt-list">
-            {subcategoriaSeleccionada.prompts.map((prompt, index) => (
-              <div key={index} className="prompt-card">
-                <h4>{prompt.title}</h4>
-                <p>{prompt.text}</p>
-                <button onClick={() => copiarPrompt(prompt.text)}>
-                  Copiar Prompt
-                </button>
+        {/* Vista de una categoría con subcategorías */}
+        {categoriaSeleccionada && !subcategoriaSeleccionada && (
+          <div className="subcategory-list">
+            <h2>{categoriaSeleccionada.name}</h2>
+            {categoriaSeleccionada.subcategories.map((subcat, index) => (
+              <div
+                key={index}
+                className="subcategory"
+                onClick={() => setSubcategoriaSeleccionada(subcat)}
+              >
+                📑 <strong>{subcat.name}</strong>
               </div>
             ))}
           </div>
-        </div>
-      )}
+        )}
+
+        {/* Vista de prompts dentro de una subcategoría */}
+        {subcategoriaSeleccionada && (
+          <div>
+            <h3>{subcategoriaSeleccionada.name}</h3>
+
+            <div className="prompt-list">
+              {subcategoriaSeleccionada.prompts.map((prompt, index) => (
+                <div key={index} className="prompt-card">
+                  <h4>{prompt.title}</h4>
+                  <p>{prompt.text}</p>
+                  <button onClick={() => copiarPrompt(prompt.text)}>
+                    Copiar Prompt
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

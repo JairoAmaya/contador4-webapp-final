@@ -4,72 +4,73 @@ import "./styles.css";
 
 function App() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
+  const [subcategoriaSeleccionada, setSubcategoriaSeleccionada] = useState(null);
 
   const copiarPrompt = (texto) => {
     navigator.clipboard.writeText(texto);
     alert("✅ Prompt copiado al portapapeles");
   };
 
+  const volver = () => {
+    if (subcategoriaSeleccionada) {
+      setSubcategoriaSeleccionada(null);
+    } else if (categoriaSeleccionada) {
+      setCategoriaSeleccionada(null);
+    }
+  };
+
   return (
     <div className="app-container">
-      <h1>📊 Contador 4.0 – Demo</h1>
-      <p className="subtitle">
-        Explora categorías y subcategorías de prompts especializados en contabilidad y negocio.
-      </p>
+      <header className="header">
+        {(categoriaSeleccionada || subcategoriaSeleccionada) && (
+          <button className="back-btn" onClick={volver}>
+            ⬅ Volver
+          </button>
+        )}
+        <h1>📊 Contador 4.0 – Demo</h1>
+        <p className="subtitle">
+          Explora categorías y subcategorías de prompts especializados en contabilidad y negocio.
+        </p>
+      </header>
 
-      {/* Si NO hay categoría seleccionada → mostramos todas */}
-      {!categoriaSeleccionada ? (
-        <div className="categories-container">
-          {promptsData.map((categoria) => (
+      {/* Pantalla Principal: Lista de Categorías */}
+      {!categoriaSeleccionada && (
+        <div className="categorias-list">
+          {promptsData.map((cat) => (
             <button
-              key={categoria.id}
-              className="category-card"
-              onClick={() => setCategoriaSeleccionada(categoria)}
+              key={cat.id}
+              onClick={() => setCategoriaSeleccionada(cat)}
+              className="categoria-btn"
             >
-              <span style={{ fontSize: "22px", marginRight: "8px" }}>
-                {categoria.icon}
-              </span>
-              {categoria.name}
+              {cat.icon} {cat.name}
             </button>
           ))}
         </div>
-      ) : (
+      )}
+
+      {/* Pantalla de una Categoría → Subcategorías */}
+      {categoriaSeleccionada && !subcategoriaSeleccionada && (
         <div>
-          {/* Botón volver */}
-          <button
-            onClick={() => setCategoriaSeleccionada(null)}
-            style={{
-              background: "#007bff",
-              color: "white",
-              padding: "8px 16px",
-              border: "none",
-              borderRadius: "6px",
-              marginBottom: "20px",
-              cursor: "pointer",
-            }}
-          >
-            ⬅ Volver
-          </button>
-
-          {/* Nombre de la categoría seleccionada */}
           <h2>{categoriaSeleccionada.name}</h2>
-
-          {/* Mostrar subcategorías y prompts */}
           {categoriaSeleccionada.subcategories.map((sub, i) => (
-            <div key={i} className="subcategory-block">
-              <h3>📑 {sub.name}</h3>
-              {sub.prompts.map((prompt, j) => (
-                <div key={j} className="prompt-card">
-                  <h4>{prompt.title}</h4>
-                  <p>{prompt.text}</p>
-                  <button
-                    className="copy-btn"
-                    onClick={() => copiarPrompt(prompt.text)}
-                  >
-                    Copiar Prompt
-                  </button>
-                </div>
-              ))}
+            <div key={i} className="subcategoria-card">
+              <h3 onClick={() => setSubcategoriaSeleccionada(sub)}>
+                📂 {sub.name}
+              </h3>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Pantalla de una Subcategoría → Prompts */}
+      {subcategoriaSeleccionada && (
+        <div>
+          <h2>{subcategoriaSeleccionada.name}</h2>
+          {subcategoriaSeleccionada.prompts.map((p, i) => (
+            <div key={i} className="prompt-card">
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+              <button onClick={() => copiarPrompt(p.text)}>Copiar Prompt</button>
             </div>
           ))}
         </div>

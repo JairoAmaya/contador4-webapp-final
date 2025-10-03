@@ -38,20 +38,35 @@ function App() {
         </div>
       )}
 
-      {/* Pantalla principal - lista de categorías */}
-      {!categoriaSeleccionada && (
-        <div className="category-list">
-          {promptsData.map((cat) => (
-            <button
-              key={cat.id}
-              className="category-button"
-              onClick={() => setCategoriaSeleccionada(cat)}
-            >
-              {cat.icon} {cat.name}
-            </button>
-          ))}
-        </div>
-      )}
+     {/* Pantalla principal - lista de categorías */}
+{!categoriaSeleccionada && (
+  <div>
+    {/* Bloque de consejos */}
+    <div className="tips-card">
+      <h3>💡 Consejos para usar los prompts</h3>
+      <ul>
+        <li>Cambia siempre la información entre [corchetes] por datos específicos.</li>
+        <li>Usa <strong>www.claude.ai</strong> para respuestas más profundas.</li>
+        <li>Combina prompts según tus necesidades específicas.</li>
+        <li>Personaliza el tono según tu estilo de comunicación.</li>
+      </ul>
+    </div>
+
+    {/* Lista de categorías */}
+    <div className="category-list">
+      {promptsData.map((cat) => (
+        <button
+          key={cat.id}
+          className="category-button"
+          onClick={() => setCategoriaSeleccionada(cat)}
+        >
+          {cat.icon} {cat.name}
+        </button>
+      ))}
+    </div>
+  </div>
+)}
+
 
       {/* Vista de una categoría con subcategorías */}
       {categoriaSeleccionada && !subcategoriaSeleccionada && (

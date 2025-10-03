@@ -82,6 +82,23 @@ h1 {
   transform: translateY(-2px);
 }
 
+/* === Caja de información === */
+.info-box {
+  margin-top: 30px;
+  padding: 20px;
+  background: #fff4ec;
+  border: 1px solid #f1d0b3;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+.info-box h2 {
+  margin-top: 0;
+  font-size: 18px;
+  color: #E66E33;
+}
+
 /* === Subcategorías === */
 .subcategoria-list {
   display: flex;
@@ -126,7 +143,6 @@ h1 {
   border: 1px solid #eee;
   text-align: left;
   transition: transform 0.2s ease;
-  overflow: visible; /* Permite crecer si el texto es largo */
 }
 
 .prompt-card:hover {
@@ -139,11 +155,9 @@ h1 {
 }
 
 .prompt-card p {
-  font-size: 15px;
-  color: #444;
+  font-size: 14px;
+  color: #555;
   margin: 10px 0;
-  line-height: 1.6;
-  white-space: pre-line; /* Muestra saltos de línea y textos largos */
 }
 
 /* === Botón Copiar Prompt === */
@@ -164,26 +178,13 @@ h1 {
   color: white;
 }
 
-/* === Caja de Consejos === */
-.consejos-box {
-  background: #fff8e6;
-  border: 1px solid #ffd27f;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 25px;
-  text-align: left;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-.consejos-box h3 {
-  margin-top: 0;
-  color: #e66e33;
-  font-size: 18px;
-}
-
-.consejos-box ul {
-  margin: 10px 0 0 15px;
-  padding: 0;
+/* === Versión express === */
+.express-section {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f9f9f9;
+  border-left: 4px solid #E66E33;
+  border-radius: 6px;
   font-size: 14px;
-  color: #555;
+  color: #333;
 }

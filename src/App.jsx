@@ -4,7 +4,8 @@ import "./styles.css";
 
 function App() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
-  const [subcategoriaSeleccionada, setSubcategoriaSeleccionada] = useState(null);
+  const [subcategoriaSeleccionada, setSubcategoriaSeleccionada] =
+    useState(null);
 
   const copiarPrompt = (texto) => {
     navigator.clipboard.writeText(texto);
@@ -32,41 +33,44 @@ function App() {
             ⬅ Volver
           </button>
           <span>
-            {categoriaSeleccionada.name}
+            {categoriaSeleccionada.icon} {categoriaSeleccionada.name}
             {subcategoriaSeleccionada && ` / ${subcategoriaSeleccionada.name}`}
           </span>
         </div>
       )}
 
-     {/* Pantalla principal - lista de categorías */}
-{!categoriaSeleccionada && (
-  <div>
-    {/* Bloque de consejos */}
-    <div className="tips-card">
-      <h3>💡 Consejos para usar los prompts</h3>
-      <ul>
-        <li>Cambia siempre la información entre [corchetes] por datos específicos.</li>
-        <li>Usa <strong>www.claude.ai</strong> para respuestas más profundas.</li>
-        <li>Combina prompts según tus necesidades específicas.</li>
-        <li>Personaliza el tono según tu estilo de comunicación.</li>
-      </ul>
-    </div>
+      {/* Pantalla principal - lista de categorías */}
+      {!categoriaSeleccionada && (
+        <div>
+          <div className="category-list">
+            {promptsData.map((cat) => (
+              <button
+                key={cat.id}
+                className="category-button"
+                onClick={() => setCategoriaSeleccionada(cat)}
+              >
+                {cat.icon} {cat.name}
+              </button>
+            ))}
+          </div>
 
-    {/* Lista de categorías */}
-    <div className="category-list">
-      {promptsData.map((cat) => (
-        <button
-          key={cat.id}
-          className="category-button"
-          onClick={() => setCategoriaSeleccionada(cat)}
-        >
-          {cat.icon} {cat.name}
-        </button>
-      ))}
-    </div>
-  </div>
-)}
-
+          {/* Consejos al final */}
+          <div className="tips-box">
+            <h3>💡 Consejos para usar los prompts</h3>
+            <ul>
+              <li>
+                Cambia siempre la información entre [corchetes] por datos
+                específicos.
+              </li>
+              <li>
+                Usa <b>www.claude.ai</b> para respuestas más profundas.
+              </li>
+              <li>Combina prompts según tus necesidades específicas.</li>
+              <li>Personaliza el tono según tu estilo de comunicación.</li>
+            </ul>
+          </div>
+        </div>
+      )}
 
       {/* Vista de una categoría con subcategorías */}
       {categoriaSeleccionada && !subcategoriaSeleccionada && (
@@ -93,10 +97,26 @@ function App() {
             {subcategoriaSeleccionada.prompts.map((prompt, index) => (
               <div key={index} className="prompt-card">
                 <h4>{prompt.title}</h4>
-                <p>{prompt.text}</p>
-                <button onClick={() => copiarPrompt(prompt.text)}>
-                  Copiar Prompt
-                </button>
+
+                {/* Prompt largo */}
+                {prompt.long && (
+                  <div className="prompt-version">
+                    <p>{prompt.long}</p>
+                    <button onClick={() => copiarPrompt(prompt.long)}>
+                      Copiar Versión Larga
+                    </button>
+                  </div>
+                )}
+
+                {/* Prompt express */}
+                {prompt.express && (
+                  <div className="prompt-version">
+                    <p>{prompt.express}</p>
+                    <button onClick={() => copiarPrompt(prompt.express)}>
+                      Copiar Versión Express
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>

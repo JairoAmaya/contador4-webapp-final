@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from "react";
 import promptsData from "./promptsData.js";
 import "./styles.css";
@@ -16,8 +15,7 @@ function App() {
     <div className="app-container">
       <h1>📊 Contador 4.0 – Demo</h1>
       <p className="subtitle">
-        Explora categorías, subcategorías y prompts especializados en
-        contabilidad y negocio.
+        Explora categorías, subcategorías y prompts especializados en contabilidad y negocio.
       </p>
 
       {/* Breadcrumb */}
@@ -41,24 +39,37 @@ function App() {
 
       {/* Pantalla principal - lista de categorías */}
       {!categoriaSeleccionada && (
-        <div className="category-list">
-          {promptsData.map((cat) => (
-            <button
-              key={cat.id}
-              className="category-button"
-              onClick={() => setCategoriaSeleccionada(cat)}
-            >
-              {cat.icon} {cat.name}
-            </button>
-          ))}
+        <div>
+          <div className="category-list">
+            {promptsData.map((cat) => (
+              <button
+                key={cat.id}
+                className="category-button"
+                onClick={() => setCategoriaSeleccionada(cat)}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
 
-          {/* Bloque de información adicional */}
-          <div className="info-box">
-            <h2>ℹ️ Sobre esta demo</h2>
+          {/* Recuadro Consejos */}
+          <div className="tips-box">
+            <h3>💡 Consejos para usar los prompts</h3>
+            <ul>
+              <li>Cambia siempre la información entre [corchetes] por datos específicos.</li>
+              <li>Usa <strong>www.claude.ai</strong> para respuestas más profundas.</li>
+              <li>Combina prompts según tus necesidades específicas.</li>
+              <li>Personaliza el tono según tu estilo de comunicación.</li>
+            </ul>
+          </div>
+
+          {/* Recuadro Sobre esta demo */}
+          <div className="about-box">
+            <h3>ℹ️ Sobre esta demo</h3>
             <p>
-              Esta es una versión de prueba de la herramienta{" "}
-              <strong>Contador 4.0</strong>. Aquí puedes explorar categorías y
-              subcategorías con ejemplos de prompts extraídos del e-book.
+              Esta es una versión de prueba de la herramienta <strong>Contador 4.0</strong>. 
+              Aquí puedes explorar categorías y subcategorías con ejemplos de prompts 
+              extraídos del e-book.
             </p>
           </div>
         </div>
@@ -90,16 +101,6 @@ function App() {
               <div key={index} className="prompt-card">
                 <h4>{prompt.title}</h4>
                 <p>{prompt.text}</p>
-
-                {/* Si hay versión express, mostrar botón extra */}
-                {prompt.express && (
-                  <div className="express-section">
-                    <p>
-                      <strong>⚡ Versión Express:</strong> {prompt.express}
-                    </p>
-                  </div>
-                )}
-
                 <button onClick={() => copiarPrompt(prompt.text)}>
                   Copiar Prompt
                 </button>

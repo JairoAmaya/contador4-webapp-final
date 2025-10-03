@@ -39,7 +39,7 @@ h1 {
 .breadcrumb button {
   background: none;
   border: none;
-  color: #1a73e8;
+  color: #E66E33; /* Naranja corporativo */
   font-weight: bold;
   cursor: pointer;
   font-size: 14px;
@@ -47,6 +47,7 @@ h1 {
 
 .breadcrumb button:hover {
   text-decoration: underline;
+  color: #cc5c29; /* Naranja más oscuro en hover */
 }
 
 /* === Categorías === */
@@ -57,20 +58,25 @@ h1 {
 }
 
 .category-button {
-  background-color: #fff;
-  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   padding: 15px 20px;
+  margin: 10px 0;
   font-size: 18px;
   font-weight: bold;
-  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
   cursor: pointer;
-  text-align: left;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  text-align: left;
 }
 
 .category-button:hover {
-  background-color: #f5f5f5;
+  background: #f7f7f7;
   transform: translateY(-2px);
 }
 
@@ -83,18 +89,21 @@ h1 {
 }
 
 .subcategory {
-  background-color: #fff;
   padding: 15px 20px;
-  border-radius: 8px;
+  margin: 12px 0;
+  background: #fff;
+  border-radius: 10px;
   border: 1px solid #ddd;
   cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   text-align: left;
   font-size: 16px;
-  transition: all 0.2s ease;
 }
 
 .subcategory:hover {
-  background-color: #f0f0f0;
+  background: #fdf4ee; /* Fondo suave naranja */
+  border-color: #E66E33;
   transform: translateY(-2px);
 }
 
@@ -107,12 +116,18 @@ h1 {
 }
 
 .prompt-card {
-  background-color: #fff;
+  background: #fff;
+  border-radius: 12px;
   padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin: 15px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eee;
+  transition: transform 0.2s ease;
   text-align: left;
+}
+
+.prompt-card:hover {
+  transform: translateY(-3px);
 }
 
 .prompt-card h4 {
@@ -128,17 +143,18 @@ h1 {
 
 /* === Botón Copiar Prompt === */
 .prompt-card button {
-  background-color: #E66E33; /* Naranja corporativo */
+  background: #E66E33; /* Naranja corporativo */
   color: #000; /* Texto negro */
+  font-weight: bold;
+  padding: 10px 18px;
   border: none;
-  padding: 8px 14px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
+  margin-top: 10px;
+  transition: background 0.3s ease;
 }
 
 .prompt-card button:hover {
-  background-color: #cc5c29; /* Más oscuro en hover */
+  background: #cc5c29; /* Más oscuro en hover */
+  color: #fff; /* Texto blanco al pasar */
 }

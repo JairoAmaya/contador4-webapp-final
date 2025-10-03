@@ -1,11 +1,11 @@
+// src/App.js
 import React, { useState } from "react";
 import promptsData from "./promptsData.js";
 import "./styles.css";
 
 function App() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
-  const [subcategoriaSeleccionada, setSubcategoriaSeleccionada] =
-    useState(null);
+  const [subcategoriaSeleccionada, setSubcategoriaSeleccionada] = useState(null);
 
   const copiarPrompt = (texto) => {
     navigator.clipboard.writeText(texto);
@@ -16,7 +16,7 @@ function App() {
     <div className="app-container">
       <h1>📊 Contador 4.0 – Demo</h1>
       <p className="subtitle">
-        Explora categorías y subcategorías de prompts especializados en
+        Explora categorías, subcategorías y prompts especializados en
         contabilidad y negocio.
       </p>
 
@@ -33,7 +33,7 @@ function App() {
             ⬅ Volver
           </button>
           <span>
-            {categoriaSeleccionada.icon} {categoriaSeleccionada.name}
+            {categoriaSeleccionada.name}
             {subcategoriaSeleccionada && ` / ${subcategoriaSeleccionada.name}`}
           </span>
         </div>
@@ -41,33 +41,25 @@ function App() {
 
       {/* Pantalla principal - lista de categorías */}
       {!categoriaSeleccionada && (
-        <div>
-          <div className="category-list">
-            {promptsData.map((cat) => (
-              <button
-                key={cat.id}
-                className="category-button"
-                onClick={() => setCategoriaSeleccionada(cat)}
-              >
-                {cat.icon} {cat.name}
-              </button>
-            ))}
-          </div>
+        <div className="category-list">
+          {promptsData.map((cat) => (
+            <button
+              key={cat.id}
+              className="category-button"
+              onClick={() => setCategoriaSeleccionada(cat)}
+            >
+              {cat.icon} {cat.name}
+            </button>
+          ))}
 
-          {/* Consejos al final */}
-          <div className="tips-box">
-            <h3>💡 Consejos para usar los prompts</h3>
-            <ul>
-              <li>
-                Cambia siempre la información entre [corchetes] por datos
-                específicos.
-              </li>
-              <li>
-                Usa <b>www.claude.ai</b> para respuestas más profundas.
-              </li>
-              <li>Combina prompts según tus necesidades específicas.</li>
-              <li>Personaliza el tono según tu estilo de comunicación.</li>
-            </ul>
+          {/* Bloque de información adicional */}
+          <div className="info-box">
+            <h2>ℹ️ Sobre esta demo</h2>
+            <p>
+              Esta es una versión de prueba de la herramienta{" "}
+              <strong>Contador 4.0</strong>. Aquí puedes explorar categorías y
+              subcategorías con ejemplos de prompts extraídos del e-book.
+            </p>
           </div>
         </div>
       )}
@@ -97,26 +89,20 @@ function App() {
             {subcategoriaSeleccionada.prompts.map((prompt, index) => (
               <div key={index} className="prompt-card">
                 <h4>{prompt.title}</h4>
+                <p>{prompt.text}</p>
 
-                {/* Prompt largo */}
-                {prompt.long && (
-                  <div className="prompt-version">
-                    <p>{prompt.long}</p>
-                    <button onClick={() => copiarPrompt(prompt.long)}>
-                      Copiar Versión Larga
-                    </button>
-                  </div>
-                )}
-
-                {/* Prompt express */}
+                {/* Si hay versión express, mostrar botón extra */}
                 {prompt.express && (
-                  <div className="prompt-version">
-                    <p>{prompt.express}</p>
-                    <button onClick={() => copiarPrompt(prompt.express)}>
-                      Copiar Versión Express
-                    </button>
+                  <div className="express-section">
+                    <p>
+                      <strong>⚡ Versión Express:</strong> {prompt.express}
+                    </p>
                   </div>
                 )}
+
+                <button onClick={() => copiarPrompt(prompt.text)}>
+                  Copiar Prompt
+                </button>
               </div>
             ))}
           </div>

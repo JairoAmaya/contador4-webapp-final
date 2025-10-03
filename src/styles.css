@@ -160,3 +160,22 @@ h1 {
   background: #cc5c29; /* Hover más oscuro */
   color: white;
 }
+/* === Diferenciar categorías por color corporativo === */
+
+/* Categoría 1 (Contabilidad y Finanzas) - ya usa el naranja */
+.category-button.contabilidad {
+  border-left: 6px solid #E66E33; /* Naranja corporativo */
+}
+.category-button.contabilidad:hover {
+  background: #fdf4ee;
+  border-color: #E66E33;
+}
+
+/* Categoría 2 (Comunicación Empresarial) - azul */
+.category-button.comunicacion {
+  border-left: 6px solid #1a73e8; /* Azul corporativo */
+}
+.category-button.comunicacion:hover {
+  background: #eef4fd;
+  border-color: #1a73e8;
+}

@@ -1,0 +1,113 @@
+/* App.css */
+
+/* ====== ESTILOS GENERALES ====== */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ====== TÍTULOS ====== */
+h1 {
+  font-size: 2rem;
+  color: #222;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+h2 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+/* ====== BOTÓN VOLVER ====== */
+.back-button {
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 8px 14px;
+  background-color: #eee;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.back-button:hover {
+  background-color: #ddd;
+}
+
+/* ====== TARJETAS (CATEGORÍAS, SUBCATEGORÍAS, PROMPTS) ====== */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.15s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+
+/* ====== PROMPTS ====== */
+.prompt-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.prompt-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.prompt-card p {
+  white-space: pre-wrap; /* 🔥 Esto asegura que los prompts largos se vean completos */
+  margin: 10px 0;
+}
+
+/* ====== BOTONES ====== */
+button {
+  background-color: #d35400;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+button:hover {
+  background-color: #e67e22;
+}
+
+/* ====== BLOQUES INFORMATIVOS ====== */
+.info-box {
+  background-color: #fef6e4;
+  border-left: 6px solid #f39c12;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.demo-box {
+  background-color: #eef6fb;
+  border-left: 6px solid #3498db;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+}

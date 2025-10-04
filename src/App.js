@@ -6,13 +6,13 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
 
-  // Cuando selecciono categoría
+  // Selección de categoría
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
     setSelectedSubcategory(null);
   };
 
-  // Cuando selecciono subcategoría
+  // Selección de subcategoría
   const handleSubcategoryClick = (subcategory) => {
     setSelectedSubcategory(subcategory);
   };
@@ -29,40 +29,48 @@ function App() {
   return (
     <div className="app-container">
       <h1>📚 Contador 4.0 – Demo</h1>
-      <p>Explora categorías, subcategorías y prompts especializados en contabilidad y negocio.</p>
+      <p className="subtitle">
+        Explora categorías, subcategorías y prompts especializados en
+        contabilidad y negocio.
+      </p>
 
-      {/* Botón Volver */}
+      {/* Breadcrumb */}
       {(selectedCategory || selectedSubcategory) && (
-        <button onClick={handleBack} style={{ marginBottom: "1rem" }}>
-          ← Volver
-        </button>
+        <div className="breadcrumb">
+          <button onClick={handleBack}>⬅ Volver</button>
+          <span>
+            {selectedCategory?.title}
+            {selectedSubcategory && ` / ${selectedSubcategory.title}`}
+          </span>
+        </div>
       )}
 
       {/* Lista de categorías */}
       {!selectedCategory && (
-        <div className="list-container">
+        <div className="category-list">
           {promptsData.map((category, index) => (
-            <div
+            <button
               key={index}
-              className="list-item"
+              className="category-button"
               onClick={() => handleCategoryClick(category)}
             >
               {category.icon} {category.title}
-            </div>
+            </button>
           ))}
         </div>
       )}
 
       {/* Lista de subcategorías */}
       {selectedCategory && !selectedSubcategory && (
-        <div className="list-container">
+        <div className="subcategoria-list">
+          <h2>{selectedCategory.title}</h2>
           {selectedCategory.subcategories.map((subcategory, index) => (
             <div
               key={index}
-              className="list-item"
+              className="subcategoria-card"
               onClick={() => handleSubcategoryClick(subcategory)}
             >
-              {subcategory.title}
+              📑 {subcategory.title}
             </div>
           ))}
         </div>
@@ -70,10 +78,11 @@ function App() {
 
       {/* Lista de prompts */}
       {selectedSubcategory && (
-        <div className="list-container">
+        <div className="prompt-list">
+          <h3>{selectedSubcategory.title}</h3>
           {selectedSubcategory.prompts.map((prompt, index) => (
             <div key={index} className="prompt-card">
-              <h3>{prompt.title}</h3>
+              <h4>{prompt.title}</h4>
               <p>{prompt.prompt}</p>
             </div>
           ))}
@@ -82,9 +91,11 @@ function App() {
 
       {/* Consejos */}
       <div className="info-box">
-        <h3>📌 Consejos para usar los prompts</h3>
+        <h2>📌 Consejos para usar los prompts</h2>
         <ul>
-          <li>Cambia siempre la información entre [corchetes] por datos específicos.</li>
+          <li>
+            Cambia siempre la información entre [corchetes] por datos específicos.
+          </li>
           <li>Usa una claridad alta en tus instrucciones.</li>
           <li>Combina prompts según tus necesidades específicas.</li>
           <li>Personaliza el tono según tu estilo de comunicación.</li>
@@ -93,10 +104,11 @@ function App() {
 
       {/* Información */}
       <div className="info-box">
-        <h3>ℹ️ Sobre esta demo</h3>
+        <h2>ℹ️ Sobre esta demo</h2>
         <p>
           Esta es una versión de prueba de la herramienta <b>Contador 4.0</b>.
-          Aquí puedes explorar categorías y subcategorías con ejemplos de prompts extraídos de e-books.
+          Aquí puedes explorar categorías y subcategorías con ejemplos de prompts
+          extraídos de e-books.
         </p>
       </div>
     </div>

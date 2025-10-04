@@ -1,38 +1,36 @@
+// src/PromptList.js
 import React from "react";
 
 const PromptList = ({ prompts }) => {
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
-    alert("✅ Prompt copiado al portapapeles");
+    alert("Prompt copiado al portapapeles ✅");
   };
 
   return (
-    <div>
-      {prompts.map((prompt) => (
-        <div key={prompt.id} className="promptCard">
-          <h3>{prompt.title}</h3>
+    <div className="prompt-list">
+      {prompts.map((prompt, idx) => (
+        <div key={idx} className="prompt-card">
+          <h4>{prompt.title}</h4>
+          <p>{prompt.long}</p>
 
-          {prompt.longVersion && (
-            <p className="promptText">{prompt.longVersion}</p>
+          {prompt.express && (
+            <p>
+              <strong>Versión Express:</strong> {prompt.express}
+            </p>
           )}
 
-          {prompt.expressVersion && (
-            <p className="promptText express">⚡ {prompt.expressVersion}</p>
-          )}
+          <button
+            className="copy-button"
+            onClick={() => copyToClipboard(prompt.long)}
+          >
+            Copiar Versión Larga
+          </button>
 
-          {prompt.longVersion && (
+          {prompt.express && (
             <button
-              className="btn btn-long"
-              onClick={() => copyToClipboard(prompt.longVersion)}
-            >
-              Copiar Versión Larga
-            </button>
-          )}
-
-          {prompt.expressVersion && (
-            <button
-              className="btn btn-express"
-              onClick={() => copyToClipboard(prompt.expressVersion)}
+              className="copy-button"
+              onClick={() => copyToClipboard(prompt.express)}
             >
               Copiar Versión Express
             </button>

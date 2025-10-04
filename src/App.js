@@ -17,8 +17,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1>📊 Contador 4.0 – Demo</h1>
-      <p>Explora categorías, subcategorías y prompts especializados en contabilidad y negocio.</p>
+      <h1>📚 Contador 4.0 – Demo</h1>
+      <p>
+        Explora categorías, subcategorías y prompts especializados en
+        contabilidad y negocio.
+      </p>
 
       {/* Botón volver */}
       {(selectedCategory || selectedSubcategory) && (
@@ -29,42 +32,51 @@ function App() {
       {selectedCategory ? (
         <CategoryDetail
           category={selectedCategory}
-          setSelectedSubcategory={setSelectedSubcategory}
           selectedSubcategory={selectedSubcategory}
+          setSelectedSubcategory={setSelectedSubcategory}
         />
       ) : (
-        <>
-          {/* Listado de categorías */}
-          {promptsData.map((cat, index) => (
+        <div>
+          {promptsData.map((category, index) => (
             <div
               key={index}
-              className="category-card"
-              onClick={() => setSelectedCategory(cat)}
+              className="card"
+              onClick={() => setSelectedCategory(category)}
             >
               <h2>
-                {cat.icon} {cat.category}
+                {category.icon} {category.title}
               </h2>
             </div>
           ))}
+        </div>
+      )}
 
-          {/* Consejos */}
+      {/* Consejos y nota */}
+      {!selectedCategory && !selectedSubcategory && (
+        <>
           <div className="tips-box">
             <h3>💡 Consejos para usar los prompts</h3>
             <ul>
-              <li>Cambia siempre la información entre [corchetes] por datos específicos.</li>
-              <li>Usa <b>www.claude.ai</b> para respuestas más profundas.</li>
+              <li>
+                Cambia siempre la información entre [corchetes] por datos
+                específicos.
+              </li>
+              <li>
+                Usa <b>www.claude.ai</b> para respuestas más profundas.
+              </li>
               <li>Combina prompts según tus necesidades específicas.</li>
-              <li>Personaliza el tono según tu estilo de comunicación.</li>
+              <li>
+                Personaliza el tono según tu estilo de comunicación.
+              </li>
             </ul>
           </div>
 
-          {/* Sobre esta demo */}
-          <div className="demo-box">
+          <div className="about-box">
             <h3>ℹ️ Sobre esta demo</h3>
             <p>
-              Esta es una versión de prueba de la herramienta <b>Contador 4.0</b>.
-              Aquí puedes explorar categorías y subcategorías con ejemplos de prompts
-              extraídos del e-book.
+              Esta es una versión de prueba de la herramienta{" "}
+              <b>Contador 4.0</b>. Aquí puedes explorar categorías y
+              subcategorías con ejemplos de prompts extraídos del e-book.
             </p>
           </div>
         </>

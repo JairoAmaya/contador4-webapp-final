@@ -100,3 +100,4 @@ function App() {
 }
 
 export default App;
+Limpieza: eliminar imports de CategoryDetail y PromptList

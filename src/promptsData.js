@@ -1,4 +1,5 @@
 // src/promptsData.js
+// === MVP: 3 categorías iniciales con prompts cortos y botón de copiar ===
 
 const promptsData = [
   {
@@ -9,16 +10,29 @@ const promptsData = [
         title: "Interpretación de Estados Financieros",
         prompts: [
           {
-            title: "Análisis integral de estados financieros",
-            prompt: "Actúa como un analista financiero senior. Analiza los estados financieros adjuntos (balance general, estado de resultados y estado de cambios en el patrimonio) de los últimos 3 años. Identifica las 5 tendencias más significativas, evalúa la salud financiera general de la empresa, y proporciona 3 recomendaciones estratégicas basadas en tu análisis. Incluye comparaciones año a año y explica el impacto de cada hallazgo en la posición competitiva de la empresa."
+            title: "Análisis general",
+            prompt: "Analiza los estados financieros y destaca fortalezas y debilidades clave."
           },
           {
-            title: "Comparación interanual de resultados",
-            prompt: "Genera un análisis comparativo de los estados de resultados de los últimos 2 años. Identifica los cambios en ingresos, costos y gastos, destacando las áreas con mayor impacto en la utilidad neta. Explica qué factores podrían estar impulsando estas variaciones."
+            title: "Comparación interanual",
+            prompt: "Compara resultados de dos años y explica los principales cambios."
           },
           {
-            title: "Identificación de debilidades financieras",
-            prompt: "Revisa los estados financieros adjuntos y detecta 3 áreas críticas que representan riesgos para la estabilidad financiera de la empresa. Propón soluciones prácticas para cada una, priorizando su urgencia."
+            title: "Recomendaciones financieras",
+            prompt: "Propón tres acciones para mejorar los indicadores financieros."
+          }
+        ]
+      },
+      {
+        title: "Evaluación de Rentabilidad",
+        prompts: [
+          {
+            title: "Análisis de rentabilidad",
+            prompt: "Calcula y explica el margen bruto, operativo y neto de la empresa."
+          },
+          {
+            title: "Optimización de utilidades",
+            prompt: "Identifica los factores que más impactan la utilidad neta y cómo optimizarlos."
           }
         ]
       }
@@ -32,12 +46,25 @@ const promptsData = [
         title: "Informes y Presentaciones",
         prompts: [
           {
-            title: "Informe ejecutivo para dirección",
-            prompt: "Redacta un informe ejecutivo claro y conciso de máximo 300 palabras que resuma los resultados financieros del último trimestre. Usa un tono profesional y resalta los logros clave, los principales riesgos detectados y 2 recomendaciones estratégicas."
+            title: "Informe ejecutivo",
+            prompt: "Resume los resultados financieros de forma profesional en menos de 200 palabras."
           },
           {
-            title: "Presentación para inversionistas",
-            prompt: "Crea una presentación de alto impacto para inversionistas basada en los estados financieros. Incluye un resumen de resultados, proyecciones de crecimiento y un argumento convincente para seguir invirtiendo en la empresa."
+            title: "Presentación de resultados",
+            prompt: "Crea una presentación con los principales hallazgos financieros del trimestre."
+          }
+        ]
+      },
+      {
+        title: "Explicación de Hallazgos",
+        prompts: [
+          {
+            title: "Explicación de auditoría",
+            prompt: "Redacta un resumen claro sobre los hallazgos de auditoría para un cliente."
+          },
+          {
+            title: "Comunicación de impacto fiscal",
+            prompt: "Explica a un cliente cómo ciertos cambios fiscales afectan su empresa."
           }
         ]
       }
@@ -48,15 +75,28 @@ const promptsData = [
     icon: "💼",
     subcategories: [
       {
-        title: "Generación de Propuestas",
+        title: "Propuestas Comerciales",
         prompts: [
           {
             title: "Propuesta de servicios contables",
-            prompt: "Redacta una propuesta comercial atractiva para un cliente potencial que busca servicios de contabilidad y asesoría financiera. Incluye una introducción, beneficios clave, servicios ofrecidos, precios aproximados y un cierre persuasivo."
+            prompt: "Crea una propuesta de servicios contables atractiva con enfoque en beneficios."
           },
           {
-            title: "Cotización profesional",
-            prompt: "Elabora una cotización detallada para un servicio contable. Incluye desglose de actividades, tarifas, plazos de entrega y beneficios adicionales que diferencien tu propuesta de la competencia."
+            title: "Cotización rápida",
+            prompt: "Elabora una cotización clara con precios, servicios y tiempos de entrega."
+          }
+        ]
+      },
+      {
+        title: "Contratos Profesionales",
+        prompts: [
+          {
+            title: "Contrato de servicios",
+            prompt: "Redacta un contrato básico de prestación de servicios contables."
+          },
+          {
+            title: "Justificación de honorarios",
+            prompt: "Explica el valor agregado detrás de tus tarifas profesionales."
           }
         ]
       }
@@ -65,3 +105,4 @@ const promptsData = [
 ];
 
 export default promptsData;
+

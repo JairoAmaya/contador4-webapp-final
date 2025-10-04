@@ -22,56 +22,58 @@ function App() {
         contabilidad y negocio.
       </p>
 
-      {/* Botón Volver */}
+      {/* Botón volver */}
       {(selectedCategory || selectedSubcategory) && (
-        <button onClick={handleBack}>⬅ Volver</button>
+        <button onClick={handleBack}>← Volver</button>
       )}
 
       {/* Si hay categoría seleccionada */}
       {selectedCategory ? (
         selectedSubcategory ? (
           <div>
-            <h2>{selectedSubcategory.name}</h2>
-            <ul>
-              {selectedSubcategory.prompts.map((prompt, index) => (
-                <li key={index}>
-                  <strong>{prompt.title}</strong>
-                  <p>{prompt.prompt}</p>
-                  <p>
-                    <em>Versión Express:</em> {prompt.express}
-                  </p>
-                </li>
-              ))}
-            </ul>
+            <h2>
+              {selectedCategory.icon} {selectedCategory.title} /{" "}
+              {selectedSubcategory.title}
+            </h2>
+            {selectedSubcategory.prompts.map((prompt, index) => (
+              <div key={index} className="prompt-card">
+                <h3>{prompt.title}</h3>
+                <p>{prompt.prompt}</p>
+              </div>
+            ))}
           </div>
         ) : (
           <div>
-            <h2>{selectedCategory.name}</h2>
-            <ul>
-              {selectedCategory.subcategories.map((subcategory, index) => (
-                <li
-                  key={index}
-                  onClick={() => setSelectedSubcategory(subcategory)}
-                >
-                  {subcategory.name}
-                </li>
-              ))}
-            </ul>
+            <h2>
+              {selectedCategory.icon} {selectedCategory.title}
+            </h2>
+            {selectedCategory.subcategories.map((subcategory, index) => (
+              <div
+                key={index}
+                className="subcategory-card"
+                onClick={() => setSelectedSubcategory(subcategory)}
+              >
+                {subcategory.title}
+              </div>
+            ))}
           </div>
         )
       ) : (
-        // Mostrar categorías
-        <ul>
+        <div>
           {promptsData.map((category, index) => (
-            <li key={index} onClick={() => setSelectedCategory(category)}>
-              {category.icon} {category.name}
-            </li>
+            <div
+              key={index}
+              className="category-card"
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category.icon} {category.title}
+            </div>
           ))}
-        </ul>
+        </div>
       )}
 
-      {/* Consejos */}
-      <div className="info-box yellow">
+      {/* Footer */}
+      <div className="footer">
         <h3>💡 Consejos para usar los prompts</h3>
         <ul>
           <li>
@@ -79,15 +81,12 @@ function App() {
             específicos.
           </li>
           <li>
-            Usa <strong>www.claude.ai</strong> para respuestas más profundas.
+            Usa <b>www.claude.ai</b> para respuestas más profundas.
           </li>
           <li>Combina prompts según tus necesidades específicas.</li>
           <li>Personaliza el tono según tu estilo de comunicación.</li>
         </ul>
-      </div>
 
-      {/* Sobre esta demo */}
-      <div className="info-box blue">
         <h3>ℹ️ Sobre esta demo</h3>
         <p>
           Esta es una versión de prueba de la herramienta <b>Contador 4.0</b>.
@@ -100,4 +99,3 @@ function App() {
 }
 
 export default App;
-Limpieza: eliminar imports de CategoryDetail y PromptList

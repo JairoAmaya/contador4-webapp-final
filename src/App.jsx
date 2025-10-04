@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useState } from "react";
 import promptsData from "./promptsData";
 import "./styles.css";
@@ -84,6 +85,14 @@ function App() {
             <div key={index} className="prompt-card">
               <h4>{prompt.title}</h4>
               <p>{prompt.prompt}</p>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(prompt.prompt);
+                  alert("✅ Prompt copiado al portapapeles");
+                }}
+              >
+                Copiar Prompt
+              </button>
             </div>
           ))}
         </div>
@@ -116,3 +125,4 @@ function App() {
 }
 
 export default App;
+

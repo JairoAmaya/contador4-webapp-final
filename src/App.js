@@ -18,25 +18,37 @@ function App() {
   return (
     <div className="App">
       <h1>📊 Contador 4.0 – Demo</h1>
-      <p>
-        Explora categorías, subcategorías y prompts especializados en contabilidad y negocio.
-      </p>
+      <p>Explora categorías, subcategorías y prompts especializados en contabilidad y negocio.</p>
 
-      {!selectedCategory && (
-        <div>
-          {promptsData.map((category) => (
+      {/* Botón volver */}
+      {(selectedCategory || selectedSubcategory) && (
+        <button onClick={handleBack}>← Volver</button>
+      )}
+
+      {/* Si hay categoría seleccionada */}
+      {selectedCategory ? (
+        <CategoryDetail
+          category={selectedCategory}
+          setSelectedSubcategory={setSelectedSubcategory}
+          selectedSubcategory={selectedSubcategory}
+        />
+      ) : (
+        <>
+          {/* Listado de categorías */}
+          {promptsData.map((cat, index) => (
             <div
-              key={category.name}
-              className="card"
-              onClick={() => setSelectedCategory(category)}
+              key={index}
+              className="category-card"
+              onClick={() => setSelectedCategory(cat)}
             >
               <h2>
-                {category.icon} {category.name}
+                {cat.icon} {cat.category}
               </h2>
             </div>
           ))}
 
-          <div className="info-box">
+          {/* Consejos */}
+          <div className="tips-box">
             <h3>💡 Consejos para usar los prompts</h3>
             <ul>
               <li>Cambia siempre la información entre [corchetes] por datos específicos.</li>
@@ -44,29 +56,18 @@ function App() {
               <li>Combina prompts según tus necesidades específicas.</li>
               <li>Personaliza el tono según tu estilo de comunicación.</li>
             </ul>
+          </div>
+
+          {/* Sobre esta demo */}
+          <div className="demo-box">
             <h3>ℹ️ Sobre esta demo</h3>
             <p>
-              Esta es una versión de prueba de la herramienta <b>Contador 4.0</b>. 
-              Aquí puedes explorar categorías y subcategorías con ejemplos de prompts extraídos del e-book.
+              Esta es una versión de prueba de la herramienta <b>Contador 4.0</b>.
+              Aquí puedes explorar categorías y subcategorías con ejemplos de prompts
+              extraídos del e-book.
             </p>
           </div>
-        </div>
-      )}
-
-      {selectedCategory && !selectedSubcategory && (
-        <CategoryDetail
-          category={selectedCategory}
-          onBack={handleBack}
-          onSelectSubcategory={setSelectedSubcategory}
-        />
-      )}
-
-      {selectedSubcategory && (
-        <CategoryDetail
-          category={selectedCategory}
-          subcategory={selectedSubcategory}
-          onBack={handleBack}
-        />
+        </>
       )}
     </div>
   );

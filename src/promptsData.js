@@ -7,7 +7,7 @@ const promptsData = [
     icon: "📈",
     subcategories: [
       {
-        title: "Interpretación de Estados Financieros",
+        title: "Interpretación de Estados Financieres",
         prompts: [
           {
             title: "Análisis integral de estados financieros",
@@ -443,81 +443,81 @@ const promptsData = [
 
   // === CATEGORÍA 6 ===
   {
-    title: "🧠 Inteligencia de Negocios",
-    icon: "💡",
+    title: "🔍 Auditoría y Control",
+    icon: "📋",
     subcategories: [
       {
-        title: "Análisis de datos financieros",
+        title: "Programas de auditoría personalizados",
         prompts: [
           {
-            title: "Detección de tendencias",
+            title: "Diseño de programa de auditoría",
             prompt:
-              "Analiza datos financieros para detectar tendencias de ingresos y gastos durante los últimos 6 meses."
+              "Crea un programa de auditoría adaptado a las operaciones de una empresa mediana."
           },
           {
-            title: "Análisis predictivo",
+            title: "Planificación de auditoría",
             prompt:
-              "Usa patrones históricos para predecir el comportamiento de ventas o costos del próximo trimestre."
+              "Diseña un plan de auditoría con objetivos, alcance, metodología y recursos necesarios."
           }
         ]
       },
       {
-        title: "Automatización de procesos",
+        title: "Evaluación de controles internos",
         prompts: [
           {
-            title: "Mapeo de procesos repetitivos",
+            title: "Revisión de controles contables",
             prompt:
-              "Identifica procesos contables que pueden automatizarse para ahorrar tiempo."
+              "Evalúa los controles internos relacionados con el ciclo contable y financiero."
           },
           {
-            title: "Propuesta de automatización",
+            title: "Informe de control interno",
             prompt:
-              "Crea un plan paso a paso para automatizar reportes contables usando herramientas de IA."
+              "Redacta un informe sobre hallazgos y debilidades en los controles contables."
           }
         ]
       },
       {
-        title: "Indicadores estratégicos",
+        title: "Detección de irregularidades",
         prompts: [
           {
-            title: "Creación de indicadores clave",
+            title: "Análisis de anomalías",
             prompt:
-              "Diseña KPIs estratégicos para evaluar desempeño financiero y comercial."
+              "Identifica operaciones o registros inusuales que podrían indicar errores o fraudes."
           },
           {
-            title: "Análisis de impacto",
+            title: "Evaluación de fraude financiero",
             prompt:
-              "Evalúa cómo cada KPI influye en la toma de decisiones empresariales."
+              "Diseña un enfoque para detectar posibles fraudes mediante revisión de patrones contables."
           }
         ]
       },
       {
-        title: "Integración de datos",
+        title: "Recomendaciones de mejora",
         prompts: [
           {
-            title: "Consolidación de fuentes de datos",
+            title: "Informe de hallazgos con acciones correctivas",
             prompt:
-              "Explica cómo integrar datos de sistemas contables, CRM y ERP en una sola vista analítica."
+              "Redacta un informe con hallazgos y recomendaciones de mejora concretas."
           },
           {
-            title: "Estandarización de datos",
+            title: "Plan de acción correctivo",
             prompt:
-              "Crea una guía de buenas prácticas para mantener consistencia en los reportes de datos financieros."
+              "Crea un plan con responsables y fechas para aplicar mejoras identificadas en la auditoría."
           }
         ]
       },
       {
-        title: "Transformación digital",
+        title: "Seguimiento de hallazgos",
         prompts: [
           {
-            title: "Estrategia digital contable",
+            title: "Control de implementación de mejoras",
             prompt:
-              "Propón un plan de transformación digital para un despacho contable tradicional."
+              "Diseña una matriz para hacer seguimiento al cumplimiento de las recomendaciones de auditoría."
           },
           {
-            title: "Herramientas digitales clave",
+            title: "Informe de seguimiento de auditoría",
             prompt:
-              "Identifica las herramientas más útiles para digitalizar procesos contables y administrativos."
+              "Elabora un reporte con avances y estado actual de las acciones correctivas."
           }
         ]
       }
@@ -526,81 +526,81 @@ const promptsData = [
 
   // === CATEGORÍA 7 ===
   {
-    title: "🌐 Consultoría y Asesoría Estratégica",
-    icon: "🤝",
+    title: "🌍 Clientes Internacionales",
+    icon: "🌐",
     subcategories: [
       {
-        title: "Diagnóstico empresarial",
+        title: "Análisis de diferencias normativas",
         prompts: [
           {
-            title: "Evaluación general de negocio",
+            title: "Comparación NIIF vs. normas locales",
             prompt:
-              "Crea un diagnóstico con fortalezas, debilidades y oportunidades basado en indicadores financieros clave."
+              "Explica las principales diferencias entre NIIF y las normas contables locales en un caso práctico."
           },
           {
-            title: "Informe de situación actual",
+            title: "Evaluación de impacto normativo",
             prompt:
-              "Redacta un resumen ejecutivo que evalúe la salud financiera del negocio."
+              "Analiza cómo los cambios normativos internacionales afectan la contabilidad local."
           }
         ]
       },
       {
-        title: "Planificación estratégica",
+        title: "Reportes en múltiples monedas",
         prompts: [
           {
-            title: "Diseño de plan estratégico",
+            title: "Conversión de estados financieros",
             prompt:
-              "Crea un plan estratégico a 12 meses con metas financieras, tácticas y KPIs medibles."
+              "Describe el procedimiento para convertir estados financieros a moneda extranjera."
           },
           {
-            title: "Propuesta de mejora operativa",
+            title: "Análisis de variación cambiaria",
             prompt:
-              "Propón acciones para optimizar procesos contables y administrativos en una pyme."
+              "Evalúa cómo las fluctuaciones cambiarias afectan los resultados consolidados."
           }
         ]
       },
       {
-        title: "Gestión de riesgos",
+        title: "Regulaciones locales e internacionales",
         prompts: [
           {
-            title: "Matriz de riesgos empresariales",
+            title: "Resumen de obligaciones internacionales",
             prompt:
-              "Diseña una matriz de riesgos financieros y operativos, clasificándolos por impacto y probabilidad."
+              "Redacta un resumen de las principales obligaciones fiscales de empresas multinacionales."
           },
           {
-            title: "Plan de mitigación de riesgos",
+            title: "Guía de cumplimiento global",
             prompt:
-              "Redacta un plan con acciones preventivas y de contingencia ante posibles crisis financieras."
+              "Crea una guía práctica para asegurar cumplimiento en diferentes jurisdicciones."
           }
         ]
       },
       {
-        title: "Crecimiento y escalabilidad",
+        title: "Comunicación intercultural",
         prompts: [
           {
-            title: "Estrategia de expansión",
+            title: "Adaptación de mensajes financieros",
             prompt:
-              "Crea un plan de expansión para abrir una nueva línea de servicios contables."
+              "Crea un correo corporativo que comunique resultados a un cliente extranjero con lenguaje profesional."
           },
           {
-            title: "Optimización de recursos",
+            title: "Protocolo de reuniones internacionales",
             prompt:
-              "Propón un modelo de escalabilidad que permita aumentar ingresos sin aumentar costos fijos."
+              "Redacta un protocolo para conducir reuniones virtuales con clientes internacionales."
           }
         ]
       },
       {
-        title: "Relación con clientes",
+        title: "Consolidación internacional",
         prompts: [
           {
-            title: "Propuesta de fidelización",
+            title: "Consolidación de filiales",
             prompt:
-              "Diseña un programa para fidelizar clientes contables a largo plazo."
+              "Explica el proceso de consolidación de estados financieros de varias filiales en distintos países."
           },
           {
-            title: "Gestión de reclamos",
+            title: "Elaboración de reporte global",
             prompt:
-              "Redacta un protocolo profesional para manejar quejas de clientes con enfoque en retención."
+              "Diseña un formato estándar para reportes financieros internacionales consolidados."
           }
         ]
       }

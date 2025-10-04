@@ -6,65 +6,46 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
 
+  // Cuando selecciono categoría
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    setSelectedSubcategory(null);
+  };
+
+  // Cuando selecciono subcategoría
+  const handleSubcategoryClick = (subcategory) => {
+    setSelectedSubcategory(subcategory);
+  };
+
+  // Botón "volver"
   const handleBack = () => {
     if (selectedSubcategory) {
       setSelectedSubcategory(null);
-    } else {
+    } else if (selectedCategory) {
       setSelectedCategory(null);
     }
   };
 
   return (
-    <div className="App">
-      <h1>📊 Contador 4.0 – Demo</h1>
-      <p>
-        Explora categorías, subcategorías y prompts especializados en
-        contabilidad y negocio.
-      </p>
+    <div className="app-container">
+      <h1>📚 Contador 4.0 – Demo</h1>
+      <p>Explora categorías, subcategorías y prompts especializados en contabilidad y negocio.</p>
 
-      {/* Botón volver */}
+      {/* Botón Volver */}
       {(selectedCategory || selectedSubcategory) && (
-        <button onClick={handleBack}>← Volver</button>
+        <button onClick={handleBack} style={{ marginBottom: "1rem" }}>
+          ← Volver
+        </button>
       )}
 
-      {/* Si hay categoría seleccionada */}
-      {selectedCategory ? (
-        selectedSubcategory ? (
-          <div>
-            <h2>
-              {selectedCategory.icon} {selectedCategory.title} /{" "}
-              {selectedSubcategory.title}
-            </h2>
-            {selectedSubcategory.prompts.map((prompt, index) => (
-              <div key={index} className="prompt-card">
-                <h3>{prompt.title}</h3>
-                <p>{prompt.prompt}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div>
-            <h2>
-              {selectedCategory.icon} {selectedCategory.title}
-            </h2>
-            {selectedCategory.subcategories.map((subcategory, index) => (
-              <div
-                key={index}
-                className="subcategory-card"
-                onClick={() => setSelectedSubcategory(subcategory)}
-              >
-                {subcategory.title}
-              </div>
-            ))}
-          </div>
-        )
-      ) : (
-        <div>
+      {/* Lista de categorías */}
+      {!selectedCategory && (
+        <div className="list-container">
           {promptsData.map((category, index) => (
             <div
               key={index}
-              className="category-card"
-              onClick={() => setSelectedCategory(category)}
+              className="list-item"
+              onClick={() => handleCategoryClick(category)}
             >
               {category.icon} {category.title}
             </div>
@@ -72,26 +53,50 @@ function App() {
         </div>
       )}
 
-      {/* Footer */}
-      <div className="footer">
-        <h3>💡 Consejos para usar los prompts</h3>
+      {/* Lista de subcategorías */}
+      {selectedCategory && !selectedSubcategory && (
+        <div className="list-container">
+          {selectedCategory.subcategories.map((subcategory, index) => (
+            <div
+              key={index}
+              className="list-item"
+              onClick={() => handleSubcategoryClick(subcategory)}
+            >
+              {subcategory.title}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Lista de prompts */}
+      {selectedSubcategory && (
+        <div className="list-container">
+          {selectedSubcategory.prompts.map((prompt, index) => (
+            <div key={index} className="prompt-card">
+              <h3>{prompt.title}</h3>
+              <p>{prompt.prompt}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Consejos */}
+      <div className="info-box">
+        <h3>📌 Consejos para usar los prompts</h3>
         <ul>
-          <li>
-            Cambia siempre la información entre [corchetes] por datos
-            específicos.
-          </li>
-          <li>
-            Usa <b>www.claude.ai</b> para respuestas más profundas.
-          </li>
+          <li>Cambia siempre la información entre [corchetes] por datos específicos.</li>
+          <li>Usa una claridad alta en tus instrucciones.</li>
           <li>Combina prompts según tus necesidades específicas.</li>
           <li>Personaliza el tono según tu estilo de comunicación.</li>
         </ul>
+      </div>
 
+      {/* Información */}
+      <div className="info-box">
         <h3>ℹ️ Sobre esta demo</h3>
         <p>
           Esta es una versión de prueba de la herramienta <b>Contador 4.0</b>.
-          Aquí puedes explorar categorías y subcategorías con ejemplos de
-          prompts extraídos del e-book.
+          Aquí puedes explorar categorías y subcategorías con ejemplos de prompts extraídos de e-books.
         </p>
       </div>
     </div>

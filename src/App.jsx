@@ -1,7 +1,66 @@
-// src/App.js
 import React, { useState } from "react";
 import promptsData from "./promptsData";
 import "./styles.css";
+
+// === Asistente Contador 4.0 ===
+function ChatAssistant() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState([
+    { sender: "bot", text: "👋 ¡Hola! Soy tu Asistente Contador 4.0. ¿En qué puedo ayudarte hoy?" }
+  ]);
+  const [input, setInput] = useState("");
+
+  const toggleChat = () => setIsOpen(!isOpen);
+
+  const handleSend = () => {
+    if (!input.trim()) return;
+
+    const newMessages = [...messages, { sender: "user", text: input }];
+    setMessages(newMessages);
+
+    // Respuesta simulada
+    setTimeout(() => {
+      const response = `🤖 Entendido. "${input}" es una excelente pregunta. Aquí tienes una orientación inicial para comenzar.`;
+      setMessages((prev) => [...prev, { sender: "bot", text: response }]);
+    }, 1000);
+
+    setInput("");
+  };
+
+  return (
+    <>
+      <button className="chat-toggle" onClick={toggleChat}>
+        💬
+      </button>
+
+      {isOpen && (
+        <div className="chat-box">
+          <div className="chat-header">
+            <strong>Asistente Contador 4.0</strong>
+            <button onClick={toggleChat}>✖</button>
+          </div>
+          <div className="chat-messages">
+            {messages.map((msg, i) => (
+              <div key={i} className={`chat-message ${msg.sender}`}>
+                {msg.text}
+              </div>
+            ))}
+          </div>
+          <div className="chat-input">
+            <input
+              type="text"
+              value={input}
+              placeholder="Escribe tu consulta..."
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
+            />
+            <button onClick={handleSend}>Enviar</button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -25,6 +84,12 @@ function App() {
     } else if (selectedCategory) {
       setSelectedCategory(null);
     }
+  };
+
+  // Copiar prompt
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
+    alert("✅ Prompt copiado al portapapeles");
   };
 
   return (
@@ -85,14 +150,7 @@ function App() {
             <div key={index} className="prompt-card">
               <h4>{prompt.title}</h4>
               <p>{prompt.prompt}</p>
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(prompt.prompt);
-                  alert("✅ Prompt copiado al portapapeles");
-                }}
-              >
-                Copiar Prompt
-              </button>
+              <button onClick={() => handleCopy(prompt.prompt)}>Copiar Prompt</button>
             </div>
           ))}
         </div>
@@ -120,9 +178,11 @@ function App() {
           extraídos de e-books.
         </p>
       </div>
+
+      {/* Botón flotante del asistente */}
+      <ChatAssistant />
     </div>
   );
 }
 
 export default App;
-

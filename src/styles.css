@@ -159,27 +159,30 @@ h1 {
   background-color: #ea580c;
 }
 
-/* === Bloques informativos === */
+/* === Bloques informativos (ajustado para más color y contraste) === */
 .info-box {
-  background-color: #fff7f2;
-  border-left: 5px solid #f97316;
-  padding: 18px 20px;
-  border-radius: 10px;
+  background-color: #fff4ec; /* Color cálido más visible */
+  border-left: 6px solid #f97316; /* Naranja más fuerte */
+  padding: 22px 24px;
+  border-radius: 12px;
   margin: 30px 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
 }
 
 .info-box h2 {
-  color: #f97316;
+  color: #e66e33;
   margin-bottom: 10px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .info-box p {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #374151;
+  line-height: 1.5;
 }
+
 
 /* === Footer === */
 footer {

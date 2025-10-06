@@ -1,10 +1,9 @@
-/* === General === */
 body {
-  font-family: "Arial", sans-serif;
-  margin: 0;
-  padding: 0;
+  font-family: 'Inter', sans-serif;
   background-color: #f7f8fa;
   color: #333;
+  margin: 0;
+  padding: 0;
 }
 
 .app-container {
@@ -15,396 +14,113 @@ body {
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
 .subtitle {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 30px;
+  color: #666;
+  margin-bottom: 25px;
 }
 
-/* === Breadcrumb === */
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 20px 0;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-  font-size: 14px;
-}
-
-.breadcrumb button {
-  background: none;
-  border: none;
-  color: #E66E33; /* Naranja corporativo */
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.breadcrumb button:hover {
-  text-decoration: underline;
-}
-
-/* === Categorías === */
 .category-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 15px;
+  margin-top: 25px;
 }
 
 .category-button {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 15px 20px;
-  margin: 10px 0;
-  font-size: 18px;
+  background: #ff7f32;
+  color: white;
   font-weight: bold;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 12px;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  text-align: left;
+  transition: transform 0.2s ease, background 0.3s ease;
 }
 
 .category-button:hover {
-  background: #f7f7f7;
+  background: #e66e33;
   transform: translateY(-2px);
 }
 
-/* === Caja de información === */
-.info-box {
-  margin-top: 30px;
-  padding: 20px;
-  background: #fff4ec;
-  border: 1px solid #f1d0b3;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  text-align: left;
-}
-
-.info-box h2 {
-  margin-top: 0;
-  font-size: 18px;
-  color: #E66E33;
-}
-
-/* === Subcategorías === */
 .subcategoria-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   margin-top: 20px;
 }
 
 .subcategoria-card {
-  padding: 15px 20px;
-  margin: 12px 0;
-  background: #fff;
+  background: white;
   border-radius: 10px;
-  border: 1px solid #ddd;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 15px;
   text-align: left;
-  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  transition: background 0.2s ease;
 }
 
 .subcategoria-card:hover {
-  background: #fdf4ee;
-  border-color: #E66E33;
-  transform: translateY(-2px);
+  background: #fff4ec;
+  border-color: #e66e33;
 }
 
-/* === Prompts === */
 .prompt-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   margin-top: 20px;
 }
 
 .prompt-card {
   background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 15px 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   text-align: left;
-  transition: transform 0.2s ease;
-}
-
-.prompt-card:hover {
-  transform: translateY(-3px);
 }
 
 .prompt-card h4 {
   margin-top: 0;
-  color: #333;
+  font-size: 1.1rem;
+  color: #e66e33;
 }
 
 .prompt-card p {
-  font-size: 14px;
-  color: #555;
-  margin: 10px 0;
+  font-size: 0.9rem;
+  color: #444;
 }
 
-/* === Botón Copiar Prompt === */
 .prompt-card button {
-  background: #E66E33;
-  color: black;
-  font-weight: bold;
-  padding: 10px 18px;
+  background: #e66e33;
+  color: white;
   border: none;
   border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
   cursor: pointer;
-  margin-top: 10px;
   transition: background 0.3s ease;
 }
 
 .prompt-card button:hover {
   background: #cc5c29;
-  color: white;
 }
 
-/* === Versión express === */
-.express-section {
-  margin-top: 10px;
-  padding: 10px;
-  background: #f9f9f9;
-  border-left: 4px solid #E66E33;
-  border-radius: 6px;
-  font-size: 14px;
-  color: #333;
-}
-/* === Asistente flotante (ChatAssistant) === */
-.chat-toggle {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  background-color: #E66E33;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  font-size: 28px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s ease;
-  z-index: 9999;
-}
-
-.chat-toggle:hover {
-  transform: scale(1.1);
-  background-color: #cc5c29;
-}
-
-/* Caja de chat */
-.chat-box {
-  position: fixed;
-  bottom: 100px;
-  right: 25px;
-  width: 320px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  z-index: 9999;
-}
-
-/* Encabezado del chat */
-.chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #E66E33;
-  color: white;
-  padding: 10px 15px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-
-/* Mensajes */
-.chat-messages {
-  padding: 10px;
-  height: 250px;
-  overflow-y: auto;
-  background: #f9f9f9;
-}
-
-.chat-message {
-  padding: 8px 12px;
-  margin-bottom: 8px;
+.info-section {
+  background: #fff4ec;
   border-radius: 10px;
-  max-width: 80%;
-  word-wrap: break-word;
+  padding: 15px;
+  margin-top: 25px;
+  text-align: left;
+  border: 1px solid #f1d0b3;
 }
 
-.chat-message.bot {
-  background: #f0f0f0;
-  align-self: flex-start;
+.info-section h3 {
+  margin-top: 0;
+  color: #e66e33;
 }
-
-.chat-message.user {
-  background: #E66E33;
-  color: white;
-  align-self: flex-end;
-}
-
-/* Campo de entrada */
-.chat-input {
-  display: flex;
-  border-top: 1px solid #ddd;
-}
-
-.chat-input input {
-  flex: 1;
-  border: none;
-  padding: 10px;
-  border-bottom-left-radius: 12px;
-  outline: none;
-}
-
-.chat-input button {
-  background: #E66E33;
-  border: none;
-  color: white;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-bottom-right-radius: 12px;
-  font-weight: bold;
-}
-
-.chat-input button:hover {
-  background: #cc5c29;
-}
-/* --- Chat Assistant --- */
-.chat-button {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  background-color: #f97316;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  font-size: 26px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
-  z-index: 1000;
-}
-.chat-button:hover {
-  background-color: #ea580c;
-  transform: scale(1.05);
-}
-
-.chat-container {
-  position: fixed;
-  bottom: 100px;
-  right: 25px;
-  width: 350px;
-  height: 450px;
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  animation: fadeIn 0.3s ease;
-  z-index: 1000;
-}
-
-.chat-header {
-  background-color: #1e293b;
-  color: white;
-  padding: 12px;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.chat-header .close-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.chat-messages {
-  flex: 1;
-  padding: 12px;
-  overflow-y: auto;
-  background-color: #f9fafb;
-}
-
-.chat-bubble {
-  max-width: 80%;
-  margin-bottom: 10px;
-  padding: 10px 14px;
-  border-radius: 12px;
-  line-height: 1.4;
-  font-size: 14px;
-}
-
-.chat-bubble.user {
-  background-color: #2563eb;
-  color: white;
-  align-self: flex-end;
-  margin-left: auto;
-}
-
-.chat-bubble.bot {
-  background-color: #e2e8f0;
-  color: #111827;
-  align-self: flex-start;
-}
-
-.chat-input-area {
-  display: flex;
-  border-top: 1px solid #e5e7eb;
-}
-
-.chat-input-area input {
-  flex: 1;
-  border: none;
-  padding: 10px;
-  font-size: 14px;
-  outline: none;
-}
-
-.chat-input-area button {
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background 0.3s;
-}
-.chat-input-area button:hover {
-  background-color: #1d4ed8;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-

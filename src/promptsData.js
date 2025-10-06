@@ -3,82 +3,9 @@
 const promptsData = [
   
   // 📊 Categoría 1: Análisis Financiero Estratégico (15 prompts)
-  {
-    "id": "1",
-    "titulo": "Análisis Integral de Estados Financieros",
-    "descripcion": "Actúa como un analista financiero senior. Analiza los estados financieros adjuntos (balance general, estado de resultados y estado de cambios en el patrimonio) de los últimos 3 años. Identifica las 5 tendencias más significativas, evalúa la salud financiera general de la empresa, y proporciona 3 recomendaciones estratégicas basadas en tu análisis. Incluye comparaciones año a año y explica el impacto de cada hallazgo en la posición competitiva de la empresa."
-  },
-  {
-    "id": "2",
-    "titulo": "Análisis Comparativo con Competidores",
-    "descripcion": "Compara los estados financieros de esta empresa con los de sus 3 principales competidores en el sector. Identifica fortalezas y debilidades relativas en términos de estructura de capital, eficiencia operativa y posición de liquidez. Proporciona un ranking de desempeño financiero y explica qué métricas clave determinan la posición de cada empresa en el mercado."
-  },
-  {
-    "id": "3",
-    "titulo": "Detección de Anomalías en Estados Financieros",
-    "descripcion": "Examina los estados financieros en busca de inconsistencias, irregularidades o señales de alerta. Analiza la coherencia entre partidas, identifica variaciones inusuales y evalúa la calidad de los resultados reportados. Elabora un informe de due diligence destacando cualquier área que requiera investigación adicional o aclaración."
-  },
-  {
-    "id": "4",
-    "titulo": "Análisis de Sostenibilidad del Flujo de Efectivo",
-    "descripcion": "Analiza los estados de flujo de efectivo de los últimos 5 años enfocándote en la sostenibilidad de la generación de efectivo. Evalúa la calidad del flujo operativo, identifica patrones estacionales y determina si la empresa puede mantener sus operaciones, inversiones y pagos de dividendos sin financiamiento externo."
-  },
-  {
-    "id": "5",
-    "titulo": "Optimización del Capital de Trabajo",
-    "descripcion": "Evalúa los componentes del capital de trabajo y su impacto en el flujo de efectivo. Identifica oportunidades de mejora en cuentas por cobrar, inventarios y cuentas por pagar. Propón estrategias específicas para optimizar el ciclo de conversión de efectivo y mejorar la liquidez sin afectar la operación."
-  },
-  {
-    "id": "6",
-    "titulo": "Evaluación de Capacidad de Inversión",
-    "descripcion": "Determina la capacidad de la empresa para financiar nuevos proyectos o expansiones a partir de su flujo de efectivo y estructura de capital. Calcula ratios de cobertura, apalancamiento y capacidad de servicio de deuda. Propón estrategias de financiamiento adecuadas según el perfil de riesgo y horizonte de inversión."
-  },
-  {
-    "id": "7",
-    "titulo": "Análisis de Contribución Marginal por Línea de Negocio",
-    "descripcion": "Analiza la rentabilidad por línea de negocio o unidad de producto calculando márgenes de contribución y EBITDA. Identifica cuáles segmentos son los más rentables y cuáles podrían estar destruyendo valor. Propón decisiones estratégicas de expansión, ajuste o desinversión."
-  },
-  {
-    "id": "8",
-    "titulo": "Análisis de Valor Económico Agregado (EVA)",
-    "descripcion": "Calcula el EVA de la empresa y analiza la rentabilidad ajustada por riesgo. Evalúa si la compañía está generando valor económico o simplemente cubriendo su costo de capital. Propón estrategias para mejorar el EVA mediante optimización del capital y reducción del costo financiero."
-  },
-  {
-    "id": "9",
-    "titulo": "Optimización del Portafolio de Negocios",
-    "descripcion": "Utiliza la matriz BCG y el análisis de rentabilidad para evaluar el portafolio de negocios. Clasifica los segmentos según su participación de mercado y crecimiento, identifica sinergias entre líneas y diseña una estrategia de asignación de recursos que maximice el retorno global."
-  },
-  {
-    "id": "10",
-    "titulo": "Dashboard de Ratios Financieros Clave",
-    "descripcion": "Diseña un dashboard ejecutivo con los ratios financieros más relevantes organizados por categoría: liquidez, rentabilidad, apalancamiento, eficiencia y mercado. Incluye valores actuales, tendencias históricas y comparativos con el sector. Presenta una interpretación ejecutiva con recomendaciones."
-  },
-  {
-    "id": "11",
-    "titulo": "Análisis Predictivo de Solidez Financiera",
-    "descripcion": "Construye un modelo predictivo basado en indicadores financieros clave (Altman Z-Score, Piotroski F-Score) para estimar la probabilidad de dificultades financieras en los próximos 12 a 24 meses. Analiza escenarios alternativos y su impacto en solvencia y liquidez."
-  },
-  {
-    "id": "12",
-    "titulo": "Benchmarking Sectorial",
-    "descripcion": "Compara los indicadores financieros de la empresa con los promedios de su sector y principales competidores. Identifica áreas donde la compañía supera o queda por debajo de los estándares. Propón metas realistas de mejora para los próximos ejercicios."
-  },
-  {
-    "id": "13",
-    "titulo": "Mapa de Riesgos Financieros",
-    "descripcion": "Crea un mapa de riesgos que clasifique amenazas en categorías (liquidez, crédito, mercado, operacional). Evalúa probabilidad e impacto de cada riesgo y diseña controles preventivos y correctivos. Incluye indicadores de alerta temprana y un plan de respuesta."
-  },
-  {
-    "id": "14",
-    "titulo": "Stress Testing Financiero",
-    "descripcion": "Desarrolla un ejercicio de stress testing con tres escenarios adversos (recesión moderada, crisis sectorial, alza de tasas). Evalúa impactos en liquidez, apalancamiento y rentabilidad, identificando puntos críticos y planes de mitigación ante cada escenario."
-  },
-  {
-    "id": "15",
-    "titulo": "Sistema de Alertas Tempranas",
-    "descripcion": "Diseña un sistema automatizado que identifique señales tempranas de deterioro financiero. Define indicadores clave, umbrales de alerta y acciones automáticas asociadas. Crea un protocolo de monitoreo y escalamiento ante desviaciones relevantes."
-  },
-
+ 
+   
+ 
 
   // 2️⃣ COMUNICACIÓN EMPRESARIAL DE ALTO IMPACTO
   {

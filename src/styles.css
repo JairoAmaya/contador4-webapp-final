@@ -407,3 +407,20 @@ h1 {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* ==== Contador 4.0 EXPRESS custom styles ==== */
+body {
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+header img,
+footer img {
+  user-select: none;
+}
+
+.bg-orange-500 {
+  background-color: #f97316 !important;
+}
+
+.bg-orange-600:hover {
+  background-color: #ea580c !important;
+}

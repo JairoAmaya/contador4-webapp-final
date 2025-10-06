@@ -1,918 +1,383 @@
-// src/promptsDataLargos.js
-// Versión larga completa — 7 categorías × 5 subcategorías × 3 prompts = 105 prompts
+// src/promptsData.js
+// ✅ MVP FUNCIONAL — 7 categorías, 105 prompts en versión corta con botón "Copiar Prompt"
+
 const promptsData = [
-  // ---------------------------
-  // 📊 1. Análisis Financiero Estratégico (15 prompts)
-  // ---------------------------
+  // 1️⃣ ANÁLISIS FINANCIERO ESTRATÉGICO
   {
-    id: "cat-1",
     title: "📊 Análisis Financiero Estratégico",
     icon: "📈",
     subcategories: [
       {
-        id: "1-1",
-        title: "Interpretación de Estados Financieros",
+        title: "Evaluación Financiera",
         prompts: [
           {
-            id: "1",
-            title: "Análisis Integral de Estados Financieros",
-            prompt:
-              "Actúa como un analista financiero senior. Analiza los estados financieros adjuntos (balance general, estado de resultados y estado de cambios en el patrimonio) de los últimos 3 años. Identifica las 5 tendencias más significativas, evalúa la salud financiera general de la empresa, y proporciona 3 recomendaciones estratégicas. Incluye comparaciones año a año, indicadores cuantitativos (márgenes, ROA, ROE, ratio de endeudamiento), y explica el impacto de cada hallazgo en la posición competitiva."
+            title: "Análisis de Rentabilidad",
+            prompt: "Realiza un análisis de rentabilidad con base en los estados financieros del último año."
           },
           {
-            id: "2",
-            title: "Comparación Interanual Detallada",
-            prompt:
-              "Genera un análisis comparativo de los estados de resultados y balances entre los últimos 2 años. Identifica variaciones por cuenta (ingresos, costo de ventas, gastos operativos), explica causas probables y sugiere 4 acciones tácticas para mejorar las partidas más volátiles. Incluye tablas con porcentajes de variación y observaciones sobre sostenibilidad."
+            title: "Diagnóstico Financiero",
+            prompt: "Evalúa la salud financiera de una empresa considerando liquidez, endeudamiento y eficiencia operativa."
           },
           {
-            id: "3",
-            title: "Informe de Calidad de Earnings",
-            prompt:
-              "Evalúa la calidad de las utilidades reportadas: analiza elementos no recurrentes, ajustes contables, políticas de reconocimiento de ingresos y estimaciones clave. Señala 5 indicadores que sugieran baja calidad de earnings y propone pruebas o documentación adicional que la gerencia debería preparar ante un auditor o inversionista."
+            title: "Informe de Indicadores Clave",
+            prompt: "Genera un resumen de KPIs financieros con recomendaciones para optimizar el desempeño."
           }
         ]
       },
       {
-        id: "1-2",
-        title: "Análisis de Flujo de Efectivo",
+        title: "Proyecciones y Escenarios",
         prompts: [
           {
-            id: "4",
-            title: "Sostenibilidad del Flujo de Caja Operativo",
-            prompt:
-              "Analiza el estado de flujo de efectivo de los últimos 5 años enfocándote en la sostenibilidad de la generación de caja operativa. Identifica fuentes/uses principales, calcula flujo libre de caja normalizado y evalúa la capacidad para financiar inversión y servicio de deuda. Propón 5 medidas concretas para mejorar generación de caja (mejor gestión de cobros, optimización de inventarios, renegociación de plazos)."
+            title: "Proyección Financiera a 3 Años",
+            prompt: "Diseña una proyección financiera a 3 años considerando ventas, gastos e inversiones."
           },
           {
-            id: "5",
-            title: "Proyección de Cash Flow y Sensibilidades",
-            prompt:
-              "Construye una proyección a 12 meses del flujo de caja operativo bajo 3 escenarios (base, -15%, +15%). Explica supuestos clave (venta, rotación de inventario, ciclo de cobro) y señala los indicadores que deben seguirse semanalmente. Incluye recomendaciones sobre líneas de financiación temporales si hubiese estrés de liquidez."
+            title: "Escenario Base y Pesimista",
+            prompt: "Elabora escenarios financieros con supuestos variables y analiza el impacto en resultados."
           },
           {
-            id: "6",
-            title: "Análisis de Calidad del Working Capital",
-            prompt:
-              "Evalúa los componentes del capital de trabajo (Cuentas por cobrar, inventarios, cuentas por pagar): calcula días de ventas pendientes, rotación de inventario y días de pago. Identifica ineficiencias, propone 6 acciones concretas para reducir ciclo de conversión de efectivo y cuantifica el impacto estimado en liquidez."
+            title: "Sensibilidad de Ingresos",
+            prompt: "Calcula la sensibilidad de los ingresos frente a cambios en precios o volumen de ventas."
           }
         ]
       },
       {
-        id: "1-3",
-        title: "Evaluación de Rentabilidad por Línea de Negocio",
+        title: "Gestión de Liquidez",
         prompts: [
           {
-            id: "7",
-            title: "Contribución por Segmento",
-            prompt:
-              "Analiza la rentabilidad por línea de negocio: calcula margen bruto, contribución marginal y EBITDA por segmento. Identifica cuáles líneas financian a otras y sugiere una estrategia (expandir, mantener, desinvertir) para cada una, con justificación cuantitativa."
+            title: "Flujo de Caja Proyectado",
+            prompt: "Construye un flujo de caja mensual estimado para el próximo año."
           },
           {
-            id: "8",
-            title: "Mapeo de Costos y Asignación",
-            prompt:
-              "Revisa la asignación actual de costos fijos y variables por unidad de negocio. Propón un sistema de costeo por actividad (ABC) para reasignar costos indirectos y mejorar la visibilidad de rentabilidad. Incluye 4 métricas que la gerencia debe monitorear para validar la nueva asignación."
+            title: "Control de Tesorería",
+            prompt: "Diseña un control de tesorería para administrar ingresos, egresos y saldos bancarios."
           },
           {
-            id: "9",
-            title: "Evaluación de Precios y Elasticidad",
-            prompt:
-              "Analiza la estructura de precios por producto/servicio y estima elasticidades simples usando datos históricos. Propón un plan de optimización de precios (paquetes, bundling, descuentos estratégicos) que maximice margen sin perder volumen significativo."
+            title: "Política de Liquidez",
+            prompt: "Redacta una política interna para optimizar la gestión de liquidez y fondos disponibles."
           }
         ]
       },
       {
-        id: "1-4",
-        title: "Análisis de Ratios Financieros",
+        title: "Planeación Presupuestal",
         prompts: [
           {
-            id: "10",
-            title: "Dashboard de Ratios Clave",
-            prompt:
-              "Diseña un dashboard con los 12 ratios financieros más relevantes (liquidez, solvencia, rentabilidad, eficiencia). Para cada ratio incluye fórmula, benchmark sectorial, interpretación y un semáforo que indique riesgo. Acompaña con recomendaciones operativas para ratios en zona amarilla/roja."
+            title: "Presupuesto Maestro Anual",
+            prompt: "Elabora un presupuesto maestro integrando ventas, gastos y flujo de caja."
           },
           {
-            id: "11",
-            title: "Ratios Predictivos y Early Warning",
-            prompt:
-              "Construye un conjunto de ratios que sirvan como early warning para deterioro financiero (Altman Z, Piotroski F-score, DSO trend). Define umbrales, frecuencia de cálculo y acciones a ejecutar cuando se superen los umbrales críticos."
+            title: "Análisis de Desviaciones Presupuestales",
+            prompt: "Crea un análisis de desviaciones entre resultados reales y presupuestos."
           },
           {
-            id: "12",
-            title: "Análisis de Apalancamiento y Cobertura",
-            prompt:
-              "Evalúa la estructura de deuda y la capacidad de cobertura de las obligaciones (cobertura de intereses, ratios de deuda neta/EBITDA). Propón acciones de refinanciamiento o cobertura (swap, extensión de plazo) para mitigar riesgo de liquidez o tasa."
+            title: "Revisión de Supuestos",
+            prompt: "Evalúa los supuestos utilizados en el presupuesto para medir su realismo."
           }
         ]
       },
       {
-        id: "1-5",
-        title: "Detección de Riesgos Financieros",
+        title: "Valoración y Rentabilidad",
         prompts: [
           {
-            id: "13",
-            title: "Mapa Integral de Riesgos",
-            prompt:
-              "Desarrolla un mapa de riesgos financieros con probabilidad, impacto y controles asociados (liquidez, crédito, mercado, operacional). Prioriza los 10 riesgos principales y propone controles o planes de mitigación para los 5 más críticos."
+            title: "Valoración de Empresa (DCF)",
+            prompt: "Aplica el método de flujos descontados para valorar una empresa."
           },
           {
-            id: "14",
-            title: "Stress Testing y Escenarios",
-            prompt:
-              "Diseña stress tests bajo 3 escenarios adversos (shock de ventas, aumento de tasas, pérdida de cliente clave). Evalúa impacto en liquidez, cumplimiento de covenants y capital de trabajo. Propón medidas de contingencia y umbrales de activación."
+            title: "ROI de Proyecto",
+            prompt: "Calcula el retorno sobre inversión de un proyecto específico."
           },
           {
-            id: "15",
-            title: "Sistema de Alertas Tempranas Financieras",
-            prompt:
-              "Define un sistema automatizado de alertas tempranas: indicadores monitoreados, umbrales, responsables y acciones automáticas (notificaciones, escalados). Incluye un plan de implementación técnica y roles operativos."
+            title: "Análisis Costo-Beneficio",
+            prompt: "Evalúa los beneficios financieros frente a los costos asociados de una decisión empresarial."
           }
         ]
       }
     ]
   },
 
-  // ---------------------------
-  // 💬 2. Comunicación Empresarial de Alto Impacto (15 prompts)
-  // ---------------------------
+  // 2️⃣ COMUNICACIÓN EMPRESARIAL
   {
-    id: "cat-2",
-    title: "💬 Comunicación Empresarial de Alto Impacto",
-    icon: "📝",
+    title: "💬 Comunicación Empresarial",
+    icon: "🗣️",
     subcategories: [
       {
-        id: "2-1",
-        title: "Cartas Explicativas para Clientes",
+        title: "Informes Ejecutivos",
         prompts: [
-          {
-            id: "16",
-            title: "Carta de Explicación de Resultados",
-            prompt:
-              "Redacta una carta profesional dirigida a un cliente para explicar los resultados financieros del trimestre. Debe incluir: resumen ejecutivo, explicación de variaciones clave, impacto esperado y recomendaciones prácticas. Mantén un tono empático y consultivo, con máximo 400 palabras."
-          },
-          {
-            id: "17",
-            title: "Comunicación de Ajuste de Precios/Servicios",
-            prompt:
-              "Prepara una comunicación para clientes informando un cambio en tarifas o alcance de servicio. Explica razones, beneficios, timeline de implementación y opciones para clientes antiguos (prórrogas, descuentos). Incluye fraseología para reducir fricción y mantener relación."
-          },
-          {
-            id: "18",
-            title: "Respuesta a Reclamos Financieros",
-            prompt:
-              "Redacta una respuesta formal a un reclamo de cliente sobre una discrepancia en facturación. Incluye investigación realizada, hallazgos, corrección propuesta y medidas preventivas para evitar recurrencia. Mantén transparencia y ofrece canal de escalamiento."
-          }
+          { title: "Informe Financiero Trimestral", prompt: "Redacta un informe financiero claro para directivos." },
+          { title: "Reporte de Avances", prompt: "Prepara un resumen ejecutivo con los logros del trimestre." },
+          { title: "Síntesis para Consejo Directivo", prompt: "Resume resultados clave y decisiones estratégicas recientes." }
         ]
       },
       {
-        id: "2-2",
-        title: "Reportes Ejecutivos Personalizados",
+        title: "Comunicación con Clientes",
         prompts: [
-          {
-            id: "19",
-            title: "Informe Ejecutivo para la Dirección",
-            prompt:
-              "Crea un informe ejecutivo de una página que resuma desempeño financiero y KPIs para el CEO. Incluye 3 highlights, 2 riesgos a monitorear y 3 recomendaciones estratégicas priorizadas por impacto."
-          },
-          {
-            id: "20",
-            title: "Reporte de Gestión Mensual",
-            prompt:
-              "Diseña un reporte mensual para gerencias que incluya: KPIs, variaciones vs budget, principales hallazgos, causas raíz y plan de acción con responsables y fechas. Debe ser utilizable en reuniones mensuales de revisión."
-          },
-          {
-            id: "21",
-            title: "Memo Técnico para Comité",
-            prompt:
-              "Redacta un memo técnico para el comité financiero sobre un tema complejo (p. ej. impacto de una nueva norma contable). Debe sintetizar: antecedentes, análisis cuantitativo, implicaciones y recomendaciones concretas para decisión."
-          }
+          { title: "Boletín Financiero", prompt: "Redacta un boletín con novedades contables y financieras relevantes." },
+          { title: "Carta a Inversionistas", prompt: "Escribe una carta con logros y proyecciones del negocio." },
+          { title: "Resumen Comercial", prompt: "Prepara un resumen de resultados dirigido a clientes corporativos." }
         ]
       },
       {
-        id: "2-3",
-        title: "Presentaciones de Resultados",
+        title: "Gestión de Crisis",
         prompts: [
-          {
-            id: "22",
-            title: "Deck para Inversionistas",
-            prompt:
-              "Prepara las secciones clave de una presentación para inversores: visión del negocio, metrics growth, estado financiero resumido, proyecciones y use of proceeds. Incluye notas del presentador para cada slide."
-          },
-          {
-            id: "23",
-            title: "Presentación de Resultados Operativos",
-            prompt:
-              "Crea una presentación con storytelling que explique desempeño operativo, causas de desvíos y plan de acción. Incluye gráficos sugeridos y bullets claros para cada slide."
-          },
-          {
-            id: "24",
-            title: "Pitch Comercial de Servicios",
-            prompt:
-              "Desarrolla un pitch de 8 slides para vender un paquete de servicios contables y de transformación digital a empresas mediana/multi-entidad."
-          }
+          { title: "Comunicado ante Incidente", prompt: "Redacta un comunicado transparente y profesional ante una crisis." },
+          { title: "Guía de Comunicación Interna", prompt: "Diseña pautas para mantener la coherencia comunicativa durante una contingencia." },
+          { title: "Plan de Reacción Rápida", prompt: "Crea un plan para mitigar impactos comunicativos en una crisis empresarial." }
         ]
       },
       {
-        id: "2-4",
-        title: "Comunicación de Hallazgos de Auditoría",
+        title: "Relaciones Públicas",
         prompts: [
-          {
-            id: "25",
-            title: "Comunicación a Consejo/Board",
-            prompt:
-              "Redacta un resumen ejecutivo sobre hallazgos críticos de auditoría para presentar al board, incluyendo impacto, evidencia, riesgo y plan de remediación con responsables y timeline."
-          },
-          {
-            id: "26",
-            title: "Notificación Operativa a Gerencias",
-            prompt:
-              "Prepara un comunicado operativo para gerencias con hallazgos de auditoría, acciones requeridas y formato de reporte de avance."
-          },
-          {
-            id: "27",
-            title: "Formato de Seguimiento de Hallazgos",
-            prompt:
-              "Genera un formato estandarizado para seguimiento de hallazgos (RACI, fechas objetivo, evidencia y cierre)."
-          }
+          { title: "Nota de Prensa Financiera", prompt: "Redacta una nota de prensa sobre resultados anuales." },
+          { title: "Discurso de Resultados", prompt: "Elabora un discurso inspirador para presentación de resultados." },
+          { title: "Mensaje Corporativo", prompt: "Crea un mensaje oficial sobre un nuevo logro o meta alcanzada." }
         ]
       },
       {
-        id: "2-5",
-        title: "Explicación de Impactos Fiscales",
+        title: "Documentación Interna",
         prompts: [
-          {
-            id: "28",
-            title: "Memo sobre Cambios Normativos",
-            prompt:
-              "Redacta un memo ejecutivo que explique el impacto de una reforma fiscal hipotética en la empresa: efectos en efectivo, provisiones, y recomendaciones de mitigación."
-          },
-          {
-            id: "29",
-            title: "Comunicación a Clientes sobre Cumplimiento",
-            prompt:
-              "Prepara una carta para clientes explicando nuevos requerimientos tributarios y pasos a seguir por parte del despacho para asegurar cumplimiento."
-          },
-          {
-            id: "30",
-            title: "Guía de Preguntas y Respuestas",
-            prompt:
-              "Genera una FAQ técnica para clientes sobre implicaciones prácticas de un cambio fiscal reciente, con ejemplos y cálculos simples."
-          }
+          { title: "Manual de Estilo Financiero", prompt: "Crea un documento guía para uniformar los reportes financieros." },
+          { title: "Plantilla de Presentaciones", prompt: "Diseña una estructura de presentaciones ejecutivas." },
+          { title: "Guía de Redacción Profesional", prompt: "Define pautas para mantener claridad y precisión en los informes contables." }
         ]
       }
     ]
   },
 
-  // ---------------------------
-  // 💼 3. Propuestas y Cotizaciones que Cierran Negocios (15 prompts)
-  // ---------------------------
+  // 3️⃣ PROPUESTAS Y COTIZACIONES
   {
-    id: "cat-3",
-    title: "💼 Propuestas y Cotizaciones que Cierran Negocios",
+    title: "💼 Propuestas y Cotizaciones",
     icon: "💼",
     subcategories: [
       {
-        id: "3-1",
-        title: "Propuestas de Servicios Contables",
+        title: "Propuestas Comerciales",
         prompts: [
-          {
-            id: "31",
-            title: "Propuesta Integral de Servicios",
-            prompt:
-              "Redacta una propuesta comercial detallada para ofrecer servicios contables integrales: alcance, entregables, equipo, timeline, SLA, KPIs de servicio y estructura de honorarios. Incluye una sección 'por qué nosotros' con 3 pruebas de valor."
-          },
-          {
-            id: "32",
-            title: "Propuesta de Migración y Modernización",
-            prompt:
-              "Elabora una propuesta para modernizar procesos contables: diagnóstico, roadmap de implementación (por fases), costos, ROI estimado y plan de capacitación."
-          },
-          {
-            id: "33",
-            title: "Propuesta de Outsourcing Contable",
-            prompt:
-              "Desarrolla una propuesta de outsourcing que incluya: alcance end-to-end, modelo de gobernanza, transiciones, riesgos mitigados y comparativo económico frente a operación interna."
-          }
+          { title: "Propuesta de Servicios Contables", prompt: "Redacta una propuesta para servicios contables profesionales." },
+          { title: "Propuesta de Asesoría Financiera", prompt: "Crea una propuesta para consultoría financiera personalizada." },
+          { title: "Carta de Presentación Comercial", prompt: "Escribe una carta introductoria para captar nuevos clientes." }
         ]
       },
       {
-        id: "3-2",
-        title: "Cotizaciones por Paquetes",
+        title: "Cotizaciones Detalladas",
         prompts: [
-          {
-            id: "34",
-            title: "Paquetes Básico/Profesional/Premium",
-            prompt:
-              "Diseña tres paquetes de servicios con alcance, frecuencia, entregables y precios; incluye add-ons posibles y criterios de recomendación según tamaño/sector del cliente."
-          },
-          {
-            id: "35",
-            title: "Cotización Modular",
-            prompt:
-              "Crea una cotización modular que permita al cliente elegir módulos (nómina, impuestos, reportes, advisory) con precios unitarios y descuentos por bundle."
-          },
-          {
-            id: "36",
-            title: "Cotización por Industria",
-            prompt:
-              "Elabora una cotización y propuesta de valor adaptada a una industria (p. ej. retail). Incluye riesgos sectoriales y servicios complementarios recomendados."
-          }
+          { title: "Cotización Estándar", prompt: "Crea una cotización con precios y plazos claros." },
+          { title: "Comparativo de Paquetes", prompt: "Desarrolla una tabla comparativa entre tres planes de servicio." },
+          { title: "Cotización Express", prompt: "Genera una cotización rápida con formato resumido y profesional." }
         ]
       },
       {
-        id: "3-3",
-        title: "Presentación de Servicios de Valor",
+        title: "Negociación y Cierre",
         prompts: [
-          {
-            id: "37",
-            title: "Presentación Ejecutiva Comercial",
-            prompt:
-              "Prepara una presentación comercial (10 diapositivas) que destaque servicios de transformación contable, casos de éxito y beneficios financieros esperados."
-          },
-          {
-            id: "38",
-            title: "Justificación de Honorarios por Valor",
-            prompt:
-              "Redacta un documento que justifique honorarios en base a valor entregado (ahorro/ingreso generado), con ejemplos cuantitativos y comparativos de mercado."
-          },
-          {
-            id: "39",
-            title: "Presentación para Decisor Público/Privado",
-            prompt:
-              "Crea una presentación adaptada para tomadores de decisión (CFO/Consejo) con énfasis en riesgos, ROI y governance del proyecto propuesto."
-          }
+          { title: "Argumentos de Valor", prompt: "Redacta argumentos sólidos para cerrar una venta." },
+          { title: "Seguimiento Post-Reunión", prompt: "Escribe un correo de seguimiento tras presentar una propuesta." },
+          { title: "Carta de Agradecimiento", prompt: "Crea una carta de agradecimiento posterior a una negociación." }
         ]
       },
       {
-        id: "3-4",
-        title: "Contratos y Alcances",
+        title: "Alcance y Entregables",
         prompts: [
-          {
-            id: "40",
-            title: "Contrato de Servicios Contables",
-            prompt:
-              "Genera el borrador de un contrato profesional que incluya alcance, confidencialidad, limitación de responsabilidad, SLA, pricing y cláusulas de rescisión."
-          },
-          {
-            id: "41",
-            title: "Acuerdo de Nivel de Servicio (SLA)",
-            prompt:
-              "Define un SLA con métricas, penalidades y proceso de revisión trimestral para un servicio contable externalizado."
-          },
-          {
-            id: "42",
-            title: "Contrato Retainer Mensual",
-            prompt:
-              "Redacta un contrato de retainer con descripción de servicios incluidos, horas dedicadas, rollover y condiciones de facturación."
-          }
+          { title: "Definición de Alcance", prompt: "Describe claramente los límites y entregables del servicio." },
+          { title: "Cronograma de Entregas", prompt: "Crea un calendario de entregas con hitos clave." },
+          { title: "Términos y Condiciones", prompt: "Incluye un resumen de condiciones comerciales en tu propuesta." }
         ]
       },
       {
-        id: "3-5",
-        title: "Herramientas Comerciales",
+        title: "Formalización y Seguimiento",
         prompts: [
-          {
-            id: "43",
-            title: "Plantilla de Propuesta Personalizable",
-            prompt:
-              "Crea una plantilla de propuesta editable con secciones: resumen ejecutivo, alcance, beneficios, pricing, timeline y next steps."
-          },
-          {
-            id: "44",
-            title: "Checklist de Venta Consultiva",
-            prompt:
-              "Genera un checklist para vendedores que guíe la venta consultiva: preguntas clave, evidencias a recabar y señales de compra."
-          },
-          {
-            id: "45",
-            title: "Script de Cierre Telefónico",
-            prompt:
-              "Desarrolla un script para la llamada de cierre con cliente potencial que valide objeciones y conduzca a un compromiso de meeting presencial o firma."
-          }
+          { title: "Contrato de Servicios", prompt: "Redacta una versión breve de contrato para servicios profesionales." },
+          { title: "Acta de Aceptación", prompt: "Genera un documento para formalizar la aceptación de una propuesta." },
+          { title: "Encuesta de Satisfacción", prompt: "Diseña una encuesta post-servicio para medir satisfacción del cliente." }
         ]
       }
     ]
   },
 
-  // ---------------------------
-  // 📈 4. Reportes y Dashboards Inteligentes (15 prompts)
-  // ---------------------------
+  // 4️⃣ REPORTES Y DASHBOARDS
   {
-    id: "cat-4",
-    title: "📈 Reportes y Dashboards Inteligentes",
+    title: "📈 Reportes y Dashboards",
     icon: "📊",
     subcategories: [
       {
-        id: "4-1",
-        title: "Creación de KPIs Financieros",
+        title: "KPIs Financieros",
         prompts: [
-          {
-            id: "46",
-            title: "Framework Integral de KPIs",
-            prompt:
-              "Diseña un sistema de KPIs financieros por nivel organizacional (C-level, gerencia, operativo). Para cada KPI define: fórmula, frecuencia, umbral, responsable y acción automática recomendada cuando se dispare la alerta."
-          },
-          {
-            id: "47",
-            title: "KPIs Predictivos y Early Warning",
-            prompt:
-              "Crea un conjunto de KPIs predictivos que sirvan como early warning (liquidez, cobranza, margen). Incluye metodología de cálculo y parámetros para calibrar falsos positivos."
-          },
-          {
-            id: "48",
-            title: "KPIs por Línea de Negocio",
-            prompt:
-              "Define KPIs específicos para medir creación de valor por unidad de negocio, incluyendo EVA, contribución marginal y medidas de eficiencia de capital."
-          }
+          { title: "Panel de Rentabilidad", prompt: "Diseña un tablero que muestre márgenes y ratios clave." },
+          { title: "KPIs de Liquidez", prompt: "Crea indicadores de liquidez operativa para análisis mensual." },
+          { title: "KPIs de Eficiencia", prompt: "Elabora métricas de productividad y eficiencia contable." }
         ]
       },
       {
-        id: "4-2",
-        title: "Reportes de Gestión Automatizados",
+        title: "Visualización de Datos",
         prompts: [
-          {
-            id: "49",
-            title: "Sistema de Reportes Automáticos",
-            prompt:
-              "Diseña la arquitectura de reportes automáticos multi-periodicidad (diario, semanal, mensual). Describe fuentes, transformaciones, validaciones y proceso de distribución automatizada."
-          },
-          {
-            id: "50",
-            title: "Reportes con Narrativa Automática",
-            prompt:
-              "Desarrolla un motor simple que, a partir de datos, genere narrativa ejecutiva resaltando 5 insights automáticos por reporte y recomendaciones accionables."
-          },
-          {
-            id: "51",
-            title: "Consolidación y Reconciliación Automática",
-            prompt:
-              "Define el proceso de consolidación multi-entidad con reconcilación automática, control de eliminaciones intercompany y manejo de conversiones FX."
-          }
+          { title: "Dashboard Ejecutivo", prompt: "Diseña un panel visual con los principales indicadores financieros." },
+          { title: "Gráficos Comparativos", prompt: "Crea gráficos que comparen desempeño histórico." },
+          { title: "Resumen Visual de Resultados", prompt: "Genera una presentación con resultados visuales clave." }
         ]
       },
       {
-        id: "4-3",
-        title: "Dashboards Ejecutivos",
+        title: "Alertas y Seguimiento",
         prompts: [
-          {
-            id: "52",
-            title: "Dashboard Ejecutivo en Tiempo Real",
-            prompt:
-              "Diseña un dashboard en tiempo real que muestre KPIs críticos, tendencias y alertas. Indica widgets, data sources, refresh rate y drill-downs sugeridos."
-          },
-          {
-            id: "53",
-            title: "Dashboard de Performance vs Budget",
-            prompt:
-              "Crea un dashboard que compare performance actual vs. budget y forecast, con análisis de variaciones descompuesto por driver (volumen, precio, mix, eficiencia)."
-          },
-          {
-            id: "54",
-            title: "Dashboard de Risk & Compliance",
-            prompt:
-              "Diseña un tablero que consolide riesgos, cumplimiento de obligaciones y hallazgos de auditoría, permitiendo priorizar acciones por impacto."
-          }
+          { title: "Sistema de Alertas", prompt: "Crea un esquema de alertas financieras automáticas." },
+          { title: "Informe Semanal", prompt: "Diseña un formato breve de reporte semanal de desempeño." },
+          { title: "Resumen de Riesgos", prompt: "Redacta un resumen de riesgos detectados con alertas tempranas." }
         ]
       },
       {
-        id: "4-4",
-        title: "Análisis de Desviaciones Presupuestarias",
+        title: "Control y Auditoría de Datos",
         prompts: [
-          {
-            id: "55",
-            title: "Sistema de Análisis de Variaciones",
-            prompt:
-              "Desarrolla un proceso analítico para descomponer desviaciones presupuestarias por volumen, precio, mix, eficiencia y timing. Incluye templates y ejemplos."
-          },
-          {
-            id: "56",
-            title: "Análisis Predictivo de Desviaciones",
-            prompt:
-              "Crea un modelo que use indicadores adelantados para predecir desviaciones presupuestarias y recomendar acciones preventivas."
-          },
-          {
-            id: "57",
-            title: "Framework de Accountability",
-            prompt:
-              "Define un marco de responsabilidad para desviaciones presupuestarias que asigne owners, umbrales y procesos de escalamiento."
-          }
+          { title: "Control de Calidad de Datos", prompt: "Crea un procedimiento para validar la integridad de datos." },
+          { title: "Registro de Cambios", prompt: "Diseña un sistema de control de versiones de reportes." },
+          { title: "Checklist de Revisión", prompt: "Genera una lista de verificación previa a entrega de informes." }
         ]
       },
       {
-        id: "4-5",
-        title: "Reportes de Cumplimiento",
+        title: "Reportes Personalizados",
         prompts: [
-          {
-            id: "58",
-            title: "Sistema de Reportes Regulatorios",
-            prompt:
-              "Diseña un sistema de reportes regulatorios que incluya validaciones, workflow de aprobación y evidencias para auditorías."
-          },
-          {
-            id: "59",
-            title: "Dashboard de Compliance",
-            prompt:
-              "Crea un dashboard que muestre estado de obligaciones, alertas por proximidad de fecha y métricas de calidad de datos."
-          },
-          {
-            id: "60",
-            title: "Reportes para Auditorías Externas",
-            prompt:
-              "Genera un paquete de reportes estandarizados para auditorías externas con evidencia vinculada y procesos de backup."
-          }
+          { title: "Informe de Cierre Mensual", prompt: "Crea un formato estándar para reportes mensuales." },
+          { title: "Resumen Financiero por Área", prompt: "Genera un informe financiero por departamentos o unidades." },
+          { title: "Reporte Gerencial", prompt: "Diseña un reporte con enfoque estratégico para la dirección." }
         ]
       }
     ]
   },
 
-  // ---------------------------
-  // 🧾 5. Cumplimiento Fiscal Proactivo (15 prompts)
-  // ---------------------------
+  // 5️⃣ CUMPLIMIENTO FISCAL
   {
-    id: "cat-5",
-    title: "🧾 Cumplimiento Fiscal Proactivo",
+    title: "🧾 Cumplimiento Fiscal",
     icon: "🧮",
     subcategories: [
       {
-        id: "5-1",
-        title: "Calendarios de Obligaciones",
+        title: "Declaraciones y Pagos",
         prompts: [
-          {
-            id: "61",
-            title: "Calendario Fiscal Automatizado",
-            prompt:
-              "Genera un calendario fiscal integrado con todas las obligaciones aplicables a [tipo de empresa], incluyendo plazos, formularios y responsables. Incluye alertas y estimación de montos cuando sea posible."
-          },
-          {
-            id: "62",
-            title: "Calendario Consolidado para Grupo",
-            prompt:
-              "Construye un calendario consolidado para grupo empresarial con múltiples jurisdicciones, incluyendo dependencias y recursos compartidos."
-          },
-          {
-            id: "63",
-            title: "Integración del Calendario con Cash Flow",
-            prompt:
-              "Diseña la integración del calendario de obligaciones con la proyección de flujo de caja para identificar periodos críticos de liquidez."
-          }
+          { title: "Calendario Fiscal", prompt: "Genera un calendario fiscal con fechas clave e impuestos a declarar." },
+          { title: "Declaración Provisional", prompt: "Prepara una declaración mensual con resumen de impuestos." },
+          { title: "Proyección de Impuestos", prompt: "Calcula una proyección de pagos fiscales anuales." }
         ]
       },
       {
-        id: "5-2",
-        title: "Explicación de Cambios Normativos",
+        title: "Auditorías y Revisiones",
         prompts: [
-          {
-            id: "64",
-            title: "Análisis de Reforma Tributaria",
-            prompt:
-              "Analiza el impacto de una reforma tributaria hipotética en nuestra empresa: cuantifica cambios en carga tributaria, identifica nuevas obligaciones y propone un plan de adaptación."
-          },
-          {
-            id: "65",
-            title: "Memo Ejecutivo sobre Cambios",
-            prompt:
-              "Redacta un memo para la dirección que resuma cambios normativos recientes, implicaciones y acciones recomendadas."
-          },
-          {
-            id: "66",
-            title: "Plantilla de Comunicación a Clientes",
-            prompt:
-              "Crea una plantilla para comunicar a clientes cambios fiscales relevantes, con FAQ y pasos a seguir."
-          }
+          { title: "Checklist de Auditoría Fiscal", prompt: "Crea un listado de revisión previa a auditorías." },
+          { title: "Expediente Fiscal Completo", prompt: "Genera un expediente con documentación tributaria obligatoria." },
+          { title: "Informe de Hallazgos", prompt: "Redacta un resumen de observaciones detectadas en la auditoría." }
         ]
       },
       {
-        id: "5-3",
-        title: "Estrategias de Optimización Fiscal",
+        title: "Optimización Tributaria",
         prompts: [
-          {
-            id: "67",
-            title: "Plan Estratégico de Optimización Fiscal",
-            prompt:
-              "Proyecta un plan anual de optimización fiscal que identifique oportunidades legales de ahorro, evalúe riesgos y cuantifique el beneficio esperado por iniciativa."
-          },
-          {
-            id: "68",
-            title: "Estructura Corporativa Óptima",
-            prompt:
-              "Analiza alternativas de estructura societaria para optimizar carga fiscal (holding, filiales, sucursales) y sugiere la opción óptima considerando riesgos y costos."
-          },
-          {
-            id: "69",
-            title: "Estrategias de Timing y Diferimiento",
-            prompt:
-              "Desarrolla estrategias defensables de timing para el reconocimiento de ingresos y gastos que optimicen carga fiscal sin elevar riesgo de cuestionamiento."
-          }
+          { title: "Estrategias de Deducción", prompt: "Identifica deducciones aplicables al régimen fiscal actual." },
+          { title: "Plan de Ahorro Fiscal", prompt: "Elabora un plan para reducir carga fiscal de forma legal." },
+          { title: "Análisis de Riesgo Tributario", prompt: "Evalúa riesgos fiscales y contingencias potenciales." }
         ]
       },
       {
-        id: "5-4",
-        title: "Análisis de Riesgos Tributarios",
+        title: "Cumplimiento Normativo",
         prompts: [
-          {
-            id: "70",
-            title: "Matriz Integral de Riesgos Tributarios",
-            prompt:
-              "Crea una matriz de riesgos tributarios por tipo de impuesto y proceso, evaluando probabilidad, impacto y controles actuales. Propón remedios y prioridades."
-          },
-          {
-            id: "71",
-            title: "Evaluación de Posiciones Fiscales Agresivas",
-            prompt:
-              "Analiza la solidez de posiciones fiscales agresivas: evidencia legal, precedentes y probabilidad de ajuste. Recomienda postura defensiva o ajuste y pasos de mitigación."
-          },
-          {
-            id: "72",
-            title: "Early Warning Tributario",
-            prompt:
-              "Define indicadores de alerta temprana para riesgos tributarios (patterns que sugieren fiscalización) y el flujo de trabajo para investigarlos."
-          }
+          { title: "Verificación de Obligaciones", prompt: "Crea un checklist de obligaciones fiscales mensuales." },
+          { title: "Evaluación de Cumplimiento", prompt: "Diseña un reporte de cumplimiento fiscal y observaciones." },
+          { title: "Plan Correctivo", prompt: "Redacta un plan para corregir incumplimientos fiscales." }
         ]
       },
       {
-        id: "5-5",
-        title: "Documentación de Cumplimiento",
+        title: "Documentación Legal",
         prompts: [
-          {
-            id: "73",
-            title: "Sistema de Documentación Tributaria",
-            prompt:
-              "Diseña un sistema centralizado de documentación para obligaciones tributarias y soporte de posiciones fiscales (control de versiones, evidencias y accesos)."
-          },
-          {
-            id: "74",
-            title: "Expediente Defensivo ante Auditoría",
-            prompt:
-              "Prepara un checklist y estructura de expediente defensivo para presentar ante una auditoría tributaria: qué evidencias, formatos y responsabilidades incluir."
-          },
-          {
-            id: "75",
-            title: "Documentación de Precios de Transferencia",
-            prompt:
-              "Genera un esquema de documentación de precios de transferencia (Master File & Local File) con comparables y metodología."
-          }
+          { title: "Carta de Cumplimiento Fiscal", prompt: "Redacta una carta formal que confirme cumplimiento de obligaciones." },
+          { title: "Formato de Declaración", prompt: "Crea una plantilla editable para futuras declaraciones." },
+          { title: "Resumen Legal Tributario", prompt: "Elabora un resumen con los principales marcos regulatorios aplicables." }
         ]
       }
     ]
   },
 
-  // ---------------------------
-  // 🕵️ 6. Auditoría y Control Robusto (15 prompts)
-  // ---------------------------
+  // 6️⃣ AUDITORÍA Y CONTROL
   {
-    id: "cat-6",
-    title: "🕵️ Auditoría y Control Robusto",
+    title: "🕵️ Auditoría y Control",
     icon: "🧩",
     subcategories: [
       {
-        id: "6-1",
-        title: "Programas de Auditoría Personalizados",
+        title: "Controles Internos",
         prompts: [
-          {
-            id: "76",
-            title: "Diseño de Programa Integral",
-            prompt:
-              "Actúa como auditor senior y diseña un programa de auditoría integral para [proceso/área], incluyendo scope, técnicas de muestreo, pruebas sustantivas y cronograma. Incluye métricas de efectividad y ejemplos de pruebas a ejecutar."
-          },
-          {
-            id: "77",
-            title: "Programa Basado en Riesgo (RA)",
-            prompt:
-              "Desarrolla un programa de auditoría basado en riesgo que integre ERM: mapeo de riesgos, priorización y pruebas de control enfocadas en áreas de mayor impacto."
-          },
-          {
-            id: "78",
-            title: "Auditoría Continua y Data Analytics",
-            prompt:
-              "Propón un plan de auditoría continua que use analytics (tests automatizados, sampling, anomaly detection) para monitorear transacciones críticas."
-          }
+          { title: "Mapa de Riesgos", prompt: "Diseña un mapa de riesgos operativos y financieros." },
+          { title: "Evaluación de Control Interno", prompt: "Aplica una evaluación del sistema de control interno." },
+          { title: "Manual de Procedimientos", prompt: "Redacta procedimientos para fortalecer el control interno." }
         ]
       },
       {
-        id: "6-2",
-        title: "Evaluación de Controles Internos",
+        title: "Auditoría Operativa",
         prompts: [
-          {
-            id: "79",
-            title: "Evaluación COSO 2013",
-            prompt:
-              "Realiza una evaluación de controles internos usando el marco COSO: para cada componente mapea principios y evidencia requerida. Identifica gaps y prioriza acciones."
-          },
-          {
-            id: "80",
-            title: "Controles IT y Ciberseguridad",
-            prompt:
-              "Diseña un checklist de control IT y seguridad para aplicaciones contables y ERP, incluyendo access controls, change management y disaster recovery."
-          },
-          {
-            id: "81",
-            title: "Matriz de Controles Avanzada",
-            prompt:
-              "Crea una matriz que relacione riesgos con controles, frecuencia de ejecución, owner y criterios de efectividad. Incluye ejemplos para transacciones de alto riesgo."
-          }
+          { title: "Plan de Auditoría", prompt: "Desarrolla un plan anual de auditoría con objetivos y cronograma." },
+          { title: "Informe de Resultados", prompt: "Elabora un informe ejecutivo de hallazgos y mejoras." },
+          { title: "Seguimiento de Recomendaciones", prompt: "Diseña un formato de seguimiento de acciones correctivas." }
         ]
       },
       {
-        id: "6-3",
-        title: "Detección de Irregularidades",
+        title: "Gestión de Riesgos",
         prompts: [
-          {
-            id: "82",
-            title: "Análisis Forense Financiero",
-            prompt:
-              "Actúa como investigador forense: usa técnicas (Benford, análisis de outliers, duplicate detection) para identificar patrones de fraude. Indica pasos para preservar evidencia."
-          },
-          {
-            id: "83",
-            title: "Detección de Fraude Ocupacional",
-            prompt:
-              "Diseña un programa de detección de fraude ocupacional (apropiación indebida, nómina, compras). Incluye triggers y pruebas de monitoreo."
-          },
-          {
-            id: "84",
-            title: "Sistema de Alertas Inteligentes",
-            prompt:
-              "Construye un sistema de alertas que combine métricas financieras y análisis conductual para identificar riesgos emergentes y posibles irregularidades."
-          }
+          { title: "Matriz de Riesgos", prompt: "Construye una matriz de riesgos con nivel de impacto y probabilidad." },
+          { title: "Evaluación de Controles", prompt: "Evalúa controles existentes frente a riesgos detectados." },
+          { title: "Plan de Mitigación", prompt: "Desarrolla un plan para reducir la exposición a riesgos clave." }
         ]
       },
       {
-        id: "6-4",
-        title: "Recomendaciones de Mejora",
+        title: "Revisión de Procesos",
         prompts: [
-          {
-            id: "85",
-            title: "Análisis Costo-Beneficio de Recomendaciones",
-            prompt:
-              "Evalúa el costo y beneficio de implementar mejoras de control sugeridas, priorizando por impacto y factibilidad. Devuelve un plan de implementación por fases."
-          },
-          {
-            id: "86",
-            title: "Plan de Acción Detallado",
-            prompt:
-              "Convierte hallazgos de auditoría en un plan de acción detallado con actividades, responsables, cronograma y métricas de cierre."
-          },
-          {
-            id: "87",
-            title: "Framework de Mejora Continua",
-            prompt:
-              "Propón un framework que integre auditoría, gestión del cambio y KPIs para asegurar implementación y sostenibilidad de acciones correctivas."
-          }
+          { title: "Mapa de Procesos", prompt: "Crea un diagrama de procesos contables principales." },
+          { title: "Checklist de Cumplimiento", prompt: "Diseña una lista de verificación de cumplimiento interno." },
+          { title: "Optimización de Procedimientos", prompt: "Propón mejoras para optimizar procesos administrativos." }
         ]
       },
       {
-        id: "6-5",
-        title: "Seguimiento de Hallazgos",
+        title: "Auditoría Interna",
         prompts: [
-          {
-            id: "88",
-            title: "Protocolo de Verificación de Cierre",
-            prompt:
-              "Diseña un protocolo para verificar el cierre efectivo de hallazgos: checklist, evidencia mínima, pruebas y timing mínimo de verificación post-implementación."
-          },
-          {
-            id: "89",
-            title: "Reporte de Seguimiento para Comité",
-            prompt:
-              "Crea un reporte ejecutivo de seguimiento que muestre estado de hallazgos, aging, responsables y riesgos residuales."
-          },
-          {
-            id: "90",
-            title: "Métricas de Efectividad de Auditoría",
-            prompt:
-              "Define KPIs para medir efectividad de la función de auditoría (tiempo de cierre, % remedio efectivo, retorno sobre recomendación) y cómo medirlos."
-          }
+          { title: "Programa Anual de Auditoría", prompt: "Crea un programa de auditorías internas con enfoque estratégico." },
+          { title: "Control de Hallazgos", prompt: "Diseña un registro de hallazgos y estado de resolución." },
+          { title: "Informe de Cumplimiento", prompt: "Redacta un resumen de cumplimiento normativo y financiero." }
         ]
       }
     ]
   },
 
-  // ---------------------------
-  // 🌍 7. Clientes Internacionales Sin Fronteras (15 prompts)
-  // ---------------------------
+  // 7️⃣ CLIENTES INTERNACIONALES
   {
-    id: "cat-7",
-    title: "🌍 Clientes Internacionales Sin Fronteras",
+    title: "🌍 Clientes Internacionales",
     icon: "🌐",
     subcategories: [
       {
-        id: "7-1",
-        title: "Análisis de Diferencias Normativas",
+        title: "Normas Internacionales",
         prompts: [
-          {
-            id: "91",
-            title: "Comparativo IFRS vs US GAAP",
-            prompt:
-              "Desarrolla una tabla comparativa de diferencias clave entre IFRS y US GAAP para una empresa multinacional. Indica impacto en reconocimiento de ingresos, arrendamientos, instrumentos financieros y consolidación, y su efecto en ratios y covenants."
-          },
-          {
-            id: "92",
-            title: "Evaluación de Cambio de Marco Contable",
-            prompt:
-              "Prepara un informe de impacto para la transición de [marco actual] a [nuevo marco], incluyendo ajustes al balance de apertura, impactos fiscales y requerimientos de sistemas."
-          },
-          {
-            id: "93",
-            title: "Guía de Convergencia y Disclosure",
-            prompt:
-              "Genera guía práctica para la convergencia de políticas contables y requerimientos de disclosure por jurisdicción."
-          }
+          { title: "Comparativo IFRS vs US GAAP", prompt: "Elabora una tabla comparativa entre IFRS y US GAAP." },
+          { title: "Adaptación Contable Global", prompt: "Diseña un proceso para adaptar reportes contables internacionales." },
+          { title: "Reporte Financiero Multidivisa", prompt: "Crea un modelo de reporte financiero en distintas monedas." }
         ]
       },
       {
-        id: "7-2",
-        title: "Reportes en Múltiples Monedas",
+        title: "Gestión Global",
         prompts: [
-          {
-            id: "94",
-            title: "Arquitectura de Reporteo Multi-moneda",
-            prompt:
-              "Diseña una arquitectura de reporteo que soporte múltiples monedas: definición de moneda funcional, método de conversión, reconciliaciones y controles FX."
-          },
-          {
-            id: "95",
-            title: "Análisis de Impacto Cambiario",
-            prompt:
-              "Evalúa el impacto de movimientos cambiarios en P&L y flujo de caja, con escenarios +/-5/10% y recomendaciones de cobertura."
-          },
-          {
-            id: "96",
-            title: "Revelaciones Multi-moneda",
-            prompt:
-              "Prepara la sección de notas para estados financieros que explique políticas de conversión, exposiciones y efecto en resultados."
-          }
+          { title: "Política de Comunicación Internacional", prompt: "Crea lineamientos para comunicación intercultural." },
+          { title: "Gestión de Equipos Multiculturales", prompt: "Diseña estrategias para coordinación internacional." },
+          { title: "Agenda Global de Cumplimiento", prompt: "Genera un calendario de obligaciones globales." }
         ]
       },
       {
-        id: "7-3",
-        title: "Explicación de Regulaciones Locales",
+        title: "Fiscalidad Internacional",
         prompts: [
-          {
-            id: "97",
-            title: "Guía Ejecutiva por Jurisdicción",
-            prompt:
-              "Crea una guía ejecutiva de compliance para [país], que incluya principales obligaciones fiscales, laborales y regulatorias relevantes para la operación."
-          },
-          {
-            id: "98",
-            title: "Análisis de Riesgos Regulatorios Locales",
-            prompt:
-              "Analiza riesgos regulatorios locales y su probabilidad de enforcement; sugiere controles y plan de monitoreo."
-          },
-          {
-            id: "99",
-            title: "Reporte a Matriz sobre Cambio Regulatorio",
-            prompt:
-              "Prepara un reporte ejecutivo para la casa matriz sobre un cambio regulatorio en una subsidiaria, indicando impacto y acciones requeridas."
-          }
+          { title: "Estrategia de Precios de Transferencia", prompt: "Desarrolla un resumen de política de precios de transferencia." },
+          { title: "Cumplimiento FATCA y CRS", prompt: "Crea un checklist de cumplimiento internacional." },
+          { title: "Reporte de Impuestos Globales", prompt: "Genera un resumen consolidado de obligaciones fiscales." }
         ]
       },
       {
-        id: "7-4",
-        title: "Comunicación Intercultural",
+        title: "Contratos Internacionales",
         prompts: [
-          {
-            id: "100",
-            title: "Protocolo de Comunicación Intercultural",
-            prompt:
-              "Desarrolla un protocolo que detalle cómo adaptar comunicaciones financieras a diferentes culturas (tono, formalidad, estructura), incluyendo ejemplos y templates."
-          },
-          {
-            id: "101",
-            title: "Adaptación de Reportes por Audiencia",
-            prompt:
-              "Define cómo adaptar reportes financieros según audiencia cultural (investor relations vs local management) y ejemplos de executive summary."
-          },
-          {
-            id: "102",
-            title: "Gestión de Equipos Multiculturales",
-            prompt:
-              "Crea un framework para minimizar conflictos culturales en equipos financieros globales, con protocolos de escalado y formación recomendada."
-          }
+          { title: "Modelo de Contrato Internacional", prompt: "Redacta un modelo de contrato de servicios globales." },
+          { title: "Acuerdo de Confidencialidad", prompt: "Crea una versión en inglés y español de un NDA." },
+          { title: "Plantilla de Carta de Entendimiento", prompt: "Genera una carta formal para acuerdos entre países." }
         ]
       },
       {
-        id: "7-5",
-        title: "Consolidación Internacional",
+        title: "Auditoría Global",
         prompts: [
-          {
-            id: "103",
-            title: "Proceso de Consolidación Global",
-            prompt:
-              "Diseña el proceso de consolidación multi-entidad: chart of accounts global, eliminaciones intercompany, conversiones FX y reconciliaciones. Incluye checklist y control points."
-          },
-          {
-            id: "104",
-            title: "Gestión de Intercompany",
-            prompt:
-              "Propón un sistema para gestionar transacciones intercompany: catálogo de transacciones, confirmaciones bilaterales y reconciliaciones automáticas."
-          },
-          {
-            id: "105",
-            title: "Reporteo Segmentado y Performance Global",
-            prompt:
-              "Crea la estructura de reporteo por segmentos (geográfico/linea de negocio) con métricas clave, reglas de asignación y dashboard ejecutivo para decisiones de asignación de capital."
-          }
+          { title: "Plan de Auditoría Multinacional", prompt: "Diseña un plan coordinado de auditoría global." },
+          { title: "Reporte Consolidado Internacional", prompt: "Crea un reporte que integre datos financieros de varias filiales." },
+          { title: "Evaluación de Riesgos Globales", prompt: "Elabora una matriz de riesgos con visión internacional." }
         ]
       }
     ]

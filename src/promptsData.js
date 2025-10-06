@@ -1,7 +1,7 @@
 // src/promptsData.js
 // ✅ Versión completa con 7 categorías y prompts extensos (MVP estable)
-
-const promptsContador4_0 = [
+const promptsData = [
+  
   // 📊 Categoría 1: Análisis Financiero Estratégico (15 prompts)
   {
     "id": "1",

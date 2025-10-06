@@ -47,17 +47,13 @@ function App() {
       {/* Header */}
       <header className="bg-black text-white py-10 px-8 flex flex-col md:flex-row items-center justify-between">
         <div className="flex items-center space-x-4">
-          <img
-            src="/contador-mascota.png"
-            alt="Mascota Contador 4.0"
-            className="w-28 h-28 hidden md:block"
-          />
+         
           <div>
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
               CONTADOR 4.0 - EXPRESS
             </h1>
             <p className="text-gray-300 text-lg mt-2">
-              Explora categorías, subcategorías y prompts especializados de manera rápida.
+              Explora categorías, subcategorías y prompts especializados del E.Book.
             </p>
           </div>
         </div>
@@ -87,11 +83,7 @@ function App() {
       <footer className="bg-gray-100 py-10 px-8">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div className="flex space-x-4 items-start">
-            <img
-              src="/contador-personaje.png"
-              alt="Personaje Contador"
-              className="w-24 h-24 object-contain"
-            />
+            
             <div>
               <h3 className="font-bold mb-2 text-gray-800">
                 Consejos para usar los prompts

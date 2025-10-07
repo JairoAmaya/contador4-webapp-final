@@ -371,3 +371,28 @@ footer {
   background: #cc5c29;
   transform: translateY(-1px);
 }
+/* === Footer Legal === */
+.footer {
+  margin-top: 60px;
+  padding: 25px 20px;
+  background-color: #f7f8fa;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.footer b {
+  color: #E66E33; /* Naranja corporativo */
+}
+
+.footer i {
+  color: #333;
+  font-style: italic;
+}
+
+.footer p {
+  margin: 0;
+  padding: 0;
+}

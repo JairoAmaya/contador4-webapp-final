@@ -6,139 +6,120 @@ import "./styles.css";
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
-  const [fade, setFade] = useState("fade-in");
 
+  // Selección de categoría
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    setSelectedSubcategory(null);
+  };
+
+  // Selección de subcategoría
+  const handleSubcategoryClick = (subcategory) => {
+    setSelectedSubcategory(subcategory);
+  };
+
+  // Botón "volver"
+  const handleBack = () => {
+    if (selectedSubcategory) {
+      setSelectedSubcategory(null);
+    } else if (selectedCategory) {
+      setSelectedCategory(null);
+    }
+  };
+
+  // Copiar prompt
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
     alert("✅ Prompt copiado al portapapeles");
   };
 
-  const goBack = () => {
-    setFade("fade-out");
-    setTimeout(() => {
-      if (selectedSubcategory) {
-        setSelectedSubcategory(null);
-      } else {
-        setSelectedCategory(null);
-      }
-      setFade("fade-in");
-    }, 250);
-  };
-
-  const handleCategorySelect = (category) => {
-    setFade("fade-out");
-    setTimeout(() => {
-      setSelectedCategory(category);
-      setFade("fade-in");
-    }, 250);
-  };
-
-  const handleSubcategorySelect = (sub) => {
-    setFade("fade-out");
-    setTimeout(() => {
-      setSelectedSubcategory(sub);
-      setFade("fade-in");
-    }, 250);
-  };
-
   return (
     <div className="app-container">
-      {/* === Encabezado con animación === */}
-      <header className="header-animated">
-        <h1 className="app-title">⚙️ Contador 4.0</h1>
-        <p className="subtitle">
-          Sistema de Transformación con IA para Contadores
-        </p>
-      </header>
+      <h1>📚 Contador 4.0</h1>
+      <p className="subtitle">
+        Sistema de Transformación con IA para Contadores
+      </p>
 
-      {/* === Breadcrumb === */}
+      {/* Breadcrumb */}
       {(selectedCategory || selectedSubcategory) && (
         <div className="breadcrumb">
-          <button onClick={goBack}>⬅️ Volver</button>
+          <button onClick={handleBack}>⬅ Volver</button>
           <span>
-            {selectedCategory && selectedCategory.title}
+            {selectedCategory?.title}
             {selectedSubcategory && ` / ${selectedSubcategory.title}`}
           </span>
         </div>
       )}
 
-      {/* === Categorías === */}
+      {/* Lista de categorías */}
       {!selectedCategory && (
-        <div className={`category-list ${fade}`}>
+        <div className="category-list">
           {promptsData.map((category, index) => (
             <button
               key={index}
               className="category-button"
-              onClick={() => handleCategorySelect(category)}
+              onClick={() => handleCategoryClick(category)}
             >
-              <span style={{ fontSize: "1.5rem", marginRight: "10px" }}>
-                {category.icon}
-              </span>
-              {category.title}
+              {category.icon} {category.title}
             </button>
           ))}
         </div>
       )}
 
-      {/* === Subcategorías === */}
+      {/* Lista de subcategorías */}
       {selectedCategory && !selectedSubcategory && (
-        <div className={`subcategoria-list ${fade}`}>
-          {selectedCategory.subcategories.map((sub, index) => (
+        <div className="subcategoria-list">
+          <h2>{selectedCategory.title}</h2>
+          {selectedCategory.subcategories.map((subcategory, index) => (
             <div
               key={index}
               className="subcategoria-card"
-              onClick={() => handleSubcategorySelect(sub)}
+              onClick={() => handleSubcategoryClick(subcategory)}
             >
-              {sub.title}
+              📑 {subcategory.title}
             </div>
           ))}
         </div>
       )}
 
-      {/* === Prompts === */}
+      {/* Lista de prompts */}
       {selectedSubcategory && (
-        <div className={`prompt-list ${fade}`}>
-          {selectedSubcategory.prompts.map((item, index) => (
+        <div className="prompt-list">
+          <h3>{selectedSubcategory.title}</h3>
+          {selectedSubcategory.prompts.map((prompt, index) => (
             <div key={index} className="prompt-card">
-              <h4>{item.title}</h4>
-              <p>{item.prompt}</p>
-              <button onClick={() => handleCopy(item.prompt)}>
-                📋 Copiar Prompt
+              <h4>{prompt.title}</h4>
+              <p>{prompt.prompt}</p>
+              <button onClick={() => handleCopy(prompt.prompt)}>
+                Copiar Prompt
               </button>
             </div>
           ))}
         </div>
       )}
 
-      {/* === Cuadros informativos === */}
-      {!selectedCategory && (
-        <>
-          <div className="info-box slide-up">
-            <div className="info-box-header">
-              <div className="info-icon">💡</div>
-              <h2>Consejos para usar los prompts</h2>
-            </div>
-            <p>
-              Cambia siempre la información entre <strong>[corchetes]</strong>{" "}
-              por tus datos reales. Usa claridad en tus instrucciones, combina
-              prompts según tus necesidades y ajusta el tono según tu estilo
-              profesional.
-            </p>
-          </div>
+      {/* Bloque informativo 1 */}
+      <div className="info-box">
+        <h2>📌 Consejos para usar los prompts</h2>
+        <ul>
+          <li>
+            Cambia siempre la información entre [corchetes] por datos específicos.
+          </li>
+          <li>Usa una claridad alta en tus instrucciones.</li>
+          <li>Combina prompts según tus necesidades específicas.</li>
+          <li>Personaliza el tono según tu estilo de comunicación.</li>
+        </ul>
+      </div>
 
-          <div className="info-box slide-up delay-2">
-            <div className="info-box-header">
-              <div className="info-icon">ℹ️</div>
-              <h2>Sobre esta demo</h2>
-            </div>
-            <p>
-              Esta es una versión de prueba de la herramienta{" "}
-              <strong>Contador 4.0</strong>. Aquí puedes explorar categorías,
-              subcategorías y ejemplos de prompts reales del e-book original.
-            </p>
-          </div>
-        </>
-      )}
+      {/* Bloque informativo 2 */}
+      <div className="info-box">
+        <h2>ℹ️ Sobre esta demo</h2>
+        <p>
+          Esta es una versión de prueba de la herramienta <b>Contador 4.0</b>.
+          Aquí puedes explorar categorías y subcategorías con ejemplos de prompts
+          especializados para el trabajo contable y financiero.
+        </p>
+      </div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import "./styles.css";
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [fade, setFade] = useState("fade-in");
 
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
@@ -13,11 +14,31 @@ function App() {
   };
 
   const goBack = () => {
-    if (selectedSubcategory) {
-      setSelectedSubcategory(null);
-    } else {
-      setSelectedCategory(null);
-    }
+    setFade("fade-out");
+    setTimeout(() => {
+      if (selectedSubcategory) {
+        setSelectedSubcategory(null);
+      } else {
+        setSelectedCategory(null);
+      }
+      setFade("fade-in");
+    }, 200);
+  };
+
+  const handleCategorySelect = (category) => {
+    setFade("fade-out");
+    setTimeout(() => {
+      setSelectedCategory(category);
+      setFade("fade-in");
+    }, 200);
+  };
+
+  const handleSubcategorySelect = (sub) => {
+    setFade("fade-out");
+    setTimeout(() => {
+      setSelectedSubcategory(sub);
+      setFade("fade-in");
+    }, 200);
   };
 
   return (
@@ -40,12 +61,12 @@ function App() {
 
       {/* === Lista de Categorías === */}
       {!selectedCategory && (
-        <div className="category-list">
+        <div className={`category-list ${fade}`}>
           {promptsData.map((category, index) => (
             <button
               key={index}
               className="category-button"
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => handleCategorySelect(category)}
             >
               <span style={{ fontSize: "1.5rem", marginRight: "10px" }}>
                 {category.icon}
@@ -58,12 +79,12 @@ function App() {
 
       {/* === Lista de Subcategorías === */}
       {selectedCategory && !selectedSubcategory && (
-        <div className="subcategoria-list">
+        <div className={`subcategoria-list ${fade}`}>
           {selectedCategory.subcategories.map((sub, index) => (
             <div
               key={index}
               className="subcategoria-card"
-              onClick={() => setSelectedSubcategory(sub)}
+              onClick={() => handleSubcategorySelect(sub)}
             >
               {sub.title}
             </div>
@@ -73,7 +94,7 @@ function App() {
 
       {/* === Lista de Prompts === */}
       {selectedSubcategory && (
-        <div className="prompt-list">
+        <div className={`prompt-list ${fade}`}>
           {selectedSubcategory.prompts.map((item, index) => (
             <div key={index} className="prompt-card">
               <h4>{item.title}</h4>
@@ -89,7 +110,7 @@ function App() {
       {/* === Cuadros informativos === */}
       {!selectedCategory && (
         <>
-          <div className="info-box">
+          <div className="info-box fade-in">
             <div className="info-box-header">
               <div className="info-icon">💡</div>
               <h2>Consejos para usar los prompts</h2>
@@ -102,7 +123,7 @@ function App() {
             </p>
           </div>
 
-          <div className="info-box">
+          <div className="info-box fade-in">
             <div className="info-box-header">
               <div className="info-icon">ℹ️</div>
               <h2>Sobre esta demo</h2>

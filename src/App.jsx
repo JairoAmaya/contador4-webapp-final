@@ -19,25 +19,80 @@ function App() {
     alert("✅ Prompt copiado al portapapeles");
   };
 
-  return (
-    <div className="app-container">
-      <header>
-        <h1>Contador 4.0</h1>
-        <p className="subtitle">
-          Sistema de Transformación con IA para Contadores
-        </p>
-      </header>
+ return (
+  <div className="app-container">
+    <header>
+      <h1>Contador 4.0</h1>
+      <p className="subtitle">
+        Sistema de Transformación con IA para Contadores
+      </p>
+    </header>
 
-      {/* Breadcrumb dinámico */}
-      {(selectedCategory || selectedSubcategory) && (
-        <div className="breadcrumb">
-          <button onClick={handleBack}>← Volver</button>
-          <span>
-            {selectedCategory && selectedCategory.title}
-            {selectedSubcategory && ` › ${selectedSubcategory.title}`}
-          </span>
-        </div>
-      )}
+    {/* Aquí va el contenido principal */}
+    {currentCategory === null ? (
+      <CategoryList
+        categories={promptsData}
+        onSelectCategory={setCurrentCategory}
+      />
+    ) : currentSubcategory === null ? (
+      <SubcategoryList
+        category={currentCategory}
+        onSelectSubcategory={setCurrentSubcategory}
+        onBack={() => setCurrentCategory(null)}
+      />
+    ) : (
+      <PromptList
+        subcategory={currentSubcategory}
+        onBack={() => setCurrentSubcategory(null)}
+      />
+    )}
+
+    {/* Bloques informativos (si los tienes) */}
+    <div className="info-box">
+      <h2>💡 Tip Pro</h2>
+      <p>
+        Usa estos prompts para mejorar tu productividad contable y ofrecer
+        servicios de consultoría de alto valor.
+      </p>
+    </div>
+
+    <div className="info-box">
+      <h2>🚀 Cómo aprovechar esta herramienta</h2>
+      <p>
+        Personaliza los prompts antes de usarlos con tus datos reales o los de
+        tus clientes. ¡Así obtendrás respuestas más precisas y valiosas!
+      </p>
+    </div>
+
+    {/* Footer */}
+    <footer className="footer">
+      <p>
+        <b>Contador 4.0 Express</b> es propiedad intelectual de 
+        <a
+          href="https://jairoamaya.co"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            color: "#E66E33",
+            fontWeight: "bold",
+            textDecoration: "none",
+            marginLeft: "4px",
+          }}
+        >
+          Jairo Amaya - Full Stack Marketer
+        </a>.
+      </p>
+      <p>
+        Todos los derechos reservados. Su acceso y uso están destinados
+        exclusivamente a los usuarios del E-book{" "}
+        <i>
+          “Contador 4.0 — Sistema de Transformación con IA para Contadores”
+        </i>.
+      </p>
+    </footer>
+  </div>
+);
+
 
       {/* Categorías */}
       {!selectedCategory && (

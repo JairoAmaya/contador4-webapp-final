@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState } from "react";
 import promptsData from "./promptsData";
 import "./styles.css";
@@ -7,18 +6,6 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
 
-  // Selección de categoría
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-    setSelectedSubcategory(null);
-  };
-
-  // Selección de subcategoría
-  const handleSubcategoryClick = (subcategory) => {
-    setSelectedSubcategory(subcategory);
-  };
-
-  // Botón "volver"
   const handleBack = () => {
     if (selectedSubcategory) {
       setSelectedSubcategory(null);
@@ -27,67 +14,69 @@ function App() {
     }
   };
 
-  // Copiar prompt
-  const handleCopy = (text) => {
-    navigator.clipboard.writeText(text);
+  const handleCopy = (prompt) => {
+    navigator.clipboard.writeText(prompt);
     alert("✅ Prompt copiado al portapapeles");
   };
 
   return (
     <div className="app-container">
-      <h1>📚 Contador 4.0</h1>
-      <p className="subtitle">
-        Sistema de Transformación con IA para Contadores
-      </p>
+      <header>
+        <h1>Contador 4.0</h1>
+        <p className="subtitle">
+          Sistema de Transformación con IA para Contadores
+        </p>
+      </header>
 
-      {/* Breadcrumb */}
+      {/* Breadcrumb dinámico */}
       {(selectedCategory || selectedSubcategory) && (
         <div className="breadcrumb">
-          <button onClick={handleBack}>⬅ Volver</button>
+          <button onClick={handleBack}>← Volver</button>
           <span>
-            {selectedCategory?.title}
-            {selectedSubcategory && ` / ${selectedSubcategory.title}`}
+            {selectedCategory && selectedCategory.title}
+            {selectedSubcategory && ` › ${selectedSubcategory.title}`}
           </span>
         </div>
       )}
 
-      {/* Lista de categorías */}
+      {/* Categorías */}
       {!selectedCategory && (
         <div className="category-list">
           {promptsData.map((category, index) => (
             <button
               key={index}
               className="category-button"
-              onClick={() => handleCategoryClick(category)}
+              onClick={() => setSelectedCategory(category)}
             >
-              {category.icon} {category.title}
+              <span style={{ fontSize: "24px", marginRight: "10px" }}>
+                {category.icon}
+              </span>
+              {category.title}
             </button>
           ))}
         </div>
       )}
 
-      {/* Lista de subcategorías */}
+      {/* Subcategorías */}
       {selectedCategory && !selectedSubcategory && (
         <div className="subcategoria-list">
-          <h2>{selectedCategory.title}</h2>
-          {selectedCategory.subcategories.map((subcategory, index) => (
+          {selectedCategory.subcategories.map((sub, i) => (
             <div
-              key={index}
+              key={i}
               className="subcategoria-card"
-              onClick={() => handleSubcategoryClick(subcategory)}
+              onClick={() => setSelectedSubcategory(sub)}
             >
-              📑 {subcategory.title}
+              {sub.title}
             </div>
           ))}
         </div>
       )}
 
-      {/* Lista de prompts */}
+      {/* Prompts */}
       {selectedSubcategory && (
         <div className="prompt-list">
-          <h3>{selectedSubcategory.title}</h3>
-          {selectedSubcategory.prompts.map((prompt, index) => (
-            <div key={index} className="prompt-card">
+          {selectedSubcategory.prompts.map((prompt, i) => (
+            <div key={i} className="prompt-card">
               <h4>{prompt.title}</h4>
               <p>{prompt.prompt}</p>
               <button onClick={() => handleCopy(prompt.prompt)}>
@@ -98,28 +87,46 @@ function App() {
         </div>
       )}
 
-      {/* Bloque informativo 1 */}
-      <div className="info-box">
-        <h2>📌 Consejos para usar los prompts</h2>
-        <ul>
-          <li>
-            Cambia siempre la información entre [corchetes] por datos específicos.
-          </li>
-          <li>Usa una claridad alta en tus instrucciones.</li>
-          <li>Combina prompts según tus necesidades específicas.</li>
-          <li>Personaliza el tono según tu estilo de comunicación.</li>
-        </ul>
-      </div>
+      {/* Bloque informativo inferior */}
+      {!selectedCategory && (
+        <div className="info-box">
+          <h2>💡 Tip de uso</h2>
+          <p>
+            Cada prompt está diseñado para integrarse fácilmente con ChatGPT u
+            otras herramientas de IA.  
+            Puedes personalizar variables entre corchetes [ ] según tus datos o
+            contexto.
+          </p>
+        </div>
+      )}
 
-      {/* Bloque informativo 2 */}
-      <div className="info-box">
-        <h2>ℹ️ Sobre esta demo</h2>
+      {!selectedCategory && (
+        <div className="info-box">
+          <h2>🚀 Recomendación</h2>
+          <p>
+            Explora las 7 categorías para descubrir cómo la inteligencia
+            artificial puede transformar tu práctica contable.  
+            Desde análisis financiero hasta auditoría internacional — todo en un
+            solo sistema.
+          </p>
+        </div>
+      )}
+
+      {/* === Footer Legal === */}
+      <footer className="footer">
         <p>
-          Esta es una versión de prueba de la herramienta <b>Contador 4.0</b>.
-          Aquí puedes explorar categorías y subcategorías con ejemplos de prompts
-          especializados para el trabajo contable y financiero.
+          © 2025 <b>Jairo Amaya – Full Stack Marketer</b>.
+          <br />
+          <b>Contador 4.0 Express</b> es propiedad intelectual de Jairo Amaya.
+          Todos los derechos reservados.
+          <br />
+          Su acceso y uso están destinados exclusivamente a los lectores del{" "}
+          <i>
+            E.book “Contador 4.0: Sistema de Transformación con IA para
+            Contadores”.
+          </i>
         </p>
-      </div>
+      </footer>
     </div>
   );
 }

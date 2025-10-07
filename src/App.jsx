@@ -43,10 +43,13 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>⚙️ Contador 4.0</h1>
-      <p className="subtitle">
-        Transforma tu gestión contable con inteligencia artificial
-      </p>
+      {/* === Encabezado con animación === */}
+      <header className="header-animated">
+        <h1 className="app-title">⚙️ Contador 4.0</h1>
+        <p className="subtitle">
+          Sistema de Transformación con IA para Contadores
+        </p>
+      </header>
 
       {/* === Breadcrumb === */}
       {(selectedCategory || selectedSubcategory) && (
@@ -107,7 +110,7 @@ function App() {
         </div>
       )}
 
-      {/* === Cuadros informativos con animación === */}
+      {/* === Cuadros informativos === */}
       {!selectedCategory && (
         <>
           <div className="info-box slide-up">

@@ -396,3 +396,14 @@ footer {
   margin: 0;
   padding: 0;
 }
+<footer className="footer">
+  <p>
+    <b>Contador 4.0 Express</b> es propiedad intelectual de 
+    <a href="https://jairoamaya.co" target="_blank" rel="noopener noreferrer" style={{ color: '#E66E33', fontWeight: 'bold', textDecoration: 'none', marginLeft: '4px' }}>
+      Jairo Amaya - Full Stack Marketer
+    </a>.
+  </p>
+  <p>
+    Todos los derechos reservados. Su acceso y uso están destinados exclusivamente a los usuarios del E-book <i>“Contador 4.0 — Sistema de Transformación con IA para Contadores”</i>.
+  </p>
+</footer>

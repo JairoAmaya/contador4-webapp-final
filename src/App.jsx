@@ -5,6 +5,7 @@ import "./styles.css";
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleBack = () => {
     if (selectedSubcategory) {
@@ -19,6 +20,24 @@ function App() {
     alert("✅ Prompt copiado al portapapeles");
   };
 
+  // === Filtrar prompts globalmente ===
+  const allPrompts = promptsData.flatMap((cat) =>
+    cat.subcategories.flatMap((sub) =>
+      sub.prompts.map((p) => ({
+        ...p,
+        category: cat.title,
+        subcategory: sub.title,
+      }))
+    )
+  );
+
+  const filteredPrompts = allPrompts.filter((p) =>
+    p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    p.prompt.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const showSearchResults = searchTerm.length > 1;
+
   return (
     <div className="app-container">
       <header>
@@ -28,84 +47,118 @@ function App() {
         </p>
       </header>
 
-      {/* === Botón Volver === */}
-      {(selectedCategory || selectedSubcategory) && (
-        <div className="breadcrumb">
-          <button onClick={handleBack}>⬅️ Volver</button>
-        </div>
-      )}
+      {/* === Buscador === */}
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Buscar prompt..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button>🔍</button>
+      </div>
 
-      {/* === Categorías === */}
-      {!selectedCategory && (
-        <div className="category-list">
-          {promptsData.map((category, index) => (
-            <button
-              key={index}
-              className="category-button"
-              onClick={() => setSelectedCategory(category)}
-            >
-              <span style={{ fontSize: "24px", marginRight: "10px" }}>
-                {category.icon}
-              </span>
-              {category.title}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {/* === Subcategorías === */}
-      {selectedCategory && !selectedSubcategory && (
-        <div className="subcategoria-list">
-          {selectedCategory.subcategories.map((sub, i) => (
-            <div
-              key={i}
-              className="subcategoria-card"
-              onClick={() => setSelectedSubcategory(sub)}
-            >
-              {sub.title}
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* === Prompts === */}
-      {selectedSubcategory && (
+      {/* === Resultados de búsqueda === */}
+      {showSearchResults ? (
         <div className="prompt-list">
-          {selectedSubcategory.prompts.map((prompt, i) => (
-            <div key={i} className="prompt-card">
-              <h4>{prompt.title}</h4>
-              <p>{prompt.prompt}</p>
-              <button onClick={() => handleCopy(prompt.prompt)}>
-                Copiar Prompt
-              </button>
+          <h3>Resultados de búsqueda</h3>
+          {filteredPrompts.length === 0 ? (
+            <p>No se encontraron prompts relacionados.</p>
+          ) : (
+            filteredPrompts.map((p, i) => (
+              <div key={i} className="prompt-card">
+                <h4>{p.title}</h4>
+                <p>{p.prompt}</p>
+                <small>
+                  {p.category} → {p.subcategory}
+                </small>
+                <br />
+                <button onClick={() => handleCopy(p.prompt)}>
+                  Copiar Prompt
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+      ) : (
+        <>
+          {/* === Navegación por categorías === */}
+          {(selectedCategory || selectedSubcategory) && (
+            <div className="breadcrumb">
+              <button onClick={handleBack}>⬅️ Volver</button>
             </div>
-          ))}
-        </div>
-      )}
+          )}
 
-      {/* === Bloques informativos === */}
-      {!selectedCategory && (
-        <div className="info-box">
-          <h2>💡 Tip de uso</h2>
-          <p>
-            Cada prompt está diseñado para integrarse fácilmente con ChatGPT u
-            otras herramientas de IA.  
-            Puedes personalizar variables entre corchetes [ ] según tus datos o
-            contexto.
-          </p>
-        </div>
-      )}
+          {!selectedCategory && (
+            <div className="category-list">
+              {promptsData.map((category, index) => (
+                <button
+                  key={index}
+                  className="category-button"
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  <span style={{ fontSize: "24px", marginRight: "10px" }}>
+                    {category.icon}
+                  </span>
+                  {category.title}
+                </button>
+              ))}
+            </div>
+          )}
 
-      {!selectedCategory && (
-        <div className="info-box">
-          <h2>🚀 Recomendación</h2>
-          <p>
-            Explora las 7 categorías para descubrir cómo la inteligencia
-            artificial puede transformar tu práctica contable.  
-            Desde análisis financiero hasta auditoría internacional — todo en un
-            solo sistema.
-          </p>
-        </div>
+          {selectedCategory && !selectedSubcategory && (
+            <div className="subcategoria-list">
+              {selectedCategory.subcategories.map((sub, i) => (
+                <div
+                  key={i}
+                  className="subcategoria-card"
+                  onClick={() => setSelectedSubcategory(sub)}
+                >
+                  {sub.title}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {selectedSubcategory && (
+            <div className="prompt-list">
+              {selectedSubcategory.prompts.map((prompt, i) => (
+                <div key={i} className="prompt-card">
+                  <h4>{prompt.title}</h4>
+                  <p>{prompt.prompt}</p>
+                  <button onClick={() => handleCopy(prompt.prompt)}>
+                    Copiar Prompt
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* === Bloques informativos === */}
+          {!selectedCategory && (
+            <>
+              <div className="info-box">
+                <h2>💡 Tip de uso</h2>
+                <p>
+                  Cada prompt está diseñado para integrarse fácilmente con
+                  ChatGPT u otras herramientas de IA.  
+                  Puedes personalizar variables entre corchetes [ ] según tus
+                  datos o contexto.
+                </p>
+              </div>
+
+              <div className="info-box">
+                <h2>🚀 Recomendación</h2>
+                <p>
+                  Explora las 7 categorías para descubrir cómo la inteligencia
+                  artificial puede transformar tu práctica contable.  
+                  Desde análisis financiero hasta auditoría internacional — todo
+                  en un solo sistema.
+                </p>
+              </div>
+            </>
+          )}
+        </>
       )}
 
       {/* === Footer Legal === */}

@@ -22,7 +22,7 @@ function App() {
         setSelectedCategory(null);
       }
       setFade("fade-in");
-    }, 200);
+    }, 250);
   };
 
   const handleCategorySelect = (category) => {
@@ -30,7 +30,7 @@ function App() {
     setTimeout(() => {
       setSelectedCategory(category);
       setFade("fade-in");
-    }, 200);
+    }, 250);
   };
 
   const handleSubcategorySelect = (sub) => {
@@ -38,7 +38,7 @@ function App() {
     setTimeout(() => {
       setSelectedSubcategory(sub);
       setFade("fade-in");
-    }, 200);
+    }, 250);
   };
 
   return (
@@ -48,7 +48,7 @@ function App() {
         Transforma tu gestión contable con inteligencia artificial
       </p>
 
-      {/* === Navegación (breadcrumb) === */}
+      {/* === Breadcrumb === */}
       {(selectedCategory || selectedSubcategory) && (
         <div className="breadcrumb">
           <button onClick={goBack}>⬅️ Volver</button>
@@ -59,7 +59,7 @@ function App() {
         </div>
       )}
 
-      {/* === Lista de Categorías === */}
+      {/* === Categorías === */}
       {!selectedCategory && (
         <div className={`category-list ${fade}`}>
           {promptsData.map((category, index) => (
@@ -77,7 +77,7 @@ function App() {
         </div>
       )}
 
-      {/* === Lista de Subcategorías === */}
+      {/* === Subcategorías === */}
       {selectedCategory && !selectedSubcategory && (
         <div className={`subcategoria-list ${fade}`}>
           {selectedCategory.subcategories.map((sub, index) => (
@@ -92,7 +92,7 @@ function App() {
         </div>
       )}
 
-      {/* === Lista de Prompts === */}
+      {/* === Prompts === */}
       {selectedSubcategory && (
         <div className={`prompt-list ${fade}`}>
           {selectedSubcategory.prompts.map((item, index) => (
@@ -107,10 +107,10 @@ function App() {
         </div>
       )}
 
-      {/* === Cuadros informativos === */}
+      {/* === Cuadros informativos con animación === */}
       {!selectedCategory && (
         <>
-          <div className="info-box fade-in">
+          <div className="info-box slide-up">
             <div className="info-box-header">
               <div className="info-icon">💡</div>
               <h2>Consejos para usar los prompts</h2>
@@ -123,7 +123,7 @@ function App() {
             </p>
           </div>
 
-          <div className="info-box fade-in">
+          <div className="info-box slide-up delay-2">
             <div className="info-box-header">
               <div className="info-icon">ℹ️</div>
               <h2>Sobre esta demo</h2>

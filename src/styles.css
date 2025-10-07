@@ -427,4 +427,19 @@ footer {
 .search-bar button:hover {
   background: #cc5c29;
 }
+.back-button {
+  background-color: #ff6b1a;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0 20px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.back-button:hover {
+  background-color: #e25a0f;
+}
 

@@ -1,8 +1,9 @@
+// src/App.jsx
 import React, { useState } from "react";
 import promptsData from "./promptsData";
 import "./styles.css";
 
-const App = () => {
+function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
 
@@ -11,101 +12,111 @@ const App = () => {
     alert("✅ Prompt copiado al portapapeles");
   };
 
+  const goBack = () => {
+    if (selectedSubcategory) {
+      setSelectedSubcategory(null);
+    } else {
+      setSelectedCategory(null);
+    }
+  };
+
   return (
     <div className="app-container">
-      <header>
-        <h1>CONTADOR 4.0 - EXPRESS</h1>
-        <p className="subtitle">
-          Explora categorías, subcategorías y prompts especializados de manera
-          rápida.
-        </p>
-      </header>
+      <h1>⚙️ Contador 4.0</h1>
+      <p className="subtitle">
+        Transforma tu gestión contable con inteligencia artificial
+      </p>
 
-      {/* Vista 1: Lista de Categorías */}
+      {/* === Navegación (breadcrumb) === */}
+      {(selectedCategory || selectedSubcategory) && (
+        <div className="breadcrumb">
+          <button onClick={goBack}>⬅️ Volver</button>
+          <span>
+            {selectedCategory && selectedCategory.title}
+            {selectedSubcategory && ` / ${selectedSubcategory.title}`}
+          </span>
+        </div>
+      )}
+
+      {/* === Lista de Categorías === */}
       {!selectedCategory && (
         <div className="category-list">
-          {promptsData.map((category) => (
+          {promptsData.map((category, index) => (
             <button
-              key={category.id}
+              key={index}
               className="category-button"
               onClick={() => setSelectedCategory(category)}
             >
-              {category.icon} {category.title}
+              <span style={{ fontSize: "1.5rem", marginRight: "10px" }}>
+                {category.icon}
+              </span>
+              {category.title}
             </button>
           ))}
         </div>
       )}
 
-      {/* Vista 2: Subcategorías */}
+      {/* === Lista de Subcategorías === */}
       {selectedCategory && !selectedSubcategory && (
-        <div>
-          <div className="breadcrumb">
-            <button onClick={() => setSelectedCategory(null)}>⬅ Volver</button>
-            <span>{selectedCategory.title}</span>
-          </div>
-
-          <div className="subcategoria-list">
-            {selectedCategory.subcategories.map((sub) => (
-              <div
-                key={sub.id}
-                className="subcategoria-card"
-                onClick={() => setSelectedSubcategory(sub)}
-              >
-                {sub.title}
-              </div>
-            ))}
-          </div>
+        <div className="subcategoria-list">
+          {selectedCategory.subcategories.map((sub, index) => (
+            <div
+              key={index}
+              className="subcategoria-card"
+              onClick={() => setSelectedSubcategory(sub)}
+            >
+              {sub.title}
+            </div>
+          ))}
         </div>
       )}
 
-      {/* Vista 3: Prompts */}
+      {/* === Lista de Prompts === */}
       {selectedSubcategory && (
-        <div>
-          <div className="breadcrumb">
-            <button onClick={() => setSelectedSubcategory(null)}>⬅ Volver</button>
-            <span>
-              {selectedCategory.title} → {selectedSubcategory.title}
-            </span>
-          </div>
-
-          <div className="prompt-list">
-            {selectedSubcategory.prompts.map((p) => (
-              <div key={p.id} className="prompt-card">
-                <h4>{p.title}</h4>
-                <p>{p.prompt}</p>
-                <button onClick={() => handleCopy(p.prompt)}>
-                  Copiar Prompt
-                </button>
-              </div>
-            ))}
-          </div>
+        <div className="prompt-list">
+          {selectedSubcategory.prompts.map((item, index) => (
+            <div key={index} className="prompt-card">
+              <h4>{item.title}</h4>
+              <p>{item.prompt}</p>
+              <button onClick={() => handleCopy(item.prompt)}>
+                📋 Copiar Prompt
+              </button>
+            </div>
+          ))}
         </div>
       )}
 
-      {/* Bloques informativos al final */}
+      {/* === Cuadros informativos === */}
       {!selectedCategory && (
-        <footer>
-          <div className="info-section">
-            <h3>💡 Consejos para usar los prompts</h3>
+        <>
+          <div className="info-box">
+            <div className="info-box-header">
+              <div className="info-icon">💡</div>
+              <h2>Consejos para usar los prompts</h2>
+            </div>
             <p>
-              Cambia siempre la información entre [corchetes] por tus datos
-              reales. Usa claridad en tus instrucciones, combina prompts según
-              tus necesidades y ajusta el tono según tu estilo profesional.
+              Cambia siempre la información entre <strong>[corchetes]</strong>{" "}
+              por tus datos reales. Usa claridad en tus instrucciones, combina
+              prompts según tus necesidades y ajusta el tono según tu estilo
+              profesional.
             </p>
           </div>
 
-          <div className="info-section">
-            <h3>ℹ️ Sobre esta demo</h3>
+          <div className="info-box">
+            <div className="info-box-header">
+              <div className="info-icon">ℹ️</div>
+              <h2>Sobre esta demo</h2>
+            </div>
             <p>
-              Esta es una versión de prueba de la herramienta <b>Contador 4.0</b>.
-              Aquí puedes explorar categorías, subcategorías y ejemplos de
-              prompts del e-book original.
+              Esta es una versión de prueba de la herramienta{" "}
+              <strong>Contador 4.0</strong>. Aquí puedes explorar categorías,
+              subcategorías y ejemplos de prompts reales del e-book original.
             </p>
           </div>
-        </footer>
+        </>
       )}
     </div>
   );
-};
+}
 
 export default App;

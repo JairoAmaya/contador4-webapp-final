@@ -392,3 +392,17 @@ function App() {
 }
 
 export default App;
+import ChatAssistant from "./ChatAssistant";
+
+function App() {
+  return (
+    <div className="app-container">
+      {/* ...contenido del MVP... */}
+
+      {/* Asistente Virtual */}
+      <ChatAssistant />
+    </div>
+  );
+}
+
+export default App;

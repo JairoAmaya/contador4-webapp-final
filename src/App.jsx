@@ -78,11 +78,18 @@ function App() {
     <div className="app-container">
       {/* === ENCABEZADO === */}
       <header className="header">
-        <div>
-          <h1>Contador 4.0</h1>
-          <p className="subtitle">
-            Sistema de Transformación con IA para Contadores
-          </p>
+        <div className="header-content">
+          <div>
+            <h1>Contador 4.0</h1>
+            <p className="subtitle">
+              Sistema de Transformación con IA para Contadores
+            </p>
+          </div>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png"
+            alt="Personaje cabecera"
+            className="header-avatar"
+          />
         </div>
       </header>
 

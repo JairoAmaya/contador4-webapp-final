@@ -56,6 +56,59 @@ function ChatAssistant() {
     transfer_pricing: "Precios de Transferencia",
     crossborder: "Operaciones Transfronterizas",
   };
+const promptsAssistant = {
+  analysis: {
+    fin_diag: "🧮 Actúa como un CFO senior. Realiza un diagnóstico financiero integral para este cliente: {{details}}.",
+    cash: "💰 Proyecta el flujo de caja a 6 meses para: {{details}}.",
+    ratios: "📊 Calcula e interpreta los principales ratios financieros para: {{details}}.",
+    break_even: "📈 Calcula el punto de equilibrio de: {{details}}.",
+    scenario: "📉 Realiza un análisis de escenarios para: {{details}}."
+  },
+  communication: {
+    client_letter: "✉️ Redacta una carta profesional dirigida al cliente explicando: {{details}}.",
+    board_report: "📑 Elabora un reporte para Junta Directiva con contexto: {{details}}.",
+    email_reminder: "📬 Escribe un correo recordatorio para: {{details}}.",
+    policy_summary: "📘 Resume en lenguaje claro una política contable/fiscal para: {{details}}.",
+    negotiation: "🤝 Redacta un mensaje para negociar honorarios con un cliente: {{details}}."
+  },
+  proposals: {
+    proposal_full: "📋 Desarrolla una propuesta integral de servicios contables para: {{details}}.",
+    pricing: "💵 Crea una cotización en 3 paquetes (Básico, Pro, Premium) para: {{details}}.",
+    service_scope: "🧾 Define el alcance de servicios contables y financieros para: {{details}}.",
+    contract: "🧠 Genera un borrador de contrato de servicios profesionales para: {{details}}.",
+    differentiation: "🚀 Explica las ventajas competitivas de tu propuesta para: {{details}}."
+  },
+  dashboards: {
+    kpi_dashboard: "📈 Crea un dashboard ejecutivo mensual con KPIs críticos basado en: {{details}}.",
+    early_warnings: "⚠️ Diseña un sistema de alertas tempranas con KPIs para: {{details}}.",
+    tax_tracker: "📊 Elabora un dashboard de control fiscal para: {{details}}.",
+    budget_control: "📉 Diseña un tablero de control presupuestal para: {{details}}.",
+    consolidation: "🔗 Diseña un dashboard de consolidación financiera para: {{details}}."
+  },
+  compliance: {
+    fiscal_calendar: "🗓️ Genera un calendario de obligaciones fiscales para: {{details}}.",
+    checklist: "✅ Diseña un checklist de cumplimiento normativo para: {{details}}.",
+    risk_map: "🧩 Crea un mapa de riesgos fiscales y laborales para: {{details}}.",
+    updates: "📰 Explica los cambios normativos recientes para: {{details}}.",
+    sanctions: "⚖️ Genera un resumen de sanciones comunes para: {{details}}."
+  },
+  audit: {
+    audit_program: "🔍 Prepara un programa de auditoría basado en riesgos para: {{details}}.",
+    controls: "🧾 Elabora un checklist de control interno para: {{details}}.",
+    fraud_signs: "🕵️ Lista indicadores de fraude financiero en: {{details}}.",
+    evidence: "📂 Redacta los procedimientos de obtención de evidencia para: {{details}}.",
+    report: "📋 Elabora un informe de hallazgos de auditoría para: {{details}}."
+  },
+  international: {
+    multicurrency: "🌍 Genera un reporte consolidado multi-moneda para: {{details}}.",
+    ifrs: "📘 Explica cómo aplicar las NIIF/IFRS en el contexto de: {{details}}.",
+    tax_compare: "💼 Compara la carga fiscal en dos países aplicable a: {{details}}.",
+    transfer_pricing: "💶 Redacta un informe de precios de transferencia para: {{details}}.",
+    crossborder: "✈️ Genera un análisis de operaciones transfronterizas para: {{details}}."
+  }
+};
+
+export default promptsAssistant;
 
   const handleGenerate = () => {
     if (!selectedCategory || !selectedTask) {

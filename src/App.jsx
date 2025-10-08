@@ -1,15 +1,218 @@
-// src/App.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import promptsData from "./promptsData";
 import "./styles.css";
 
+// === Componente Asistente Virtual Contador 4.0 ===
+const AssistantWidget = () => {
+  const JSON_URL =
+    "https://jairoamaya.co/wp-content/uploads/2025/09/prompts_contador4.json";
+  const API_URL = ""; // Si tienes endpoint, pon la URL. Si no, se queda en modo prompt.
+
+  const [prompts, setPrompts] = useState({});
+  const [cat, setCat] = useState("");
+  const [task, setTask] = useState("");
+  const [details, setDetails] = useState("");
+  const [output, setOutput] = useState("");
+
+  const catLabels = {
+    analysis: "📊 Análisis Financiero",
+    communication: "💬 Comunicación Empresarial",
+    proposals: "💼 Propuestas y Cotizaciones",
+    dashboards: "📈 Reportes y Dashboards",
+    compliance: "🧾 Cumplimiento Fiscal",
+    audit: "🔍 Auditoría y Control",
+    international: "🌍 Clientes Internacionales",
+  };
+
+  const taskLabels = {
+    fin_diag: "Diagnóstico Financiero",
+    cash: "Proyección de Flujo 6 meses",
+    ratios: "Análisis de Ratios",
+    break_even: "Punto de Equilibrio",
+    scenario: "Análisis de Escenarios",
+    client_letter: "Carta al Cliente",
+    board_report: "Reporte para Junta",
+    proposal_full: "Propuesta Integral",
+    pricing: "Cotización por Paquetes",
+    kpi_dashboard: "Dashboard Ejecutivo",
+    fiscal_calendar: "Calendario Fiscal",
+    checklist: "Checklist de Cumplimiento",
+    audit_program: "Programa de Auditoría",
+    multicurrency: "Reporte Multi-moneda",
+  };
+
+  useEffect(() => {
+    async function fetchPrompts() {
+      try {
+        const resp = await fetch(JSON_URL, { cache: "no-cache" });
+        if (!resp.ok) throw new Error("No se pudo cargar el JSON");
+        const data = await resp.json();
+        setPrompts(data);
+        setCat(Object.keys(data)[0] || "");
+      } catch (err) {
+        console.error(err);
+        setOutput("❌ Error cargando prompts.");
+      }
+    }
+    fetchPrompts();
+  }, []);
+
+  const handleGenerate = async () => {
+    if (!cat || !task) {
+      setOutput("⚠️ Selecciona categoría y tarea primero.");
+      return;
+    }
+
+    const template = prompts[cat]?.[task];
+    if (!template) {
+      setOutput("⚠️ No se encontró la plantilla seleccionada.");
+      return;
+    }
+
+    const finalPrompt = template.replace(/\{\{\s*details\s*\}\}/gi, details || "[sin detalles]");
+
+    if (!API_URL) {
+      setOutput(`📌 Prompt generado:\n\n${finalPrompt}`);
+      return;
+    }
+
+    try {
+      setOutput("⏳ Enviando a la API...");
+      const resp = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: finalPrompt }),
+      });
+      const data = await resp.json();
+      const answer =
+        data.answer ||
+        data.output?.[0]?.content?.[0]?.text ||
+        data.choices?.[0]?.message?.content ||
+        JSON.stringify(data);
+      setOutput(`📌 Prompt:\n${finalPrompt}\n\n🤖 Respuesta IA:\n${answer}`);
+    } catch (err) {
+      setOutput("❌ Error al conectar con la API: " + (err.message || err));
+    }
+  };
+
+  return (
+    <div
+      style={{
+        maxWidth: "720px",
+        margin: "30px auto",
+        padding: "20px",
+        border: "1px solid #e5e7eb",
+        borderRadius: "12px",
+        fontFamily: "Inter, Arial, Helvetica, sans-serif",
+        background: "#fff",
+      }}
+    >
+      <h3 style={{ textAlign: "center", marginBottom: "12px" }}>
+        🤖 Asistente Virtual Contador 4.0
+      </h3>
+
+      <label style={{ display: "block", fontWeight: 600, marginBottom: "6px" }}>
+        Categoría
+      </label>
+      <select
+        value={cat}
+        onChange={(e) => {
+          setCat(e.target.value);
+          setTask("");
+        }}
+        style={{
+          width: "100%",
+          padding: "10px",
+          borderRadius: "8px",
+          border: "1px solid #d1d5db",
+          marginBottom: "12px",
+        }}
+      >
+        {Object.keys(prompts).map((c) => (
+          <option key={c} value={c}>
+            {catLabels[c] || c}
+          </option>
+        ))}
+      </select>
+
+      <label style={{ display: "block", fontWeight: 600, marginBottom: "6px" }}>
+        Tarea
+      </label>
+      <select
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "10px",
+          borderRadius: "8px",
+          border: "1px solid #d1d5db",
+          marginBottom: "12px",
+        }}
+      >
+        {cat &&
+          Object.keys(prompts[cat] || {}).map((t) => (
+            <option key={t} value={t}>
+              {taskLabels[t] || t.replace(/_/g, " ")}
+            </option>
+          ))}
+      </select>
+
+      <label style={{ display: "block", fontWeight: 600, marginBottom: "6px" }}>
+        Detalles / Contexto
+      </label>
+      <textarea
+        value={details}
+        onChange={(e) => setDetails(e.target.value)}
+        rows={5}
+        placeholder="Ej: Empresa de restaurantes; ventas 200M (2024); problema: liquidez en mayo"
+        style={{
+          width: "100%",
+          padding: "10px",
+          borderRadius: "8px",
+          border: "1px solid #d1d5db",
+          marginBottom: "12px",
+        }}
+      />
+
+      <button
+        onClick={handleGenerate}
+        style={{
+          width: "100%",
+          padding: "12px",
+          background: "#111827",
+          color: "#fff",
+          border: "none",
+          borderRadius: "10px",
+          cursor: "pointer",
+          fontWeight: 700,
+          marginBottom: "12px",
+        }}
+      >
+        Generar respuesta
+      </button>
+
+      <div
+        style={{
+          minHeight: "120px",
+          padding: "14px",
+          borderRadius: "10px",
+          background: "#f9fafb",
+          border: "1px solid #e6eef5",
+          whiteSpace: "pre-wrap",
+        }}
+      >
+        {output}
+      </div>
+    </div>
+  );
+};
+
+// === Componente Principal ===
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [assistantMessages, setAssistantMessages] = useState([]);
-  const [assistantInput, setAssistantInput] = useState("");
 
   const handleBack = () => {
     if (selectedSubcategory) {
@@ -27,7 +230,6 @@ function App() {
     alert("✅ Prompt copiado al portapapeles");
   };
 
-  // === Buscador ===
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
@@ -53,43 +255,15 @@ function App() {
     setSearchResults(results);
   };
 
-  // === Asistente ===
-  const handleAssistantAction = (action) => {
-    const message = `🤖 ¿Qué deseas hacer con "${action}"? Puedo guiarte paso a paso.`;
-    setAssistantMessages((prev) => [...prev, { from: "bot", text: message }]);
-  };
-
-  const handleAssistantSend = () => {
-    if (assistantInput.trim() === "") return;
-    const newMessage = { from: "user", text: assistantInput };
-    setAssistantMessages((prev) => [...prev, newMessage]);
-    setAssistantInput("");
-
-    // Simula respuesta base del asistente
-    setTimeout(() => {
-      setAssistantMessages((prev) => [
-        ...prev,
-        { from: "bot", text: "🤖 Gracias por tu mensaje, pronto podré ayudarte de forma más personalizada." }
-      ]);
-    }, 600);
-  };
-
   return (
     <div className="app-container">
       {/* === ENCABEZADO === */}
       <header className="header">
-        <div className="header-content">
-          <div>
-            <h1>Contador 4.0</h1>
-            <p className="subtitle">
-              Sistema de Transformación con IA para Contadores
-            </p>
-          </div>
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png"
-            alt="Personaje cabecera"
-            className="header-avatar"
-          />
+        <div>
+          <h1>Contador 4.0</h1>
+          <p className="subtitle">
+            Sistema de Transformación con IA para Contadores
+          </p>
         </div>
       </header>
 
@@ -195,52 +369,8 @@ function App() {
         </>
       )}
 
-      {/* === PERSONAJE Y ACCIONES RÁPIDAS === */}
-      <div className="quick-actions">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png"
-          alt="Personaje asistente"
-          className="assistant-avatar"
-        />
-        <div className="actions-buttons">
-          <button onClick={() => handleAssistantAction("Crear reporte financiero")}>
-            📊 Crear reporte financiero
-          </button>
-          <button onClick={() => handleAssistantAction("Preparar declaración fiscal")}>
-            🧾 Preparar declaración fiscal
-          </button>
-          <button onClick={() => handleAssistantAction("Revisar hallazgos de auditoría")}>
-            🕵️ Revisar hallazgos de auditoría
-          </button>
-          <button onClick={() => handleAssistantAction("Explicar resultados al cliente")}>
-            💬 Explicar resultados al cliente
-          </button>
-        </div>
-      </div>
-
-      {/* === ASISTENTE === */}
-      <div className="assistant-box">
-        <div className="assistant-messages">
-          {assistantMessages.map((msg, i) => (
-            <div
-              key={i}
-              className={`assistant-message ${msg.from === "user" ? "user" : "bot"}`}
-            >
-              {msg.text}
-            </div>
-          ))}
-        </div>
-        <div className="assistant-input">
-          <input
-            type="text"
-            placeholder="Escribe aquí..."
-            value={assistantInput}
-            onChange={(e) => setAssistantInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleAssistantSend()}
-          />
-          <button onClick={handleAssistantSend}>Enviar</button>
-        </div>
-      </div>
+      {/* === NUEVO ASISTENTE VIRTUAL === */}
+      <AssistantWidget />
 
       {/* === FOOTER === */}
       <footer className="footer">

@@ -1,225 +1,27 @@
-import React, { useState, useEffect } from "react";
-import promptsData from "./promptsData";
+// src/App.jsx
+import React, { useState } from "react";
+import promptsData from "./promptsData"; // ← aquí siguen tus prompts originales
+import localPrompts from "./promptsExpress"; // ← prompts integrados para el asistente
 import "./styles.css";
 
-// === Componente Asistente Virtual Contador 4.0 ===
-const AssistantWidget = () => {
-  const JSON_URL =
-    "https://jairoamaya.co/wp-content/uploads/2025/09/prompts_contador4.json";
-  const API_URL = ""; // Si tienes endpoint, pon la URL. Si no, se queda en modo prompt.
-
-  const [prompts, setPrompts] = useState({});
-  const [cat, setCat] = useState("");
-  const [task, setTask] = useState("");
-  const [details, setDetails] = useState("");
-  const [output, setOutput] = useState("");
-
-  const catLabels = {
-    analysis: "📊 Análisis Financiero",
-    communication: "💬 Comunicación Empresarial",
-    proposals: "💼 Propuestas y Cotizaciones",
-    dashboards: "📈 Reportes y Dashboards",
-    compliance: "🧾 Cumplimiento Fiscal",
-    audit: "🔍 Auditoría y Control",
-    international: "🌍 Clientes Internacionales",
-  };
-
-  const taskLabels = {
-    fin_diag: "Diagnóstico Financiero",
-    cash: "Proyección de Flujo 6 meses",
-    ratios: "Análisis de Ratios",
-    break_even: "Punto de Equilibrio",
-    scenario: "Análisis de Escenarios",
-    client_letter: "Carta al Cliente",
-    board_report: "Reporte para Junta",
-    proposal_full: "Propuesta Integral",
-    pricing: "Cotización por Paquetes",
-    kpi_dashboard: "Dashboard Ejecutivo",
-    fiscal_calendar: "Calendario Fiscal",
-    checklist: "Checklist de Cumplimiento",
-    audit_program: "Programa de Auditoría",
-    multicurrency: "Reporte Multi-moneda",
-  };
-
-  useEffect(() => {
-    async function fetchPrompts() {
-      try {
-        const resp = await fetch(JSON_URL, { cache: "no-cache" });
-        if (!resp.ok) throw new Error("No se pudo cargar el JSON");
-        const data = await resp.json();
-        setPrompts(data);
-        setCat(Object.keys(data)[0] || "");
-      } catch (err) {
-        console.error(err);
-        setOutput("❌ Error cargando prompts.");
-      }
-    }
-    fetchPrompts();
-  }, []);
-
-  const handleGenerate = async () => {
-    if (!cat || !task) {
-      setOutput("⚠️ Selecciona categoría y tarea primero.");
-      return;
-    }
-
-    const template = prompts[cat]?.[task];
-    if (!template) {
-      setOutput("⚠️ No se encontró la plantilla seleccionada.");
-      return;
-    }
-
-    const finalPrompt = template.replace(/\{\{\s*details\s*\}\}/gi, details || "[sin detalles]");
-
-    if (!API_URL) {
-      setOutput(`📌 Prompt generado:\n\n${finalPrompt}`);
-      return;
-    }
-
-    try {
-      setOutput("⏳ Enviando a la API...");
-      const resp = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: finalPrompt }),
-      });
-      const data = await resp.json();
-      const answer =
-        data.answer ||
-        data.output?.[0]?.content?.[0]?.text ||
-        data.choices?.[0]?.message?.content ||
-        JSON.stringify(data);
-      setOutput(`📌 Prompt:\n${finalPrompt}\n\n🤖 Respuesta IA:\n${answer}`);
-    } catch (err) {
-      setOutput("❌ Error al conectar con la API: " + (err.message || err));
-    }
-  };
-
-  return (
-    <div
-      style={{
-        maxWidth: "720px",
-        margin: "30px auto",
-        padding: "20px",
-        border: "1px solid #e5e7eb",
-        borderRadius: "12px",
-        fontFamily: "Inter, Arial, Helvetica, sans-serif",
-        background: "#fff",
-      }}
-    >
-      <h3 style={{ textAlign: "center", marginBottom: "12px" }}>
-        🤖 Asistente Virtual Contador 4.0
-      </h3>
-
-      <label style={{ display: "block", fontWeight: 600, marginBottom: "6px" }}>
-        Categoría
-      </label>
-      <select
-        value={cat}
-        onChange={(e) => {
-          setCat(e.target.value);
-          setTask("");
-        }}
-        style={{
-          width: "100%",
-          padding: "10px",
-          borderRadius: "8px",
-          border: "1px solid #d1d5db",
-          marginBottom: "12px",
-        }}
-      >
-        {Object.keys(prompts).map((c) => (
-          <option key={c} value={c}>
-            {catLabels[c] || c}
-          </option>
-        ))}
-      </select>
-
-      <label style={{ display: "block", fontWeight: 600, marginBottom: "6px" }}>
-        Tarea
-      </label>
-      <select
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-        style={{
-          width: "100%",
-          padding: "10px",
-          borderRadius: "8px",
-          border: "1px solid #d1d5db",
-          marginBottom: "12px",
-        }}
-      >
-        {cat &&
-          Object.keys(prompts[cat] || {}).map((t) => (
-            <option key={t} value={t}>
-              {taskLabels[t] || t.replace(/_/g, " ")}
-            </option>
-          ))}
-      </select>
-
-      <label style={{ display: "block", fontWeight: 600, marginBottom: "6px" }}>
-        Detalles / Contexto
-      </label>
-      <textarea
-        value={details}
-        onChange={(e) => setDetails(e.target.value)}
-        rows={5}
-        placeholder="Ej: Empresa de restaurantes; ventas 200M (2024); problema: liquidez en mayo"
-        style={{
-          width: "100%",
-          padding: "10px",
-          borderRadius: "8px",
-          border: "1px solid #d1d5db",
-          marginBottom: "12px",
-        }}
-      />
-
-      <button
-        onClick={handleGenerate}
-        style={{
-          width: "100%",
-          padding: "12px",
-          background: "#111827",
-          color: "#fff",
-          border: "none",
-          borderRadius: "10px",
-          cursor: "pointer",
-          fontWeight: 700,
-          marginBottom: "12px",
-        }}
-      >
-        Generar respuesta
-      </button>
-
-      <div
-        style={{
-          minHeight: "120px",
-          padding: "14px",
-          borderRadius: "10px",
-          background: "#f9fafb",
-          border: "1px solid #e6eef5",
-          whiteSpace: "pre-wrap",
-        }}
-      >
-        {output}
-      </div>
-    </div>
-  );
-};
-
-// === Componente Principal ===
 function App() {
+  // ===== ESTADOS =====
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
+  // Asistente
+  const [assistantCategory, setAssistantCategory] = useState("");
+  const [assistantTask, setAssistantTask] = useState("");
+  const [assistantDetails, setAssistantDetails] = useState("");
+  const [assistantOutput, setAssistantOutput] = useState("");
+
+  // ===== FUNCIONES BÁSICAS =====
   const handleBack = () => {
-    if (selectedSubcategory) {
-      setSelectedSubcategory(null);
-    } else if (selectedCategory) {
-      setSelectedCategory(null);
-    } else if (searchResults.length > 0) {
+    if (selectedSubcategory) setSelectedSubcategory(null);
+    else if (selectedCategory) setSelectedCategory(null);
+    else if (searchResults.length > 0) {
       setSearchResults([]);
       setSearchTerm("");
     }
@@ -255,19 +57,47 @@ function App() {
     setSearchResults(results);
   };
 
+  // ===== ASISTENTE =====
+  const handleAssistantGenerate = () => {
+    if (!assistantCategory || !assistantTask) {
+      setAssistantOutput("⚠️ Selecciona categoría y tarea primero.");
+      return;
+    }
+
+    const template =
+      localPrompts[assistantCategory] &&
+      localPrompts[assistantCategory][assistantTask];
+
+    if (!template) {
+      setAssistantOutput("❌ No se encontró la plantilla seleccionada.");
+      return;
+    }
+
+    const finalPrompt = template.replace(
+      /\{\{\s*details\s*\}\}/gi,
+      assistantDetails || "[sin detalles]"
+    );
+
+    setAssistantOutput(`📌 Prompt generado:\n\n${finalPrompt}`);
+  };
+
   return (
     <div className="app-container">
-      {/* === ENCABEZADO === */}
+      {/* ENCABEZADO */}
       <header className="header">
         <div>
           <h1>Contador 4.0</h1>
-          <p className="subtitle">
-            Sistema de Transformación con IA para Contadores
-          </p>
+          <p className="subtitle">Sistema de Transformación con IA para Contadores</p>
         </div>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png"
+          alt="Asistente"
+          className="assistant-avatar"
+          style={{ width: "120px", height: "auto" }}
+        />
       </header>
 
-      {/* === BUSCADOR === */}
+      {/* BUSCADOR */}
       <div className="search-bar">
         <input
           type="text"
@@ -282,7 +112,7 @@ function App() {
         )}
       </div>
 
-      {/* === RESULTADOS DE BÚSQUEDA === */}
+      {/* RESULTADOS DE BÚSQUEDA */}
       {searchResults.length > 0 && (
         <div className="prompt-list">
           {searchResults.map((p, i) => (
@@ -295,7 +125,7 @@ function App() {
         </div>
       )}
 
-      {/* === CATEGORÍAS === */}
+      {/* CATEGORÍAS */}
       {!selectedCategory && !selectedSubcategory && searchResults.length === 0 && (
         <div className="category-list">
           {promptsData.map((category, index) => (
@@ -313,7 +143,7 @@ function App() {
         </div>
       )}
 
-      {/* === SUBCATEGORÍAS === */}
+      {/* SUBCATEGORÍAS */}
       {selectedCategory && !selectedSubcategory && (
         <div className="subcategoria-list">
           <button className="back-button" onClick={handleBack}>
@@ -331,7 +161,7 @@ function App() {
         </div>
       )}
 
-      {/* === PROMPTS === */}
+      {/* PROMPTS */}
       {selectedSubcategory && (
         <div className="prompt-list">
           <button className="back-button" onClick={handleBack}>
@@ -349,33 +179,57 @@ function App() {
         </div>
       )}
 
-      {/* === BLOQUES INFORMATIVOS === */}
-      {!selectedCategory && searchResults.length === 0 && (
-        <>
-          <div className="info-box">
-            <h2>💡 Tip Pro</h2>
-            <p>
-              Usa estos prompts para mejorar tu productividad contable y ofrecer
-              servicios de consultoría de alto valor.
-            </p>
-          </div>
-          <div className="info-box">
-            <h2>🚀 Cómo aprovechar esta herramienta</h2>
-            <p>
-              Personaliza los prompts antes de usarlos con tus datos reales o los
-              de tus clientes. ¡Así obtendrás respuestas más precisas y valiosas!
-            </p>
-          </div>
-        </>
-      )}
+      {/* ===== ASISTENTE VIRTUAL ===== */}
+      <div className="assistant-box">
+        <h3>🤖 Asistente Virtual Contador 4.0</h3>
+        <label>Categoría</label>
+        <select
+          value={assistantCategory}
+          onChange={(e) => setAssistantCategory(e.target.value)}
+        >
+          <option value="">-- Selecciona --</option>
+          {Object.keys(localPrompts).map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
 
-      {/* === NUEVO ASISTENTE VIRTUAL === */}
-      <AssistantWidget />
+        <label>Tarea</label>
+        <select
+          value={assistantTask}
+          onChange={(e) => setAssistantTask(e.target.value)}
+          disabled={!assistantCategory}
+        >
+          <option value="">-- Selecciona --</option>
+          {assistantCategory &&
+            Object.keys(localPrompts[assistantCategory]).map((task) => (
+              <option key={task} value={task}>
+                {task}
+              </option>
+            ))}
+        </select>
 
-      {/* === FOOTER === */}
+        <label>Detalles / Contexto</label>
+        <textarea
+          value={assistantDetails}
+          onChange={(e) => setAssistantDetails(e.target.value)}
+          placeholder="Ej: Empresa de restaurantes; ventas 200M (2024); problema: liquidez en mayo"
+        />
+
+        <button onClick={handleAssistantGenerate}>Generar respuesta</button>
+
+        {assistantOutput && (
+          <div className="assistant-output">
+            <pre>{assistantOutput}</pre>
+          </div>
+        )}
+      </div>
+
+      {/* FOOTER */}
       <footer className="footer">
         <p>
-          <b>Contador 4.0 Express</b> es propiedad intelectual de{" "}
+          <b>Contador 4.0 Express</b> — propiedad intelectual de{" "}
           <a
             href="https://jairoamaya.co"
             target="_blank"
@@ -384,23 +238,8 @@ function App() {
           >
             Jairo Amaya - Full Stack Marketer
           </a>
-          . Todos los derechos reservados.
         </p>
       </footer>
-    </div>
-  );
-}
-
-export default App;
-import ChatAssistant from "./ChatAssistant";
-
-function App() {
-  return (
-    <div className="app-container">
-      {/* ...contenido del MVP... */}
-
-      {/* Asistente Virtual */}
-      <ChatAssistant />
     </div>
   );
 }

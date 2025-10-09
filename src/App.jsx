@@ -1,48 +1,262 @@
-import React from "react";
-import PromptSearch from "./PromptSearch";
-import PromptCategories from "./PromptCategories";
-import TipsSection from "./TipsSection";
-import RecommendationsSection from "./RecommendationsSection";
-import ChatAssistant from "./ChatAssistant";
+// src/App.jsx
+import React, { useState } from "react";
+import promptsData from "./promptsData";
+import "./styles.css";
 
-export default function App() {
+function App() {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  // Estados para el asistente
+  const [assistantMessages, setAssistantMessages] = useState([]);
+  const [assistantInput, setAssistantInput] = useState("");
+
+  // === Navegación ===
+  const handleBack = () => {
+    if (selectedSubcategory) {
+      setSelectedSubcategory(null);
+    } else if (selectedCategory) {
+      setSelectedCategory(null);
+    } else if (searchResults.length > 0) {
+      setSearchResults([]);
+      setSearchTerm("");
+    }
+  };
+
+  // === Copiar prompt ===
+  const handleCopy = (prompt) => {
+    navigator.clipboard.writeText(prompt);
+    alert("✅ Prompt copiado al portapapeles");
+  };
+
+  // === Buscador ===
+  const handleSearch = (e) => {
+    const term = e.target.value.toLowerCase();
+    setSearchTerm(term);
+    if (term === "") {
+      setSearchResults([]);
+      return;
+    }
+
+    const results = [];
+    promptsData.forEach((category) => {
+      category.subcategories.forEach((sub) => {
+        sub.prompts.forEach((p) => {
+          if (
+            p.title.toLowerCase().includes(term) ||
+            p.prompt.toLowerCase().includes(term)
+          ) {
+            results.push(p);
+          }
+        });
+      });
+    });
+    setSearchResults(results);
+  };
+
+  // === Asistente Virtual ===
+  const handleAssistantAction = (action) => {
+    const message = `🤖 ¿Qué deseas hacer con "${action}"? Puedo guiarte paso a paso.`;
+    setAssistantMessages((prev) => [...prev, { from: "bot", text: message }]);
+  };
+
+  const handleAssistantSend = () => {
+    if (assistantInput.trim() === "") return;
+    const newMessage = { from: "user", text: assistantInput };
+    setAssistantMessages((prev) => [...prev, newMessage]);
+    setAssistantInput("");
+
+    setTimeout(() => {
+      setAssistantMessages((prev) => [
+        ...prev,
+        {
+          from: "bot",
+          text: "🤖 Gracias por tu mensaje. Pronto podré ayudarte de forma más personalizada.",
+        },
+      ]);
+    }, 600);
+  };
+
   return (
-    <div className="app-container px-4 py-8 max-w-6xl mx-auto">
-      {/* 🧭 Encabezado */}
-      <header className="text-center mb-8">
-        <h1 className="text-4xl font-bold mb-2">Contador 4.0</h1>
-        <p className="text-lg text-gray-600">
-          Sistema de Transformación con IA para Contadores
-        </p>
+    <div className="app-container">
+      {/* === ENCABEZADO === */}
+      <header className="header">
+        <div>
+          <h1>Contador 4.0</h1>
+          <p className="subtitle">
+            Sistema de Transformación con IA para Contadores
+          </p>
+        </div>
       </header>
 
-      {/* 🔍 Buscador */}
-      <section className="mb-8">
-        <PromptSearch />
-      </section>
+      {/* === BUSCADOR === */}
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="🔍 Buscar prompts..."
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+        {searchResults.length > 0 && (
+          <button className="back-button" onClick={handleBack}>
+            Volver
+          </button>
+        )}
+      </div>
 
-      {/* 🟧 Categorías principales */}
-      <section className="mb-8">
-        <PromptCategories />
-      </section>
+      {/* === RESULTADOS DE BÚSQUEDA === */}
+      {searchResults.length > 0 && (
+        <div className="prompt-list">
+          {searchResults.map((p, i) => (
+            <div key={i} className="prompt-card">
+              <h4>{p.title}</h4>
+              <p>{p.prompt}</p>
+              <button onClick={() => handleCopy(p.prompt)}>Copiar Prompt</button>
+            </div>
+          ))}
+        </div>
+      )}
 
-      {/* 💡 Tip de uso */}
-      <section className="mb-6">
-        <TipsSection />
-      </section>
+      {/* === CATEGORÍAS === */}
+      {!selectedCategory && !selectedSubcategory && searchResults.length === 0 && (
+        <div className="category-list">
+          {promptsData.map((category, index) => (
+            <button
+              key={index}
+              className="category-button"
+              onClick={() => setSelectedCategory(category)}
+            >
+              <span style={{ fontSize: "24px", marginRight: "10px" }}>
+                {category.icon}
+              </span>
+              {category.title}
+            </button>
+          ))}
+        </div>
+      )}
 
-      {/* 🚀 Recomendaciones */}
-      <section className="mb-12">
-        <RecommendationsSection />
-      </section>
+      {/* === SUBCATEGORÍAS === */}
+      {selectedCategory && !selectedSubcategory && (
+        <div className="subcategoria-list">
+          <button className="back-button" onClick={handleBack}>
+            ⬅ Volver
+          </button>
+          {selectedCategory.subcategories.map((sub, i) => (
+            <div
+              key={i}
+              className="subcategoria-card"
+              onClick={() => setSelectedSubcategory(sub)}
+            >
+              {sub.title}
+            </div>
+          ))}
+        </div>
+      )}
 
-      {/* 🤖 Asistente Virtual */}
-      <section className="mt-12 border-t pt-8">
-        <h2 className="text-2xl font-bold mb-4 text-center">
-          🤖 Asistente Virtual Contador 4.0
-        </h2>
-        <ChatAssistant />
-      </section>
+      {/* === PROMPTS === */}
+      {selectedSubcategory && (
+        <div className="prompt-list">
+          <button className="back-button" onClick={handleBack}>
+            ⬅ Volver
+          </button>
+          {selectedSubcategory.prompts.map((prompt, i) => (
+            <div key={i} className="prompt-card">
+              <h4>{prompt.title}</h4>
+              <p>{prompt.prompt}</p>
+              <button onClick={() => handleCopy(prompt.prompt)}>
+                Copiar Prompt
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* === BLOQUES INFORMATIVOS === */}
+      {!selectedCategory && searchResults.length === 0 && (
+        <>
+          <div className="info-box">
+            <h2>💡 Tip Pro</h2>
+            <p>
+              Usa estos prompts para mejorar tu productividad contable y ofrecer
+              servicios de consultoría de alto valor.
+            </p>
+          </div>
+          <div className="info-box">
+            <h2>🚀 Cómo aprovechar esta herramienta</h2>
+            <p>
+              Personaliza los prompts antes de usarlos con tus datos reales o los
+              de tus clientes. ¡Así obtendrás respuestas más precisas y valiosas!
+            </p>
+          </div>
+        </>
+      )}
+
+      {/* === ASISTENTE VIRTUAL (complemento) === */}
+      {!selectedCategory && searchResults.length === 0 && (
+        <div className="assistant-container">
+          <h2>🤖 Asistente Virtual Contador 4.0</h2>
+          <div className="assistant-actions">
+            <button onClick={() => handleAssistantAction("Crear reporte financiero")}>
+              📊 Crear reporte financiero
+            </button>
+            <button onClick={() => handleAssistantAction("Preparar declaración fiscal")}>
+              🧾 Preparar declaración fiscal
+            </button>
+            <button onClick={() => handleAssistantAction("Revisar hallazgos de auditoría")}>
+              🕵️ Revisar hallazgos de auditoría
+            </button>
+            <button onClick={() => handleAssistantAction("Explicar resultados al cliente")}>
+              💬 Explicar resultados al cliente
+            </button>
+          </div>
+
+          <div className="assistant-messages">
+            {assistantMessages.map((msg, i) => (
+              <div
+                key={i}
+                className={`assistant-message ${msg.from === "user" ? "user" : "bot"}`}
+              >
+                {msg.text}
+              </div>
+            ))}
+          </div>
+
+          <div className="assistant-input">
+            <input
+              type="text"
+              placeholder="Escribe aquí..."
+              value={assistantInput}
+              onChange={(e) => setAssistantInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleAssistantSend()}
+            />
+            <button onClick={handleAssistantSend}>Enviar</button>
+          </div>
+        </div>
+      )}
+
+      {/* === FOOTER === */}
+      <footer className="footer">
+        <p>
+          <b>Contador 4.0 Express</b> es propiedad intelectual de{" "}
+          <a
+            href="https://jairoamaya.co"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: "#E66E33",
+              fontWeight: "bold",
+              textDecoration: "none",
+            }}
+          >
+            Jairo Amaya - Full Stack Marketer
+          </a>
+          . Todos los derechos reservados.
+        </p>
+      </footer>
     </div>
   );
 }
+
+export default App;

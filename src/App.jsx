@@ -1,37 +1,30 @@
 // src/App.jsx
 import React, { useState } from "react";
-import promptsData from "./promptsData";
+import promptsExpress from "./promptsExpress";
 import "./styles.css";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [selectedTask, setSelectedTask] = useState("");
+  const [details, setDetails] = useState("");
+  const [output, setOutput] = useState("");
+
+  // Para la parte inicial de categorías y búsqueda
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  // Estados para el asistente
-  const [assistantMessages, setAssistantMessages] = useState([]);
-  const [assistantInput, setAssistantInput] = useState("");
-
-  // === Navegación ===
   const handleBack = () => {
-    if (selectedSubcategory) {
-      setSelectedSubcategory(null);
-    } else if (selectedCategory) {
+    if (selectedCategory) {
       setSelectedCategory(null);
+      setSelectedTask("");
+      setDetails("");
+      setOutput("");
     } else if (searchResults.length > 0) {
       setSearchResults([]);
       setSearchTerm("");
     }
   };
 
-  // === Copiar prompt ===
-  const handleCopy = (prompt) => {
-    navigator.clipboard.writeText(prompt);
-    alert("✅ Prompt copiado al portapapeles");
-  };
-
-  // === Buscador ===
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
@@ -41,42 +34,28 @@ function App() {
     }
 
     const results = [];
-    promptsData.forEach((category) => {
-      category.subcategories.forEach((sub) => {
-        sub.prompts.forEach((p) => {
-          if (
-            p.title.toLowerCase().includes(term) ||
-            p.prompt.toLowerCase().includes(term)
-          ) {
-            results.push(p);
-          }
-        });
+    Object.entries(promptsExpress).forEach(([catKey, cat]) => {
+      Object.entries(cat.tasks).forEach(([taskKey, task]) => {
+        if (
+          task.label.toLowerCase().includes(term) ||
+          task.prompt.toLowerCase().includes(term)
+        ) {
+          results.push({ ...task, category: cat.label });
+        }
       });
     });
+
     setSearchResults(results);
   };
 
-  // === Asistente Virtual ===
-  const handleAssistantAction = (action) => {
-    const message = `🤖 ¿Qué deseas hacer con "${action}"? Puedo guiarte paso a paso.`;
-    setAssistantMessages((prev) => [...prev, { from: "bot", text: message }]);
-  };
-
-  const handleAssistantSend = () => {
-    if (assistantInput.trim() === "") return;
-    const newMessage = { from: "user", text: assistantInput };
-    setAssistantMessages((prev) => [...prev, newMessage]);
-    setAssistantInput("");
-
-    setTimeout(() => {
-      setAssistantMessages((prev) => [
-        ...prev,
-        {
-          from: "bot",
-          text: "🤖 Gracias por tu mensaje. Pronto podré ayudarte de forma más personalizada.",
-        },
-      ]);
-    }, 600);
+  const handleGenerate = () => {
+    if (!selectedCategory || !selectedTask) {
+      setOutput("⚠️ Selecciona categoría y tarea primero.");
+      return;
+    }
+    const prompt = promptsExpress[selectedCategory].tasks[selectedTask].prompt;
+    const finalPrompt = prompt.replace(/\{\{\s*details\s*\}\}/gi, details || "[sin detalles]");
+    setOutput(`📌 Prompt generado:\n\n${finalPrompt}`);
   };
 
   return (
@@ -111,61 +90,15 @@ function App() {
         <div className="prompt-list">
           {searchResults.map((p, i) => (
             <div key={i} className="prompt-card">
-              <h4>{p.title}</h4>
+              <h4>{p.label}</h4>
+              <p><strong>Categoría:</strong> {p.category}</p>
               <p>{p.prompt}</p>
-              <button onClick={() => handleCopy(p.prompt)}>Copiar Prompt</button>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* === CATEGORÍAS === */}
-      {!selectedCategory && !selectedSubcategory && searchResults.length === 0 && (
-        <div className="category-list">
-          {promptsData.map((category, index) => (
-            <button
-              key={index}
-              className="category-button"
-              onClick={() => setSelectedCategory(category)}
-            >
-              <span style={{ fontSize: "24px", marginRight: "10px" }}>
-                {category.icon}
-              </span>
-              {category.title}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {/* === SUBCATEGORÍAS === */}
-      {selectedCategory && !selectedSubcategory && (
-        <div className="subcategoria-list">
-          <button className="back-button" onClick={handleBack}>
-            ⬅ Volver
-          </button>
-          {selectedCategory.subcategories.map((sub, i) => (
-            <div
-              key={i}
-              className="subcategoria-card"
-              onClick={() => setSelectedSubcategory(sub)}
-            >
-              {sub.title}
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* === PROMPTS === */}
-      {selectedSubcategory && (
-        <div className="prompt-list">
-          <button className="back-button" onClick={handleBack}>
-            ⬅ Volver
-          </button>
-          {selectedSubcategory.prompts.map((prompt, i) => (
-            <div key={i} className="prompt-card">
-              <h4>{prompt.title}</h4>
-              <p>{prompt.prompt}</p>
-              <button onClick={() => handleCopy(prompt.prompt)}>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(p.prompt);
+                  alert("✅ Prompt copiado al portapapeles");
+                }}
+              >
                 Copiar Prompt
               </button>
             </div>
@@ -173,65 +106,52 @@ function App() {
         </div>
       )}
 
-      {/* === BLOQUES INFORMATIVOS === */}
+      {/* === FORMULARIO DEL ASISTENTE === */}
       {!selectedCategory && searchResults.length === 0 && (
-        <>
-          <div className="info-box">
-            <h2>💡 Tip Pro</h2>
-            <p>
-              Usa estos prompts para mejorar tu productividad contable y ofrecer
-              servicios de consultoría de alto valor.
-            </p>
-          </div>
-          <div className="info-box">
-            <h2>🚀 Cómo aprovechar esta herramienta</h2>
-            <p>
-              Personaliza los prompts antes de usarlos con tus datos reales o los
-              de tus clientes. ¡Así obtendrás respuestas más precisas y valiosas!
-            </p>
-          </div>
-        </>
-      )}
-
-      {/* === ASISTENTE VIRTUAL (complemento) === */}
-      {!selectedCategory && searchResults.length === 0 && (
-        <div className="assistant-container">
+        <div className="assistant-widget">
           <h2>🤖 Asistente Virtual Contador 4.0</h2>
-          <div className="assistant-actions">
-            <button onClick={() => handleAssistantAction("Crear reporte financiero")}>
-              📊 Crear reporte financiero
-            </button>
-            <button onClick={() => handleAssistantAction("Preparar declaración fiscal")}>
-              🧾 Preparar declaración fiscal
-            </button>
-            <button onClick={() => handleAssistantAction("Revisar hallazgos de auditoría")}>
-              🕵️ Revisar hallazgos de auditoría
-            </button>
-            <button onClick={() => handleAssistantAction("Explicar resultados al cliente")}>
-              💬 Explicar resultados al cliente
-            </button>
-          </div>
 
-          <div className="assistant-messages">
-            {assistantMessages.map((msg, i) => (
-              <div
-                key={i}
-                className={`assistant-message ${msg.from === "user" ? "user" : "bot"}`}
-              >
-                {msg.text}
-              </div>
+          <label>Categoría</label>
+          <select
+            value={selectedCategory || ""}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="">Selecciona una categoría</option>
+            {Object.entries(promptsExpress).map(([key, cat]) => (
+              <option key={key} value={key}>
+                {cat.label}
+              </option>
             ))}
-          </div>
+          </select>
 
-          <div className="assistant-input">
-            <input
-              type="text"
-              placeholder="Escribe aquí..."
-              value={assistantInput}
-              onChange={(e) => setAssistantInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleAssistantSend()}
-            />
-            <button onClick={handleAssistantSend}>Enviar</button>
+          <label>Tarea</label>
+          <select
+            value={selectedTask}
+            onChange={(e) => setSelectedTask(e.target.value)}
+            disabled={!selectedCategory}
+          >
+            <option value="">Selecciona una tarea</option>
+            {selectedCategory &&
+              Object.entries(promptsExpress[selectedCategory].tasks).map(
+                ([key, task]) => (
+                  <option key={key} value={key}>
+                    {task.label}
+                  </option>
+                )
+              )}
+          </select>
+
+          <label>Detalles / Contexto</label>
+          <textarea
+            placeholder="Ej: Empresa de restaurantes; ventas 200M (2024); problema: liquidez en mayo"
+            value={details}
+            onChange={(e) => setDetails(e.target.value)}
+          />
+
+          <button onClick={handleGenerate}>Generar respuesta</button>
+
+          <div className="assistant-output">
+            {output && <pre>{output}</pre>}
           </div>
         </div>
       )}
@@ -244,11 +164,7 @@ function App() {
             href="https://jairoamaya.co"
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              color: "#E66E33",
-              fontWeight: "bold",
-              textDecoration: "none",
-            }}
+            style={{ color: "#E66E33", fontWeight: "bold", textDecoration: "none" }}
           >
             Jairo Amaya - Full Stack Marketer
           </a>

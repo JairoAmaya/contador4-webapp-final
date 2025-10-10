@@ -1,65 +1,99 @@
-
 // src/components/TestSection.jsx
-import React from "react";
+import React, { useState } from "react";
+import "./TestSection.css"; // 👉 estilos independientes para esta sección
 
 export default function TestSection() {
-  return (
-    <div>
-      <h2>🧪 Sección de Pruebas</h2>
-      <p>
-        Aquí puedes experimentar con una nueva estructura de categorías y
-        prompts sin afectar el MVP actual.
-      </p>
-    </div>
-  );
-}
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeSubcategory, setActiveSubcategory] = useState(null);
 
+  // 🧭 Estructura base (ejemplo tomado del HTML)
+  const testPrompts = [
+    {
+      title: "📊 Análisis Financiero Estratégico",
+      subcategories: [
+        {
+          title: "Evaluación Financiera",
+          prompts: [
+            "Prompt largo 1 - Análisis de Rentabilidad...",
+            "Prompt largo 2 - Diagnóstico Financiero...",
+            "Prompt largo 3 - Informe de Indicadores..."
+          ]
+        },
+        {
+          title: "Proyecciones y Escenarios",
+          prompts: [
+            "Prompt largo 1 - Proyección Financiera...",
+            "Prompt largo 2 - Escenario Base y Pesimista...",
+            "Prompt largo 3 - Sensibilidad de Ingresos..."
+          ]
+        }
+      ]
+    },
+    {
+      title: "💬 Comunicación Empresarial",
+      subcategories: [
+        {
+          title: "Informes Ejecutivos",
+          prompts: [
+            "Prompt largo 1 - Informe Financiero Trimestral...",
+            "Prompt largo 2 - Reporte de Avances...",
+            "Prompt largo 3 - Síntesis para Consejo..."
+          ]
+        },
+        {
+          title: "Comunicación con Clientes",
+          prompts: [
+            "Prompt largo 1 - Boletín Financiero...",
+            "Prompt largo 2 - Carta a Inversionistas...",
+            "Prompt largo 3 - Resumen Comercial..."
+          ]
+        }
+      ]
+    },
+    // 📌 Aquí puedes ir agregando las demás categorías igual que en tu HTML original
+  ];
 
-export default function TestSection() {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
-
-  const handleBack = () => {
-    if (selectedSubcategory) setSelectedSubcategory(null);
-    else if (selectedCategory) setSelectedCategory(null);
-  };
-
-  const handleCopy = (prompt) => {
-    navigator.clipboard.writeText(prompt);
-    alert("✅ Prompt copiado al portapapeles");
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
+    alert("✅ Prompt copiado");
   };
 
   return (
     <div className="test-section">
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-        🧪 Sección de Pruebas (No afecta el MVP)
-      </h2>
+      <h1>🧪 Sección de Pruebas</h1>
+      <p className="intro">
+        Aquí puedes experimentar con una nueva estructura de categorías y prompts sin afectar el MVP actual.
+      </p>
 
-      {!selectedCategory && (
+      {/* === Categorías === */}
+      {!activeCategory && (
         <div className="category-list">
-          {promptsTest.map((cat, i) => (
+          {testPrompts.map((cat, i) => (
             <button
               key={i}
-              className="category-button"
-              onClick={() => setSelectedCategory(cat)}
+              className="category-btn"
+              onClick={() => setActiveCategory(cat)}
             >
-              <span style={{ marginRight: "10px" }}>{cat.icon}</span>
               {cat.title}
             </button>
           ))}
         </div>
       )}
 
-      {selectedCategory && !selectedSubcategory && (
-        <div className="subcategoria-list">
-          <button className="back-button" onClick={handleBack}>
+      {/* === Subcategorías === */}
+      {activeCategory && !activeSubcategory && (
+        <div className="subcategory-list">
+          <button
+            className="back-button"
+            onClick={() => setActiveCategory(null)}
+          >
             ⬅ Volver
           </button>
-          {selectedCategory.subcategories.map((sub, i) => (
+          {activeCategory.subcategories.map((sub, i) => (
             <div
               key={i}
-              className="subcategoria-card"
-              onClick={() => setSelectedSubcategory(sub)}
+              className="subcategory-card"
+              onClick={() => setActiveSubcategory(sub)}
             >
               {sub.title}
             </div>
@@ -67,16 +101,19 @@ export default function TestSection() {
         </div>
       )}
 
-      {selectedSubcategory && (
+      {/* === Prompts === */}
+      {activeSubcategory && (
         <div className="prompt-list">
-          <button className="back-button" onClick={handleBack}>
+          <button
+            className="back-button"
+            onClick={() => setActiveSubcategory(null)}
+          >
             ⬅ Volver
           </button>
-          {selectedSubcategory.prompts.map((p, i) => (
+          {activeSubcategory.prompts.map((p, i) => (
             <div key={i} className="prompt-card">
-              <h4>{p.title}</h4>
-              <p>{p.prompt}</p>
-              <button onClick={() => handleCopy(p.prompt)}>Copiar Prompt</button>
+              <p>{p}</p>
+              <button onClick={() => handleCopy(p)}>Copiar</button>
             </div>
           ))}
         </div>
@@ -84,4 +121,3 @@ export default function TestSection() {
     </div>
   );
 }
-

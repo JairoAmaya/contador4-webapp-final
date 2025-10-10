@@ -10,20 +10,32 @@ function App() {
   return (
     <div className="app-container">
       {/* === MVP PRINCIPAL === */}
-      <MVPSection />
+      {!showFullPrompts && <MVPSection />}
 
       {/* === BOTÓN FLOTANTE PARA VER PROMPTS COMPLETOS === */}
-      <button
-        className="floating-button"
-        onClick={() => setShowFullPrompts(true)}
-        title="Abrir biblioteca completa de prompts"
-      >
-        🧪
-      </button>
+      {!showFullPrompts && (
+        <button
+          className="floating-button"
+          onClick={() => setShowFullPrompts(true)}
+          title="Abrir biblioteca completa de prompts"
+        >
+          🧪
+        </button>
+      )}
 
       {/* === SECCIÓN COMPLETA DE PROMPTS === */}
       {showFullPrompts && (
-        <FullPromptsSection onClose={() => setShowFullPrompts(false)} />
+        <div className="overlay">
+          <div className="overlay-content">
+            <button
+              className="close-button"
+              onClick={() => setShowFullPrompts(false)}
+            >
+              ✖
+            </button>
+            <FullPromptsSection />
+          </div>
+        </div>
       )}
     </div>
   );

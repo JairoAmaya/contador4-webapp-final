@@ -1,1 +1,59 @@
-
+[
+  {
+    "category": "Análisis Financiero Estratégico",
+    "subcategories": [
+      {
+        "title": "Proyecciones y Escenarios",
+        "prompts": [
+          {
+            "title": "Actúa como CFO Senior",
+            "prompt": "Actúa como un CFO senior. Realiza un diagnóstico financiero integral para este cliente: {{details}}."
+          },
+          {
+            "title": "Proyecta flujo de caja",
+            "prompt": "Proyecta el flujo de caja a 6 meses para: {{details}}."
+          },
+          {
+            "title": "Calcula ratios financieros",
+            "prompt": "Calcula e interpreta los principales ratios financieros para: {{details}}."
+          }
+        ]
+      },
+      {
+        "title": "Modelos y Rentabilidad",
+        "prompts": [
+          {
+            "title": "Calcula punto de equilibrio",
+            "prompt": "Calcula el punto de equilibrio de: {{details}}."
+          },
+          {
+            "title": "Análisis de escenarios",
+            "prompt": "Realiza un análisis de escenarios para: {{details}}."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Comunicación Empresarial",
+    "subcategories": [
+      {
+        "title": "Cartas y Comunicaciones",
+        "prompts": [
+          {
+            "title": "Redacta carta profesional",
+            "prompt": "Redacta una carta profesional dirigida al cliente explicando: {{details}}."
+          },
+          {
+            "title": "Correo recordatorio",
+            "prompt": "Escribe un correo recordatorio para: {{details}}."
+          },
+          {
+            "title": "Mensaje de negociación",
+            "prompt": "Redacta un mensaje para negociar honorarios con un cliente: {{details}}."
+          }
+        ]
+      }
+    ]
+  }
+]

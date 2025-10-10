@@ -1,7 +1,19 @@
+
 // src/components/TestSection.jsx
-import React, { useState } from "react";
-import promptsTest from "../promptsTest";
-import "../styles.css";
+import React from "react";
+
+export default function TestSection() {
+  return (
+    <div>
+      <h2>🧪 Sección de Pruebas</h2>
+      <p>
+        Aquí puedes experimentar con una nueva estructura de categorías y
+        prompts sin afectar el MVP actual.
+      </p>
+    </div>
+  );
+}
+
 
 export default function TestSection() {
   const [selectedCategory, setSelectedCategory] = useState(null);

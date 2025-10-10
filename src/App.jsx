@@ -1,6 +1,7 @@
 // src/App.jsx
 import React, { useState } from "react";
 import promptsData from "./promptsData";
+import TestSection from "./components/TestSection"; // 🆕 Sección de prueba
 import "./styles.css";
 
 function App() {
@@ -8,13 +9,13 @@ function App() {
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [showTestSection, setShowTestSection] = useState(false); // 🆕 Control para cambiar entre MVP y Test
 
+  // ===== Funciones MVP =====
   const handleBack = () => {
-    if (selectedSubcategory) {
-      setSelectedSubcategory(null);
-    } else if (selectedCategory) {
-      setSelectedCategory(null);
-    } else if (searchResults.length > 0) {
+    if (selectedSubcategory) setSelectedSubcategory(null);
+    else if (selectedCategory) setSelectedCategory(null);
+    else if (searchResults.length > 0) {
       setSearchResults([]);
       setSearchTerm("");
     }
@@ -50,9 +51,26 @@ function App() {
     setSearchResults(results);
   };
 
+  // 🧪 ===== MODO SECCIÓN DE PRUEBA =====
+  if (showTestSection) {
+    return (
+      <div className="app-container">
+        <button
+          onClick={() => setShowTestSection(false)}
+          className="back-button"
+          style={{ marginBottom: "20px" }}
+        >
+          ⬅ Volver al MVP
+        </button>
+        <TestSection />
+      </div>
+    );
+  }
+
+  // ===== MVP =====
   return (
     <div className="app-container">
-      {/* === ENCABEZADO === */}
+      {/* ENCABEZADO */}
       <header className="header">
         <div>
           <h1>Contador 4.0</h1>
@@ -62,7 +80,21 @@ function App() {
         </div>
       </header>
 
-      {/* === BUSCADOR === */}
+      {/* 🧪 Botón para acceder a la sección de pruebas */}
+      <button
+        onClick={() => setShowTestSection(true)}
+        className="category-button"
+        style={{
+          background: "#E66E33",
+          color: "white",
+          fontWeight: "bold",
+          marginBottom: "20px",
+        }}
+      >
+        🧪 Ir a Sección de Pruebas
+      </button>
+
+      {/* BUSCADOR */}
       <div className="search-bar">
         <input
           type="text"
@@ -77,7 +109,7 @@ function App() {
         )}
       </div>
 
-      {/* === RESULTADOS DE BÚSQUEDA === */}
+      {/* RESULTADOS DE BÚSQUEDA */}
       {searchResults.length > 0 && (
         <div className="prompt-list">
           {searchResults.map((p, i) => (
@@ -92,7 +124,7 @@ function App() {
         </div>
       )}
 
-      {/* === CATEGORÍAS === */}
+      {/* CATEGORÍAS */}
       {!selectedCategory && !selectedSubcategory && searchResults.length === 0 && (
         <div className="category-list">
           {promptsData.map((category, index) => (
@@ -110,7 +142,7 @@ function App() {
         </div>
       )}
 
-      {/* === SUBCATEGORÍAS === */}
+      {/* SUBCATEGORÍAS */}
       {selectedCategory && !selectedSubcategory && (
         <div className="subcategoria-list">
           <button className="back-button" onClick={handleBack}>
@@ -128,7 +160,7 @@ function App() {
         </div>
       )}
 
-      {/* === PROMPTS === */}
+      {/* PROMPTS */}
       {selectedSubcategory && (
         <div className="prompt-list">
           <button className="back-button" onClick={handleBack}>
@@ -146,7 +178,7 @@ function App() {
         </div>
       )}
 
-      {/* === BLOQUES INFORMATIVOS === */}
+      {/* BLOQUES INFORMATIVOS */}
       {!selectedCategory && searchResults.length === 0 && (
         <>
           <div className="info-box">
@@ -166,10 +198,10 @@ function App() {
         </>
       )}
 
-      {/* === FOOTER === */}
+      {/* FOOTER */}
       <footer className="footer">
         <p>
-          <b>Contador 4.0 Express</b> es propiedad intelectual de{" "}
+          <b>Contador 4.0 Express</b> — propiedad intelectual de{" "}
           <a
             href="https://jairoamaya.co"
             target="_blank"
@@ -182,7 +214,6 @@ function App() {
           >
             Jairo Amaya - Full Stack Marketer
           </a>
-          . Todos los derechos reservados.
         </p>
       </footer>
     </div>

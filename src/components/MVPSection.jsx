@@ -51,20 +51,12 @@ function MVPSection() {
   return (
     <div className="app-container">
       {/* ENCABEZADO */}
-      <header className="header">
-        <div>
-          <h1>Contador 4.0</h1>
-          <p className="subtitle">
-            Sistema de Transformación con IA para Contadores
-          </p>
-        </div>
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png"
-          alt="Asistente"
-          className="assistant-avatar"
-          style={{ width: "120px", height: "auto" }}
-        />
-      </header>
+     <header className="header">
+  <div>
+    <h1>Contador 4.0</h1>
+    <p>Sistema de Transformación con IA para Contadores</p>
+  </div>
+</header>
 
       {/* BUSCADOR */}
       <div className="search-bar">

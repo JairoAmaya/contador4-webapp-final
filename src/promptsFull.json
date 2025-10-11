@@ -1,59 +1,67 @@
-[
-  {
-    "category": "Análisis Financiero Estratégico",
-    "subcategories": [
+{
+  "analisis_financiero": {
+    "title": "Análisis Financiero Estratégico",
+    "prompts": [
       {
-        "title": "Proyecciones y Escenarios",
-        "prompts": [
-          {
-            "title": "Actúa como CFO Senior",
-            "prompt": "Actúa como un CFO senior. Realiza un diagnóstico financiero integral para este cliente: {{details}}."
-          },
-          {
-            "title": "Proyecta flujo de caja",
-            "prompt": "Proyecta el flujo de caja a 6 meses para: {{details}}."
-          },
-          {
-            "title": "Calcula ratios financieros",
-            "prompt": "Calcula e interpreta los principales ratios financieros para: {{details}}."
-          }
-        ]
+        "title": "Análisis Integral de Estados Financieros",
+        "text": "Actúa como un analista financiero senior. Analiza los estados financieros adjuntos (balance general, estado de resultados y estado de cambios en el patrimonio) de los últimos 3 años. Identifica las 5 tendencias más significativas, evalúa la salud financiera general de la empresa, y proporciona 3 recomendaciones estratégicas basadas en tu análisis. Incluye comparaciones año a año y explica el impacto de cada hallazgo en la posición competitiva de la empresa."
       },
       {
-        "title": "Modelos y Rentabilidad",
-        "prompts": [
-          {
-            "title": "Calcula punto de equilibrio",
-            "prompt": "Calcula el punto de equilibrio de: {{details}}."
-          },
-          {
-            "title": "Análisis de escenarios",
-            "prompt": "Realiza un análisis de escenarios para: {{details}}."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "category": "Comunicación Empresarial",
-    "subcategories": [
+        "title": "Análisis Comparativo",
+        "text": "Compara los estados financieros de esta empresa con los de sus 3 principales competidores en el sector. Identifica fortalezas y debilidades relativas en términos de estructura de capital, eficiencia operativa y posición de liquidez. Proporciona un ranking de desempeño financiero y explica qué métricas clave determinan la posición de cada empresa en el mercado."
+      },
       {
-        "title": "Cartas y Comunicaciones",
-        "prompts": [
-          {
-            "title": "Redacta carta profesional",
-            "prompt": "Redacta una carta profesional dirigida al cliente explicando: {{details}}."
-          },
-          {
-            "title": "Correo recordatorio",
-            "prompt": "Escribe un correo recordatorio para: {{details}}."
-          },
-          {
-            "title": "Mensaje de negociación",
-            "prompt": "Redacta un mensaje para negociar honorarios con un cliente: {{details}}."
-          }
-        ]
+        "title": "Detección de Anomalías",
+        "text": "Examina estos estados financieros buscando inconsistencias, irregularidades o señales de alerta. Analiza la coherencia entre las diferentes partidas, identifica variaciones inusuales period-over-period, y evalúa la calidad de los earnings. Proporciona un informe de due diligence destacando cualquier área que requiera investigación adicional o aclaración por parte de la gerencia."
+      },
+      {
+        "title": "Análisis de Sostenibilidad",
+        "text": "Analiza el estado de flujo de efectivo de los últimos 5 años, enfocándote en la sostenibilidad de la generación de efectivo. Evalúa la calidad del flujo operativo, identifica patrones estacionales, y determina si la empresa puede mantener sus operaciones, inversiones y pagos de dividendos sin financiamiento externo. Incluye proyecciones de flujo libre de efectivo para los próximos 2 años."
+      },
+      {
+        "title": "Optimización de Capital de Trabajo",
+        "text": "Examina los componentes del flujo de efectivo operativo, particularmente los cambios en capital de trabajo. Identifica oportunidades de optimización en cuentas por cobrar, inventarios y cuentas por pagar. Calcula el ciclo de conversión de efectivo y proporciona 5 estrategias específicas para mejorar la generación de efectivo operativo sin comprometer las operaciones."
+      },
+      {
+        "title": "Evaluación de Capacidad de Inversión",
+        "text": "Analiza la capacidad de la empresa para financiar proyectos de crecimiento basándote en su flujo de efectivo histórico y proyectado. Evalúa el equilibrio entre flujo operativo, necesidades de capex, servicio de deuda y distribuciones a accionistas. Determina el monto óptimo disponible para nuevas inversiones y recomienda una estructura de financiamiento para proyectos estratégicos."
+      },
+      {
+        "title": "Análisis de Contribución Marginal",
+        "text": "Analiza la rentabilidad de cada línea de negocio calculando márgenes brutos, contribución marginal y EBITDA por segmento. Identifica qué líneas están subsidiando a otras, evalúa la asignación de costos fijos, y determina el punto de equilibrio para cada unidad de negocio. Proporciona recomendaciones sobre qué líneas expandir, mantener o descontinuar."
+      },
+      {
+        "title": "Análisis de Valor Económico Agregado - EVA",
+        "text": "Calcula el EVA para cada línea de negocio, considerando el costo de capital específico y los activos empleados. Identifica qué segmentos están creando o destruyendo valor, analiza los drivers de rentabilidad únicos de cada línea, y propone estrategias para maximizar el valor económico total de la empresa."
+      },
+      {
+        "title": "Optimización de Portfolio de Negocios",
+        "text": "Usando la matriz BCG y análisis de rentabilidad, evalúa el portfolio de líneas de negocio. Clasifica cada segmento según su posición competitiva y atractivo del mercado, analiza la sinergia entre líneas, y desarrolla una estrategia de asignación de recursos que maximice el retorno sobre el capital invertido a nivel corporativo."
+      },
+      {
+        "title": "Dashboard de Ratios Clave",
+        "text": "Crea un dashboard ejecutivo con los 15 ratios financieros más críticos organizados en 5 categorías: liquidez, eficiencia, apalancamiento, rentabilidad y mercado. Para cada ratio, proporciona el valor actual, tendencia de 3 años, benchmark del sector, y semáforo de alerta (verde/amarillo/rojo). Incluye interpretación ejecutiva y acciones recomendadas para ratios en zona de riesgo."
+      },
+      {
+        "title": "Análisis Predictivo con Ratios",
+        "text": "Utiliza los ratios financieros históricos para desarrollar un modelo predictivo de la salud financiera futura. Identifica los ratios más correlacionados con el desempeño operativo, calcula z-scores de Altman y Piotroski F-Score, y proporciona una probabilidad de stress financiero en los próximos 12-24 meses. Incluye escenarios de sensibilidad."
+      },
+      {
+        "title": "Benchmarking Sectorial de Ratios",
+        "text": "Compara los ratios financieros de la empresa contra el percentil 25, mediana y percentil 75 de su sector industrial. Identifica en qué métricas la empresa sobresale o queda rezagada, analiza las causas estructurales de las diferencias, y establece targets realistas de mejora para alcanzar el cuartil superior en 3 años."
+      },
+      {
+        "title": "Mapa de Riesgos Integral",
+        "text": "Desarrolla un mapa comprensivo de riesgos financieros evaluando: riesgo de liquidez, riesgo crediticio, riesgo de mercado, riesgo operacional y riesgo de concentración. Para cada categoría, identifica los 3 riesgos principales, evalúa probabilidad e impacto, y propone controles preventivos y planes de contingencia. Incluye métricas de early warning para cada tipo de riesgo."
+      },
+      {
+        "title": "Stress Testing Financiero",
+        "text": "Diseña y ejecuta stress tests bajo 3 escenarios: recesión moderada, crisis sectorial y shock de tasas de interés. Evalúa el impacto en liquidez, solvencia y rentabilidad, identifica puntos de quiebre críticos, y determina las acciones de contingencia necesarias. Calcula el capital de reserva requerido para mantener operaciones bajo cada escenario adverso."
+      },
+      {
+        "title": "Sistema de Alertas Tempranas",
+        "text": "Establece un sistema de alertas tempranas basado en indicadores financieros y operativos. Define umbrales críticos para ratios clave, identifica combinaciones de métricas que históricamente preceden problemas financieros, y crea un scoring de riesgo automatizado. Proporciona un protocolo de escalamiento y acciones correctivas para cada nivel de alerta del sistema."
       }
     ]
   }
-]
+}

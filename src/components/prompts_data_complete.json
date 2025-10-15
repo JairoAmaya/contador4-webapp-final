@@ -1,0 +1,20 @@
+[
+  {
+    "nombre": "Análisis Integral de Estados Financieros",
+    "cuando": "Revisión trimestral o anual",
+    "frecuencia": "Trimestral",
+    "contenido": "Actúa como analista financiero senior. Analiza estados financieros de los últimos 3 años.\n\nANÁLISIS:\n1. Identifica 5 tendencias significativas\n2. Evalúa salud financiera\n3. Proporciona 3 recomendaciones\n4. Comparaciones año a año"
+  },
+  {
+    "nombre": "Análisis de Ratios Financieros",
+    "cuando": "Evaluación mensual",
+    "frecuencia": "Mensual", 
+    "contenido": "Calcula y analiza ratios financieros clave:\n\n1. Liquidez (corriente, prueba ácida)\n2. Endeudamiento\n3. Rentabilidad (ROE, ROA)\n4. Eficiencia operativa"
+  },
+  {
+    "nombre": "Proyección de Flujo de Caja",
+    "cuando": "Planificación financiera",
+    "frecuencia": "Mensual",
+    "contenido": "Proyecta flujo de caja a 6 meses considerando:\n\n- Ingresos esperados\n- Gastos operativos\n- Inversiones planificadas\n- Servicio de deuda"
+  }
+]

@@ -613,3 +613,6 @@ footer {
   cursor: pointer;
   color: #333;
 }
+.assistant-avatar {
+  display: none !important;
+}

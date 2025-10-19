@@ -43,7 +43,6 @@ export default function App() {
     <div className="app-container">
       {/* Header */}
       <header className="header">
-        <div className="header-icon">ðŸ“Š</div>
         <div className="header-text">
           <h1>Contador 4.0</h1>
           <p>Sistema de TransformaciÃ³n con IA para Contadores</p>

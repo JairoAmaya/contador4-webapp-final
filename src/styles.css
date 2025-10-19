@@ -616,3 +616,6 @@ footer {
 .assistant-avatar {
   display: none !important;
 }
+.quick-actions {
+  display: none !important;
+}

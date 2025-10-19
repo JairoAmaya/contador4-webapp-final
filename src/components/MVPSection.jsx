@@ -10,9 +10,11 @@ function MVPSection() {
   const [searchResults, setSearchResults] = useState([]);
 
   const handleBack = () => {
-    if (selectedSubcategory) setSelectedSubcategory(null);
-    else if (selectedCategory) setSelectedCategory(null);
-    else if (searchResults.length > 0) {
+    if (selectedSubcategory) {
+      setSelectedSubcategory(null);
+    } else if (selectedCategory) {
+      setSelectedCategory(null);
+    } else if (searchResults.length > 0) {
       setSearchResults([]);
       setSearchTerm("");
     }
@@ -44,21 +46,20 @@ function MVPSection() {
         });
       });
     });
-
     setSearchResults(results);
   };
 
   return (
     <div className="app-container">
-      {/* ENCABEZADO */}
-     <header className="header">
-  <div>
-    <h1>Contador 4.0</h1>
-    <p>Sistema de Transformación con IA para Contadores</p>
-  </div>
-</header>
+      {/* === Encabezado === */}
+      <header className="header">
+        <h1>Contador 4.0</h1>
+        <p className="subtitle">
+          Sistema de Transformación con IA para Contadores
+        </p>
+      </header>
 
-      {/* BUSCADOR */}
+      {/* === Buscador === */}
       <div className="search-bar">
         <input
           type="text"
@@ -73,20 +74,22 @@ function MVPSection() {
         )}
       </div>
 
-      {/* RESULTADOS DE BÚSQUEDA */}
+      {/* === Resultados de búsqueda === */}
       {searchResults.length > 0 && (
         <div className="prompt-list">
           {searchResults.map((p, i) => (
             <div key={i} className="prompt-card">
               <h4>{p.title}</h4>
               <p>{p.prompt}</p>
-              <button onClick={() => handleCopy(p.prompt)}>Copiar Prompt</button>
+              <button onClick={() => handleCopy(p.prompt)}>
+                Copiar Prompt
+              </button>
             </div>
           ))}
         </div>
       )}
 
-      {/* CATEGORÍAS */}
+      {/* === Categorías === */}
       {!selectedCategory && !selectedSubcategory && searchResults.length === 0 && (
         <div className="category-list">
           {promptsData.map((category, index) => (
@@ -104,7 +107,7 @@ function MVPSection() {
         </div>
       )}
 
-      {/* SUBCATEGORÍAS */}
+      {/* === Subcategorías === */}
       {selectedCategory && !selectedSubcategory && (
         <div className="subcategoria-list">
           <button className="back-button" onClick={handleBack}>
@@ -122,7 +125,7 @@ function MVPSection() {
         </div>
       )}
 
-      {/* PROMPTS */}
+      {/* === Prompts de subcategoría === */}
       {selectedSubcategory && (
         <div className="prompt-list">
           <button className="back-button" onClick={handleBack}>
@@ -140,27 +143,26 @@ function MVPSection() {
         </div>
       )}
 
-      {/* TIP DE USO */}
+      {/* === Tip de uso === */}
       <div className="info-box">
         <h3>💡 Tip de uso</h3>
         <p>
           Cada prompt está diseñado para integrarse fácilmente con ChatGPT u otras
-          herramientas de IA. Puedes personalizar variables entre corchetes [ ] según
-          tus datos o contexto.
+          herramientas de IA. Personaliza los textos entre [ ] según tu caso.
         </p>
       </div>
 
-      {/* RECOMENDACIÓN */}
+      {/* === Recomendación === */}
       <div className="info-box">
         <h3>🚀 Recomendación</h3>
         <p>
-          Explora las 7 categorías para descubrir cómo la inteligencia artificial puede
-          transformar tu práctica contable. Desde análisis financiero hasta auditoría
-          internacional — todo en un solo sistema.
+          Explora las categorías para descubrir cómo la IA puede transformar tu
+          práctica contable. Desde análisis financiero hasta auditoría — todo en
+          un solo sistema.
         </p>
       </div>
 
-      {/* FOOTER */}
+      {/* === Footer === */}
       <footer className="footer">
         <p>
           <b>Contador 4.0 Express</b> — propiedad intelectual de{" "}

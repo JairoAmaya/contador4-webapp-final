@@ -147,8 +147,8 @@ function MVPSection() {
       <div className="info-box">
         <h3>💡 Tip de uso</h3>
         <p>
-          Cada prompt está diseñado para integrarse fácilmente con ChatGPT u otras
-          herramientas de IA. Personaliza los textos entre [ ] según tu caso.
+          Cada prompt está diseñado para integrarse fácilmente con ChatGPT, Claude, Manus u otras
+          herramientas de IA. Personaliza los datos que están entre los corchetes [ ] según tu caso.
         </p>
       </div>
 

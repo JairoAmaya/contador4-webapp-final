@@ -165,7 +165,7 @@ function MVPSection() {
       {/* === Footer === */}
       <footer className="footer">
         <p>
-          <b>Contador 4.0 Express</b> — propiedad intelectual de{" "}
+          <b>Contador 4.0 Express es un complemento del E.Book Contador 4.0 Sistema de transformación con IA para contadores</b> — propiedad intelectual de{" "}
           <a
             href="https://jairoamaya.co"
             target="_blank"

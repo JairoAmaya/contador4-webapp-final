@@ -11,7 +11,7 @@ const promptsData = [
         title: "Evaluación Financiera",
         prompts: [
           {
-            title: "Análisis de Rentabilidad 1",
+            title: "Análisis de Rentabilidad",
             prompt: "Realiza un análisis de rentabilidad con base en los estados financieros del último año."
           },
           {

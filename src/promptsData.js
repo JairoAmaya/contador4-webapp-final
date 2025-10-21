@@ -1,10 +1,4 @@
-// src/promptsData.js
-// ✅ MVP FUNCIONAL — 7 categorías, 105 prompts en versión corta con botón "Copiar Prompt"
-
-const promptsData = [
-  // 1️⃣ ANÁLISIS FINANCIERO ESTRATÉGICO
-  {
-    },
+},
           {
             title: "Controles IT y Ciberseguridad",
             prompt: "Diseña una evaluación comprehensiva de controles IT y ciberseguridad que abarque: Governance IT: (a) Evaluación de alineación entre estrategia IT y objetivos de negocio, (b) Assessment de estructura de governance IT (steering committees, roles y responsabilidades), (c) Revisión de políticas IT y marco de cumplimiento regulatorio, Controles Generales IT: (d) Evaluación de controles de acceso lógico (identity management, privileged access, segregación de funciones), (e) Assessment de gestión de cambios con metodología ITIL/DevOps, (f) Revisión de controles de operación IT (job scheduling, monitoring, incident management), (g) Evaluación de controles de respaldo y disaster recovery con testing de efectividad, Ciberseguridad: (h) Assessment de security framework (NIST, ISO 27001) y maturity model, (i) Evaluación de controles de seguridad perimetral y endpoint, (j) Testing de respuesta a incidentes y threat intelligence, (k) Revisión de programa de awareness y training en seguridad, Controles de Aplicación: (l) Evaluación de controles automatizados en aplicaciones críticas (validaciones, cálculos, interfaces), (m) Testing de integridad y completitud de datos, (n) Revisión de controles de reportes financieros automatizados, Emerging Technologies: (o) Assessment de controles en cloud computing y arquitecturas híbridas, (p) Evaluación de riesgos en IoT, AI/ML y blockchain implementations."
@@ -626,6 +620,4 @@ const promptsData = [
     ]
   },
 
-  // 6️⃣ AUDITORÍA Y CONTROL ROBUSTA   
-
-export default promptsData;
+  // 6️⃣ AUDITORÍA Y CONTROL ROBUSTO

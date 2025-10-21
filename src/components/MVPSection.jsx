@@ -150,6 +150,10 @@ function MVPSection() {
           Cada prompt especializado está diseñado para integrarse fácilmente con ChatGPT, Claude, Manus u otras
           herramientas de IA y entregarte resultados que te sorprenderán.
           Personaliza los datos que están entre los corchetes [ ] según tu caso.
+          •Cambia siempre la información entre [corchetes] por datos específicos de tu cliente
+          •Usa www.claude.ai para respuestas más profundas y análisis complejos
+          •Combina múltiples prompts según tus necesidades específicas
+          •Revisa siempre los resultados generados por IA antes de presentarlos
         </p>
       </div>
 

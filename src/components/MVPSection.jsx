@@ -1,6 +1,6 @@
 // src/components/MVPSection.jsx
 import React, { useState } from "react";
-import promptsData from "../promptsData";
+import promptsData from "../promptsData.js?v=2";
 import "../styles.css";
 
 function MVPSection() {

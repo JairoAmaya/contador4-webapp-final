@@ -11,8 +11,12 @@ const promptsData = [
         title: "Evaluación Financiera",
         prompts: [
           {
-            title: "Análisis de Rentabilidad",
-            prompt: "Realiza un análisis de rentabilidad con base en los estados financieros del último año."
+            title: "Análisis integral",
+            prompt: "Actúa como un analista financiero senior. Analiza los estados financieros adjuntos (balance general,
+              estado de resultados y estado de cambios en el patrimonio) de los últimos 3 años.
+              Identifica las 5 tendencias más significativas, evalúa la salud financiera general de la empresa, y proporciona
+              3 recomendaciones estratégicas basadas en tu análisis. Incluye
+              comparaciones año a año y explica el impacto de cada hallazgo en la posición competitiva de la empresa."
           },
           {
             title: "Diagnóstico Financiero",

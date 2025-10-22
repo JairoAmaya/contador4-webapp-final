@@ -253,23 +253,3 @@ body {
         width: 100%;
     }
 }
-/* --- EN src/styles.css --- */
-
-/* Mover el Tips Section para que no esté dentro del grid de categorías */
-.tips-section {
-    background: #eef4f9;
-    border-radius: 12px;
-    padding: 25px;
-    /* ✅ FIX: Añadir margen arriba para separarlo del grid de categorías */
-    margin-top: 40px; 
-    /* ✅ FIX: Asegurar que la lista se vea bien */
-    list-style: disc;
-    padding-left: 45px;
-}
-.tips-section ul {
-    list-style: disc;
-    padding-left: 20px;
-}
-.tips-section li {
-    margin-bottom: 5px;
-}

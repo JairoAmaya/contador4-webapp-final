@@ -279,3 +279,22 @@ body {
     list-style: disc; /* Usar puntos */
     padding-left: 20px;
 }
+/* --- ESTILOS DEL FOOTER --- */
+.app-footer {
+    text-align: center;
+    padding: 30px 0 20px;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 50px;
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+.app-footer a {
+    color: #ff6a24;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.app-footer a:hover {
+    text-decoration: underline;
+}

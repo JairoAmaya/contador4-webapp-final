@@ -52,7 +52,7 @@ export default function App() {
       );
       setSearchResults(results);
     } else {
-      // Limpiar resultados al vacío
+      // Limpiar resultados al vacío. Esto garantiza que renderContent caiga en la Vista Inicial.
       setSearchResults([]);
     }
   };
@@ -64,7 +64,7 @@ export default function App() {
       setSelectedCategory(null);
       setSelectedSubcategory(null);
     } else if (searchTerm) {
-      // FIX: Volver a la vista inicial limpiando el buscador
+      // FIX CRÍTICO: El botón Volver en la búsqueda debe llevar a la Vista Inicial
       setSearchTerm('');
       setSearchResults([]);
     }
@@ -79,7 +79,8 @@ export default function App() {
   // Lógica para renderizar el contenido principal
   const renderContent = () => {
     
-    // 1. VISTA DE BÚSQUEDA (Máxima Prioridad)
+    // 1. VISTA DE BÚSQUEDA (Máxima Prioridad si hay un término activo)
+    // El Buscador siempre tiene prioridad si searchTerm > 0
     if (searchTerm.length > 0) {
         if (searchResults.length === 0) {
             return <div className="no-results">No se encontraron prompts para "{searchTerm}"</div>;
@@ -173,7 +174,7 @@ export default function App() {
     }
 
     // 4. VISTA INICIAL: CATEGORÍAS (Nivel 1) - Fallback si todos los estados son nulos
-    // Esta vista es ahora solo el grid de categorías
+    // Esta es la vista por defecto y solo se activa si NO hay búsqueda y NO hay navegación
     return (
         <div className="prompts-container category-list">
              <h2 className="main-title-selection">Selecciona una Categoría ({promptsData.length} disponibles)</h2>
@@ -188,6 +189,17 @@ export default function App() {
                     {category.title.replace(/[\d\s\W]*/, '')} ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
                 </button>
             ))}
+            {/* Tips Section */}
+            <div className="tips-section">
+                <h3>💡 Consejos para usar los prompts</h3>
+                <ul>
+                    <li>Usa la información de <strong>"Cuándo usar"</strong> para saber el contexto ideal</li>
+                    <li>La <strong>frecuencia</strong> te indica qué tan seguido deberías aplicar el prompt</li>
+                    <li>Personaliza el contenido según las necesidades específicas de tu cliente</li>
+                    <li>Usa <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> para análisis más profundos</li>
+                    <li>Combina múltiples prompts para casos complejos</li>
+                </ul>
+            </div>
         </div>
     );
   };
@@ -224,19 +236,6 @@ export default function App() {
 
         {renderContent()}
 
-        {/* ✅ FIX CRÍTICO: Tips Section fuera de renderContent */}
-        {!searchTerm && !selectedCategory && !selectedSubcategory && (
-          <div className="tips-section">
-            <h3>💡 Consejos para usar los prompts</h3>
-            <ul>
-                <li>Usa la información de <strong>"Cuándo usar"</strong> para saber el contexto ideal</li>
-                <li>La <strong>frecuencia</strong> te indica qué tan seguido deberías aplicar el prompt</li>
-                <li>Personaliza el contenido según las necesidades específicas de tu cliente</li>
-                <li>Usa <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> para análisis más profundos</li>
-                <li>Combina múltiples prompts para casos complejos</li>
-            </ul>
-          </div>
-        )}
       </main>
     </div>
   );

@@ -10,15 +10,17 @@ export default function App() {
 
   // Extraer frecuencias únicas
   const frequencies = useMemo(() => {
-    const freqs = [...new Set(promptsData.map(p => p.frecuencia))]
+    // Usamos 'frecuencia' del archivo JSON plano
+    const freqs = [...new Set(promptsData.map(p => p.frecuencia))] 
     return ['all', ...freqs]
   }, [])
 
   // Filtrar prompts
   const filteredPrompts = useMemo(() => {
     return promptsData.filter(prompt => {
+      // Usamos 'nombre' y 'contenido' del archivo JSON plano
       const matchesSearch = prompt.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           prompt.contenido.toLowerCase().includes(searchTerm.toLowerCase())
+                            prompt.contenido.toLowerCase().includes(searchTerm.toLowerCase())
       const matchesFrequency = selectedFrequency === 'all' || prompt.frecuencia === selectedFrequency
       return matchesSearch && matchesFrequency
     })
@@ -156,4 +158,3 @@ export default function App() {
     </div>
   )
 }
-

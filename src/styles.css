@@ -367,3 +367,147 @@ footer {
         width: 100%;
     }
 }
+/* --- ESTILOS MEJORADOS PARA LA FASE FINAL DE PULIDO --- */
+
+/* 1. Contenedor Principal (Flexibilidad y Resaltado) */
+.app-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* 2. Estilo Base para el Contenedor de Botones (Cuadrícula) */
+.prompts-container {
+  display: grid;
+  /* Por defecto, usar una columna simple para asegurar compatibilidad */
+  grid-template-columns: 1fr; 
+  gap: 15px; /* Espaciado uniforme */
+  margin-bottom: 30px;
+  padding: 10px 0; /* Espacio alrededor de las categorías/subcategorías */
+}
+
+/* 3. Estilos de la Vista de Categorías (Nivel 1: 7 botones) */
+.category-list {
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas grandes */
+  justify-items: stretch;
+  align-items: stretch;
+  gap: 20px;
+}
+
+/* 4. Botón Base (para Categoría y Subcategoría) */
+.filter-btn {
+  padding: 15px 20px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  transition: all 0.3s ease;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.filter-btn:hover {
+  border-color: #ff6a24;
+  box-shadow: 0 4px 8px rgba(255, 106, 36, 0.2);
+}
+
+/* 5. Estilos Específicos de Botones de Categoría (Nivel 1) */
+.category-button {
+  background: #ff6a24; /* Color principal naranja/coral */
+  color: white;
+  border: none; /* Quitar el borde, el color de fondo es el color de acento */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 85px; /* Altura fija para la estética */
+  font-size: 1.15rem;
+}
+
+/* Ajuste para centrar el ícono dentro del botón */
+.category-button span {
+    margin-right: 10px;
+}
+
+/* Hacer que el botón "Clientes Internacionales" ocupe el ancho completo */
+.category-list button:nth-last-child(1) {
+    grid-column: 1 / -1; 
+}
+
+/* 6. Ajustes de la barra de búsqueda y encabezados */
+.search-bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.search-input {
+    flex-grow: 1;
+}
+
+/* 7. Vista de Subcategorías (Nivel 2) */
+.subcategoria-list {
+    grid-template-columns: 1fr; /* Volver a una columna para mejor legibilidad en listas largas */
+    gap: 10px;
+}
+
+.subcategoria-list h2 {
+    grid-column: 1 / -1; /* Título ocupa todo el ancho */
+    margin-top: 0;
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* 8. Estilos de Tarjeta de Prompts (Nivel 3) */
+.prompt-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.prompt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.prompt-content-text {
+    white-space: pre-wrap;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+}
+
+/* MEDIA QUERIES (Responsividad) */
+@media (max-width: 992px) {
+    .category-list {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablet */
+    }
+}
+
+@media (max-width: 600px) {
+    .category-list {
+        grid-template-columns: 1fr; /* 1 columna en móvil */
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .reset-btn {
+        width: 100%;
+    }
+}

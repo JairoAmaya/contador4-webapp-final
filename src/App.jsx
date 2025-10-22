@@ -42,6 +42,7 @@ export default function App() {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
     
+    // Limpiar siempre la navegación al iniciar la búsqueda
     setSelectedCategory(null); 
     setSelectedSubcategory(null);
 
@@ -55,7 +56,7 @@ export default function App() {
     }
   };
 
-  // ✅ LÓGICA DEL BOTÓN 'VOLVER' REFORZADA
+  // ✅ LÓGICA DEL BOTÓN 'VOLVER' CORREGIDA PARA VISTA DE BÚSQUEDA
   const handleBack = () => {
     if (selectedSubcategory) {
       setSelectedSubcategory(null);
@@ -63,9 +64,11 @@ export default function App() {
       setSelectedCategory(null);
       setSelectedSubcategory(null);
     } else if (searchTerm) {
-      // ✅ Vuelve a la vista inicial limpiando la búsqueda
+      // ✅ CRÍTICO: Limpia el buscador y fuerza el retorno a la vista inicial (Nivel 1)
       setSearchTerm('');
       setSearchResults([]);
+      setSelectedCategory(null);
+      setSelectedSubcategory(null);
     }
   };
 
@@ -79,7 +82,8 @@ export default function App() {
   const renderContent = () => {
     
     // 1. VISTA DE BÚSQUEDA (Si hay un término activo)
-    if (searchTerm) {
+    // Se muestra esta vista SIEMPRE que searchTerm > 0
+    if (searchTerm.length > 0) {
         if (searchResults.length === 0) {
             return <div className="no-results">No se encontraron prompts para "{searchTerm}"</div>;
         }
@@ -186,7 +190,7 @@ export default function App() {
                     {category.title.replace(/[\d\s\W]*/, '')} ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
                 </button>
             ))}
-            {/* Tips Section */}
+            {/* Tips Section (colocado aquí para fluidez) */}
             <div className="tips-section">
                 <h3>💡 Consejos para usar los prompts</h3>
                 <ul>
@@ -221,7 +225,8 @@ export default function App() {
           />
           
           {/* Botón de Reset/Volver */}
-          {(searchTerm || selectedCategory || selectedSubcategory) && (
+          {/* Muestra el botón si hay algo seleccionado O si hay una búsqueda activa */}
+          {(searchTerm.length > 0 || selectedCategory || selectedSubcategory) && (
             <button 
               className="reset-btn volver-btn"
               onClick={handleBack}

@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import './styles.css';
 import promptsData from './promptsData'; 
 
-// [Funciones Auxiliares omitidas para concisión, asumiendo que están correctas]
+// [Funciones Auxiliares omitidas, asumiendo que están correctas]
 const flattenAndAssignIds = (data) => {
   const flattened = [];
   data.forEach(category => {
@@ -42,7 +42,6 @@ export default function App() {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
     
-    // Limpiar siempre la navegación al iniciar la búsqueda
     setSelectedCategory(null); 
     setSelectedSubcategory(null);
 
@@ -56,7 +55,6 @@ export default function App() {
     }
   };
 
-  // ✅ LÓGICA DEL BOTÓN 'VOLVER' CORREGIDA PARA VISTA DE BÚSQUEDA
   const handleBack = () => {
     if (selectedSubcategory) {
       setSelectedSubcategory(null);
@@ -64,7 +62,6 @@ export default function App() {
       setSelectedCategory(null);
       setSelectedSubcategory(null);
     } else if (searchTerm) {
-      // ✅ CRÍTICO: Limpia el buscador y fuerza el retorno a la vista inicial (Nivel 1)
       setSearchTerm('');
       setSearchResults([]);
       setSelectedCategory(null);
@@ -81,8 +78,7 @@ export default function App() {
   // Lógica para renderizar el contenido principal
   const renderContent = () => {
     
-    // 1. VISTA DE BÚSQUEDA (Si hay un término activo)
-    // Se muestra esta vista SIEMPRE que searchTerm > 0
+    // 1. VISTA DE BÚSQUEDA 
     if (searchTerm.length > 0) {
         if (searchResults.length === 0) {
             return <div className="no-results">No se encontraron prompts para "{searchTerm}"</div>;
@@ -215,17 +211,18 @@ export default function App() {
       <main>
         
         <div className="filters-container search-bar">
-          {/* Input de Búsqueda */}
-          <input
-            type="text"
-            placeholder="Buscar por nombre o contenido..."
-            className="search-input"
-            value={searchTerm}
-            onChange={handleSearch} 
-          />
+          {/* Input de Búsqueda: Visible solo si NO hay navegación activa */}
+          {!selectedCategory && !selectedSubcategory && (
+            <input
+              type="text"
+              placeholder="Buscar por nombre o contenido..."
+              className="search-input"
+              value={searchTerm}
+              onChange={handleSearch} 
+            />
+          )}
           
-          {/* Botón de Reset/Volver */}
-          {/* Muestra el botón si hay algo seleccionado O si hay una búsqueda activa */}
+          {/* Botón de Reset/Volver: Visible en todos los estados donde no es la página inicial */}
           {(searchTerm.length > 0 || selectedCategory || selectedSubcategory) && (
             <button 
               className="reset-btn volver-btn"

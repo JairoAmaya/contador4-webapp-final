@@ -38,27 +38,24 @@ export default function App() {
   const allPrompts = useMemo(() => flattenAndAssignIds(promptsData), []);
   const totalPrompts = useMemo(() => getTotalPrompts(promptsData), []);
 
-  // ✅ LÓGICA DE BÚSQUEDA CORREGIDA Y SIMPLIFICADA
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
     
-    // Limpiar siempre la navegación al iniciar la búsqueda
     setSelectedCategory(null); 
     setSelectedSubcategory(null);
-    
-    // Si hay un término de búsqueda, filtramos
+
     if (term.length > 0) {
       const results = allPrompts.filter(p => 
         p.title.toLowerCase().includes(term) || p.prompt.toLowerCase().includes(term)
       );
       setSearchResults(results);
     } else {
-      // Si el término está vacío, se limpia todo y se vuelve a la vista inicial (renderContent se encarga)
       setSearchResults([]);
     }
   };
 
+  // ✅ LÓGICA DEL BOTÓN 'VOLVER' REFORZADA
   const handleBack = () => {
     if (selectedSubcategory) {
       setSelectedSubcategory(null);
@@ -66,6 +63,7 @@ export default function App() {
       setSelectedCategory(null);
       setSelectedSubcategory(null);
     } else if (searchTerm) {
+      // ✅ Vuelve a la vista inicial limpiando la búsqueda
       setSearchTerm('');
       setSearchResults([]);
     }
@@ -81,8 +79,7 @@ export default function App() {
   const renderContent = () => {
     
     // 1. VISTA DE BÚSQUEDA (Si hay un término activo)
-    // El Buscador siempre tiene prioridad si searchTerm > 0
-    if (searchTerm.length > 0) {
+    if (searchTerm) {
         if (searchResults.length === 0) {
             return <div className="no-results">No se encontraron prompts para "{searchTerm}"</div>;
         }
@@ -189,7 +186,7 @@ export default function App() {
                     {category.title.replace(/[\d\s\W]*/, '')} ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
                 </button>
             ))}
-            {/* Tips Section (colocado aquí para fluidez) */}
+            {/* Tips Section */}
             <div className="tips-section">
                 <h3>💡 Consejos para usar los prompts</h3>
                 <ul>

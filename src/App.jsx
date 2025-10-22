@@ -1,7 +1,7 @@
 // src/App.jsx
 
 import React, { useState } from 'react';
-import promptsData from './promptsData'; // IMPORTA LA DATA ANIDADA DESDE EL ARCHIVO JS
+import promptsData from './promptsData'; // Importa la data anidada
 import './styles.css';
 
 export default function App() {
@@ -17,8 +17,12 @@ export default function App() {
       category.subcategories.forEach(sub => {
         sub.prompts.forEach(p => {
           if (p.title.toLowerCase().includes(term) || p.prompt.toLowerCase().includes(term)) {
-            // Asegura que el prompt tenga un nombre de subcategoría para referencia
-            results.push({...p, subTitle: sub.title}); 
+            // Se asegura de adjuntar el nombre de la CATEGORÍA y SUB-CATEGORÍA
+            results.push({
+                ...p, 
+                categoryTitle: category.title, 
+                subTitle: sub.title
+            }); 
           }
         });
       });
@@ -41,6 +45,7 @@ export default function App() {
       setSelectedSubcategory(null);
     } else if (selectedCategory) {
       setSelectedCategory(null);
+      setSelectedSubcategory(null); // Asegura que ambos se limpien al volver
     } else if (searchResults.length > 0) {
       setSearchResults([]);
       setSearchTerm('');
@@ -55,6 +60,14 @@ export default function App() {
   const totalPrompts = promptsData.reduce((count, category) => {
     return count + category.subcategories.reduce((subCount, sub) => subCount + sub.prompts.length, 0);
   }, 0);
+
+  // Determinar el título de la vista actual (para la barra de búsqueda)
+  const currentViewTitle = () => {
+    if (selectedSubcategory) return selectedSubcategory.title;
+    if (selectedCategory) return selectedCategory.title;
+    if (searchResults.length > 0) return 'Resultados de Búsqueda';
+    return 'Biblioteca de Prompts';
+  };
 
   return (
     <div className="app-container">
@@ -71,9 +84,9 @@ export default function App() {
       <main className="main-content">
         
         <div className="section-header">
-          <h2>Biblioteca de Prompts ({totalPrompts} prompts profesionales)</h2>
+          <h2>{currentViewTitle()} ({selectedSubcategory ? selectedSubcategory.prompts.length : selectedCategory ? totalPrompts : totalPrompts} {selectedSubcategory ? 'prompts' : 'categorías'})</h2>
           
-          {/* Search Bar */}
+          {/* Search Bar y Botón Volver */}
           <div className="search-bar">
             <input
               type="text"
@@ -84,7 +97,7 @@ export default function App() {
             />
             {(selectedCategory || selectedSubcategory || searchResults.length > 0) && (
               <button className="reset-btn" onClick={handleBack}>
-                ⬅ {selectedSubcategory ? 'Volver a Subcategorías' : selectedCategory ? 'Volver a Categorías' : 'Limpiar Búsqueda'}
+                ⬅ {selectedSubcategory ? `Volver a ${selectedCategory.title}` : 'Volver a Categorías'}
               </button>
             )}
           </div>
@@ -103,7 +116,8 @@ export default function App() {
                     <div className="prompt-card-title">
                       <h3>{p.title}</h3>
                       <div className="prompt-metadata">
-                        <span className="badge badge-frequency">Categoría: {p.subTitle}</span>
+                        {/* Muestra la ruta de navegación: Categoría > Subcategoría */}
+                        <span className="badge badge-frequency">{p.categoryTitle.replace(/[\d\s\W]*/, '')} > {p.subTitle}</span> 
                       </div>
                     </div>
                   </div>
@@ -124,7 +138,7 @@ export default function App() {
             </>
         )}
 
-        {/* === Vista Principal: Categorías === */}
+        {/* === Vista Principal: Categorías (Muestra las 7 principales) === */}
         {!selectedCategory && searchResults.length === 0 && (
           <div className="category-list prompts-container">
             {promptsData.map((category, index) => (
@@ -134,13 +148,13 @@ export default function App() {
                 onClick={() => setSelectedCategory(category)}
               >
                 <span style={{ fontSize: "1.5rem", marginRight: "10px" }}>{category.icon}</span>
-                {category.title} ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
+                {category.title.replace(/[\d\s\W]*/, '')} ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
               </button>
             ))}
           </div>
         )}
 
-        {/* === Vista Secundaria: Subcategorías === */}
+        {/* === Vista Secundaria: Subcategorías (Muestra las 5) === */}
         {selectedCategory && !selectedSubcategory && searchResults.length === 0 && (
           <div className="subcategoria-list prompts-container">
             {selectedCategory.subcategories.map((sub, i) => (
@@ -155,7 +169,7 @@ export default function App() {
           </div>
         )}
 
-        {/* === Vista Final: Prompts de Subcategoría === */}
+        {/* === Vista Final: Prompts de Subcategoría (Muestra los 3 detallados) === */}
         {selectedSubcategory && searchResults.length === 0 && (
           <div className="prompt-list prompts-container">
             {selectedSubcategory.prompts.map((prompt, i) => (

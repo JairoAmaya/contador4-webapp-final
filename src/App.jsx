@@ -1,45 +1,60 @@
-import React, { useState, useMemo } from 'react'
-import './styles.css'
-import promptsData from './data/prompts_data_complete.json'
+// src/App.jsx
+
+import React, { useState } from 'react';
+import promptsData from './promptsData'; // IMPORTA LA DATA ANIDADA DESDE EL ARCHIVO JS
+import './styles.css';
 
 export default function App() {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedFrequency, setSelectedFrequency] = useState('all')
-  const [expandedPrompts, setExpandedPrompts] = useState({})
-  const [copiedPrompts, setCopiedPrompts] = useState({})
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  
+  // Función para aplanar la data y buscar en todas las categorías
+  const searchAllPrompts = (term) => {
+    const results = [];
+    promptsData.forEach(category => {
+      category.subcategories.forEach(sub => {
+        sub.prompts.forEach(p => {
+          if (p.title.toLowerCase().includes(term) || p.prompt.toLowerCase().includes(term)) {
+            // Asegura que el prompt tenga un nombre de subcategoría para referencia
+            results.push({...p, subTitle: sub.title}); 
+          }
+        });
+      });
+    });
+    setSearchResults(results);
+  };
 
-  // Extraer frecuencias únicas
-  const frequencies = useMemo(() => {
-    // Usamos 'frecuencia' del archivo JSON plano
-    const freqs = [...new Set(promptsData.map(p => p.frecuencia))] 
-    return ['all', ...freqs]
-  }, [])
+  const handleSearch = (e) => {
+    const term = e.target.value.toLowerCase();
+    setSearchTerm(term);
+    if (term.length > 2) {
+      searchAllPrompts(term);
+    } else {
+      setSearchResults([]);
+    }
+  };
 
-  // Filtrar prompts
-  const filteredPrompts = useMemo(() => {
-    return promptsData.filter(prompt => {
-      // Usamos 'nombre' y 'contenido' del archivo JSON plano
-      const matchesSearch = prompt.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            prompt.contenido.toLowerCase().includes(searchTerm.toLowerCase())
-      const matchesFrequency = selectedFrequency === 'all' || prompt.frecuencia === selectedFrequency
-      return matchesSearch && matchesFrequency
-    })
-  }, [searchTerm, selectedFrequency])
+  const handleBack = () => {
+    if (selectedSubcategory) {
+      setSelectedSubcategory(null);
+    } else if (selectedCategory) {
+      setSelectedCategory(null);
+    } else if (searchResults.length > 0) {
+      setSearchResults([]);
+      setSearchTerm('');
+    }
+  };
 
-  const togglePrompt = (index) => {
-    setExpandedPrompts(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }))
-  }
+  const handleCopy = (prompt) => {
+    navigator.clipboard.writeText(prompt);
+  };
 
-  const copyPrompt = (content, index) => {
-    navigator.clipboard.writeText(content)
-    setCopiedPrompts(prev => ({ ...prev, [index]: true }))
-    setTimeout(() => {
-      setCopiedPrompts(prev => ({ ...prev, [index]: false }))
-    }, 2000)
-  }
+  // Contar el número total de prompts
+  const totalPrompts = promptsData.reduce((count, category) => {
+    return count + category.subcategories.reduce((subCount, sub) => subCount + sub.prompts.length, 0);
+  }, 0);
 
   return (
     <div className="app-container">
@@ -54,8 +69,9 @@ export default function App() {
 
       {/* Main Content */}
       <main className="main-content">
+        
         <div className="section-header">
-          <h2>Biblioteca de Prompts ({promptsData.length} prompts profesionales)</h2>
+          <h2>Biblioteca de Prompts ({totalPrompts} prompts profesionales)</h2>
           
           {/* Search Bar */}
           <div className="search-bar">
@@ -63,86 +79,108 @@ export default function App() {
               type="text"
               placeholder="🔍 Buscar prompts..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={handleSearch}
               className="search-input"
             />
+            {(selectedCategory || selectedSubcategory || searchResults.length > 0) && (
+              <button className="reset-btn" onClick={handleBack}>
+                ⬅ {selectedSubcategory ? 'Volver a Subcategorías' : selectedCategory ? 'Volver a Categorías' : 'Limpiar Búsqueda'}
+              </button>
+            )}
           </div>
-
-          {/* Frequency Filter */}
-          <div className="filter-section">
-            <label className="filter-label">Filtrar por frecuencia:</label>
-            <div className="frequency-filters">
-              {frequencies.map(freq => (
-                <button
-                  key={freq}
-                  className={`filter-btn ${selectedFrequency === freq ? 'active' : ''}`}
-                  onClick={() => setSelectedFrequency(freq)}
-                >
-                  {freq === 'all' ? 'Todos' : freq}
-                </button>
+        </div>
+        
+        {/* === Vista de Búsqueda (si hay resultados) === */}
+        {searchResults.length > 0 && (
+            <>
+            <div className="results-info">
+              Mostrando {searchResults.length} resultados para "{searchTerm}"
+            </div>
+            <div className="prompts-container">
+              {searchResults.map((p, i) => (
+                <div key={i} className="prompt-card">
+                  <div className="prompt-card-header">
+                    <div className="prompt-card-title">
+                      <h3>{p.title}</h3>
+                      <div className="prompt-metadata">
+                        <span className="badge badge-frequency">Categoría: {p.subTitle}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="prompt-card-content">
+                    <div className="prompt-text">
+                      {p.prompt}
+                    </div>
+                    <button
+                      className="copy-button"
+                      onClick={() => handleCopy(p.prompt)}
+                    >
+                      📋 Copiar prompt
+                    </button>
+                  </div>
+                </div>
               ))}
             </div>
-          </div>
-        </div>
+            </>
+        )}
 
-        {/* Results Count */}
-        <div className="results-info">
-          Mostrando {filteredPrompts.length} de {promptsData.length} prompts
-        </div>
-
-        {/* Prompts List */}
-        <div className="prompts-container">
-          {filteredPrompts.map((prompt, index) => (
-            <div key={index} className="prompt-card">
-              <div 
-                className="prompt-card-header"
-                onClick={() => togglePrompt(index)}
+        {/* === Vista Principal: Categorías === */}
+        {!selectedCategory && searchResults.length === 0 && (
+          <div className="category-list prompts-container">
+            {promptsData.map((category, index) => (
+              <button
+                key={index}
+                className="filter-btn category-button active"
+                onClick={() => setSelectedCategory(category)}
               >
-                <div className="prompt-card-title">
-                  <h3>{prompt.nombre}</h3>
-                  <div className="prompt-metadata">
-                    <span className="badge badge-frequency">{prompt.frecuencia}</span>
-                    <span className="badge badge-when">📅 {prompt.cuando}</span>
-                  </div>
-                </div>
-                <div className={`expand-icon ${expandedPrompts[index] ? 'expanded' : ''}`}>
-                  ▼
-                </div>
-              </div>
-
-              {expandedPrompts[index] && (
-                <div className="prompt-card-content">
-                  <div className="prompt-text">
-                    {prompt.contenido}
-                  </div>
-                  <button
-                    className={`copy-button ${copiedPrompts[index] ? 'copied' : ''}`}
-                    onClick={() => copyPrompt(prompt.contenido, index)}
-                  >
-                    {copiedPrompts[index] ? '✓ Copiado' : '📋 Copiar prompt'}
-                  </button>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* No Results */}
-        {filteredPrompts.length === 0 && (
-          <div className="no-results">
-            <p>No se encontraron prompts que coincidan con tu búsqueda.</p>
-            <button 
-              className="reset-btn"
-              onClick={() => {
-                setSearchTerm('')
-                setSelectedFrequency('all')
-              }}
-            >
-              Limpiar filtros
-            </button>
+                <span style={{ fontSize: "1.5rem", marginRight: "10px" }}>{category.icon}</span>
+                {category.title} ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
+              </button>
+            ))}
           </div>
         )}
 
+        {/* === Vista Secundaria: Subcategorías === */}
+        {selectedCategory && !selectedSubcategory && searchResults.length === 0 && (
+          <div className="subcategoria-list prompts-container">
+            {selectedCategory.subcategories.map((sub, i) => (
+              <button
+                key={i}
+                className="filter-btn"
+                onClick={() => setSelectedSubcategory(sub)}
+              >
+                {sub.title} ({sub.prompts.length} prompts)
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* === Vista Final: Prompts de Subcategoría === */}
+        {selectedSubcategory && searchResults.length === 0 && (
+          <div className="prompt-list prompts-container">
+            {selectedSubcategory.prompts.map((prompt, i) => (
+              <div key={i} className="prompt-card">
+                <div className="prompt-card-header">
+                  <div className="prompt-card-title">
+                    <h3>{prompt.title}</h3>
+                  </div>
+                </div>
+                <div className="prompt-card-content">
+                  <div className="prompt-text">
+                    {prompt.prompt}
+                  </div>
+                  <button
+                    className="copy-button"
+                    onClick={() => handleCopy(prompt.prompt)}
+                  >
+                    📋 Copiar prompt
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        
         {/* Tips Section */}
         <div className="tips-section">
           <h3>💡 Consejos para usar los prompts</h3>
@@ -156,5 +194,5 @@ export default function App() {
         </div>
       </main>
     </div>
-  )
+  );
 }

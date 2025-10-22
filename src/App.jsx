@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import './styles.css';
 import promptsData from './promptsData'; 
 
-// [Funciones Auxiliares omitidas, asumiendo que están correctas]
+// Funciones Auxiliares (Se mantienen igual)
 const flattenAndAssignIds = (data) => {
   const flattened = [];
   data.forEach(category => {
@@ -31,42 +31,17 @@ const getTotalPrompts = (data) => {
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
   const [copiedPromptId, setCopiedPromptId] = useState(null); 
 
-  const allPrompts = useMemo(() => flattenAndAssignIds(promptsData), []);
   const totalPrompts = useMemo(() => getTotalPrompts(promptsData), []);
 
-  const handleSearch = (e) => {
-    const term = e.target.value.toLowerCase();
-    setSearchTerm(term);
-    
-    // CRÍTICO: Limpiar la navegación al iniciar la búsqueda
-    setSelectedCategory(null); 
-    setSelectedSubcategory(null);
-
-    if (term.length > 0) {
-      const results = allPrompts.filter(p => 
-        p.title.toLowerCase().includes(term) || p.prompt.toLowerCase().includes(term)
-      );
-      setSearchResults(results);
-    } else {
-      // Limpiar resultados al vacío. Esto garantiza que renderContent caiga en la Vista Inicial.
-      setSearchResults([]);
-    }
-  };
-
+  // Lógica de navegación simple sin búsqueda
   const handleBack = () => {
     if (selectedSubcategory) {
       setSelectedSubcategory(null);
     } else if (selectedCategory) {
       setSelectedCategory(null);
       setSelectedSubcategory(null);
-    } else if (searchTerm) {
-      // FIX CRÍTICO: El botón Volver en la búsqueda debe llevar a la Vista Inicial
-      setSearchTerm('');
-      setSearchResults([]);
     }
   };
 
@@ -79,46 +54,7 @@ export default function App() {
   // Lógica para renderizar el contenido principal
   const renderContent = () => {
     
-    // 1. VISTA DE BÚSQUEDA (Máxima Prioridad si hay un término activo)
-    // El Buscador siempre tiene prioridad si searchTerm > 0
-    if (searchTerm.length > 0) {
-        if (searchResults.length === 0) {
-            return <div className="no-results">No se encontraron prompts para "{searchTerm}"</div>;
-        }
-        
-        return (
-            <div className="prompt-list-container">
-                <h2 className="main-title-selection">Resultados de Búsqueda para: "{searchTerm}" ({searchResults.length})</h2>
-                
-                {searchResults.map((p, i) => (
-                    <div key={p.id || i} className="prompt-card prompt-final-view">
-                        <div className="prompt-header">
-                            <h3 className="prompt-final-title">{p.title}</h3>
-                            <span className="badge badge-frequency">
-                                {p.categoryTitle.replace(/[\d\s\W]*/, '')} {' > '} {p.subTitle}
-                            </span>
-                        </div>
-                        
-                        <div className="prompt-details">
-                            <div className="detail-section">
-                                <h4>Contenido del Prompt:</h4>
-                                <pre className="prompt-content-text">{p.prompt}</pre>
-                            </div>
-                            
-                            <button 
-                                className={`copy-button ${copiedPromptId === p.id ? 'copied' : ''}`} 
-                                onClick={() => handleCopy(p.prompt, p.id)} 
-                            >
-                                {copiedPromptId === p.id ? '✓ Copiado' : '📋 Copiar prompt'}
-                            </button>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        );
-    }
-
-    // 2. VISTA DE PROMPTS INDIVIDUALES (Nivel 3)
+    // 1. VISTA DE PROMPTS INDIVIDUALES (Nivel 3)
     if (selectedSubcategory) {
         return (
             <div className="prompt-list-container">
@@ -151,7 +87,7 @@ export default function App() {
         );
     }
 
-    // 3. VISTA DE SUB-CATEGORÍAS (Nivel 2)
+    // 2. VISTA DE SUB-CATEGORÍAS (Nivel 2)
     if (selectedCategory) {
         return (
             <div className="prompts-container subcategoria-list">
@@ -173,8 +109,7 @@ export default function App() {
         );
     }
 
-    // 4. VISTA INICIAL: CATEGORÍAS (Nivel 1) - Fallback si todos los estados son nulos
-    // Esta es la vista por defecto y solo se activa si NO hay búsqueda y NO hay navegación
+    // 3. VISTA INICIAL: CATEGORÍAS (Nivel 1) - Fallback por defecto
     return (
         <div className="prompts-container category-list">
              <h2 className="main-title-selection">Selecciona una Categoría ({promptsData.length} disponibles)</h2>
@@ -213,18 +148,11 @@ export default function App() {
       
       <main>
         
+        {/* El Input de Búsqueda y su lógica han sido eliminados */}
+        
         <div className="filters-container search-bar">
-          {/* Input de Búsqueda */}
-          <input
-            type="text"
-            placeholder="Buscar por nombre o contenido..."
-            className="search-input"
-            value={searchTerm}
-            onChange={handleSearch} 
-          />
-          
-          {/* Botón de Reset/Volver */}
-          {(searchTerm.length > 0 || selectedCategory || selectedSubcategory) && (
+          {/* Botón de Reset/Volver: Solo visible si hay algo seleccionado */}
+          {(selectedCategory || selectedSubcategory) && (
             <button 
               className="reset-btn volver-btn"
               onClick={handleBack}

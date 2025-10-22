@@ -40,22 +40,32 @@ export default function App() {
   const allPrompts = useMemo(() => flattenAndAssignIds(promptsData), []);
   const totalPrompts = useMemo(() => getTotalPrompts(promptsData), []);
 
+  // ✅ LÓGICA DE BÚSQUEDA CORREGIDA
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
     
+    // Si el término es de 3 o más caracteres, activa la búsqueda
     if (term.length > 2) {
       const results = allPrompts.filter(p => 
         p.title.toLowerCase().includes(term) || p.prompt.toLowerCase().includes(term)
       );
+      // CRÍTICO: Limpiar la navegación al buscar
       setSelectedCategory(null); 
       setSelectedSubcategory(null);
       setSearchResults(results);
     } else {
+      // Limpiar resultados si el término es muy corto
       setSearchResults([]);
+      // Si el término se vacía, volver a la vista de categorías
+      if (term.length === 0 && (selectedCategory || selectedSubcategory)) {
+          setSelectedCategory(null); 
+          setSelectedSubcategory(null);
+      }
     }
   };
 
+  // ✅ LÓGICA DE BOTÓN 'VOLVER' CORREGIDA
   const handleBack = () => {
     if (selectedSubcategory) {
       setSelectedSubcategory(null);
@@ -68,7 +78,7 @@ export default function App() {
     }
   };
 
-  // ✅ FUNCIONALIDAD DE COPIAR COMPLETA
+  // FUNCIONALIDAD DE COPIAR COMPLETA
   const handleCopy = (promptContent, id) => {
     navigator.clipboard.writeText(promptContent);
     setCopiedPromptId(id);
@@ -78,16 +88,22 @@ export default function App() {
   // Lógica para renderizar el contenido principal
   const renderContent = () => {
     
-    // 1. VISTA DE BÚSQUEDA (si hay resultados)
-    if (searchTerm && searchResults.length > 0) {
+    // 1. VISTA DE BÚSQUEDA (Si hay resultados o estamos buscando)
+    if (searchTerm || searchResults.length > 0) {
+        if (searchResults.length === 0 && searchTerm) {
+            return <div className="no-results">No se encontraron prompts para "{searchTerm}"</div>;
+        }
+        
         return (
             <div className="prompt-list-container">
                 <h2 className="main-title-selection">Resultados de Búsqueda para: "{searchTerm}"</h2>
+                
                 {searchResults.map((p, i) => (
                     <div key={p.id || i} className="prompt-card prompt-final-view">
                         <div className="prompt-header">
                             <h3 className="prompt-final-title">{p.title}</h3>
                             <span className="badge badge-frequency">
+                                {/* Se usa ' > ' para representar la ruta de navegación */}
                                 {p.categoryTitle.replace(/[\d\s\W]*/, '')} {' > '} {p.subTitle}
                             </span>
                         </div>
@@ -109,8 +125,6 @@ export default function App() {
                 ))}
             </div>
         );
-    } else if (searchTerm && searchResults.length === 0) {
-        return <div className="no-results">No se encontraron prompts para "{searchTerm}"</div>;
     }
 
     // 2. VISTA DE PROMPTS INDIVIDUALES (Nivel 3)
@@ -118,7 +132,6 @@ export default function App() {
         return (
             <div className="prompt-list-container">
                 <div className="section-header">
-                    {/* Título: Categoría > Subcategoría */}
                     <h2>{selectedCategory.title.replace(/[\d\s\W]*/, '')} > {selectedSubcategory.title}</h2>
                 </div>
                 
@@ -178,7 +191,6 @@ export default function App() {
                 <button
                     key={category.title}
                     className="filter-btn category-button"
-                    // LA CLAVE FINAL PARA RESOLVER EL PROBLEMA DEL CLIC
                     onClick={() => setSelectedCategory(category)} 
                 >
                     <span className="icon-span" role="img">{category.icon}</span>
@@ -189,7 +201,6 @@ export default function App() {
     );
   };
 
-  // return FINAL del componente App
   return (
     <div className="app-container">
       <header className="header">
@@ -206,7 +217,7 @@ export default function App() {
             placeholder="Buscar por nombre o contenido..."
             className="search-input"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleSearch} // ✅ Usa la función de búsqueda corregida
           />
           
           {/* Botón de Reset/Volver */}

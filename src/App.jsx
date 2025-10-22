@@ -3,7 +3,7 @@ import './styles.css';
 // IMPORTACIÓN CORRECTA: Usa el archivo de datos anidados
 import promptsData from './promptsData'; 
 
-// Función auxiliar para aplanar la data para la búsqueda y asignar IDs
+// Función auxiliar para aplanar la data para la búsqueda
 const flattenAndAssignIds = (data) => {
   const flattened = [];
   data.forEach(category => {
@@ -67,27 +67,55 @@ export default function App() {
     }
   };
 
-  // ✅ FUNCIONALIDAD DE COPIAR CORREGIDA Y ACTIVA
   const handleCopy = (promptContent, id) => {
     navigator.clipboard.writeText(promptContent);
     setCopiedPromptId(id);
     setTimeout(() => setCopiedPromptId(null), 2000);
   };
-
+  
   // Lógica para renderizar el contenido principal
   const renderContent = () => {
     
-    // --- Nivel 3: Vista de Prompts Individuales (después de Subcategoría) ---
+    // 1. VISTA DE BÚSQUEDA (si hay resultados)
+    if (searchTerm && searchResults.length > 0) {
+        // Renderiza los resultados de búsqueda aquí (usando la lógica de Nivel 3 para las tarjetas)
+        return (
+            <div className="prompt-list-container">
+                <h2 className="main-title-selection">Resultados de Búsqueda para: "{searchTerm}"</h2>
+                {searchResults.map((p, i) => (
+                    <div key={p.id || i} className="prompt-card prompt-final-view">
+                        <div className="prompt-header">
+                            <h3 className="prompt-final-title">{p.title}</h3>
+                        </div>
+                        
+                        <div className="prompt-details">
+                            <div className="detail-section">
+                                <h4>Contenido del Prompt:</h4>
+                                <pre className="prompt-content-text">{p.prompt}</pre>
+                            </div>
+                            
+                            <button 
+                                className={`copy-button ${copiedPromptId === p.id ? 'copied' : ''}`} 
+                                onClick={() => handleCopy(p.prompt, p.id)} 
+                            >
+                                {copiedPromptId === p.id ? '✓ Copiado' : '📋 Copiar prompt'}
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        );
+    } else if (searchTerm && searchResults.length === 0) {
+        return <div className="no-results">No se encontraron prompts para "{searchTerm}"</div>;
+    }
+
+    // 2. VISTA DE PROMPTS INDIVIDUALES (Nivel 3)
     if (selectedSubcategory) {
         return (
             <div className="prompt-list-container">
-                <div className="section-title-group">
-                    {/* Título de la vista actual */}
-                    <h2>
-                        <span className="current-category-title">{selectedCategory.title.replace(/[\d\s\W]*/, '')}</span> 
-                        {' > '} 
-                        {selectedSubcategory.title}
-                    </h2>
+                <div className="section-header">
+                    {/* Título: Categoría > Subcategoría */}
+                    <h2>{selectedCategory.title.replace(/[\d\s\W]*/, '')} > {selectedSubcategory.title}</h2>
                 </div>
                 
                 {selectedSubcategory.prompts.map((prompt, i) => (
@@ -97,17 +125,16 @@ export default function App() {
                         </div>
                         
                         <div className="prompt-details">
-                            {/* Este bloque se veía vacío/mal en la captura anterior */}
                             <div className="detail-section">
                                 <h4>Contenido del Prompt:</h4>
                                 <pre className="prompt-content-text">{prompt.prompt}</pre>
                             </div>
                             
                             <button 
-                                className={`copy-button ${copiedPromptId === prompt.title ? 'copied' : ''}`} 
-                                onClick={() => handleCopy(prompt.prompt, prompt.title)} 
+                                className={`copy-button ${copiedPromptId === (prompt.id || i) ? 'copied' : ''}`} 
+                                onClick={() => handleCopy(prompt.prompt, prompt.id || i)} 
                             >
-                                {copiedPromptId === prompt.title ? '✓ Copiado' : '📋 Copiar prompt'}
+                                {copiedPromptId === (prompt.id || i) ? '✓ Copiado' : '📋 Copiar prompt'}
                             </button>
                         </div>
                     </div>
@@ -116,7 +143,7 @@ export default function App() {
         );
     }
 
-    // --- Nivel 2: Vista de Sub-Categorías (después de Categoría) ---
+    // 3. VISTA DE SUB-CATEGORÍAS (Nivel 2)
     if (selectedCategory) {
         return (
             <div className="prompts-container subcategoria-list">
@@ -126,7 +153,6 @@ export default function App() {
                 </div>
                 
                 {selectedCategory.subcategories.map((sub, i) => (
-                    // El clic en el botón setea la Subcategoría y abre el Nivel 3
                     <button
                         key={i}
                         className="filter-btn subcategory-button"
@@ -139,34 +165,27 @@ export default function App() {
         );
     }
 
-    // --- Nivel 1: Vista Inicial (Selección de Categorías) ---
-    // Esta es la vista que se veía duplicada y que queremos mostrar al inicio
+    // 4. VISTA INICIAL: CATEGORÍAS (Nivel 1)
+    // El título "Selecciona una Categoría" es el único que debe ir aquí.
     return (
-        <>
-            <div className="section-header">
-                {/* TÍTULO CORREGIDO: Ya no se renderiza aquí el texto que causa la duplicidad */}
-            </div>
-            
-            <div className="prompts-container category-list">
-                <h2 className="main-title-selection">Selecciona una Categoría ({promptsData.length} disponibles)</h2>
-
-                {promptsData.map(category => (
-                    <button
-                        key={category.title}
-                        className="filter-btn category-button"
-                        // El clic en el botón setea la Categoría y abre el Nivel 2
-                        onClick={() => handleCategorySelect(category)} 
-                    >
-                        <span className="icon-span" role="img">{category.icon}</span>
-                        {category.title.replace(/[\d\s\W]*/, '')} ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
-                    </button>
-                ))}
-            </div>
-        </>
+        <div className="prompts-container category-list">
+             <h2 className="main-title-selection">Selecciona una Categoría ({promptsData.length} disponibles)</h2>
+             
+             {/* Renderizado de los botones de categorías */}
+             {promptsData.map(category => (
+                <button
+                    key={category.title}
+                    className="filter-btn category-button"
+                    onClick={() => setSelectedCategory(category)} // FUNCIÓN DE CLIC REVISADA Y CONECTADA
+                >
+                    <span className="icon-span" role="img">{category.icon}</span>
+                    {category.title.replace(/[\d\s\W]*/, '')} ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
+                </button>
+            ))}
+        </div>
     );
   };
 
-  // return FINAL del componente App
   return (
     <div className="app-container">
       <header className="header">

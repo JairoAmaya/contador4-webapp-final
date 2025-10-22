@@ -653,4 +653,7 @@ const promptsData = [
   }
 ];
 
+// src/promptsData.js
+// ... (Toda la data anidada de 7 categorías) ...
+
 export default promptsData;

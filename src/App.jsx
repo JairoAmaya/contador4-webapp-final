@@ -9,10 +9,11 @@ const flattenAndAssignIds = (data) => {
   data.forEach(category => {
     category.subcategories.forEach(subcategory => {
       subcategory.prompts.forEach((prompt, index) => {
-        // Asignamos un ID único y propiedades de navegación para la búsqueda
+        // Genera un ID único para cada prompt, vital para la función de Copiar
+        const uniqueId = `${category.title.substring(0,2)}-${subcategory.title.substring(0,2)}-${index}`; 
         flattened.push({
           ...prompt,
-          id: `${category.title.substring(0,2)}-${subcategory.title.substring(0,2)}-${index}`, // ID corto para tracking
+          id: uniqueId,
           categoryTitle: category.title,
           subTitle: subcategory.title,
         });
@@ -67,6 +68,7 @@ export default function App() {
     }
   };
 
+  // ✅ FUNCIONALIDAD DE COPIAR COMPLETA
   const handleCopy = (promptContent, id) => {
     navigator.clipboard.writeText(promptContent);
     setCopiedPromptId(id);
@@ -78,7 +80,6 @@ export default function App() {
     
     // 1. VISTA DE BÚSQUEDA (si hay resultados)
     if (searchTerm && searchResults.length > 0) {
-        // Renderiza los resultados de búsqueda aquí (usando la lógica de Nivel 3 para las tarjetas)
         return (
             <div className="prompt-list-container">
                 <h2 className="main-title-selection">Resultados de Búsqueda para: "{searchTerm}"</h2>
@@ -86,6 +87,9 @@ export default function App() {
                     <div key={p.id || i} className="prompt-card prompt-final-view">
                         <div className="prompt-header">
                             <h3 className="prompt-final-title">{p.title}</h3>
+                            <span className="badge badge-frequency">
+                                {p.categoryTitle.replace(/[\d\s\W]*/, '')} {' > '} {p.subTitle}
+                            </span>
                         </div>
                         
                         <div className="prompt-details">
@@ -119,7 +123,7 @@ export default function App() {
                 </div>
                 
                 {selectedSubcategory.prompts.map((prompt, i) => (
-                    <div key={i} className="prompt-card prompt-final-view">
+                    <div key={prompt.title} className="prompt-card prompt-final-view">
                         <div className="prompt-header">
                             <h3 className="prompt-final-title">{prompt.title}</h3>
                         </div>
@@ -131,10 +135,10 @@ export default function App() {
                             </div>
                             
                             <button 
-                                className={`copy-button ${copiedPromptId === (prompt.id || i) ? 'copied' : ''}`} 
-                                onClick={() => handleCopy(prompt.prompt, prompt.id || i)} 
+                                className={`copy-button ${copiedPromptId === prompt.title ? 'copied' : ''}`} 
+                                onClick={() => handleCopy(prompt.prompt, prompt.title)} 
                             >
-                                {copiedPromptId === (prompt.id || i) ? '✓ Copiado' : '📋 Copiar prompt'}
+                                {copiedPromptId === prompt.title ? '✓ Copiado' : '📋 Copiar prompt'}
                             </button>
                         </div>
                     </div>
@@ -166,17 +170,16 @@ export default function App() {
     }
 
     // 4. VISTA INICIAL: CATEGORÍAS (Nivel 1)
-    // El título "Selecciona una Categoría" es el único que debe ir aquí.
     return (
         <div className="prompts-container category-list">
              <h2 className="main-title-selection">Selecciona una Categoría ({promptsData.length} disponibles)</h2>
              
-             {/* Renderizado de los botones de categorías */}
              {promptsData.map(category => (
                 <button
                     key={category.title}
                     className="filter-btn category-button"
-                    onClick={() => setSelectedCategory(category)} // FUNCIÓN DE CLIC REVISADA Y CONECTADA
+                    // LA CLAVE FINAL PARA RESOLVER EL PROBLEMA DEL CLIC
+                    onClick={() => setSelectedCategory(category)} 
                 >
                     <span className="icon-span" role="img">{category.icon}</span>
                     {category.title.replace(/[\d\s\W]*/, '')} ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
@@ -186,6 +189,7 @@ export default function App() {
     );
   };
 
+  // return FINAL del componente App
   return (
     <div className="app-container">
       <header className="header">

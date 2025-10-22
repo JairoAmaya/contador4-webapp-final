@@ -42,6 +42,7 @@ export default function App() {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
     
+    // CRÍTICO: Limpiar la navegación al iniciar la búsqueda
     setSelectedCategory(null); 
     setSelectedSubcategory(null);
 
@@ -51,10 +52,15 @@ export default function App() {
       );
       setSearchResults(results);
     } else {
+      // Limpiar resultados al vacío
       setSearchResults([]);
+      // ✅ Solución: Al limpiar el campo, aseguramos que la navegación no esté activa
+      setSelectedCategory(null); 
+      setSelectedSubcategory(null);
     }
   };
 
+  // El botón Volver es ahora más simple: siempre limpia la búsqueda si está activa.
   const handleBack = () => {
     if (selectedSubcategory) {
       setSelectedSubcategory(null);
@@ -62,10 +68,9 @@ export default function App() {
       setSelectedCategory(null);
       setSelectedSubcategory(null);
     } else if (searchTerm) {
+      // Si estamos en la vista de búsqueda, Volver lleva a la vista inicial limpia
       setSearchTerm('');
       setSearchResults([]);
-      setSelectedCategory(null);
-      setSelectedSubcategory(null);
     }
   };
 
@@ -78,7 +83,8 @@ export default function App() {
   // Lógica para renderizar el contenido principal
   const renderContent = () => {
     
-    // 1. VISTA DE BÚSQUEDA 
+    // 1. VISTA DE BÚSQUEDA (Máxima Prioridad)
+    // Se activa si searchTerm > 0. Si se borra el término (searchTerm = ''), pasa al punto 4.
     if (searchTerm.length > 0) {
         if (searchResults.length === 0) {
             return <div className="no-results">No se encontraron prompts para "{searchTerm}"</div>;
@@ -171,7 +177,7 @@ export default function App() {
         );
     }
 
-    // 4. VISTA INICIAL: CATEGORÍAS (Nivel 1)
+    // 4. VISTA INICIAL: CATEGORÍAS (Nivel 1) - Fallback si todos los estados son nulos
     return (
         <div className="prompts-container category-list">
              <h2 className="main-title-selection">Selecciona una Categoría ({promptsData.length} disponibles)</h2>
@@ -186,7 +192,7 @@ export default function App() {
                     {category.title.replace(/[\d\s\W]*/, '')} ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
                 </button>
             ))}
-            {/* Tips Section (colocado aquí para fluidez) */}
+            {/* Tips Section */}
             <div className="tips-section">
                 <h3>💡 Consejos para usar los prompts</h3>
                 <ul>
@@ -211,18 +217,17 @@ export default function App() {
       <main>
         
         <div className="filters-container search-bar">
-          {/* Input de Búsqueda: Visible solo si NO hay navegación activa */}
-          {!selectedCategory && !selectedSubcategory && (
-            <input
-              type="text"
-              placeholder="Buscar por nombre o contenido..."
-              className="search-input"
-              value={searchTerm}
-              onChange={handleSearch} 
-            />
-          )}
+          {/* Input de Búsqueda */}
+          <input
+            type="text"
+            placeholder="Buscar por nombre o contenido..."
+            className="search-input"
+            value={searchTerm}
+            onChange={handleSearch} 
+          />
           
-          {/* Botón de Reset/Volver: Visible en todos los estados donde no es la página inicial */}
+          {/* Botón de Reset/Volver */}
+          {/* CRÍTICO: El botón aparece si hay algo activo */}
           {(searchTerm.length > 0 || selectedCategory || selectedSubcategory) && (
             <button 
               className="reset-btn volver-btn"

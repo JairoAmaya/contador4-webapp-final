@@ -264,3 +264,18 @@ body {
     /* ✅ FIX: Centrar el contenido cuando solo está el botón Volver */
     justify-content: center; 
 }
+/* --- EN src/styles.css --- */
+
+/* 1. Mover los Tips fuera del flujo de cuadrícula (para que ocupe todo el ancho) */
+.tips-section {
+    /* El estilo base ya es correcto, solo ajustamos el margen superior para separarlo de los botones */
+    margin-top: 30px; 
+    /* Aseguramos que se alinee con el contenido principal */
+    grid-column: 1 / -1; 
+}
+
+/* 2. Limpiar el estilo de la lista (ya que se heredan del CSS base) */
+.tips-section ul {
+    list-style: disc; /* Usar puntos */
+    padding-left: 20px;
+}

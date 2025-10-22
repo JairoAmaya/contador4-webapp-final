@@ -1,248 +1,156 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import './styles.css';
-// IMPORTACIÓN CORREGIDA: Asumimos que el archivo de datos anidados se llama promptsData.js o está listo para ser importado como './promptsData'
+// Importación de la data anidada (7 categorías)
 import promptsData from './promptsData'; 
 
-// Función para aplanar la estructura de datos anidada
-const flattenPrompts = (data) => {
-  const flattened = [];
-  data.forEach(category => {
-    category.subcategories.forEach(subcategory => {
-      subcategory.prompts.forEach(prompt => {
-        flattened.push({
-          ...prompt,
-          categoryTitle: category.title,
-          subTitle: subcategory.title,
-          frecuencia: prompt.frecuencia, // Asegúrate que esta propiedad exista en tu promptsData.js si la quieres usar
-          cuando: prompt.cuando // Asegúrate que esta propiedad exista en tu promptsData.js si la quieres usar
-        });
-      });
-    });
-  });
-  return flattened;
+// Función auxiliar para calcular el total de prompts
+const getTotalPrompts = (data) => {
+  return data.reduce((count, category) => {
+    return count + category.subcategories.reduce((subCount, sub) => subCount + sub.prompts.length, 0);
+  }, 0);
 };
 
 export default function App() {
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
-  const [expandedPrompts, setExpandedPrompts] = useState({});
-  const [copiedPrompts, setCopiedPrompts] = useState({});
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  
+  const totalPrompts = getTotalPrompts(promptsData);
 
-  // 1. Aplanar los datos para facilitar la búsqueda
-  const allPrompts = useMemo(() => flattenPrompts(promptsData), []);
-
-  // 2. Filtrar Prompts por navegación o búsqueda
-  const filteredPrompts = useMemo(() => {
-    let results = allPrompts;
-
-    // Filtro por Búsqueda (dominante)
-    if (searchTerm) {
-      return results.filter(p => 
-        p.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.contenido.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+  // Lógica de búsqueda simple sobre la data anidada
+  const handleSearch = (e) => {
+    const term = e.target.value.toLowerCase();
+    setSearchTerm(term);
+    if (term.length > 2) {
+      const results = [];
+      promptsData.forEach(category => {
+        category.subcategories.forEach(sub => {
+          sub.prompts.forEach(p => {
+            if (p.title.toLowerCase().includes(term) || p.prompt.toLowerCase().includes(term)) {
+              results.push({...p, categoryTitle: category.title, subTitle: sub.title}); 
+            }
+          });
+        });
+      });
+      setSelectedCategory(null); // Limpia la navegación si busca
+      setSelectedSubcategory(null);
+      setSearchResults(results);
+    } else {
+      setSearchResults([]);
     }
+  };
 
-    // Filtro por Categoría
-    if (selectedCategory) {
-      results = results.filter(p => p.categoryTitle === selectedCategory.title);
-    }
-    
-    // Filtro por Subcategoría
+  const handleBack = () => {
     if (selectedSubcategory) {
-      results = results.filter(p => p.subTitle === selectedSubcategory.title);
+      setSelectedSubcategory(null);
+    } else if (selectedCategory) {
+      setSelectedCategory(null);
+      setSelectedSubcategory(null);
+    } else if (searchResults.length > 0) {
+      setSearchResults([]);
+      setSearchTerm('');
     }
-
-    return results;
-  }, [searchTerm, selectedCategory, selectedSubcategory, allPrompts]);
-
-  const togglePrompt = (id) => {
-    setExpandedPrompts(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
   };
 
-  const copyPrompt = (content, id) => {
-    navigator.clipboard.writeText(content);
-    setCopiedPrompts(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setCopiedPrompts(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
-
-  const handleCategorySelect = (category) => {
-    setSelectedCategory(category);
-    setSelectedSubcategory(null);
-  };
-
-  const handleSubcategorySelect = (subcategory) => {
-    setSelectedSubcategory(subcategory);
-  };
-
-  const resetAll = () => {
-    setSearchTerm('');
-    setSelectedCategory(null);
-    setSelectedSubcategory(null);
+  const handleCopy = (prompt) => {
+    navigator.clipboard.writeText(prompt);
   };
   
-  // Renderizado de Contenido
-
+  // Renderizado del contenido central
   const renderContent = () => {
-    // A. Vista de Búsqueda (si hay un término)
-    if (searchTerm) {
-      return (
-        <div className="prompt-list">
-          <h2>Resultados de la Búsqueda para: "{searchTerm}"</h2>
-          {filteredPrompts.map((p) => (
-            <div 
-              key={p.id} 
-              className={`prompt-card ${expandedPrompts[p.id] ? 'expanded' : ''}`}
-            >
-              <div 
-                className="prompt-header" 
-                onClick={() => togglePrompt(p.id)}
-              >
-                <div className="prompt-title-group">
-                  <h3>{p.nombre}</h3>
-                  {/* LÍNEA 120 CORREGIDA: Uso de {' > '} */}
-                  <span className="badge badge-frequency">
-                    {p.categoryTitle.replace(/[\d\s\W]*/, '')} {' > '} {p.subTitle}
-                  </span>
-                </div>
-                <div className="prompt-meta-group">
-                  <span className={`badge badge-frequency-pill ${p.frecuencia ? p.frecuencia.toLowerCase() : 'default'}`}>
-                    {p.frecuencia || 'Uso'}
-                  </span>
-                  <span className="toggle-icon">
-                    {expandedPrompts[p.id] ? '▲' : '▼'}
-                  </span>
-                </div>
-              </div>
-
-              {expandedPrompts[p.id] && (
-                <div className="prompt-details">
-                  <div className="detail-section">
-                    <h4>Cuándo usar:</h4>
-                    <p>{p.cuando || 'No especificado'}</p>
-                  </div>
-                  
-                  <div className="detail-section">
-                    <h4>Contenido del Prompt:</h4>
-                    <pre className="prompt-content-text">{p.contenido}</pre>
-                  </div>
-
-                  <button
-                    className={`copy-button ${copiedPrompts[p.id] ? 'copied' : ''}`}
-                    onClick={() => copyPrompt(p.contenido, p.id)}
-                  >
-                    {copiedPrompts[p.id] ? '✓ Copiado' : '📋 Copiar prompt'}
-                  </button>
-                </div>
-              )}
-            </div>
-          ))}
-          {filteredPrompts.length === 0 && (
-            <div className="no-results">
-              <p>No se encontraron prompts que coincidan con tu búsqueda.</p>
-            </div>
-          )}
-        </div>
-      );
-    }
     
-    // B. Vista de Prompts de Subcategoría (después de seleccionar Categoría y Subcategoría)
-    if (selectedSubcategory) {
-      return (
-        <div className="prompt-list">
-          <div className="section-header">
-            <h2>{selectedCategory.title} > {selectedSubcategory.title}</h2>
-          </div>
-          
-          {filteredPrompts.map((p) => (
-            <div 
-              key={p.id} 
-              className={`prompt-card ${expandedPrompts[p.id] ? 'expanded' : ''}`}
-            >
-              <div 
-                className="prompt-header" 
-                onClick={() => togglePrompt(p.id)}
-              >
-                <div className="prompt-title-group">
-                  <h3>{p.nombre}</h3>
-                  <span className="badge badge-frequency-pill">{p.frecuencia || 'Uso'}</span>
-                </div>
-                <div className="prompt-meta-group">
-                  <span className={`badge badge-frequency-pill ${p.frecuencia ? p.frecuencia.toLowerCase() : 'default'}`}>
-                    {p.frecuencia || 'Uso'}
-                  </span>
-                  <span className="toggle-icon">
-                    {expandedPrompts[p.id] ? '▲' : '▼'}
-                  </span>
-                </div>
-              </div>
-
-              {expandedPrompts[p.id] && (
-                <div className="prompt-details">
-                  <div className="detail-section">
-                    <h4>Cuándo usar:</h4>
-                    <p>{p.cuando || 'No especificado'}</p>
-                  </div>
-                  
-                  <div className="detail-section">
-                    <h4>Contenido del Prompt:</h4>
-                    <pre className="prompt-content-text">{p.contenido}</pre>
-                  </div>
-
-                  <button
-                    className={`copy-button ${copiedPrompts[p.id] ? 'copied' : ''}`}
-                    onClick={() => copyPrompt(p.contenido, p.id)}
-                  >
-                    {copiedPrompts[p.id] ? '✓ Copiado' : '📋 Copiar prompt'}
-                  </button>
-                </div>
-              )}
+    // A. Vista de Búsqueda
+    if (searchTerm || searchResults.length > 0) {
+        if (searchResults.length === 0 && searchTerm) {
+            return <div className="no-results">No se encontraron prompts para "{searchTerm}"</div>;
+        }
+        
+        return (
+            <div className="prompt-list prompts-container">
+                <h2>Resultados de Búsqueda ({searchResults.length})</h2>
+                {searchResults.map((p, i) => (
+                    <div key={i} className="prompt-card">
+                        <div className="prompt-header">
+                            <div className="prompt-title-group">
+                                <h3>{p.title}</h3>
+                                {/* Muestra la ruta de navegación: Categoría > Subcategoría */}
+                                <span className="badge badge-frequency">{p.categoryTitle.replace(/[\d\s\W]*/, '')} {' > '} {p.subTitle}</span>
+                            </div>
+                        </div>
+                        <div className="prompt-details">
+                            <div className="detail-section">
+                                <h4>Contenido del Prompt:</h4>
+                                <pre className="prompt-content-text">{p.prompt}</pre>
+                            </div>
+                            <button className="copy-button" onClick={() => handleCopy(p.prompt)}>
+                                📋 Copiar prompt
+                            </button>
+                        </div>
+                    </div>
+                ))}
             </div>
-          ))}
-        </div>
-      );
+        );
     }
 
-    // C. Vista de Subcategorías (después de seleccionar Categoría)
+    // B. Vista de Prompts (Nivel 3)
+    if (selectedSubcategory) {
+        return (
+            <div className="prompt-list prompts-container">
+                <h2>{selectedCategory.title} > {selectedSubcategory.title}</h2>
+                {selectedSubcategory.prompts.map((prompt, i) => (
+                    <div key={i} className="prompt-card">
+                        <div className="prompt-header">
+                            <div className="prompt-title-group">
+                                <h3>{prompt.title}</h3>
+                            </div>
+                        </div>
+                        <div className="prompt-details">
+                            <div className="detail-section">
+                                <h4>Contenido del Prompt:</h4>
+                                <pre className="prompt-content-text">{prompt.prompt}</pre>
+                            </div>
+                            <button className="copy-button" onClick={() => handleCopy(prompt.prompt)}>
+                                📋 Copiar prompt
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
+    // C. Vista de Subcategorías (Nivel 2)
     if (selectedCategory) {
-      return (
-        <div className="prompts-container subcategoria-list">
-          <div className="section-header">
-            <h2>{selectedCategory.title}</h2>
-            <p>Selecciona una subcategoría para ver los prompts:</p>
-          </div>
-          {selectedCategory.subcategories.map(subcategory => (
-            <button
-              key={subcategory.id}
-              className="filter-btn"
-              onClick={() => handleSubcategorySelect(subcategory)}
-            >
-              {subcategory.title}
-            </button>
-          ))}
-        </div>
-      );
+        return (
+            <div className="prompts-container subcategoria-list">
+                <h2>{selectedCategory.title}</h2>
+                <p>Selecciona una subcategoría para ver los prompts:</p>
+                {selectedCategory.subcategories.map((sub, i) => (
+                    <button
+                        key={i}
+                        className="filter-btn"
+                        onClick={() => setSelectedSubcategory(sub)}
+                    >
+                        {sub.title} ({sub.prompts.length} prompts)
+                    </button>
+                ))}
+            </div>
+        );
     }
 
-    // D. Vista Inicial (Selección de Categorías)
+    // D. Vista Inicial: Selección de Categorías (Nivel 1)
     return (
       <div className="prompts-container category-list">
-        <div className="section-header">
-          <h2>Selecciona una Categoría</h2>
-        </div>
+        <h2>Selecciona una Categoría ({promptsData.length} disponibles)</h2>
         {promptsData.map(category => (
           <button
-            key={category.id}
+            key={category.title}
             className="filter-btn category-button"
-            onClick={() => handleCategorySelect(category)}
+            onClick={() => setSelectedCategory(category)}
           >
-            {category.title}
+            <span style={{ fontSize: "1.5rem", marginRight: "10px" }}>{category.icon}</span>
+            {category.title.replace(/[\d\s\W]*/, '')} ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
           </button>
         ))}
       </div>
@@ -257,13 +165,13 @@ export default function App() {
         </div>
         <div className="header-text">
           <h1>Contador 4.0 Prompts</h1>
-          <p>Sistema de transformación con IA para contadores (115+ prompts)</p>
+          <p>Sistema de transformación con IA para contadores ({totalPrompts} prompts)</p>
         </div>
       </header>
       
       <main>
+        {/* Barra de Búsqueda y Volver */}
         <div className="filters-container search-bar">
-          {/* Input de Búsqueda */}
           <input
             type="text"
             placeholder="Buscar por nombre o contenido..."
@@ -272,21 +180,20 @@ export default function App() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           
-          {/* Botón de Reset/Volver */}
           {(searchTerm || selectedCategory || selectedSubcategory) && (
             <button 
               className="reset-btn"
-              onClick={resetAll}
+              onClick={handleBack}
             >
-              Volver a Categorías
+              ⬅ Volver
             </button>
           )}
         </div>
 
         {renderContent()}
 
-        {/* Tips Section (visible solo si no hay búsqueda activa) */}
-        {!searchTerm && (
+        {/* Tips Section (visible solo en vista inicial) */}
+        {!searchTerm && !selectedCategory && (
           <div className="tips-section">
             <h3>💡 Consejos para usar los prompts</h3>
             <ul>

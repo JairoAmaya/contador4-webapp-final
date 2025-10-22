@@ -1,42 +1,41 @@
-/* === 1. RESET Y CONFIGURACIÓN BASE === */
+/* === GENERAL Y RESET === */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f3f4f6;
-  line-height: 1.6;
-  color: #1f2937;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f6f7f9;
+    color: #1e293b;
+    line-height: 1.6;
 }
 
-/* --- Estructura y Header --- */
+/* === ENCABEZADO Y CONTENEDOR PRINCIPAL === */
 .app-container {
-  max-width: 1200px;
-  margin: 0 auto; /* Centra el contenido */
-  padding: 20px;
-  min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .header {
-  text-align: center;
-  padding: 20px 0 40px;
+    text-align: center;
+    padding: 20px 0 40px;
 }
 
 .header h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1f2937;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
 }
 
-/* --- Barra de Búsqueda y Botón Volver --- */
+/* === BARRA DE BÚSQUEDA Y VOLVER === */
 .search-bar {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 30px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
 .search-input {
@@ -48,6 +47,12 @@ body {
     transition: all 0.3s ease;
 }
 
+.search-input:focus {
+    outline: none;
+    border-color: #ff6a24;
+    box-shadow: 0 0 0 3px rgba(255, 106, 36, 0.15);
+}
+
 .reset-btn.volver-btn {
     background: #ff6a24;
     color: white;
@@ -56,48 +61,85 @@ body {
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    white-space: nowrap; 
+    white-space: nowrap;
+    transition: background 0.3s;
 }
+
 .reset-btn.volver-btn:hover {
     background: #e65c19;
 }
 
 
-/* === 2. ESTILOS DE NAVEGACIÓN Y BOTONES === */
+/* === TÍTULOS Y ESTRUCTURA DE NAVEGACIÓN === */
 
 .main-title-selection {
-    font-size: 1.75rem;
-    margin-top: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 10px;
     margin-bottom: 25px;
     color: #1f2937;
-    text-align: left; /* Título principal siempre alineado a la izquierda */
-    width: 100%;
 }
 
+.section-header h2 {
+    font-size: 1.5rem;
+    color: #ff6a24;
+    margin-bottom: 10px;
+}
+
+.instruction {
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+/* --- Estructura de Grids y Botones --- */
+
+/* Contenedor General que activa el Grid */
 .prompts-container {
-  display: grid;
-  gap: 20px;
-  margin-bottom: 30px;
+    display: grid;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Estilo Base para Botones (Subcategoría y Nivel de Lista) */
+.filter-btn {
+    padding: 15px 20px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    transition: all 0.3s ease;
+    text-align: left; /* Alinea el texto del botón a la izquierda */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.filter-btn:hover {
+    border-color: #ff6a24;
 }
 
 /* Nivel 1: Categorías (Cuadrícula de 3 columnas) */
 .category-list {
-  grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 10px;
 }
 
+/* Estilo de los Botones de Categoría (Tarjetas Naranjas) */
 .category-button {
-  background: #ff6a24; 
-  color: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* Alinea ícono y texto a la izquierda */
-  height: 85px; 
-  font-size: 1.15rem;
-  box-shadow: 0 4px 8px rgba(255, 106, 36, 0.3);
-  border-radius: 8px;
-  padding-left: 15px; 
-  cursor: pointer;
+    background: #ff6a24;
+    color: white;
+    border: none;
+    display: flex;
+    flex-direction: column; /* Icono arriba del texto */
+    align-items: flex-start;
+    justify-content: center;
+    height: 85px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    padding-left: 15px;
+    box-shadow: 0 4px 8px rgba(255, 106, 36, 0.3);
 }
 
 .category-button:hover {
@@ -107,12 +149,12 @@ body {
 
 .category-button .icon-span {
     font-size: 1.5rem;
-    margin-right: 10px;
+    margin-bottom: 5px;
 }
 
-/* Ocupar todo el ancho para el botón "Clientes Internacionales" */
+/* Ocupar todo el ancho para "Clientes Internacionales" */
 .category-list button:nth-last-child(1) {
-    grid-column: 1 / -1; 
+    grid-column: 1 / -1;
 }
 
 /* Nivel 2: Subcategorías (Lista vertical) */
@@ -121,24 +163,8 @@ body {
     gap: 10px;
 }
 
-.subcategory-button {
-  /* Estilos para que se vean como tarjetas planas */
-  background: white;
-  border: 1px solid #e5e7eb;
-  text-align: left;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-.subcategory-button:hover {
-    background: #fff7f2;
-    border-color: #ff6a24;
-}
 
-/* --- Nivel 3: Vista de Prompts Individuales --- */
-
-.prompt-list-container {
-    grid-template-columns: 1fr;
-    gap: 30px;
-}
+/* === PROMPTS Y BOTÓN DE COPIAR === */
 
 .prompt-card {
     background: white;
@@ -146,6 +172,7 @@ body {
     border-radius: 8px;
     padding: 25px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
 }
 
 .prompt-header {
@@ -160,18 +187,23 @@ body {
     margin: 0;
 }
 
+.detail-section h4 {
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 8px;
+}
+
 .prompt-content-text {
-    white-space: pre-wrap; /* Mantiene el formato de salto de línea */
+    white-space: pre-wrap;
     background: #f9f9f9;
     padding: 15px;
     border: 1px solid #e5e7eb;
     border-radius: 6px;
     font-family: monospace;
     font-size: 0.9rem;
-    overflow-x: auto; 
+    overflow-x: auto;
 }
 
-/* Botón Copiar */
 .copy-button {
     background: #2563eb;
     color: white;
@@ -186,9 +218,20 @@ body {
 }
 
 .copy-button.copied {
-    background: #10b981; /* Verde al copiar */
+    background: #10b981;
 }
 
+/* === TIPS SECTION === */
+.tips-section {
+    background: #eef4f9;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+.tips-section h3 {
+    color: #2563eb;
+}
 
 /* --- Media Queries (Responsividad) --- */
 @media (max-width: 992px) {
@@ -199,7 +242,7 @@ body {
 
 @media (max-width: 600px) {
     .category-list {
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr;
     }
 
     .search-bar {

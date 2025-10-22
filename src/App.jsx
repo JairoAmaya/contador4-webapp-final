@@ -35,7 +35,6 @@ export default function App() {
 
   const totalPrompts = useMemo(() => getTotalPrompts(promptsData), []);
 
-  // Lógica de navegación simple sin búsqueda
   const handleBack = () => {
     if (selectedSubcategory) {
       setSelectedSubcategory(null);
@@ -148,8 +147,6 @@ export default function App() {
       
       <main>
         
-        {/* El Input de Búsqueda y su lógica han sido eliminados */}
-        
         <div className="filters-container search-bar">
           {/* Botón de Reset/Volver: Solo visible si hay algo seleccionado */}
           {(selectedCategory || selectedSubcategory) && (
@@ -163,8 +160,19 @@ export default function App() {
         </div>
 
         {renderContent()}
-
+        
       </main>
+      
+      {/* ✅ Bloque Footer Añadido */}
+      <footer className="app-footer">
+        <p>
+          © {new Date().getFullYear()} Contador 4.0. Sistema de Transformación con IA para Contadores.
+        </p>
+        <p>
+          Desarrollado por <a href="https://jairoamaya.co" target="_blank" rel="noopener noreferrer">Jairo Amaya - Full Stack Marketer</a>.
+        </p>
+      </footer>
+
     </div>
   );
 }

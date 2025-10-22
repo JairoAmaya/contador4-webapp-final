@@ -253,3 +253,14 @@ body {
         width: 100%;
     }
 }
+/* --- EN src/styles.css --- */
+
+/* 1. Ajustar la barra de búsqueda para que se centre cuando no hay input */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 30px;
+    /* ✅ FIX: Centrar el contenido cuando solo está el botón Volver */
+    justify-content: center; 
+}

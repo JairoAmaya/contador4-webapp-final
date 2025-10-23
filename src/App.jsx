@@ -101,7 +101,8 @@ export default function App() {
                         className="filter-btn subcategory-button"
                         onClick={() => setSelectedSubcategory(sub)}
                     >
-                        {sub.title} ({sub.prompts.length} prompts)
+                        {/* El contador se mantiene aquí, porque es útil en el Nivel 2 */}
+                        {sub.title} ({sub.prompts.length} prompts) 
                     </button>
                 ))}
             </div>
@@ -111,7 +112,7 @@ export default function App() {
     // 3. VISTA INICIAL: CATEGORÍAS (Nivel 1) - Fallback por defecto
     return (
         <div className="prompts-container category-list">
-             {/* ✅ Título sin el contador (7 disponibles) */}
+             {/* ✅ FIX 1: Título principal sin el contador (7 disponibles) */}
              <h2 className="main-title-selection">Selecciona una Categoría</h2>
              
              {promptsData.map(category => (
@@ -121,12 +122,9 @@ export default function App() {
                     onClick={() => setSelectedCategory(category)} 
                 >
                     <span className="icon-span" role="img">{category.icon}</span>
-                    {/* ✅ ESTRUCTURA DE SPAN PARA ESTILOS FINALES */}
+                    {/* ✅ FIX 2: Dejar solo el título sin el contador numérico */}
                     <span className="category-title-text">
                         {category.title.replace(/[\d\s\W]*/, '')} 
-                    </span>
-                    <span className="category-count">
-                        ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
                     </span>
                 </button>
             ))}
@@ -148,10 +146,8 @@ export default function App() {
   return (
     <div className="app-container">
       <header className="header">
-        {/* ✅ CAMBIO DE BRANDING */}
-        <h1>Contador 4.0 Express</h1> 
-        {/* ✅ SUBTÍTULO LIMPIO */}
-        <p>Sistema de transformación con IA para contadores</p> 
+        <h1>Contador 4.0 Express</h1>
+        <p>Sistema de transformación con IA para contadores</p>
       </header>
       
       <main>
@@ -172,7 +168,6 @@ export default function App() {
 
       </main>
       
-      {/* Bloque Footer con el enlace */}
       <footer className="app-footer">
         <p>
           Contador 4.0 Express es un complemento del E.Book Contador 4.0 Sistema de Transformación con IA para contadores que incluye 105 prompts especializados y fue desarrollado por <a href="https://jairoamaya.co" target="_blank" rel="noopener noreferrer">Jairo Amaya - Full Stack Marketer</a>. Todos los derechos reservados © {new Date().getFullYear()}.

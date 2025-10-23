@@ -160,16 +160,13 @@ export default function App() {
         </div>
 
         {renderContent()}
-        
+
       </main>
       
-      {/* ✅ Bloque Footer Añadido */}
+      {/* ✅ Bloque Footer con el enlace */}
       <footer className="app-footer">
         <p>
-          © {new Date().getFullYear()} Contador 4.0. Sistema de Transformación con IA para Contadores.
-        </p>
-        <p>
-          Desarrollado por <a href="https://jairoamaya.co" target="_blank" rel="noopener noreferrer">Jairo Amaya - Full Stack Marketer</a>.
+          Contador 4.0 Express es un complemento del E.Book Contador 4.0 Sistema de Transformación con IA para contadores que incluye 105 prompts especializados y fue desarrollado por <a href="https://jairoamaya.co" target="_blank" rel="noopener noreferrer">Jairo Amaya - Full Stack Marketer</a>. Todos los derechos reservados © {new Date().getFullYear()}.
         </p>
       </footer>
 

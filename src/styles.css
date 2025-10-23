@@ -124,14 +124,10 @@ body {
     font-weight: 700;
 }
 
-/* Eliminamos el espacio del contador que ya eliminamos del HTML */
+/* El contador se elimina del Nivel 1 */
 .category-count {
-    font-size: 0.9rem;
-    color: #6b7280;
-    font-weight: 500;
-    margin-top: 4px;
+    display: none; 
 }
-
 
 /* Ajuste para el botón "Clientes Internacionales" */
 .category-list button:nth-last-child(1) {
@@ -155,7 +151,7 @@ body {
   justify-content: space-between; 
   align-items: center;
   transition: all 0.25s ease;
-  font-size: 1.1rem; 
+  font-size: 1.1rem; /* Aumentar tamaño para mejor tacto */
 }
 
 .subcategory-button:hover {

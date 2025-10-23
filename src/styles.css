@@ -31,6 +31,10 @@ body {
   color: #1f2937;
 }
 
+.header p {
+  color: #6b7280;
+}
+
 /* --- Botón Volver (Ahora el único elemento en la barra superior) --- */
 .search-bar {
   display: flex;
@@ -49,7 +53,7 @@ body {
     cursor: pointer;
     font-weight: 600;
     white-space: nowrap;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
 }
 
 .reset-btn.volver-btn:hover {
@@ -82,7 +86,7 @@ body {
 }
 
 .category-button {
-  /* ✅ ESTILO NOTION/TARJETA LIMPIA */
+  /* ✅ ESTILO NOTION/TARJETA LIMPIA (Nivel 1) */
   background: white; 
   color: #1f2937; 
   border: 1px solid #e5e7eb;
@@ -116,17 +120,16 @@ body {
     color: #ff6a24; 
 }
 
-/* El título principal del botón */
 .category-title-text {
     font-weight: 700;
+    margin-bottom: 4px; /* Separación del contador */
 }
 
-/* ✅ FIX: Contador (15) */
+/* Estilo del contador de Prompts */
 .category-count {
     font-size: 0.9rem;
     color: #6b7280;
     font-weight: 500;
-    margin-top: 4px;
 }
 
 /* Ajuste para el botón "Clientes Internacionales" */
@@ -141,28 +144,27 @@ body {
 }
 
 .subcategory-button {
-  /* Cohesión estética: Se ve como una tarjeta seleccionable, no un botón simple */
+  /* ✅ COHERENCIA ESTÉTICA: Similar a la tarjeta, pero más delgado */
   background: white;
   border: 1px solid #e5e7eb;
   text-align: left;
-  padding: 15px 20px;
+  padding: 15px 20px; /* Aumentar tamaño para mejor tacto */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between; /* Alinea el contador a la derecha */
   align-items: center;
   transition: all 0.25s ease;
-  font-size: 1.1rem; /* ✅ Aumentar tamaño para mejor tacto */
+  font-size: 1.1rem; 
 }
 
-/* ✅ FIX: Aplicar hover cohesivo */
 .subcategory-button:hover {
     background: #fafafa;
     border-color: #ff6a24;
-    transform: translateY(-2px); 
+    transform: translateY(-2px); /* Efecto flotante sutil */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Nivel 3: Prompts Individuales --- */
+/* --- Nivel 3: Vista de Prompts Individuales --- */
 
 .prompt-card {
     background: white;
@@ -196,6 +198,11 @@ body {
     border-radius: 6px;
     margin-top: 15px;
 }
+
+.copy-button.copied {
+    background: #10b981;
+}
+
 
 /* --- Estilos de Footer y Tips --- */
 .app-footer {
@@ -238,7 +245,7 @@ body {
     }
 
     .category-button {
-        height: 85px; 
+        height: 85px; /* Altura ajustada en móvil */
         font-size: 1.1rem;
     }
     
@@ -247,6 +254,7 @@ body {
     }
     
     .search-bar {
+        /* Permite que el botón Volver ocupe todo el ancho */
         flex-direction: column;
     }
     

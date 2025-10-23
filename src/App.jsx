@@ -111,7 +111,8 @@ export default function App() {
     // 3. VISTA INICIAL: CATEGORÍAS (Nivel 1) - Fallback por defecto
     return (
         <div className="prompts-container category-list">
-             <h2 className="main-title-selection">Selecciona una Categoría ({promptsData.length} disponibles)</h2>
+             {/* ✅ CAMBIO: Se eliminó el contador (7 disponibles) */}
+             <h2 className="main-title-selection">Selecciona una Categoría</h2> 
              
              {promptsData.map(category => (
                 <button
@@ -141,8 +142,10 @@ export default function App() {
   return (
     <div className="app-container">
       <header className="header">
-        <h1>Contador 4.0 Prompts</h1>
-        <p>Sistema de transformación con IA para contadores ({totalPrompts} prompts)</p>
+        {/* ✅ CAMBIO: Título Principal actualizado */}
+        <h1>Contador 4.0 Express</h1> 
+        {/* ✅ CAMBIO: Subtítulo sin el contador (105 prompts) */}
+        <p>Sistema de transformación con IA para contadores</p> 
       </header>
       
       <main>
@@ -163,7 +166,7 @@ export default function App() {
 
       </main>
       
-      {/* ✅ Bloque Footer con el enlace */}
+      {/* Bloque Footer con el enlace */}
       <footer className="app-footer">
         <p>
           Contador 4.0 Express es un complemento del E.Book Contador 4.0 Sistema de Transformación con IA para contadores que incluye 105 prompts especializados y fue desarrollado por <a href="https://jairoamaya.co" target="_blank" rel="noopener noreferrer">Jairo Amaya - Full Stack Marketer</a>. Todos los derechos reservados © {new Date().getFullYear()}.

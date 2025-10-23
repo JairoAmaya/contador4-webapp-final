@@ -151,7 +151,7 @@ body {
   justify-content: space-between; 
   align-items: center;
   transition: all 0.25s ease;
-  font-size: 1.1rem; /* Aumentar tamaño para mejor tacto */
+  font-size: 1.1rem; 
 }
 
 .subcategory-button:hover {
@@ -189,7 +189,7 @@ body {
     overflow-x: auto; 
 }
 
-/* ✅ ESTILO DE RESALTADO DE CORCHETES */
+/* ✅ ESTILO DE RESALTADO DE CORCHETES (Punto 3) */
 .prompt-content-text .highlight-variable {
     color: #ff6a24; 
     font-weight: 700;

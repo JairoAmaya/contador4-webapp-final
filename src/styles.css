@@ -22,7 +22,7 @@ body {
 
 .header {
   text-align: center;
-  padding: 20px 0 25px; 
+  padding: 20px 0 25px;  
 }
 
 .header h1 {
@@ -75,52 +75,52 @@ body {
     margin-top: 20px;
     margin-bottom: 25px;
     color: #1f2937;
-    text-align: left; 
+    text-align: left;  
     width: 100%;
     font-weight: 700;
 }
 
 .prompts-container {
   display: grid;
-  gap: 25px; 
+  gap: 25px;  
   margin-bottom: 30px;
 }
 
 /* Nivel 1: Categorías (Cuadrícula de 2 columnas tipo Notion) */
 .category-list {
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat(2, 1fr);  
   margin-top: 10px;
   width: 100%;
 }
 
 .category-button {
-  background: white; 
-  color: #1f2937; 
+  background: white;  
+  color: #1f2937;  
   border: 1px solid #e5e7eb;
-  border-radius: 12px; 
-  height: 110px; 
+  border-radius: 12px;  
+  /* height: 110px; <== ELIMINADO para altura flexible */
   font-size: 1.1rem;
   font-weight: 600;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;  
   align-items: flex-start;
   justify-content: center;
-  padding: 15px 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+  padding: 20px; /* <== AJUSTADO para más "aire" */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);  
   transition: all 0.25s ease;
 }
 
 .category-button:hover {
     background: #fafafa;
     border-color: #ff6a24;
-    transform: translateY(-4px); 
+    transform: translateY(-4px);  
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .category-button .icon-span {
-    font-size: 1.8rem; 
-    margin-bottom: 5px; 
-    color: #ff6a24; 
+    font-size: 1.8rem;  
+    margin-bottom: 5px;  
+    color: #ff6a24;  
 }
 
 .category-title-text {
@@ -140,10 +140,10 @@ body {
   padding: 15px 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;  
   align-items: center;
   transition: all 0.25s ease;
-  font-size: 1.1rem; 
+  font-size: 1.1rem;  
 }
 
 .subcategory-button:hover {
@@ -178,7 +178,8 @@ body {
     border-radius: 6px;
     font-family: monospace;
     font-size: 0.9rem;
-    overflow-x: auto; 
+    overflow-x: auto;
+    word-break: break-word; /* <== AÑADIDO para evitar desborde */
 }
 
 /* ✅ RESALTADO DE VARIABLES ENTRE [CORCHETES] */
@@ -233,32 +234,93 @@ body {
 }
 
 
-/* === 3. OPTIMIZACIÓN MÓVIL (CRÍTICO) === */
+/* === 3. OPTIMIZACIÓN MÓVIL (MEJORADA) === */
+/* Esta sección reemplaza tu bloque @media anterior */
+
 @media (max-width: 768px) {
+    
     .app-container {
-        padding: 15px;
+        /* Damos más "aire" a los lados de la app */
+        padding: 20px; 
     }
 
+    .header h1 {
+        /* Título principal más compacto */
+        font-size: 2.1rem; 
+    }
+    
+    .main-title-selection {
+        /* Título de sección más compacto */
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        text-align: left; /* Aseguramos alineación izquierda */
+    }
+
+    /* --- Botón Volver (Mejora clave) --- */
+    .search-bar {
+        flex-direction: column;
+        /* El botón se alinea a la izquierda, no ocupa todo */
+        align-items: flex-start; 
+    }
+
+    .reset-btn.volver-btn {
+        /* El botón ya no ocupa el 100% del ancho */
+        width: auto; 
+        margin-top: 10px;
+        padding: 12px 24px; /* Más padding horizontal para mejor look */
+    }
+
+    /* --- Tarjetas de Categoría (Nivel 1) --- */
     .category-list {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 16px; /* Un poco más de separación */
     }
 
     .category-button {
-        height: 85px; 
-        font-size: 1.1rem;
+        /* Eliminamos la altura fija para que el contenido mande */
+        height: auto; 
+        font-size: 1rem; /* Texto más legible en móvil */
+        padding: 24px 20px; /* Más padding vertical */
+        
+        /* Mantenemos la estructura de columna del ícono */
+        flex-direction: column; 
+        align-items: flex-start;
     }
     
-    .category-list button:nth-last-child(1) {
-        grid-column: auto; 
+    .category-button .icon-span {
+        font-size: 1.6rem; /* Ícono ligeramente más pequeño */
+        margin-bottom: 8px;
+    }
+
+    /* --- Listas de Subcategoría (Nivel 2) --- */
+    .subcategoria-list {
+        gap: 12px;
+    }
+
+    .subcategory-button {
+        padding: 18px 20px; /* Más espacio vertical para mejor "tap" */
+        font-size: 1rem;
+    }
+
+    /* --- Tarjetas de Prompt (Nivel 3) --- */
+    .prompt-card {
+        padding: 20px; /* Más padding interno */
+    }
+
+    .prompt-final-title {
+        font-size: 1.15rem; /* Título de prompt más compacto */
     }
     
-    .search-bar {
-        flex-direction: column;
+    .prompt-content-text {
+        font-size: 0.85rem; /* Texto del código/prompt más pequeño */
     }
-    
-    .reset-btn.volver-btn {
-        width: 100%;
-        margin-top: 10px;
+
+    /* --- Sección de Consejos --- */
+    .tips-section {
+        padding: 20px;
+    }
+
+    .app-footer {
+        padding: 30px 10px 20px; /* Menos padding lateral en footer */
     }
 }

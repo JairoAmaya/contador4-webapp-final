@@ -263,3 +263,10 @@ body {
         margin-top: 10px;
     }
 }
+/* --- ESTILOS DE RESALTADO DE VARIABLES (PUNTO 3 UX) --- */
+.prompt-content-text .highlight-variable {
+    /* Destacar la variable que el usuario debe reemplazar */
+    color: #ff6a24; /* Color de acento naranja */
+    font-weight: 700;
+    text-decoration: underline; /* Subrayado sutil para indicar edición */
+}

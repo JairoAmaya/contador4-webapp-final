@@ -63,9 +63,15 @@ body {
 
 /* === 2. ESTILOS DE NAVEGACIÓN Y BOTONES (TARJETAS MODERNAS) === */
 
+/* Contenedor Wrapper para el Título y la Cuadrícula (Nivel 1) */
+.category-list-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 .main-title-selection {
     font-size: 1.5rem;
-    margin-top: 20px;
+    margin-top: 0; /* Eliminamos el margen superior que causaba el salto */
     margin-bottom: 25px;
     color: #1f2937;
     text-align: left; 
@@ -82,11 +88,12 @@ body {
 /* Nivel 1: Categorías (Cuadrícula de 2 columnas tipo Notion) */
 .category-list {
   grid-template-columns: repeat(2, 1fr); 
+  gap: 25px; /* Espacio entre tarjetas */
   margin-top: 10px;
 }
 
 .category-button {
-  /* ✅ ESTILO NOTION/TARJETA LIMPIA */
+  /* ✅ ESTILO NOTION/TARJETA LIMPIA (Punto 1) */
   background: white; 
   color: #1f2937; 
   border: 1px solid #e5e7eb;
@@ -124,11 +131,6 @@ body {
     font-weight: 700;
 }
 
-/* El contador se elimina del Nivel 1 */
-.category-count {
-    display: none; 
-}
-
 /* Ajuste para el botón "Clientes Internacionales" */
 .category-list button:nth-last-child(1) {
     grid-column: 1 / -1; 
@@ -141,7 +143,7 @@ body {
 }
 
 .subcategory-button {
-  /* ✅ COHERENCIA ESTÉTICA: Aplicar hover cohesivo de tarjeta */
+  /* ✅ COHERENCIA ESTÉTICA: Aplicar hover cohesivo de tarjeta (Punto 1) */
   background: white;
   border: 1px solid #e5e7eb;
   text-align: left;

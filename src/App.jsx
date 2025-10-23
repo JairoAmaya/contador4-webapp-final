@@ -27,7 +27,7 @@ const getTotalPrompts = (data) => {
   }, 0);
 };
 
-// Función para resaltar las variables entre corchetes (Punto 3 UX)
+// Función para resaltar las variables entre corchetes
 const highlightVariables = (text) => {
   if (!text) return '';
   return text.replace(
@@ -46,8 +46,10 @@ export default function App() {
 
   const handleBack = () => {
     if (selectedSubcategory) {
+      // Regresa del Nivel 3 (Prompts) al Nivel 2 (Subcategorías)
       setSelectedSubcategory(null);
     } else if (selectedCategory) {
+      // Regresa del Nivel 2 (Subcategorías) al Nivel 1 (Categorías)
       setSelectedCategory(null);
       setSelectedSubcategory(null);
     }
@@ -104,7 +106,7 @@ export default function App() {
             <div className="prompts-container subcategoria-list">
                 <div className="section-header">
                     <h2>{selectedCategory.title}</h2>
-                    {/* ✅ FIX: Eliminado el subtítulo redundante (Punto 4) */}
+                    {/* El subtítulo redundante fue eliminado (Punto 4) */}
                 </div>
                 
                 {selectedCategory.subcategories.map((sub, i) => (
@@ -124,7 +126,6 @@ export default function App() {
     // 3. VISTA INICIAL: CATEGORÍAS (Nivel 1) - Fallback por defecto
     return (
         <div className="prompts-container category-list">
-             {/* ✅ FIX: Título sin el contador (7 disponibles) */}
              <h2 className="main-title-selection">Selecciona una Categoría</h2>
              
              {promptsData.map(category => (
@@ -137,6 +138,7 @@ export default function App() {
                     <span className="category-title-text">
                         {category.title.replace(/[\d\s\W]*/, '')} 
                     </span>
+                    {/* El contador ha sido eliminado de esta vista */}
                 </button>
             ))}
             {/* Tips Section */}
@@ -155,7 +157,7 @@ export default function App() {
   };
 
   return (
-    <div className="app-container">
+    <div classNameño="app-container">
       <header className="header">
         <h1>Contador 4.0 Express</h1>
         <p>Sistema de transformación con IA para contadores</p>
@@ -169,7 +171,11 @@ export default function App() {
               className="reset-btn volver-btn"
               onClick={handleBack}
             >
-              ⬅ Volver
+              {/* ✅ PUNTO 5: Lógica dinámica para el botón Volver */}
+              {selectedSubcategory 
+                ? `⬅ Volver a Subcategorías` // Nivel 3 -> Nivel 2
+                : '⬅ Volver a Categorías' // Nivel 2 -> Nivel 1
+              }
             </button>
           )}
         </div>

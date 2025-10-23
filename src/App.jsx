@@ -27,17 +27,6 @@ const getTotalPrompts = (data) => {
   }, 0);
 };
 
-// ✅ FUNCIÓN CRÍTICA: Resaltar variables entre corchetes
-const highlightVariables = (text) => {
-  if (!text) return '';
-  // Reemplaza [TEXTO] con <span class="highlight-variable">[TEXTO]</span>
-  // Se usa $1 para mantener el texto original dentro del span
-  return text.replace(
-    /(\[.*?\])/g,
-    '<span class="highlight-variable">$1</span>'
-  );
-};
-
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -81,7 +70,6 @@ export default function App() {
                         <div className="prompt-details">
                             <div className="detail-section">
                                 <h4>Contenido del Prompt:</h4>
-                                {/* ✅ CRÍTICO: Uso de dangerouslySetInnerHTML para renderizar el HTML del highlighting */}
                                 <pre 
                                     className="prompt-content-text"
                                     dangerouslySetInnerHTML={{ __html: highlightVariables(prompt.prompt) }}
@@ -116,6 +104,7 @@ export default function App() {
                         className="filter-btn subcategory-button"
                         onClick={() => setSelectedSubcategory(sub)}
                     >
+                        {/* ✅ El contador es necesario en este nivel */}
                         {sub.title} ({sub.prompts.length} prompts)
                     </button>
                 ))}
@@ -136,10 +125,8 @@ export default function App() {
                 >
                     <span className="icon-span" role="img">{category.icon}</span>
                     <span className="category-title-text">
+                        {/* ✅ FIX: Solo el título principal, sin el contador (15) */}
                         {category.title.replace(/[\d\s\W]*/, '')} 
-                    </span>
-                    <span className="category-count">
-                        ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
                     </span>
                 </button>
             ))}

@@ -27,6 +27,17 @@ const getTotalPrompts = (data) => {
   }, 0);
 };
 
+// ✅ FUNCIÓN CRÍTICA: Resaltar variables entre corchetes
+const highlightVariables = (text) => {
+  if (!text) return '';
+  // Reemplaza [TEXTO] con <span class="highlight-variable">[TEXTO]</span>
+  // Se usa $1 para mantener el texto original dentro del span
+  return text.replace(
+    /(\[.*?\])/g,
+    '<span class="highlight-variable">$1</span>'
+  );
+};
+
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -70,7 +81,11 @@ export default function App() {
                         <div className="prompt-details">
                             <div className="detail-section">
                                 <h4>Contenido del Prompt:</h4>
-                                <pre className="prompt-content-text">{prompt.prompt}</pre>
+                                {/* ✅ CRÍTICO: Uso de dangerouslySetInnerHTML para renderizar el HTML del highlighting */}
+                                <pre 
+                                    className="prompt-content-text"
+                                    dangerouslySetInnerHTML={{ __html: highlightVariables(prompt.prompt) }}
+                                />
                             </div>
                             
                             <button 
@@ -101,8 +116,7 @@ export default function App() {
                         className="filter-btn subcategory-button"
                         onClick={() => setSelectedSubcategory(sub)}
                     >
-                        {/* El contador se mantiene aquí, porque es útil en el Nivel 2 */}
-                        {sub.title} ({sub.prompts.length} prompts) 
+                        {sub.title} ({sub.prompts.length} prompts)
                     </button>
                 ))}
             </div>
@@ -112,7 +126,6 @@ export default function App() {
     // 3. VISTA INICIAL: CATEGORÍAS (Nivel 1) - Fallback por defecto
     return (
         <div className="prompts-container category-list">
-             {/* ✅ FIX 1: Título principal sin el contador (7 disponibles) */}
              <h2 className="main-title-selection">Selecciona una Categoría</h2>
              
              {promptsData.map(category => (
@@ -122,9 +135,11 @@ export default function App() {
                     onClick={() => setSelectedCategory(category)} 
                 >
                     <span className="icon-span" role="img">{category.icon}</span>
-                    {/* ✅ FIX 2: Dejar solo el título sin el contador numérico */}
                     <span className="category-title-text">
                         {category.title.replace(/[\d\s\W]*/, '')} 
+                    </span>
+                    <span className="category-count">
+                        ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
                     </span>
                 </button>
             ))}
@@ -168,6 +183,7 @@ export default function App() {
 
       </main>
       
+      {/* Bloque Footer */}
       <footer className="app-footer">
         <p>
           Contador 4.0 Express es un complemento del E.Book Contador 4.0 Sistema de Transformación con IA para contadores que incluye 105 prompts especializados y fue desarrollado por <a href="https://jairoamaya.co" target="_blank" rel="noopener noreferrer">Jairo Amaya - Full Stack Marketer</a>. Todos los derechos reservados © {new Date().getFullYear()}.

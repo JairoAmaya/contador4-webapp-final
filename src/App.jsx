@@ -27,9 +27,10 @@ const getTotalPrompts = (data) => {
   }, 0);
 };
 
-// Función para resaltar las variables entre corchetes
+// ✅ FUNCIÓN CRÍTICA: Resaltar variables entre corchetes
 const highlightVariables = (text) => {
   if (!text) return '';
+  // Reemplaza [TEXTO] con <span class="highlight-variable">[TEXTO]</span>
   return text.replace(
     /(\[.*?\])/g,
     '<span class="highlight-variable">$1</span>'
@@ -46,8 +47,10 @@ export default function App() {
 
   const handleBack = () => {
     if (selectedSubcategory) {
+      // Regresa del Nivel 3 (Prompts) al Nivel 2 (Subcategorías)
       setSelectedSubcategory(null);
     } else if (selectedCategory) {
+      // Regresa del Nivel 2 (Subcategorías) al Nivel 1 (Categorías)
       setSelectedCategory(null);
       setSelectedSubcategory(null);
     }
@@ -81,6 +84,7 @@ export default function App() {
                                 <h4>Contenido del Prompt:</h4>
                                 <pre 
                                     className="prompt-content-text"
+                                    // ✅ APLICACIÓN DEL HIGHLIGHTING EN EL RENDER
                                     dangerouslySetInnerHTML={{ __html: highlightVariables(prompt.prompt) }}
                                 />
                             </div>
@@ -104,7 +108,6 @@ export default function App() {
             <div className="prompts-container subcategoria-list">
                 <div className="section-header">
                     <h2>{selectedCategory.title}</h2>
-                    {/* El subtítulo redundante fue eliminado (Punto 4) */}
                 </div>
                 
                 {selectedCategory.subcategories.map((sub, i) => (
@@ -170,9 +173,10 @@ export default function App() {
               className="reset-btn volver-btn"
               onClick={handleBack}
             >
+              {/* Punto 5: Lógica dinámica para el botón Volver */}
               {selectedSubcategory 
-                ? `⬅ Volver a Subcategorías` 
-                : '⬅ Volver a Categorías' 
+                ? `⬅ Volver a Subcategorías`
+                : '⬅ Volver a Categorías'
               }
             </button>
           )}
@@ -182,6 +186,7 @@ export default function App() {
 
       </main>
       
+      {/* Bloque Footer */}
       <footer className="app-footer">
         <p>
           Contador 4.0 Express es un complemento del E.Book Contador 4.0 Sistema de Transformación con IA para contadores que incluye 105 prompts especializados y fue desarrollado por <a href="https://jairoamaya.co" target="_blank" rel="noopener noreferrer">Jairo Amaya - Full Stack Marketer</a>. Todos los derechos reservados © {new Date().getFullYear()}.

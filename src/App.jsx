@@ -27,12 +27,12 @@ const getTotalPrompts = (data) => {
   }, 0);
 };
 
-// ✅ FUNCIÓN CRÍTICA: Resaltar variables entre corchetes
+// ✅ FUNCIÓN DE RESALTADO: Detecta y envuelve variables entre [CORCHETES]
 const highlightVariables = (text) => {
   if (!text) return '';
   // Reemplaza [TEXTO] con <span class="highlight-variable">[TEXTO]</span>
   return text.replace(
-    /(\[.*?\])/g,
+    /(\[([^\]]+)\])/g,
     '<span class="highlight-variable">$1</span>'
   );
 };
@@ -84,7 +84,6 @@ export default function App() {
                                 <h4>Contenido del Prompt:</h4>
                                 <pre 
                                     className="prompt-content-text"
-                                    // ✅ APLICACIÓN DEL HIGHLIGHTING EN EL RENDER
                                     dangerouslySetInnerHTML={{ __html: highlightVariables(prompt.prompt) }}
                                 />
                             </div>

@@ -111,8 +111,8 @@ export default function App() {
     // 3. VISTA INICIAL: CATEGORÍAS (Nivel 1) - Fallback por defecto
     return (
         <div className="prompts-container category-list">
-             {/* ✅ CAMBIO: Se eliminó el contador (7 disponibles) */}
-             <h2 className="main-title-selection">Selecciona una Categoría</h2> 
+             {/* ✅ Título sin el contador (7 disponibles) */}
+             <h2 className="main-title-selection">Selecciona una Categoría</h2>
              
              {promptsData.map(category => (
                 <button
@@ -121,7 +121,13 @@ export default function App() {
                     onClick={() => setSelectedCategory(category)} 
                 >
                     <span className="icon-span" role="img">{category.icon}</span>
-                    {category.title.replace(/[\d\s\W]*/, '')} ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
+                    {/* ✅ ESTRUCTURA DE SPAN PARA ESTILOS FINALES */}
+                    <span className="category-title-text">
+                        {category.title.replace(/[\d\s\W]*/, '')} 
+                    </span>
+                    <span className="category-count">
+                        ({category.subcategories.reduce((c, sub) => c + sub.prompts.length, 0)})
+                    </span>
                 </button>
             ))}
             {/* Tips Section */}
@@ -142,9 +148,9 @@ export default function App() {
   return (
     <div className="app-container">
       <header className="header">
-        {/* ✅ CAMBIO: Título Principal actualizado */}
+        {/* ✅ CAMBIO DE BRANDING */}
         <h1>Contador 4.0 Express</h1> 
-        {/* ✅ CAMBIO: Subtítulo sin el contador (105 prompts) */}
+        {/* ✅ SUBTÍTULO LIMPIO */}
         <p>Sistema de transformación con IA para contadores</p> 
       </header>
       

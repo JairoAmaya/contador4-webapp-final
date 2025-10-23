@@ -46,10 +46,8 @@ export default function App() {
 
   const handleBack = () => {
     if (selectedSubcategory) {
-      // Regresa del Nivel 3 (Prompts) al Nivel 2 (Subcategorías)
       setSelectedSubcategory(null);
     } else if (selectedCategory) {
-      // Regresa del Nivel 2 (Subcategorías) al Nivel 1 (Categorías)
       setSelectedCategory(null);
       setSelectedSubcategory(null);
     }
@@ -106,7 +104,6 @@ export default function App() {
             <div className="prompts-container subcategoria-list">
                 <div className="section-header">
                     <h2>{selectedCategory.title}</h2>
-                    {/* El subtítulo redundante fue eliminado (Punto 4) */}
                 </div>
                 
                 {selectedCategory.subcategories.map((sub, i) => (
@@ -125,22 +122,24 @@ export default function App() {
 
     // 3. VISTA INICIAL: CATEGORÍAS (Nivel 1) - Fallback por defecto
     return (
-        <div className="prompts-container category-list">
+        <div className="prompts-container category-list-wrapper"> {/* Contenedor Wrapper */}
              <h2 className="main-title-selection">Selecciona una Categoría</h2>
              
-             {promptsData.map(category => (
-                <button
-                    key={category.title}
-                    className="filter-btn category-button"
-                    onClick={() => setSelectedCategory(category)} 
-                >
-                    <span className="icon-span" role="img">{category.icon}</span>
-                    <span className="category-title-text">
-                        {category.title.replace(/[\d\s\W]*/, '')} 
-                    </span>
-                    {/* El contador ha sido eliminado de esta vista */}
-                </button>
-            ))}
+             <div className="category-list"> {/* Contenedor Grid */}
+                {promptsData.map(category => (
+                    <button
+                        key={category.title}
+                        className="filter-btn category-button"
+                        onClick={() => setSelectedCategory(category)} 
+                    >
+                        <span className="icon-span" role="img">{category.icon}</span>
+                        <span className="category-title-text">
+                            {category.title.replace(/[\d\s\W]*/, '')} 
+                        </span>
+                    </button>
+                ))}
+            </div>
+            
             {/* Tips Section */}
             <div className="tips-section">
                 <h3>💡 Consejos para usar los prompts</h3>
@@ -157,7 +156,7 @@ export default function App() {
   };
 
   return (
-    <div classNameño="app-container">
+    <div className="app-container">
       <header className="header">
         <h1>Contador 4.0 Express</h1>
         <p>Sistema de transformación con IA para contadores</p>
@@ -171,10 +170,10 @@ export default function App() {
               className="reset-btn volver-btn"
               onClick={handleBack}
             >
-              {/* ✅ PUNTO 5: Lógica dinámica para el botón Volver */}
+              {/* ✅ Punto 5: Navegación Dinámica */}
               {selectedSubcategory 
-                ? `⬅ Volver a Subcategorías` // Nivel 3 -> Nivel 2
-                : '⬅ Volver a Categorías' // Nivel 2 -> Nivel 1
+                ? `⬅ Volver a Subcategorías`
+                : '⬅ Volver a Categorías'
               }
             </button>
           )}

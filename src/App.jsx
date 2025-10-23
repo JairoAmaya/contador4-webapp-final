@@ -104,6 +104,7 @@ export default function App() {
             <div className="prompts-container subcategoria-list">
                 <div className="section-header">
                     <h2>{selectedCategory.title}</h2>
+                    {/* El subtítulo redundante fue eliminado (Punto 4) */}
                 </div>
                 
                 {selectedCategory.subcategories.map((sub, i) => (
@@ -122,10 +123,10 @@ export default function App() {
 
     // 3. VISTA INICIAL: CATEGORÍAS (Nivel 1) - Fallback por defecto
     return (
-        <div className="prompts-container category-list-wrapper"> {/* Contenedor Wrapper */}
+        <div className="category-list-wrapper"> {/* Contenedor para el título y los tips */}
              <h2 className="main-title-selection">Selecciona una Categoría</h2>
              
-             <div className="category-list"> {/* Contenedor Grid */}
+             <div className="prompts-container category-list"> {/* Contenedor Grid real */}
                 {promptsData.map(category => (
                     <button
                         key={category.title}
@@ -139,7 +140,6 @@ export default function App() {
                     </button>
                 ))}
             </div>
-            
             {/* Tips Section */}
             <div className="tips-section">
                 <h3>💡 Consejos para usar los prompts</h3>
@@ -170,10 +170,9 @@ export default function App() {
               className="reset-btn volver-btn"
               onClick={handleBack}
             >
-              {/* ✅ Punto 5: Navegación Dinámica */}
               {selectedSubcategory 
-                ? `⬅ Volver a Subcategorías`
-                : '⬅ Volver a Categorías'
+                ? `⬅ Volver a Subcategorías` 
+                : '⬅ Volver a Categorías' 
               }
             </button>
           )}

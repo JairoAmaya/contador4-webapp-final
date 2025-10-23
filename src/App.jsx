@@ -1,3 +1,4 @@
+// Versión con highlighting de variables v2
 import React, { useState, useMemo } from 'react';
 import './styles.css';
 import promptsData from './promptsData'; 

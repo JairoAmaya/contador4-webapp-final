@@ -65,7 +65,6 @@ body {
 
 /* Contenedor Wrapper para el Título y la Cuadrícula (Nivel 1) */
 .category-list-wrapper {
-    /* FIX CRÍTICO: Soluciona el descuadre en el Nivel 1 */
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -95,23 +94,18 @@ body {
 }
 
 .category-button {
-  /* ✅ ESTILO NOTION/TARJETA LIMPIA */
   background: white; 
   color: #1f2937; 
   border: 1px solid #e5e7eb;
   border-radius: 12px; 
-  
   height: 110px; 
   font-size: 1.1rem;
   font-weight: 600;
-  
-  /* Layout: Ícono, Título apilados a la izquierda */
   display: flex;
   flex-direction: column; 
   align-items: flex-start;
   justify-content: center;
   padding: 15px 20px;
-  
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
   transition: all 0.25s ease;
 }
@@ -140,7 +134,6 @@ body {
 }
 
 .subcategory-button {
-  /* ✅ COHERENCIA ESTÉTICA: Aplicar hover cohesivo de tarjeta */
   background: white;
   border: 1px solid #e5e7eb;
   text-align: left;
@@ -156,7 +149,7 @@ body {
 .subcategory-button:hover {
     background: #fafafa;
     border-color: #ff6a24;
-    transform: translateY(-2px); /* Efecto flotante sutil */
+    transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -188,11 +181,14 @@ body {
     overflow-x: auto; 
 }
 
-/* ✅ ESTILO DE RESALTADO DE CORCHETES (Punto 3) */
+/* ✅ RESALTADO DE VARIABLES ENTRE [CORCHETES] */
 .prompt-content-text .highlight-variable {
-    color: #ff6a24; 
+    color: #ff6a24;
     font-weight: 700;
-    text-decoration: underline; 
+    background-color: #fff3e0;
+    padding: 2px 4px;
+    border-radius: 3px;
+    border-bottom: 2px solid #ff6a24;
 }
 
 .copy-button {
@@ -244,7 +240,7 @@ body {
     }
 
     .category-list {
-        grid-template-columns: 1fr; /* Una columna en móvil */
+        grid-template-columns: 1fr;
         gap: 15px;
     }
 

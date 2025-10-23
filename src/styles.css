@@ -22,30 +22,22 @@ body {
 
 .header {
   text-align: center;
-  padding: 20px 0 25px; /* Compactar espacio */
+  padding: 20px 0 25px; 
 }
 
 .header h1 {
   font-size: 2.5rem;
-  font-weight: 800; /* Más impacto */
+  font-weight: 800;
   color: #1f2937;
 }
 
-/* --- Barra de Búsqueda y Volver --- */
+/* --- Botón Volver (Ahora el único elemento en la barra superior) --- */
 .search-bar {
   display: flex;
   gap: 10px;
   align-items: center;
   margin-bottom: 30px;
-}
-
-.search-input {
-    flex-grow: 1;
-    padding: 12px 20px;
-    font-size: 1rem;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+  justify-content: flex-start;
 }
 
 .reset-btn.volver-btn {
@@ -60,10 +52,15 @@ body {
     transition: background 0.3s;
 }
 
+.reset-btn.volver-btn:hover {
+    background: #e65c19;
+}
+
+
 /* === 2. ESTILOS DE NAVEGACIÓN Y BOTONES (TARJETAS MODERNAS) === */
 
 .main-title-selection {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     margin-top: 20px;
     margin-bottom: 25px;
     color: #1f2937;
@@ -74,14 +71,13 @@ body {
 
 .prompts-container {
   display: grid;
-  gap: 25px; /* Más espacio entre tarjetas */
+  gap: 25px; 
   margin-bottom: 30px;
 }
 
-/* Nivel 1: Categorías (Desktop: 2 columnas para tarjetas más grandes) */
+/* Nivel 1: Categorías (Cuadrícula de 2 columnas tipo Notion) */
 .category-list {
   grid-template-columns: repeat(2, 1fr); 
-  gap: 25px;
   margin-top: 10px;
 }
 
@@ -90,7 +86,7 @@ body {
   background: white; 
   color: #1f2937; 
   border: 1px solid #e5e7eb;
-  border-radius: 12px; /* Esquinas más suaves */
+  border-radius: 12px; 
   
   height: 110px; 
   font-size: 1.1rem;
@@ -101,7 +97,7 @@ body {
   flex-direction: column; 
   align-items: flex-start;
   justify-content: center;
-  padding: 20px;
+  padding: 15px 20px;
   
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
   transition: all 0.25s ease;
@@ -110,23 +106,25 @@ body {
 .category-button:hover {
     background: #fafafa;
     border-color: #ff6a24;
-    transform: translateY(-4px); /* Efecto flotante moderno */
+    transform: translateY(-4px); 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .category-button .icon-span {
-    font-size: 2rem; 
+    font-size: 1.8rem; 
     margin-bottom: 5px; 
-    color: #ff6a24; /* Color de acento para el ícono */
+    color: #ff6a24; 
 }
 
+/* El título principal del botón */
 .category-title-text {
     font-weight: 700;
 }
 
+/* ✅ FIX: Contador (15) */
 .category-count {
     font-size: 0.9rem;
-    color: #6b7280; /* Contador en gris sutil */
+    color: #6b7280;
     font-weight: 500;
     margin-top: 4px;
 }
@@ -136,7 +134,6 @@ body {
     grid-column: 1 / -1; 
 }
 
-
 /* Nivel 2: Subcategorías (Lista vertical) */
 .subcategoria-list {
     grid-template-columns: 1fr;
@@ -144,15 +141,29 @@ body {
 }
 
 .subcategory-button {
+  /* Cohesión estética: Se ve como una tarjeta seleccionable, no un botón simple */
   background: white;
   border: 1px solid #e5e7eb;
   text-align: left;
   padding: 15px 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  transition: all 0.25s ease;
+  font-size: 1.1rem; /* ✅ Aumentar tamaño para mejor tacto */
 }
 
+/* ✅ FIX: Aplicar hover cohesivo */
+.subcategory-button:hover {
+    background: #fafafa;
+    border-color: #ff6a24;
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-/* === Nivel 3: Prompts Finales === */
+/* --- Nivel 3: Prompts Individuales --- */
+
 .prompt-card {
     background: white;
     border: 1px solid #e5e7eb;
@@ -186,20 +197,29 @@ body {
     margin-top: 15px;
 }
 
-.copy-button.copied {
-    background: #10b981;
+/* --- Estilos de Footer y Tips --- */
+.app-footer {
+    text-align: center;
+    padding: 30px 0 20px;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 50px;
+    font-size: 0.9rem;
+    color: #6b7280;
 }
 
+.app-footer a {
+    color: #ff6a24;
+    text-decoration: none;
+    font-weight: 600;
+}
 
-/* --- Sección de Tips --- */
 .tips-section {
     background: #eef4f9;
     border-radius: 12px;
     padding: 25px;
     margin-top: 40px;
-    /* ✅ FIX: Asegurar que la lista se vea bien */
-    list-style: disc; 
 }
+
 .tips-section ul {
     list-style: disc;
     padding-left: 20px;
@@ -211,29 +231,27 @@ body {
     .app-container {
         padding: 15px;
     }
-    
-    /* ✅ CRÍTICO: Una columna única en móvil para mejor tacto y legibilidad */
+
     .category-list {
-        grid-template-columns: 1fr; /* Una columna para el 100% del ancho */
+        grid-template-columns: 1fr; /* Una columna en móvil */
         gap: 15px;
     }
 
     .category-button {
-        height: 100px; /* Reducir altura en móvil */
+        height: 85px; 
         font-size: 1.1rem;
-        padding: 15px;
     }
     
-    /* Asegurar que el botón Clientes Internacionales siga el flujo */
     .category-list button:nth-last-child(1) {
         grid-column: auto; 
     }
-
+    
     .search-bar {
         flex-direction: column;
     }
     
-    .search-input, .reset-btn.volver-btn {
+    .reset-btn.volver-btn {
         width: 100%;
+        margin-top: 10px;
     }
 }

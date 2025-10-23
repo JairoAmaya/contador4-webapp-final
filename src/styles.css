@@ -65,7 +65,7 @@ body {
 
 /* Contenedor Wrapper para el Título y la Cuadrícula (Nivel 1) */
 .category-list-wrapper {
-    /* ✅ FIX CRÍTICO: Soluciona el descuadre del título y botones */
+    /* FIX CRÍTICO: Soluciona el descuadre en el Nivel 1 */
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -91,7 +91,7 @@ body {
 .category-list {
   grid-template-columns: repeat(2, 1fr); 
   margin-top: 10px;
-  width: 100%; /* Asegurar que la cuadrícula ocupe el espacio */
+  width: 100%;
 }
 
 .category-button {
@@ -140,7 +140,7 @@ body {
 }
 
 .subcategory-button {
-  /* COHERENCIA ESTÉTICA: Aplicar hover cohesivo de tarjeta (Punto 1) */
+  /* ✅ COHERENCIA ESTÉTICA: Aplicar hover cohesivo de tarjeta */
   background: white;
   border: 1px solid #e5e7eb;
   text-align: left;
@@ -229,8 +229,6 @@ body {
     border-radius: 12px;
     padding: 25px;
     margin-top: 40px;
-    /* ✅ FIX: Asegurar que ocupe todo el ancho bajo el wrapper */
-    grid-column: 1 / -1; 
 }
 
 .tips-section ul {
@@ -243,11 +241,6 @@ body {
 @media (max-width: 768px) {
     .app-container {
         padding: 15px;
-    }
-    
-    .category-list-wrapper {
-        /* En móvil, la cuadrícula de botones debe estar debajo del título */
-        flex-direction: column; 
     }
 
     .category-list {

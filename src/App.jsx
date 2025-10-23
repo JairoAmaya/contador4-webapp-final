@@ -27,11 +27,10 @@ const getTotalPrompts = (data) => {
   }, 0);
 };
 
-// ✅ FUNCIÓN CRÍTICA: Resaltar variables entre corchetes
+// Función para resaltar las variables entre corchetes (Punto 3 UX)
 const highlightVariables = (text) => {
   if (!text) return '';
   return text.replace(
-    // RegEx que busca texto entre corchetes (ej. [SECTOR], [MONTO])
     /(\[.*?\])/g,
     '<span class="highlight-variable">$1</span>'
   );
@@ -82,7 +81,6 @@ export default function App() {
                                 <h4>Contenido del Prompt:</h4>
                                 <pre 
                                     className="prompt-content-text"
-                                    // ✅ APLICACIÓN DEL HIGHLIGHTING EN EL RENDER
                                     dangerouslySetInnerHTML={{ __html: highlightVariables(prompt.prompt) }}
                                 />
                             </div>
@@ -106,7 +104,7 @@ export default function App() {
             <div className="prompts-container subcategoria-list">
                 <div className="section-header">
                     <h2>{selectedCategory.title}</h2>
-                    {/* El subtítulo "Selecciona una subcategoría..." se elimina por coherencia UX */}
+                    {/* ✅ FIX: Eliminado el subtítulo redundante (Punto 4) */}
                 </div>
                 
                 {selectedCategory.subcategories.map((sub, i) => (
@@ -126,6 +124,7 @@ export default function App() {
     // 3. VISTA INICIAL: CATEGORÍAS (Nivel 1) - Fallback por defecto
     return (
         <div className="prompts-container category-list">
+             {/* ✅ FIX: Título sin el contador (7 disponibles) */}
              <h2 className="main-title-selection">Selecciona una Categoría</h2>
              
              {promptsData.map(category => (
@@ -179,7 +178,6 @@ export default function App() {
 
       </main>
       
-      {/* Bloque Footer */}
       <footer className="app-footer">
         <p>
           Contador 4.0 Express es un complemento del E.Book Contador 4.0 Sistema de Transformación con IA para contadores que incluye 105 prompts especializados y fue desarrollado por <a href="https://jairoamaya.co" target="_blank" rel="noopener noreferrer">Jairo Amaya - Full Stack Marketer</a>. Todos los derechos reservados © {new Date().getFullYear()}.

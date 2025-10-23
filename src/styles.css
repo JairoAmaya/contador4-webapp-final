@@ -35,7 +35,7 @@ body {
   color: #6b7280;
 }
 
-/* --- Botón Volver (Ahora el único elemento en la barra superior) --- */
+/* --- Botón Volver --- */
 .search-bar {
   display: flex;
   gap: 10px;
@@ -45,19 +45,19 @@ body {
 }
 
 .reset-btn.volver-btn {
-    background: #ff6a24;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    white-space: nowrap;
-    transition: all 0.3s ease;
+  background: #ff6a24;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.3s ease;
 }
 
 .reset-btn.volver-btn:hover {
-    background: #e65c19;
+  background: #e65c19;
 }
 
 
@@ -86,7 +86,7 @@ body {
 }
 
 .category-button {
-  /* ✅ ESTILO NOTION/TARJETA LIMPIA (Nivel 1) */
+  /* ✅ ESTILO NOTION/TARJETA LIMPIA */
   background: white; 
   color: #1f2937; 
   border: 1px solid #e5e7eb;
@@ -96,7 +96,7 @@ body {
   font-size: 1.1rem;
   font-weight: 600;
   
-  /* Layout: Ícono, Título, Contador apilados a la izquierda */
+  /* Layout: Ícono, Título apilados a la izquierda */
   display: flex;
   flex-direction: column; 
   align-items: flex-start;
@@ -122,14 +122,11 @@ body {
 
 .category-title-text {
     font-weight: 700;
-    margin-bottom: 4px; /* Separación del contador */
 }
 
-/* Estilo del contador de Prompts */
+/* Remover el espacio del contador que ya eliminamos del HTML */
 .category-count {
-    font-size: 0.9rem;
-    color: #6b7280;
-    font-weight: 500;
+    display: none; 
 }
 
 /* Ajuste para el botón "Clientes Internacionales" */
@@ -144,14 +141,14 @@ body {
 }
 
 .subcategory-button {
-  /* ✅ COHERENCIA ESTÉTICA: Similar a la tarjeta, pero más delgado */
+  /* ✅ COHERENCIA ESTÉTICA: Aplicar hover cohesivo */
   background: white;
   border: 1px solid #e5e7eb;
   text-align: left;
-  padding: 15px 20px; /* Aumentar tamaño para mejor tacto */
+  padding: 15px 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   display: flex;
-  justify-content: space-between; /* Alinea el contador a la derecha */
+  justify-content: space-between; 
   align-items: center;
   transition: all 0.25s ease;
   font-size: 1.1rem; 
@@ -160,9 +157,10 @@ body {
 .subcategory-button:hover {
     background: #fafafa;
     border-color: #ff6a24;
-    transform: translateY(-2px); /* Efecto flotante sutil */
+    transform: translateY(-2px); 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 
 /* --- Nivel 3: Vista de Prompts Individuales --- */
 
@@ -245,7 +243,7 @@ body {
     }
 
     .category-button {
-        height: 85px; /* Altura ajustada en móvil */
+        height: 85px; 
         font-size: 1.1rem;
     }
     
@@ -254,7 +252,6 @@ body {
     }
     
     .search-bar {
-        /* Permite que el botón Volver ocupe todo el ancho */
         flex-direction: column;
     }
     
@@ -262,11 +259,4 @@ body {
         width: 100%;
         margin-top: 10px;
     }
-}
-/* --- ESTILOS DE RESALTADO DE VARIABLES (PUNTO 3 UX) --- */
-.prompt-content-text .highlight-variable {
-    /* Destacar la variable que el usuario debe reemplazar */
-    color: #ff6a24; /* Color de acento naranja */
-    font-weight: 700;
-    text-decoration: underline; /* Subrayado sutil para indicar edición */
 }

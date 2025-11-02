@@ -1,4 +1,40 @@
-/* === 1. RESET Y CONFIGURACIÓN BASE === */
+/* ========================================
+   CONTADOR 4.0 SAT MÉXICO - STYLES
+   Tema: Verde, Blanco, Rojo (Bandera mexicana)
+   ======================================== */
+
+:root {
+  /* Colores principales - Inspirados en la bandera mexicana */
+  --mexico-green: #006847;
+  --mexico-white: #ffffff;
+  --mexico-red: #CE1126;
+  
+  /* Colores secundarios */
+  --primary-color: #006847;
+  --secondary-color: #CE1126;
+  --accent-color: #FFD700; /* Dorado para detalles */
+  
+  /* Colores de categorías (del promptsData) */
+  --cat-facturacion: #1e40af;
+  --cat-declaraciones: #059669;
+  --cat-contabilidad: #dc2626;
+  --cat-precios: #7c3aed;
+  --cat-optimizacion: #f59e0b;
+  --cat-defensa: #ef4444;
+  
+  /* Grises y neutros */
+  --bg-light: #f9fafb;
+  --bg-card: #ffffff;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+  
+  /* Sombras */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,321 +42,596 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f3f4f6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+  color: var(--text-primary);
   line-height: 1.6;
-  color: #1f2937;
 }
 
-/* --- Estructura y Header --- */
 .app-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+/* ========================================
+   HEADER CON TEMA MEXICANO
+   ======================================== */
 .header {
+  background: linear-gradient(135deg, var(--mexico-green) 0%, #004d35 100%);
+  color: white;
+  padding: 2rem 1.5rem;
   text-align: center;
-  padding: 20px 0 25px;  
+  box-shadow: var(--shadow-lg);
+  border-bottom: 4px solid var(--mexico-red);
+}
+
+.header-mexico {
+  position: relative;
+  overflow: hidden;
+}
+
+.header-mexico::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    var(--mexico-green) 0%, 
+    var(--mexico-green) 33%, 
+    var(--mexico-white) 33%, 
+    var(--mexico-white) 66%, 
+    var(--mexico-red) 66%, 
+    var(--mexico-red) 100%
+  );
+}
+
+.header-content {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .header h1 {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #1f2937;
-}
-
-.header p {
-  color: #6b7280;
-}
-
-/* --- Botón Volver --- */
-.search-bar {
+  margin-bottom: 0.5rem;
   display: flex;
-  gap: 10px;
   align-items: center;
-  margin-bottom: 30px;
-  justify-content: flex-start;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-.reset-btn.volver-btn {
-  background: #ff6a24;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: all 0.3s ease;
+.flag-emoji {
+  font-size: 2rem;
+  animation: wave 2s ease-in-out infinite;
 }
 
-.reset-btn.volver-btn:hover {
-  background: #e65c19;
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
 }
 
-
-/* === 2. ESTILOS DE NAVEGACIÓN Y BOTONES (TARJETAS MODERNAS) === */
-
-/* Contenedor Wrapper para el Título y la Cuadrícula (Nivel 1) */
-.category-list-wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  opacity: 0.95;
+  margin-bottom: 0.5rem;
 }
 
-.main-title-selection {
-    font-size: 1.5rem;
-    margin-top: 20px;
-    margin-bottom: 25px;
-    color: #1f2937;
-    text-align: left;  
-    width: 100%;
-    font-weight: 700;
+.header-description {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  font-weight: 400;
 }
 
-.prompts-container {
-  display: grid;
-  gap: 25px;  
-  margin-bottom: 30px;
-}
-
-/* Nivel 1: Categorías (Cuadrícula de 2 columnas tipo Notion) */
-.category-list {
-  grid-template-columns: repeat(2, 1fr);  
-  margin-top: 10px;
+/* ========================================
+   MAIN CONTENT
+   ======================================== */
+main {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
   width: 100%;
 }
 
-.category-button {
-  background: white;  
-  color: #1f2937;  
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;  
-  /* height: 110px; <== ELIMINADO para altura flexible */
-  font-size: 1.1rem;
+/* ========================================
+   BOTÓN VOLVER
+   ======================================== */
+.filters-container {
+  margin-bottom: 2rem;
+}
+
+.volver-btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
   font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.volver-btn:hover {
+  background: #004d35;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ========================================
+   TÍTULO DE SELECCIÓN
+   ======================================== */
+.main-title-selection {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+/* ========================================
+   CATEGORÍAS (Nivel 1)
+   ======================================== */
+.category-list-wrapper {
+  width: 100%;
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.category-button {
+  background: white;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
   display: flex;
-  flex-direction: column;  
-  align-items: flex-start;
-  justify-content: center;
-  padding: 20px; /* <== AJUSTADO para más "aire" */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);  
-  transition: all 0.25s ease;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  min-height: 160px;
 }
 
 .category-button:hover {
-    background: #fafafa;
-    border-color: #ff6a24;
-    transform: translateY(-4px);  
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
 }
 
-.category-button .icon-span {
-    font-size: 1.8rem;  
-    margin-bottom: 5px;  
-    color: #ff6a24;  
+.icon-span {
+  font-size: 3rem;
+  display: block;
 }
 
 .category-title-text {
-    font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
 }
 
-/* Nivel 2: Subcategorías (Lista vertical) */
+/* ========================================
+   SUBCATEGORÍAS (Nivel 2)
+   ======================================== */
 .subcategoria-list {
-    grid-template-columns: 1fr;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .subcategory-button {
   background: white;
-  border: 1px solid #e5e7eb;
+  border: 2px solid var(--border-color);
+  border-left: 4px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
   text-align: left;
-  padding: 15px 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  display: flex;
-  justify-content: space-between;  
-  align-items: center;
-  transition: all 0.25s ease;
-  font-size: 1.1rem;  
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
 }
 
 .subcategory-button:hover {
-    background: #fafafa;
-    border-color: #ff6a24;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(5px);
+  border-left-width: 6px;
+  box-shadow: var(--shadow-md);
 }
 
+/* ========================================
+   PROMPTS (Nivel 3)
+   ======================================== */
+.prompt-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 
-/* --- Nivel 3: Vista de Prompts Individuales --- */
+.section-header {
+  background: linear-gradient(135deg, var(--primary-color), #004d35);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-md);
+}
+
+.section-header h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
 
 .prompt-card {
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 25px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s;
+}
+
+.prompt-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.prompt-header {
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .prompt-final-title {
-    font-size: 1.25rem;
-    color: #ff6a24;
-    margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.prompt-description {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.prompt-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.detail-section h4 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
 }
 
 .prompt-content-text {
-    white-space: pre-wrap;
-    background: #f9f9f9;
-    padding: 15px;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    font-family: monospace;
-    font-size: 0.9rem;
-    overflow-x: auto;
-    word-break: break-word; /* <== AÑADIDO para evitar desborde */
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: var(--text-primary);
+  overflow-x: auto;
 }
 
-/* ✅ RESALTADO DE VARIABLES ENTRE [CORCHETES] */
+/* ========================================
+   HIGHLIGHTING DE VARIABLES
+   ======================================== */
 .prompt-content-text .highlight-variable {
-    color: #ff6a24;
-    font-weight: 700;
-    background-color: #fff3e0;
-    padding: 2px 4px;
-    border-radius: 3px;
-    border-bottom: 2px solid #ff6a24;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #92400e;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  border: 1px solid #fbbf24;
+  display: inline-block;
+  margin: 0 2px;
 }
 
+/* ========================================
+   VARIABLES SECTION
+   ======================================== */
+.variables-section {
+  background: #fffbeb;
+  border: 2px solid #fbbf24;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.variables-section h4 {
+  color: #92400e;
+  margin-bottom: 1rem;
+}
+
+.variables-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.variables-list li {
+  background: white;
+  border: 1px solid #fbbf24;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+}
+
+.variables-list code {
+  color: #92400e;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ========================================
+   TAGS SECTION
+   ======================================== */
+.tags-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 0;
+}
+
+.tag-badge {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ========================================
+   BOTÓN COPIAR
+   ======================================== */
 .copy-button {
-    background: #2563eb;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 6px;
-    margin-top: 15px;
+  background: linear-gradient(135deg, var(--mexico-green), #004d35);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: var(--shadow-md);
+  align-self: flex-start;
+}
+
+.copy-button:hover {
+  background: linear-gradient(135deg, #004d35, #003525);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .copy-button.copied {
-    background: #10b981;
+  background: linear-gradient(135deg, #059669, #047857);
+  animation: pulse 0.5s ease;
 }
 
-
-/* --- Estilos de Footer y Tips --- */
-.app-footer {
-    text-align: center;
-    padding: 30px 0 20px;
-    border-top: 1px solid #e5e7eb;
-    margin-top: 50px;
-    font-size: 0.9rem;
-    color: #6b7280;
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
-.app-footer a {
-    color: #ff6a24;
-    text-decoration: none;
-    font-weight: 600;
-}
-
+/* ========================================
+   TIPS SECTION
+   ======================================== */
 .tips-section {
-    background: #eef4f9;
-    border-radius: 12px;
-    padding: 25px;
-    margin-top: 40px;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border: 2px solid #3b82f6;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: var(--shadow-md);
+}
+
+.tips-section h3 {
+  color: #1e40af;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
 }
 
 .tips-section ul {
-    list-style: disc;
-    padding-left: 20px;
+  list-style: none;
+  padding-left: 0;
 }
 
+.tips-section li {
+  padding: 0.75rem 0;
+  padding-left: 2rem;
+  position: relative;
+  color: #1e3a8a;
+  font-size: 1.05rem;
+}
 
-/* === 3. OPTIMIZACIÓN MÓVIL (MEJORADA) === */
-/* Esta sección reemplaza tu bloque @media anterior */
+.tips-section li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #059669;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
 
+.tips-section a {
+  color: #1e40af;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.tips-section a:hover {
+  border-bottom-color: #1e40af;
+}
+
+/* ========================================
+   INFO BOX
+   ======================================== */
+.info-box {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 2px solid #22c55e;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.info-text {
+  color: #166534;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* ========================================
+   FOOTER CON TEMA MEXICANO
+   ======================================== */
+.app-footer {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  color: white;
+  padding: 3rem 1.5rem;
+  margin-top: 4rem;
+  border-top: 4px solid var(--mexico-green);
+}
+
+.footer-mexico {
+  position: relative;
+}
+
+.footer-mexico::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, 
+    var(--mexico-green) 0%, 
+    var(--mexico-green) 33%, 
+    var(--mexico-white) 33%, 
+    var(--mexico-white) 66%, 
+    var(--mexico-red) 66%, 
+    var(--mexico-red) 100%
+  );
+}
+
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-content p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+  color: #d1d5db;
+}
+
+.footer-credits {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.footer-credits a {
+  color: var(--accent-color);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.footer-credits a:hover {
+  border-bottom-color: var(--accent-color);
+}
+
+.footer-disclaimer {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  font-style: italic;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #374151;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
 @media (max-width: 768px) {
-    
-    .app-container {
-        /* Damos más "aire" a los lados de la app */
-        padding: 20px; 
-    }
+  .header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .header-description {
+    font-size: 0.85rem;
+  }
+  
+  .category-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .icon-span {
+    font-size: 2.5rem;
+  }
+  
+  .prompt-card {
+    padding: 1.5rem;
+  }
+  
+  .prompt-content-text {
+    font-size: 0.85rem;
+    padding: 1rem;
+  }
+  
+  .tips-section, .info-box {
+    padding: 1.5rem;
+  }
+}
 
-    .header h1 {
-        /* Título principal más compacto */
-        font-size: 2.1rem; 
-    }
-    
-    .main-title-selection {
-        /* Título de sección más compacto */
-        font-size: 1.3rem;
-        margin-bottom: 20px;
-        text-align: left; /* Aseguramos alineación izquierda */
-    }
-
-    /* --- Botón Volver (Mejora clave) --- */
-    .search-bar {
-        flex-direction: column;
-        /* El botón se alinea a la izquierda, no ocupa todo */
-        align-items: flex-start; 
-    }
-
-    .reset-btn.volver-btn {
-        /* El botón ya no ocupa el 100% del ancho */
-        width: auto; 
-        margin-top: 10px;
-        padding: 12px 24px; /* Más padding horizontal para mejor look */
-    }
-
-    /* --- Tarjetas de Categoría (Nivel 1) --- */
-    .category-list {
-        grid-template-columns: 1fr;
-        gap: 16px; /* Un poco más de separación */
-    }
-
-    .category-button {
-        /* Eliminamos la altura fija para que el contenido mande */
-        height: auto; 
-        font-size: 1rem; /* Texto más legible en móvil */
-        padding: 24px 20px; /* Más padding vertical */
-        
-        /* Mantenemos la estructura de columna del ícono */
-        flex-direction: column; 
-        align-items: flex-start;
-    }
-    
-    .category-button .icon-span {
-        font-size: 1.6rem; /* Ícono ligeramente más pequeño */
-        margin-bottom: 8px;
-    }
-
-    /* --- Listas de Subcategoría (Nivel 2) --- */
-    .subcategoria-list {
-        gap: 12px;
-    }
-
-    .subcategory-button {
-        padding: 18px 20px; /* Más espacio vertical para mejor "tap" */
-        font-size: 1rem;
-    }
-
-    /* --- Tarjetas de Prompt (Nivel 3) --- */
-    .prompt-card {
-        padding: 20px; /* Más padding interno */
-    }
-
-    .prompt-final-title {
-        font-size: 1.15rem; /* Título de prompt más compacto */
-    }
-    
-    .prompt-content-text {
-        font-size: 0.85rem; /* Texto del código/prompt más pequeño */
-    }
-
-    /* --- Sección de Consejos --- */
-    .tips-section {
-        padding: 20px;
-    }
-
-    .app-footer {
-        padding: 30px 10px 20px; /* Menos padding lateral en footer */
-    }
+@media (max-width: 480px) {
+  main {
+    padding: 1rem;
+  }
+  
+  .header {
+    padding: 1.5rem 1rem;
+  }
+  
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .copy-button {
+    width: 100%;
+    text-align: center;
+  }
 }

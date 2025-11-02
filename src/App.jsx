@@ -248,9 +248,6 @@ export default function App() {
             Desarrollado por <a href="https://jairoamaya.co" target="_blank" rel="noopener noreferrer">Jairo Amaya - Full Stack Marketer</a> • 
             Todos los derechos reservados © {new Date().getFullYear()}
           </p>
-          <p className="footer-disclaimer">
-            ⚠️ Contenido educativo. Consulta con un contador titulado para casos específicos.
-          </p>
         </div>
       </footer>
 

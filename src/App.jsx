@@ -2,7 +2,7 @@
 // Mantiene toda la funcionalidad original con branding y contenido específico de México
 import React, { useState, useMemo } from 'react';
 import './styles.css';
-import promptsData from './promptsData-SAT-Mexico'; // ⬅️ CAMBIO: Importar datos de México
+import promptsData from './promptsData'; // ⬅️ CAMBIO: Importar datos de México
 
 // Funciones Auxiliares (Se mantienen igual)
 const flattenAndAssignIds = (data) => {

@@ -1,7 +1,8 @@
-// Versión con highlighting de variables v2
+// Contador 4.0 SAT México - Versión adaptada para el mercado mexicano
+// Mantiene toda la funcionalidad original con branding y contenido específico de México
 import React, { useState, useMemo } from 'react';
 import './styles.css';
-import promptsData from './promptsData'; 
+import promptsData from './promptsData-SAT-Mexico'; // ⬅️ CAMBIO: Importar datos de México
 
 // Funciones Auxiliares (Se mantienen igual)
 const flattenAndAssignIds = (data) => {
@@ -78,6 +79,10 @@ export default function App() {
                     <div key={prompt.title} className="prompt-card prompt-final-view">
                         <div className="prompt-header">
                             <h3 className="prompt-final-title">{prompt.title}</h3>
+                            {/* ✨ NUEVO: Badge de descripción */}
+                            {prompt.description && (
+                                <p className="prompt-description">{prompt.description}</p>
+                            )}
                         </div>
                         
                         <div className="prompt-details">
@@ -88,6 +93,29 @@ export default function App() {
                                     dangerouslySetInnerHTML={{ __html: highlightVariables(prompt.prompt) }}
                                 />
                             </div>
+                            
+                            {/* ✨ NUEVO: Mostrar variables detectadas */}
+                            {prompt.variables && prompt.variables.length > 0 && (
+                                <div className="variables-section">
+                                    <h4>📝 Variables a personalizar:</h4>
+                                    <ul className="variables-list">
+                                        {prompt.variables.map((variable, idx) => (
+                                            <li key={idx}>
+                                                <code>[{variable}]</code>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                            
+                            {/* ✨ NUEVO: Tags si existen */}
+                            {prompt.tags && prompt.tags.length > 0 && (
+                                <div className="tags-section">
+                                    {prompt.tags.map((tag, idx) => (
+                                        <span key={idx} className="tag-badge">{tag}</span>
+                                    ))}
+                                </div>
+                            )}
                             
                             <button 
                                 className={`copy-button ${copiedPromptId === prompt.title ? 'copied' : ''}`} 
@@ -126,14 +154,18 @@ export default function App() {
 
     // 3. VISTA INICIAL: CATEGORÍAS (Nivel 1) - Fallback por defecto
     return (
-        <div className="category-list-wrapper"> {/* Contenedor para el título y los tips */}
+        <div className="category-list-wrapper">
              <h2 className="main-title-selection">Selecciona una Categoría</h2>
              
-             <div className="prompts-container category-list"> {/* Contenedor Grid real */}
+             <div className="prompts-container category-list">
                 {promptsData.map(category => (
                     <button
                         key={category.title}
                         className="filter-btn category-button"
+                        style={{
+                            // ✨ NUEVO: Usar colores definidos en promptsData
+                            borderLeft: `4px solid ${category.color || '#3b82f6'}`
+                        }}
                         onClick={() => setSelectedCategory(category)} 
                     >
                         <span className="icon-span" role="img">{category.icon}</span>
@@ -143,16 +175,25 @@ export default function App() {
                     </button>
                 ))}
             </div>
-            {/* Tips Section */}
+            
+            {/* ✨ NUEVO: Tips específicos para México */}
             <div className="tips-section">
-                <h3>💡 Consejos para usar los prompts</h3>
+                <h3>💡 Consejos para usar los prompts SAT</h3>
                 <ul>
-                    <li>Usa la información de <strong>"Cuándo usar"</strong> para saber el contexto ideal</li>
-                    <li>La <strong>frecuencia</strong> te indica qué tan seguido deberías aplicar el prompt</li>
-                    <li>Personaliza el contenido según las necesidades específicas de tu cliente</li>
-                    <li>Usa <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">claude.ai</a> para análisis más profundos</li>
-                    <li>Combina múltiples prompts para casos complejos</li>
+                    <li>Estos prompts están <strong>especializados para México</strong> con referencias a Anexos SAT, CFDI 4.0 y normativa vigente</li>
+                    <li>Las <strong>variables entre [CORCHETES]</strong> deben reemplazarse con los datos de tu cliente</li>
+                    <li>Usa <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">claude.ai</a> o <a href="https://chat.openai.com" target="_blank" rel="noopener noreferrer">ChatGPT</a> para ejecutar los prompts</li>
+                    <li>Para casos complejos, combina múltiples prompts (ej: CFDI + Complemento de Pagos)</li>
+                    <li>Mantén actualizada tu referencia a <strong>Anexos 20 y 24</strong> del SAT</li>
+                    <li>Los prompts de <strong>Precios de Transferencia</strong> son únicos de este pack</li>
                 </ul>
+            </div>
+            
+            {/* ✨ NUEVO: Información del pack */}
+            <div className="info-box">
+                <p className="info-text">
+                    📦 <strong>{totalPrompts} prompts especializados</strong> organizados en <strong>6 categorías</strong> para cumplimiento fiscal mexicano
+                </p>
             </div>
         </div>
     );
@@ -160,9 +201,20 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <header className="header">
-        <h1>Contador 4.0 Express</h1>
-        <p>Sistema de transformación con IA para contadores</p>
+      {/* ✨ HEADER ACTUALIZADO PARA MÉXICO */}
+      <header className="header header-mexico">
+        <div className="header-content">
+          <h1>
+            <span className="flag-emoji">🇲🇽</span> 
+            Contador 4.0 SAT México
+          </h1>
+          <p className="subtitle">
+            40 Prompts especializados en cumplimiento fiscal mexicano
+          </p>
+          <p className="header-description">
+            CFDI 4.0 • Anexos SAT • Declaraciones • Precios de Transferencia • Defensa Fiscal
+          </p>
+        </div>
       </header>
       
       <main>
@@ -173,7 +225,6 @@ export default function App() {
               className="reset-btn volver-btn"
               onClick={handleBack}
             >
-              {/* Punto 5: Lógica dinámica para el botón Volver */}
               {selectedSubcategory 
                 ? `⬅ Volver a Subcategorías`
                 : '⬅ Volver a Categorías'
@@ -186,11 +237,21 @@ export default function App() {
 
       </main>
       
-      {/* Bloque Footer */}
-      <footer className="app-footer">
-        <p>
-          Contador 4.0 Express es un complemento del E.Book Contador 4.0 Sistema de Transformación con IA para contadores que incluye 105 prompts especializados y fue desarrollado por <a href="https://jairoamaya.co" target="_blank" rel="noopener noreferrer">Jairo Amaya - Full Stack Marketer</a>. Todos los derechos reservados © {new Date().getFullYear()}.
-        </p>
+      {/* ✨ FOOTER ACTUALIZADO PARA MÉXICO */}
+      <footer className="app-footer footer-mexico">
+        <div className="footer-content">
+          <p>
+            <strong>Contador 4.0 SAT México</strong> es un pack especializado de 40 prompts para contadores que trabajan con cumplimiento fiscal mexicano. 
+            Complementa el sistema Contador 4.0 con herramientas específicas para CFDI, SAT, Anexos 20/24, y normativa fiscal de México.
+          </p>
+          <p className="footer-credits">
+            Desarrollado por <a href="https://jairoamaya.co" target="_blank" rel="noopener noreferrer">Jairo Amaya - Full Stack Marketer</a> • 
+            Todos los derechos reservados © {new Date().getFullYear()}
+          </p>
+          <p className="footer-disclaimer">
+            ⚠️ Contenido educativo. Consulta con un contador titulado para casos específicos.
+          </p>
+        </div>
       </footer>
 
     </div>
